@@ -16,25 +16,32 @@ window.__MANIFEST__ = {
       "icon": "🔬",
       "folder": "internal_medicine_topics/01_Glomerular_Diseases",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
-      "slidesPath": "internal_medicine_topics/01_Glomerular_Diseases",
-      "slideCount": 7,
+      "slidesPath": "internal_medicine_topics/01_Glomerular_Diseases/slides",
+      "slideCount": 49,
       "slides": [
-        "01_Principles_of_Glomerulopathies.html",
-        "02_Acute_Glomerulonephritis_Nephritic_Syndrome.html",
-        "03_Nephrotic_Syndrome.html",
-        "04_Anti_GBM_Disease_Goodpasture_Syndrome.html",
-        "05_Post_Streptococcal_GN.html",
-        "06_Lupus_Nephritis.html",
-        "07_Diabetic_Nephropathy.html"
+        "slide-01.html", "slide-02.html", "slide-03.html", "slide-04.html", "slide-05.html",
+        "slide-06.html", "slide-07.html", "slide-08.html", "slide-09.html", "slide-10.html",
+        "slide-11.html", "slide-12.html", "slide-13.html", "slide-14.html", "slide-15.html",
+        "slide-16.html", "slide-17.html", "slide-18.html", "slide-19.html", "slide-20.html",
+        "slide-21.html", "slide-22.html", "slide-23.html", "slide-24.html", "slide-25.html",
+        "slide-26.html", "slide-27.html", "slide-28.html", "slide-29.html", "slide-30.html",
+        "slide-31.html", "slide-32.html", "slide-33.html", "slide-34.html", "slide-35.html",
+        "slide-36.html", "slide-37.html", "slide-38.html", "slide-39.html", "slide-40.html",
+        "slide-41.html", "slide-42.html", "slide-43.html", "slide-44.html", "slide-45.html",
+        "slide-46.html", "slide-47.html", "slide-48.html", "slide-49.html"
       ],
       "slideTitles": [
-        "Principles of Glomerulopathies",
-        "Acute Glomerulonephritis & Nephritic Syndrome",
-        "Nephrotic Syndrome",
-        "Anti-GBM Disease & Goodpasture Syndrome",
-        "Post-Streptococcal GN",
-        "Lupus Nephritis",
-        "Diabetic Nephropathy"
+        "Glomerular Diseases — Cover",
+        "Slide 02", "Slide 03", "Slide 04", "Slide 05",
+        "Slide 06", "Slide 07", "Slide 08", "Slide 09", "Slide 10",
+        "Slide 11", "Slide 12", "Slide 13", "Slide 14", "Slide 15",
+        "Slide 16", "Slide 17", "Slide 18", "Slide 19", "Slide 20",
+        "Slide 21", "Slide 22", "Slide 23", "Slide 24", "Slide 25",
+        "Slide 26", "Slide 27", "Slide 28", "Slide 29", "Slide 30",
+        "Slide 31", "Slide 32", "Slide 33", "Slide 34", "Slide 35",
+        "Slide 36", "Slide 37", "Slide 38", "Slide 39", "Slide 40",
+        "Slide 41", "Slide 42", "Slide 43", "Slide 44", "Slide 45",
+        "Slide 46", "Slide 47", "Slide 48", "Slide 49"
       ]
     },
     {
@@ -44,15 +51,30 @@ window.__MANIFEST__ = {
       "icon": "🚨",
       "folder": "internal_medicine_topics/02_Acute_Kidney_Injury",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
-      "slidesPath": "internal_medicine_topics/02_Acute_Kidney_Injury",
-      "slideCount": 2,
+      "slidesPath": "internal_medicine_topics/02_Acute_Kidney_Injury/slides",
+      "slideCount": 44,
       "slides": [
-        "09_Acute_Kidney_Injury.html",
-        "10_AKI_Special_Situations.html"
+        "slide-01.html", "slide-02.html", "slide-03.html", "slide-04.html", "slide-05.html",
+        "slide-06.html", "slide-07.html", "slide-08.html", "slide-09.html", "slide-10.html",
+        "slide-11.html", "slide-12.html", "slide-13.html", "slide-14.html", "slide-15.html",
+        "slide-16.html", "slide-17.html", "slide-18.html", "slide-19.html", "slide-20.html",
+        "slide-21.html", "slide-22.html", "slide-23.html", "slide-24.html", "slide-25.html",
+        "slide-26.html", "slide-27.html", "slide-28.html", "slide-29.html", "slide-30.html",
+        "slide-31.html", "slide-32.html", "slide-33.html", "slide-34.html", "slide-35.html",
+        "slide-36.html", "slide-37.html", "slide-38.html", "slide-39.html", "slide-40.html",
+        "slide-41.html", "slide-42.html", "slide-43.html", "slide-44.html"
       ],
       "slideTitles": [
-        "Acute Kidney Injury",
-        "AKI Special Situations"
+        "Acute Kidney Injury — Cover",
+        "Slide 02", "Slide 03", "Slide 04", "Slide 05",
+        "Slide 06", "Slide 07", "Slide 08", "Slide 09", "Slide 10",
+        "Slide 11", "Slide 12", "Slide 13", "Slide 14", "Slide 15",
+        "Slide 16", "Slide 17", "Slide 18", "Slide 19", "Slide 20",
+        "Slide 21", "Slide 22", "Slide 23", "Slide 24", "Slide 25",
+        "Slide 26", "Slide 27", "Slide 28", "Slide 29", "Slide 30",
+        "Slide 31", "Slide 32", "Slide 33", "Slide 34", "Slide 35",
+        "Slide 36", "Slide 37", "Slide 38", "Slide 39", "Slide 40",
+        "Slide 41", "Slide 42", "Slide 43", "Slide 44"
       ]
     },
     {
@@ -62,15 +84,32 @@ window.__MANIFEST__ = {
       "icon": "🩸",
       "folder": "internal_medicine_topics/03_Chronic_Kidney_Disease_and_RRT",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
-      "slidesPath": "internal_medicine_topics/03_Chronic_Kidney_Disease_and_RRT",
-      "slideCount": 2,
+      "slidesPath": "internal_medicine_topics/03_Chronic_Kidney_Disease_and_RRT/slides",
+      "slideCount": 48,
       "slides": [
-        "11_Chronic_Kidney_Disease.html",
-        "12_Renal_Replacement_Therapy.html"
+        "slide-01.html", "slide-02.html", "slide-03.html", "slide-04.html", "slide-05.html",
+        "slide-06.html", "slide-07.html", "slide-08.html", "slide-09.html", "slide-10.html",
+        "slide-11.html", "slide-12.html", "slide-13.html", "slide-14.html", "slide-15.html",
+        "slide-16.html", "slide-17.html", "slide-18.html", "slide-19.html", "slide-20.html",
+        "slide-21.html", "slide-22.html", "slide-23.html", "slide-24.html", "slide-25.html",
+        "slide-26.html", "slide-27.html", "slide-28.html", "slide-29.html", "slide-30.html",
+        "slide-31.html", "slide-32.html", "slide-33.html", "slide-34.html", "slide-35.html",
+        "slide-36.html", "slide-37.html", "slide-38.html", "slide-39.html", "slide-40.html",
+        "slide-41.html", "slide-42.html", "slide-43.html", "slide-44.html", "slide-45.html",
+        "slide-46.html", "slide-47.html", "slide-48.html"
       ],
       "slideTitles": [
-        "Chronic Kidney Disease",
-        "Renal Replacement Therapy"
+        "Chronic Kidney Disease — Cover",
+        "Slide 02", "Slide 03", "Slide 04", "Slide 05",
+        "Slide 06", "Slide 07", "Slide 08", "Slide 09", "Slide 10",
+        "Slide 11", "Slide 12", "Slide 13", "Slide 14", "Slide 15",
+        "Slide 16", "Slide 17", "Slide 18", "Slide 19", "Slide 20",
+        "Slide 21", "Slide 22", "Slide 23", "Slide 24", "Slide 25",
+        "Slide 26", "Slide 27", "Slide 28", "Slide 29", "Slide 30",
+        "Slide 31", "Slide 32", "Slide 33", "Slide 34", "Slide 35",
+        "Slide 36", "Slide 37", "Slide 38", "Slide 39", "Slide 40",
+        "Slide 41", "Slide 42", "Slide 43", "Slide 44", "Slide 45",
+        "Slide 46", "Slide 47", "Slide 48"
       ]
     },
     {
@@ -80,21 +119,30 @@ window.__MANIFEST__ = {
       "icon": "⚖️",
       "folder": "internal_medicine_topics/04_Electrolytes_and_Acid_Base",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
-      "slidesPath": "internal_medicine_topics/04_Electrolytes_and_Acid_Base",
-      "slideCount": 5,
+      "slidesPath": "internal_medicine_topics/04_Electrolytes_and_Acid_Base/slides",
+      "slideCount": 44,
       "slides": [
-        "14_Acid_Base_Balance.html",
-        "15_Hyponatremia.html",
-        "16_Hypernatremia.html",
-        "17_Hyperkalemia.html",
-        "18_Hypokalemia.html"
+        "slide-01.html", "slide-02.html", "slide-03.html", "slide-04.html", "slide-05.html",
+        "slide-06.html", "slide-07.html", "slide-08.html", "slide-09.html", "slide-10.html",
+        "slide-11.html", "slide-12.html", "slide-13.html", "slide-14.html", "slide-15.html",
+        "slide-16.html", "slide-17.html", "slide-18.html", "slide-19.html", "slide-20.html",
+        "slide-21.html", "slide-22.html", "slide-23.html", "slide-24.html", "slide-25.html",
+        "slide-26.html", "slide-27.html", "slide-28.html", "slide-29.html", "slide-30.html",
+        "slide-31.html", "slide-32.html", "slide-33.html", "slide-34.html", "slide-35.html",
+        "slide-36.html", "slide-37.html", "slide-38.html", "slide-39.html", "slide-40.html",
+        "slide-41.html", "slide-42.html", "slide-43.html", "slide-44.html"
       ],
       "slideTitles": [
-        "Acid-Base Balance",
-        "Hyponatremia",
-        "Hypernatremia",
-        "Hyperkalemia",
-        "Hypokalemia"
+        "Electrolytes & Acid-Base — Cover",
+        "Slide 02", "Slide 03", "Slide 04", "Slide 05",
+        "Slide 06", "Slide 07", "Slide 08", "Slide 09", "Slide 10",
+        "Slide 11", "Slide 12", "Slide 13", "Slide 14", "Slide 15",
+        "Slide 16", "Slide 17", "Slide 18", "Slide 19", "Slide 20",
+        "Slide 21", "Slide 22", "Slide 23", "Slide 24", "Slide 25",
+        "Slide 26", "Slide 27", "Slide 28", "Slide 29", "Slide 30",
+        "Slide 31", "Slide 32", "Slide 33", "Slide 34", "Slide 35",
+        "Slide 36", "Slide 37", "Slide 38", "Slide 39", "Slide 40",
+        "Slide 41", "Slide 42", "Slide 43", "Slide 44"
       ]
     },
     {
@@ -104,15 +152,26 @@ window.__MANIFEST__ = {
       "icon": "🏗️",
       "folder": "internal_medicine_topics/05_Structural_and_Vascular_Renal_Diseases",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
-      "slidesPath": "internal_medicine_topics/05_Structural_and_Vascular_Renal_Diseases",
-      "slideCount": 2,
+      "slidesPath": "internal_medicine_topics/05_Structural_and_Vascular_Renal_Diseases/slides",
+      "slideCount": 32,
       "slides": [
-        "08_Cystic_Kidney_Diseases.html",
-        "13_Hypertensive_Nephrosclerosis.html"
+        "slide-01.html", "slide-02.html", "slide-03.html", "slide-04.html", "slide-05.html",
+        "slide-06.html", "slide-07.html", "slide-08.html", "slide-09.html", "slide-10.html",
+        "slide-11.html", "slide-12.html", "slide-13.html", "slide-14.html", "slide-15.html",
+        "slide-16.html", "slide-17.html", "slide-18.html", "slide-19.html", "slide-20.html",
+        "slide-21.html", "slide-22.html", "slide-23.html", "slide-24.html", "slide-25.html",
+        "slide-26.html", "slide-27.html", "slide-28.html", "slide-29.html", "slide-30.html",
+        "slide-31.html", "slide-32.html"
       ],
       "slideTitles": [
-        "Cystic Kidney Diseases",
-        "Hypertensive Nephrosclerosis"
+        "Structural & Vascular Renal Diseases — Cover",
+        "Slide 02", "Slide 03", "Slide 04", "Slide 05",
+        "Slide 06", "Slide 07", "Slide 08", "Slide 09", "Slide 10",
+        "Slide 11", "Slide 12", "Slide 13", "Slide 14", "Slide 15",
+        "Slide 16", "Slide 17", "Slide 18", "Slide 19", "Slide 20",
+        "Slide 21", "Slide 22", "Slide 23", "Slide 24", "Slide 25",
+        "Slide 26", "Slide 27", "Slide 28", "Slide 29", "Slide 30",
+        "Slide 31", "Slide 32"
       ]
     },
     {

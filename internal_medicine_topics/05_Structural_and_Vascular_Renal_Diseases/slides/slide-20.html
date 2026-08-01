@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#2E2012; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F4EADA;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:24px;left:56px;right:56px;z-index:10;">
+  <p style="font-size:13px;letter-spacing:2.5px;color:#6E7A3E;margin:0 0 3px 0;font-weight:700;text-transform:uppercase;">Cystic Kidney Diseases · ARPKD</p>
+  <p style="font-size:28px;font-weight:700;color:#55361C;margin:0;line-height:1.12;">Symptoms — Presentation by Age</p>
+  <div style="width:74px;height:4px;background:#C08A3E;margin-top:7px;border-radius:2px;"></div>
+</div><div style="position:absolute;top:100px;left:56px;right:56px;bottom:56px;z-index:10;"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;height:310px;">
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #B0502A;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Perinatal Period</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13.5px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;"><b>High mortality</b> due to <b>pulmonary hypoplasia</b>.</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #6E7A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Early Life — Liver Dominant</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13.5px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">Presentation dominated by features of <b>liver disease</b>.</li><li style="margin-bottom:5px;line-height:1.42;"><b>Hepatic cysts are uncommon</b>, but symptoms result from <b>hepatic fibrosis</b> and <b>portal hypertension</b> (i.e. <b>GI bleeding</b>, <b>hepato-splenomegaly</b> and <b>hypersplenism</b>).</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #C08A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Increasing Age — Renal Prominent</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13.5px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">Symptoms of <b>renal involvement</b> become prominent; e.g. <b>abdominal mass</b>, <b>hypertension</b>, <b>recurrent UTIs</b>, and <b>renal failure in adolescence</b>.</li></ul>
+</div>
+</div>
+<div style="margin-top:10px;">
+  <div style="background:#4A3118;border-radius:10px;padding:11px 15px;border-left:4px solid #C08A3E;box-shadow:0 1px 5px rgba(74,49,24,0.35);">
+  <p style="font-size:14px;color:#FBF5E9;margin:0;line-height:1.45;"><b style="color:#E8B84B;">NB:</b> ARPKD may be associated with <b>berry aneurysms</b>, <b>aortic aneurysms</b> and <b>Ehlers-Danlos syndrome</b>.</p>
+</div>
+</div></div>
+<svg style="position:absolute;right:32px;bottom:22px;width:44px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="44" height="34" rx="6" fill="#C08A3E"/>
+  <text x="22" y="24" font-family="Times New Roman,serif" font-size="17" font-weight="700" fill="#FBF5E9" text-anchor="middle">20</text>
+</svg>
+</div>
+</body>
+</html>

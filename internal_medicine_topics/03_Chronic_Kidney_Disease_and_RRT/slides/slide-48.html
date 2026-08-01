@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){var s=document.querySelector('.slide-content');if(!s)return;var sx=window.innerWidth/960;var sy=window.innerHeight/540;var sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F1E8D9;font-family:'Times New Roman',serif;color:#3A2B22;overflow:hidden;">
+
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:linear-gradient(135deg,#5C3A24 0%,#8A5A33 100%);"></div>
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;">
+  <svg width="960" height="540" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="120" r="180" fill="rgba(217,164,91,0.10)"/>
+    <circle cx="840" cy="460" r="200" fill="rgba(168,74,42,0.12)"/>
+    <line x1="70" y1="180" x2="170" y2="180" stroke="#D9A45B" stroke-width="5"/>
+  </svg>
+</div>
+<div style="position:absolute;top:150px;left:75px;z-index:5;">
+  <p style="font-size:44px;color:#FFE9C2;font-weight:700;margin:0;">Thank You</p>
+  <p style="font-size:20px;color:rgba(255,240,214,0.85);margin:14px 0 0 0;">Chronic Kidney Disease &amp; Renal Replacement Therapy</p>
+  <p style="font-size:16px;color:rgba(255,240,214,0.55);margin:34px 0 0 0;">Principles of Nephrology &mdash; Dr. Hassan Abd-Elhady, Menoufia University</p>
+</div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:#5B3A21;"></div>
+<div style="position:absolute;top:0;right:0;width:360px;height:540px;background:#7A5636;opacity:0.5;"></div>
+<svg style="position:absolute;top:0;right:-60px;width:420px;height:540px;z-index:1;" aria-hidden="true">
+  <circle cx="180" cy="270" r="170" fill="#B07C44" opacity="0.18"/>
+</svg>
+<div style="position:absolute;top:130px;left:80px;z-index:10;">
+  <p style="font-size:96px;font-weight:700;color:#B07C44;margin:0;line-height:1;">03</p>
+  <div style="width:84px;height:4px;background:#D9A23B;margin:14px 0 16px 0;"></div>
+  <p style="font-size:38px;font-weight:700;color:#FBF3E3;margin:0;">Hypernatremia</p>
+  <p style="font-size:20px;color:#D9A23B;margin:9px 0 0 0;">Definition &middot; Pathogenesis &middot; Pathological Effects &middot; Clinical Manifestations &middot; Classification &middot; Treatment</p>
+  <div style="margin-top:26px;max-width:720px;">
+<div style="display:flex;gap:12px;">
+  <div style="background:#7A5636;border-radius:8px;padding:10px 14px;"><p style="font-size:14px;color:#FBF3E3;margin:0;font-weight:700;">Definition</p></div>
+  <div style="background:#7A5636;border-radius:8px;padding:10px 14px;"><p style="font-size:14px;color:#FBF3E3;margin:0;font-weight:700;">Pathogenesis</p></div>
+  <div style="background:#7A5636;border-radius:8px;padding:10px 14px;"><p style="font-size:14px;color:#FBF3E3;margin:0;font-weight:700;">Types</p></div>
+  <div style="background:#7A5636;border-radius:8px;padding:10px 14px;"><p style="font-size:14px;color:#FBF3E3;margin:0;font-weight:700;">Treatment</p></div>
+</div>
+</div></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:10px;background:linear-gradient(90deg,#4A2F16,#7A5233,#B0722F,#A86E1C);"></div>
+<div style="position:absolute;top:26px;left:52px;right:52px;">
+  <p style="font-size:12px;color:#B0722F;letter-spacing:2.5px;font-weight:700;margin:0;text-transform:uppercase;">Ch 04 · Anti-GBM / Goodpasture</p>
+  <p style="font-size:28px;color:#4A2F16;margin:1px 0 0 0;font-weight:700;line-height:1.1;">Investigations &amp; Treatment</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:6px 0 0 0;border-radius:2px;"></div>
+</div>
+<div style="position:absolute;top:108px;left:52px;right:52px;bottom:46px;">
+<div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:9px 13px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Investigations</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:11.5px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Evidence of GN: hematuria with dysmorphic red cells, red cell casts and variable degrees of proteinuria</li><li style="margin:0 0 3px 0;">Blood: positive circulating anti-GBM antibodies; other serological tests (complements, ASOT, ANA) are <b style="color:#8E3B2B;">normal</b></li><li style="margin:0 0 3px 0;">Renal biopsy: diffuse proliferative GN</li></ul></div>
+</div>
+<div style="margin-top:8px;">
+<table style="width:100%;border-collapse:collapse;border:1px solid #D9C4A4;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(74,47,22,0.12);"><colgroup><col style="width:50.0%;"><col style="width:50.0%;"></colgroup><tr><th style="padding:5px 9px;font-size:13px;text-align:left;background:#4A2F16;color:#FBF3E4;font-weight:700;border:1px solid #3A2A18;">Corticosteroids</th><th style="padding:5px 9px;font-size:13px;text-align:left;background:#4A2F16;color:#FBF3E4;font-weight:700;border:1px solid #3A2A18;">Cyclophosphamide</th></tr><tr style="background:#FDF7EB;"><td style="padding:5px 9px;font-size:11.5px;border:1px solid #D9C4A4;color:#3A2A18;line-height:1.4;vertical-align:top;">IV methylprednisolone <b>7–15 mg/kg/day</b> (maximum 1 gm/day) for <b>3 days</b>, then oral prednisone <b>1 mg/kg/day</b>; reduce to 20 mg/day by 6 weeks and continue for 6 months.</td><td style="padding:5px 9px;font-size:11.5px;border:1px solid #D9C4A4;color:#3A2A18;line-height:1.4;vertical-align:top;">Dose depends upon the patient&rsquo;s age:<br>• &lt; 55 years: 3 mg/kg (down to 50 mg) for 3 months<br>• &gt; 55 years: 2 mg/kg (down to 50 mg) for 3 months</td></tr></table>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #A86E1C;border-radius:10px;padding:8px 12px;">
+<p style="font-size:14px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Plasma exchange</p><div style="font-size:11.5px;color:#3A2A18;line-height:1.45;"><b>Plasma exchange (plasmapheresis):</b> replacement with daily <b style="color:#8E3B2B;">40–50 ml/kg</b> plasma with albumin for <b>2 weeks</b> or until anti-GBM antibody disappears.</div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #B5522E;border-radius:10px;padding:8px 12px;">
+<p style="font-size:14px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Caution</p><div style="font-size:11.5px;color:#3A2A18;line-height:1.45;"><b>N.B.:</b> Plasmapheresis should <b style="color:#8E3B2B;">not</b> be given in patients with anuria and/or crescents &gt; 85% of glomeruli, <b>unless</b> there is pulmonary hemorrhage. Albumin is the recommended replacement fluid with plasmapheresis because of the lower incidence of complications.</div>
+</div>
+</div>
+<div style="margin-top:8px;"><div style="background:rgba(142,59,43,0.09);border:1.5px solid #8E3B2B;border-radius:8px;padding:8px 12px;">
+<p style="font-size:13px;color:#3A2A18;margin:0;line-height:1.45;"><b style="color:#8E3B2B;">Protocol:</b> <b>Summary:</b> 3 days pulse methylprednisolone → 2 weeks course of daily plasmapheresis → 6 months oral corticosteroids and 3 months cyclophosphamide.</p></div></div>
+</div><div style="position:absolute;left:52px;bottom:24px;font-size:10.5px;color:#6B5238;font-style:italic;">PRINCIPLES OF NEPHROLOGY — Page 14–15</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">32</text>
+</svg>
+</div>
+</body>
+</html>

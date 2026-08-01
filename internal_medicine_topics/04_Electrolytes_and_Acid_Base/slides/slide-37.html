@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">04</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Hyperkalemia &mdash; Treatment (3. Removal &amp; 4. Monitoring)</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>3. Removal of potassium from the body</b></p>
+<table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+  <tr style="background:#7A5636;color:#FBF3E3;">
+    <th style="padding:7px 10px;border:1px solid #7A5636;text-align:left;width:26%;">Method</th>
+    <th style="padding:7px 10px;border:1px solid #7A5636;text-align:left;">Mechanism / Notes</th>
+  </tr>
+  <tr style="background:#FBF3E3;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">1- Loop diuretics</b></td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">Lead to K<sup>+</sup> loss in the urine by inhibiting Na/K/Cl transporter in loop of Henle.</td>
+  </tr>
+  <tr style="background:#F4E6CC;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">2- Potassium exchange resins</b> (sodium polystyrene sulfate)</td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">Given orally or per rectum. Exchanges Na<sup>+</sup> for K<sup>+</sup> and binds it in the gut (primarily in large intestine) &rarr; decreasing total body K<sup>+</sup>. K<sup>+</sup> is removed in the stool, 8&ndash;12 hours after administration. <b style="color:#B85C38;">Side effects: intestinal necrosis / gangrene</b>.</td>
+  </tr>
+  <tr style="background:#FBF3E3;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">3- Hemodialysis</b></td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">In <b style="color:#B85C38;">refractory and emergency cases</b> (i.e. high K<sup>+</sup> level &gt; 7 mmol/L or ECG changes).</td>
+  </tr>
+</table>
+</div>
+<div style="height:10px;"></div>
+<div style="background:#F4E6CC;border-radius:10px;padding:12px 16px;border-left:5px solid #6E7F4A;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>4- Monitoring</b></p>
+<ul style="margin:0;padding:0 0 0 18px;color:#3A2A1B;font-size:13px;line-height:1.45;">
+  <li style="margin-bottom:5px;">Continuous <b style="color:#9E3B2C;">cardiac monitoring</b> and serial ECGs.</li>
+  <li>Measurement of <b style="color:#9E3B2C;">serum potassium at 1&ndash;2 hours</b> after the initiation of therapy.</li>
+</ul>
+</div>
+</div>
+
+</div>
+</body>
+</html>

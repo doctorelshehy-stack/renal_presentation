@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:10px;background:linear-gradient(90deg,#4A2F16,#7A5233,#B0722F,#A86E1C);"></div>
+<div style="position:absolute;top:26px;left:52px;right:52px;">
+  <p style="font-size:12px;color:#B0722F;letter-spacing:2.5px;font-weight:700;margin:0;text-transform:uppercase;">Ch 01 · Principles of Glomerulopathies</p>
+  <p style="font-size:28px;color:#4A2F16;margin:1px 0 0 0;font-weight:700;line-height:1.1;">Investigations — I (Urine, Blood, Imaging, Biopsy)</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:6px 0 0 0;border-radius:2px;"></div>
+</div>
+<div style="position:absolute;top:112px;left:52px;right:52px;bottom:60px;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:16px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">1. Urine Examination</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:12.5px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Volume in 24 hours: may be decreased or normal</li><li style="margin:0 0 3px 0;">24-hour urinary protein or urinary protein/creatinine ratio</li><li style="margin:0 0 3px 0;">Microscopic examination of urinary sediment:</li><li style="margin:0 0 3px 0;"><span style="padding-left:10px;">– Red cells → may or may not be present</span></li><li style="margin:0 0 3px 0;"><span style="padding-left:10px;">– <b style="color:#8E3B2B;">Dysmorphic red cells</b> → strongly suggestive of GN</span></li><li style="margin:0 0 3px 0;"><span style="padding-left:10px;">– Casts → granular &amp; <b style="color:#8E3B2B;">red cell casts</b> (diagnostic of acute GN)</span></li></ul></div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:16px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">2. Blood Examination</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:13px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Blood urea</li><li style="margin:0 0 3px 0;">Serum creatinine</li><li style="margin:0 0 3px 0;">Serum electrolytes (Ca, PO4, K+, Na+)</li><li style="margin:0 0 3px 0;">Assessment of GFR (normal = 90–120 ml/min)</li></ul></div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:16px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">3. Renal Imaging</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><b>Ultrasound</b> (to exclude other renal pathology):<br><span style="padding-left:8px;">– Smooth renal outline</span><br><span style="padding-left:8px;">– Normal pelvicalyceal system and lower urinary tract</span></div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:16px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">4. Renal Biopsy — needed for:</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:13px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Accurate histopathological diagnosis</li><li style="margin:0 0 3px 0;">Assess severity &amp; response to treatment</li><li style="margin:0 0 3px 0;">Prognosis</li></ul></div>
+</div>
+</div>
+<div style="margin-top:14px;"><div style="background:rgba(142,59,43,0.09);border:1.5px solid #8E3B2B;border-radius:8px;padding:8px 12px;">
+<p style="font-size:13px;color:#3A2A18;margin:0;line-height:1.45;"><b style="color:#8E3B2B;">Note:</b> Renal biopsy gives the <b>histopathological diagnosis</b>, assesses <b>severity &amp; response to treatment</b>, and predicts <b>prognosis</b>.</p></div></div>
+</div><div style="position:absolute;left:52px;bottom:24px;font-size:10.5px;color:#6B5238;font-style:italic;">PRINCIPLES OF NEPHROLOGY — Page 4–5</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">10</text>
+</svg>
+</div>
+</body>
+</html>

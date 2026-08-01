@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#2E2012; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F4EADA;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:24px;left:56px;right:56px;z-index:10;">
+  <p style="font-size:13px;letter-spacing:2.5px;color:#6E7A3E;margin:0 0 3px 0;font-weight:700;text-transform:uppercase;">Recap</p>
+  <p style="font-size:28px;font-weight:700;color:#55361C;margin:0;line-height:1.12;">Summary — Key Points</p>
+  <div style="width:74px;height:4px;background:#C08A3E;margin-top:7px;border-radius:2px;"></div>
+</div><div style="position:absolute;top:100px;left:56px;right:56px;bottom:56px;z-index:10;"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;height:100%;">
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #6E7A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Simple Renal Cysts</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">Common &gt; 50 y; <b>asymptomatic</b>; excellent prognosis.</li><li style="margin-bottom:5px;line-height:1.42;">US: echoes-free, thin smooth wall, enhanced back wall; CT: no enhancement.</li><li style="margin-bottom:5px;line-height:1.42;">Hematuria → suspect <b>RCC</b>.</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #B0502A;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">ADPKD</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">AD inheritance; chr 16 (ADPKD-1) &amp; chr 4 (ADPKD-2).</li><li style="margin-bottom:5px;line-height:1.42;">HTN in 50%, hepatic cysts in 50%, cerebral aneurysms → SAH.</li><li style="margin-bottom:5px;line-height:1.42;">Treatment: control BP; cyst-penetrating antibiotics; avoid peritoneal dialysis.</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #C08A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">ARPKD</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">AR inheritance; chr 6; parents unaffected.</li><li style="margin-bottom:5px;line-height:1.42;">Perinatal → pulmonary hypoplasia; early life → hepatic fibrosis / portal HTN.</li><li style="margin-bottom:5px;line-height:1.42;">US is test of choice (enlarged echogenic kidneys).</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #B0502A;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Hypertensive Nephrosclerosis</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">CKD complicating AHT; <b>clinical</b> diagnosis (5 criteria).</li><li style="margin-bottom:5px;line-height:1.42;">BP goal <b>&lt; 130/80</b>; low salt diet; diuretics cornerstone.</li><li style="margin-bottom:5px;line-height:1.42;">ACEI/ARB + CCB combination; MRA fourth-line (hyperkalemia/AKI risk).</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #6E7A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Management Principles</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">Intensive BP control; dose diuretics to GFR.</li><li style="margin-bottom:5px;line-height:1.42;">RAAS blockade central; avoid DHP-CCB monotherapy in proteinuric CKD.</li><li style="margin-bottom:5px;line-height:1.42;">Watch for hypokalemia, hyperkalemia, AKI.</li></ul>
+</div>
+  <div style="background:#FBF5E9;border-radius:10px;padding:12px 14px;border-left:4px solid #C08A3E;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <p style="font-size:17px;font-weight:700;color:#55361C;margin:0 0 5px 0;">Exam Pearls</p>
+  <ul style="margin:0;padding:0 0 0 17px;font-size:13px;color:#3B2A1A;"><li style="margin-bottom:5px;line-height:1.42;">Normal urine in ADPKD cyst infection — use blood cultures.</li><li style="margin-bottom:5px;line-height:1.42;">Recurrent hematuria → RCC; SAH → berry aneurysm.</li><li style="margin-bottom:5px;line-height:1.42;">CRF in ADPKD: avoid peritoneal dialysis.</li></ul>
+</div>
+</div></div>
+<svg style="position:absolute;right:32px;bottom:22px;width:44px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="44" height="34" rx="6" fill="#C08A3E"/>
+  <text x="22" y="24" font-family="Times New Roman,serif" font-size="17" font-weight="700" fill="#FBF5E9" text-anchor="middle">31</text>
+</svg>
+</div>
+</body>
+</html>

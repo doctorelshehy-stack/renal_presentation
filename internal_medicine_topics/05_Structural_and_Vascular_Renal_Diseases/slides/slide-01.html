@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#2E2012; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F4EADA;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:linear-gradient(150deg,#EBD8B8 0%,#DEC399 55%,#D3B485 100%);"></div>
+<svg style="position:absolute;top:-70px;right:-90px;width:520px;height:420px;z-index:1;" aria-hidden="true">
+  <ellipse cx="260" cy="210" rx="230" ry="300" fill="#C08A3E" opacity="0.16"/>
+</svg>
+<svg style="position:absolute;bottom:-110px;left:-70px;width:420px;height:360px;z-index:1;" aria-hidden="true">
+  <circle cx="210" cy="180" r="230" fill="#6E7A3E" opacity="0.10"/>
+</svg>
+<div style="position:absolute;top:0;left:0;width:14px;height:540px;background:#B0502A;"></div>
+<div style="position:absolute;top:0;right:0;width:6px;height:540px;background:#C08A3E;"></div>
+<div style="position:absolute;top:118px;left:72px;z-index:10;">
+  <div style="width:84px;height:5px;background:#B0502A;margin-bottom:16px;border-radius:2px;"></div>
+  <p style="font-size:22px;color:#6E7A3E;margin:0;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Internal Medicine · Nephrology</p>
+  <p style="font-size:56px;color:#3B2A1A;margin:10px 0 0 0;font-weight:700;line-height:1.08;">Structural & Vascular Renal Diseases</p>
+  <p style="font-size:30px;color:#B0502A;margin:8px 0 0 0;font-weight:700;">Cystic Kidney Diseases · Hypertensive Nephrosclerosis</p>
+  <div style="width:60px;height:4px;background:#C08A3E;margin:22px 0 14px 0;border-radius:2px;"></div>
+  <p style="font-size:19px;color:#55361C;margin:0;">Simple Renal Cysts · ADPKD · ARPKD · Hypertensive Nephrosclerosis</p>
+</div>
+<div style="position:absolute;bottom:26px;left:72px;z-index:10;">
+  <p style="font-size:15px;color:#3B2A1A;margin:0;font-weight:700;">Internal Medicine · Nephrology</p>
+  <p style="font-size:13px;color:#7A5A3A;margin:3px 0 0 0;">Principles of Nephrology — Dr. Hassan Abd-Elhady, Menoufia University</p>
+</div>
+<svg style="position:absolute;right:32px;bottom:22px;width:44px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="44" height="34" rx="6" fill="#C08A3E"/>
+  <text x="22" y="24" font-family="Times New Roman,serif" font-size="17" font-weight="700" fill="#FBF5E9" text-anchor="middle">1</text>
+</svg>
+</div>
+</body>
+</html>

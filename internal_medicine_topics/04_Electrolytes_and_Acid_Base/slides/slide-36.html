@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">04</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Hyperkalemia &mdash; Treatment (1. Membrane &amp; 2. Cellular Shift)</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<div style="background:#F6DFD2;border-radius:8px;padding:9px 14px;border:1.5px solid #B85C38;">
+  <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.45;"><b style="color:#9E3B2C;">&#9888; Important:</b> Urgent therapy is indicated when serious manifestations are present such as: <b>muscle weakness or paralysis, cardiac conduction abnormalities, cardiac arrhythmias, and/or serum K<sup>+</sup> concentration &ge; 7 mmol/L</b>.</p>
+</div>
+<div style="height:10px;"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>1. Stabilize the myocardial cell membrane</b></p>
+  <p style="font-size:13px;color:#3A2A1B;margin:0;line-height:1.45;">I.V. <b style="color:#9E3B2C;">calcium gluconate</b>, <b style="color:#9E3B2C;">10 mg in 10 ml over 10 minutes</b>, as calcium antagonizes the cellular effects of hyperkalemia (a <b style="color:#B85C38;">physiologic antidote</b>).</p>
+  </div>
+  <div style="background:#F4E6CC;border-radius:10px;padding:12px 16px;border-left:5px solid #6E7F4A;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>2. Drive extracellular K<sup>+</sup> into the cells</b> (increase Na<sup>+</sup>/K<sup>+</sup>-ATPase pump activity)</p>
+  <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+    <tr style="background:#7A5636;color:#FBF3E3;">
+      <th style="padding:5px 7px;border:1px solid #7A5636;text-align:left;">Agent</th>
+      <th style="padding:5px 7px;border:1px solid #7A5636;text-align:left;">Dose</th>
+      <th style="padding:5px 7px;border:1px solid #7A5636;text-align:left;">Notes</th>
+    </tr>
+    <tr style="background:#FBF3E3;">
+      <td style="padding:5px 7px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">&beta;2 agonists</b> (albuterol, salbutamol)</td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">10 to 20 mg inhaled over 10 minutes</td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">Peak effect in 90 minutes. Contraindicated in patients with ischemic heart diseases</td>
+    </tr>
+    <tr style="background:#F4E6CC;">
+      <td style="padding:5px 7px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">Insulin and glucose</b></td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">One ampule dextrose 50% concentration with 5&ndash;10 units of regular insulin I.V.</td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">Peak effect within 60 min, lasts several hours. Side effect: <b style="color:#B85C38;">hypoglycemia</b></td>
+    </tr>
+    <tr style="background:#FBF3E3;">
+      <td style="padding:5px 7px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">Sodium bicarbonate (NaHCO<sub>3</sub>)</b></td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">&mdash;</td>
+      <td style="padding:5px 7px;border:1px solid #C9AC85;">Rapid effect within few minutes but <b style="color:#B85C38;">not long lasting</b></td>
+    </tr>
+  </table>
+  </div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

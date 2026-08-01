@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">3</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Rhabdomyolysis &mdash; Definition &amp; Causes (1&ndash;4)</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Definition</b></p>
+<p style="font-size:13px;color:#3A2A1B;margin:0;line-height:1.45;">Rhabdomyolysis is a disorder resulting from an <b style="color:#9E3B2C;">injury or a metabolic defect in the skeletal muscle cell</b> resulting in <b style="color:#B85C38;">lysis of the cell membrane</b> and leakage of its contents (<b style="color:#9E3B2C;">myoglobin, enzymes, phosphorus, potassium</b>) into the blood.</p>
+</div>
+<div style="height:10px;"></div>
+<div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Causes</b></p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+  <div style="background:#F4E6CC;border-radius:8px;padding:9px 12px;border-left:4px solid #B85C38;">
+    <p style="font-size:13px;font-weight:700;color:#5B3A21;margin:0 0 3px 0;">1. Direct trauma</p>
+    <ul style="margin:0;padding:0 0 0 16px;color:#3A2A1B;font-size:12px;line-height:1.45;">
+      <li>Crush syndrome.</li><li>Electrical shock.</li><li>Prolonged pressure with coma.</li><li>Thermal burns &amp; freezing.</li>
+    </ul>
+  </div>
+  <div style="background:#F4E6CC;border-radius:8px;padding:9px 12px;border-left:4px solid #B85C38;">
+    <p style="font-size:13px;font-weight:700;color:#5B3A21;margin:0 0 3px 0;">2. Excessive exercise</p>
+    <p style="font-size:12px;color:#3A2A1B;margin:0;">e.g.; athletic injury and convulsive seizures.</p>
+  </div>
+  <div style="background:#F4E6CC;border-radius:8px;padding:9px 12px;border-left:4px solid #B85C38;">
+    <p style="font-size:13px;font-weight:700;color:#5B3A21;margin:0 0 3px 0;">3. Hereditary myopathies</p>
+    <p style="font-size:12px;color:#3A2A1B;margin:0;">e.g. myophosphorylase deficiency (<b style="color:#9E3B2C;">McArdle&rsquo;s disease</b>).</p>
+  </div>
+  <div style="background:#F4E6CC;border-radius:8px;padding:9px 12px;border-left:4px solid #B85C38;">
+    <p style="font-size:13px;font-weight:700;color:#5B3A21;margin:0 0 3px 0;">4. Acquired metabolic disorders</p>
+    <ul style="margin:0;padding:0 0 0 16px;color:#3A2A1B;font-size:12px;line-height:1.45;">
+      <li>Hyperthyroidism.</li><li>Hypokalemia (acute).</li><li>Diabetic ketoacidosis.</li><li>Hypophosphatemia (acute).</li><li>Alcoholism.</li><li>Hyponatremia (acute).</li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">1A</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Metabolic Acidosis &mdash; Definition &amp; The Anion Gap</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;"><div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Definition</b></p><p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.45;">Decrease in <b style="color:#9E3B2C;">blood pH</b> due to a decrease in <b style="color:#9E3B2C;">serum HCO<sub>3</sub><sup>&minus;</sup></b> concentrations.</p></div><div style="height:12px;"></div><div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>The Anion Gap (AG)</b></p>
+    <p style="font-size:14px;color:#3A2A1B;margin:0 0 7px 0;line-height:1.45;">Plasma is <b style="color:#B85C38;">electro-neutral</b>, i.e. total anions match total cations.</p>
+    <ul style="margin:0;padding:0 0 0 18px;color:#3A2A1B;font-size:13.5px;line-height:1.5;">
+      <li style="margin-bottom:5px;">The major <b style="color:#6E7F4A;">measured</b> plasma cation is <b>Na<sup>+</sup></b>; the major <b style="color:#6E7F4A;">measured</b> anions are <b>HCO<sub>3</sub><sup>&minus;</sup></b> and <b>Cl<sup>&minus;</sup></b>.</li>
+      <li style="margin-bottom:5px;">There are <b style="color:#6E7F4A;">unmeasured</b> plasma cations (e.g. K<sup>+</sup>, Mg<sup>2+</sup> and Ca<sup>2+</sup>) as well as <b style="color:#6E7F4A;">unmeasured</b> anions (e.g. sulfate, phosphate and some organic anions).</li>
+      <li style="margin-bottom:5px;">The unmeasured anions are <b style="color:#9E3B2C;">slightly more</b> than the unmeasured cations; this difference is termed <b style="color:#9E3B2C;">&quot;the Anion Gap (AG)&quot;</b>.</li>
+      <li>Based on the fact that the total cations equal the total anions; AG can be calculated as the difference between the major cation (Na<sup>+</sup>) and the sum of the major anions (HCO<sub>3</sub><sup>&minus;</sup> and Cl<sup>&minus;</sup>), i.e. <b style="color:#9E3B2C;">AG = Na<sup>+</sup> &minus; (HCO<sub>3</sub><sup>&minus;</sup> + Cl<sup>&minus;</sup>)</b>.</li>
+    </ul>
+    </div><div style="height:10px;"></div><div style="background:#EFE7D2;border-radius:8px;padding:8px 14px;border-left:5px solid #D9A23B;">
+  <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.45;"><b style="color:#B07C44;">NB:</b> An <b>increase of AG</b> can result from either: a <b>decrease in the unmeasured cations</b> (e.g. hypokalemia) or an <b>increase in the unmeasured anions</b> (e.g. hyperphosphatemia).</p>
+</div></div>
+
+</div>
+</body>
+</html>

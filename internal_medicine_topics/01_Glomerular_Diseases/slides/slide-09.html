@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:10px;background:linear-gradient(90deg,#4A2F16,#7A5233,#B0722F,#A86E1C);"></div>
+<div style="position:absolute;top:26px;left:52px;right:52px;">
+  <p style="font-size:12px;color:#B0722F;letter-spacing:2.5px;font-weight:700;margin:0;text-transform:uppercase;">Ch 01 · Principles of Glomerulopathies</p>
+  <p style="font-size:28px;color:#4A2F16;margin:1px 0 0 0;font-weight:700;line-height:1.1;">Clinical Presentations — The 5 Major Syndromes</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:6px 0 0 0;border-radius:2px;"></div>
+</div>
+<div style="position:absolute;top:112px;left:52px;right:52px;bottom:60px;">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;"><div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #7A5233;border-radius:10px;padding:9px 12px;">
+  <p style="font-size:13.5px;font-weight:700;color:#4A2F16;margin:0 0 4px 0;">Acute GN (acute nephritic syndrome)</p>
+  <p style="font-size:11.5px;color:#3A2A18;margin:0;line-height:1.42;">
+    <b style="color:#B0722F;">Onset:</b> Relatively abrupt<br>
+    <b style="color:#B0722F;">Features:</b> Hematuria, Proteinuria, Oliguria, Edema, Hypertension<br>
+    <b style="color:#B0722F;">Pathology:</b> DPGN<br>
+    <b style="color:#B0722F;">Course:</b> Spontaneous resolution<br>
+    
+  </p>
+</div><div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #7A5233;border-radius:10px;padding:9px 12px;">
+  <p style="font-size:13.5px;font-weight:700;color:#4A2F16;margin:0 0 4px 0;">Nephrotic syndrome</p>
+  <p style="font-size:11.5px;color:#3A2A18;margin:0;line-height:1.42;">
+    <b style="color:#B0722F;">Onset:</b> Variable<br>
+    <b style="color:#B0722F;">Features:</b> Albumin &lt; 2.5 g/dl, Proteinuria ≥ 3+, Hyperlipidemia, Edema, Hypertension (MCGN)<br>
+    <b style="color:#B0722F;">Pathology:</b> Variable lesions<br>
+    <b style="color:#B0722F;">Course:</b> Variable<br>
+    <b style="color:#B0722F;">Notes:</b> Variable onset, pathology &amp; course
+  </p>
+</div><div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #7A5233;border-radius:10px;padding:9px 12px;">
+  <p style="font-size:13.5px;font-weight:700;color:#4A2F16;margin:0 0 4px 0;">Chronic GN</p>
+  <p style="font-size:11.5px;color:#3A2A18;margin:0;line-height:1.42;">
+    <b style="color:#B0722F;">Onset:</b> Insidious / progressive<br>
+    <b style="color:#B0722F;">Features:</b> Proteinuria 0/1+, Hypertension, Urinary sediments +, Slow progressive decline in GFR<br>
+    <b style="color:#B0722F;">Pathology:</b> Glomerulosclerosis, chronic interstitial fibrosis<br>
+    <b style="color:#B0722F;">Course:</b> Progress to renal failure<br>
+    <b style="color:#B0722F;">Notes:</b> The common pathway to ESRD
+  </p>
+</div><div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #7A5233;border-radius:10px;padding:9px 12px;">
+  <p style="font-size:13.5px;font-weight:700;color:#4A2F16;margin:0 0 4px 0;">Rapidly Progressive GN (RPGN)</p>
+  <p style="font-size:11.5px;color:#3A2A18;margin:0;line-height:1.42;">
+    <b style="color:#B0722F;">Onset:</b> Rapid decline in GFR<br>
+    <b style="color:#B0722F;">Features:</b> Hematuria, Proteinuria, Oliguria, Absent or mild hypertension<br>
+    <b style="color:#B0722F;">Pathology:</b> DPGN with crescents<br>
+    <b style="color:#B0722F;">Course:</b> Rapidly progresses to AKI<br>
+    <b style="color:#B0722F;">Notes:</b> Renal emergency — intensive therapy
+  </p>
+</div><div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #7A5233;border-radius:10px;padding:9px 12px;">
+  <p style="font-size:13.5px;font-weight:700;color:#4A2F16;margin:0 0 4px 0;">Asymptomatic proteinuria ± hematuria</p>
+  <p style="font-size:11.5px;color:#3A2A18;margin:0;line-height:1.42;">
+    <b style="color:#B0722F;">Onset:</b> Insidious<br>
+    <b style="color:#B0722F;">Features:</b> Hematuria / proteinuria, Hypertension +/–, Normal GFR<br>
+    <b style="color:#B0722F;">Pathology:</b> FSGN<br>
+    <b style="color:#B0722F;">Course:</b> Persists or recurs<br>
+    <b style="color:#B0722F;">Notes:</b> Accidentally discovered, relatively benign
+  </p>
+</div></div>
+<div style="margin-top:10px;"><div style="background:rgba(142,59,43,0.09);border:1.5px solid #8E3B2B;border-radius:8px;padding:8px 12px;">
+<p style="font-size:13px;color:#3A2A18;margin:0;line-height:1.45;"><b style="color:#8E3B2B;">Key:</b> Every glomerulopathy presents as one (or more) of these 5 clinical syndromes: acute GN, nephrotic syndrome, chronic GN, RPGN, or asymptomatic proteinuria ± hematuria.</p></div></div>
+</div><div style="position:absolute;left:52px;bottom:24px;font-size:10.5px;color:#6B5238;font-style:italic;">PRINCIPLES OF NEPHROLOGY — Page 3–4</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">9</text>
+</svg>
+</div>
+</body>
+</html>

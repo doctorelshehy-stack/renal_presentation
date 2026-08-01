@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#2E2012; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F4EADA;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:linear-gradient(150deg,#EFE0C6 0%,#E4CEA9 100%);"></div>
+<div style="position:absolute;top:0;right:0;width:330px;height:540px;background:#6E7A3E;opacity:0.14;"></div>
+<div style="position:absolute;top:0;left:0;width:10px;height:540px;background:#B0502A;"></div>
+<div style="position:absolute;top:0;right:0;width:5px;height:540px;background:#C08A3E;"></div>
+<div style="position:absolute;top:150px;left:82px;z-index:10;">
+  <p style="font-size:92px;font-weight:700;color:#C08A3E;margin:0;line-height:1;">02</p>
+  <div style="width:84px;height:4px;background:#B0502A;margin:12px 0 14px 0;border-radius:2px;"></div>
+  <p style="font-size:37px;font-weight:700;color:#3B2A1A;margin:0;line-height:1.1;">Autosomal Dominant Polycystic Kidney Disease (ADPKD)</p>
+  <p style="font-size:20px;color:#B0502A;margin:9px 0 0 0;font-weight:700;">Hereditary Polycystic Kidney Disease</p>
+  <p style="font-size:15px;color:#7A5A3A;margin:14px 0 0 0;max-width:600px;line-height:1.45;">Inherited as autosomal dominant; genetic defect on chromosome 16 (ADPKD-1) and chromosome 4 (ADPKD-2).</p>
+</div>
+<svg style="position:absolute;right:32px;bottom:22px;width:44px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="44" height="34" rx="6" fill="#C08A3E"/>
+  <text x="22" y="24" font-family="Times New Roman,serif" font-size="17" font-weight="700" fill="#FBF5E9" text-anchor="middle">9</text>
+</svg>
+</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">1</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">CIN &mdash; Prevention &amp; Treatment</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div style="background:#F4E6CC;border-radius:10px;padding:12px 16px;border-left:5px solid #6E7F4A;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Prevention</b></p>
+    <ol style="margin:0;padding:0 0 0 20px;color:#3A2A1B;font-size:13px;line-height:1.5;">
+      <li>Use <b style="color:#B85C38;">non-iodinated</b> contrast media.</li>
+      <li>Use <b style="color:#B85C38;">low osmolar</b> contrast media.</li>
+      <li><b style="color:#9E3B2C;">Minimize contrast volume (dose)</b> &mdash; formula based on body weight and baseline S. creatinine:<br><span style="font-size:12px;font-weight:700;color:#5B3A21;">Volume of contrast = 5 ml of contrast/kg of BW (max 300 ml) / S. creatinine mg/dl</span></li>
+      <li><b style="color:#B85C38;">Space between</b> contrast administrations.</li>
+      <li><b style="color:#B85C38;">Avoid nephrotoxic drugs</b> before and after the procedure.</li>
+      <li><b style="color:#9E3B2C;">Adequate hydration</b> before, during, and after the procedure.</li>
+      <li>Use of <b style="color:#B07C44;">N-acetyl cysteine</b> &mdash; it is <b style="color:#9E3B2C;">unclear whether it prevents CIN</b> as studies are conflicting.</li>
+    </ol>
+  </div>
+  <div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Treatment</b></p>
+    <p style="font-size:13px;color:#3A2A1B;margin:0 0 6px 0;"><b style="color:#9E3B2C;">No specific therapy for CIN once it occurs</b> &mdash; the best strategy is one of <b style="color:#B85C38;">prevention</b>. However, once a patient develops CIN the following should be taken:</p>
+    <ol style="margin:0;padding:0 0 0 20px;color:#3A2A1B;font-size:13px;line-height:1.5;">
+      <li>Manage fluid and electrolytes.</li>
+      <li>Adjust medications that are eliminated by the kidney.</li>
+      <li>Regular monitoring of electrolytes, S. creatinine and BUN.</li>
+      <li>Dialysis as needed.</li>
+    </ol>
+  </div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

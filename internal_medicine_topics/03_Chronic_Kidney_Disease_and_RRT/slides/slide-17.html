@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){var s=document.querySelector('.slide-content');if(!s)return;var sx=window.innerWidth/960;var sy=window.innerHeight/540;var sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F1E8D9;font-family:'Times New Roman',serif;color:#3A2B22;overflow:hidden;">
+
+<div style="position:absolute;top:26px;left:60px;right:60px;z-index:5;"><p style="font-size:30px;font-weight:700;color:#4B3223;margin:0;line-height:1.1;">Figure 11 &mdash; Spectrum of Renal Osteodystrophy</p><div style="width:64px;height:4px;background:#B97A2E;margin:8px 0 0 0;border-radius:2px;"></div></div>
+<div style="position:absolute;top:92px;left:60px;right:60px;z-index:5;">
+  <p style="font-size:15px;color:#7A5C3E;margin:0 0 10px 0;">Figure 11 &mdash; Skeletal abnormalities in renal bone disease (spectrum of renal osteodystrophy; Martin et al., 2015):</p>
+  <div style="background:#FBF4E7;border-radius:10px;padding:18px 20px;box-shadow:0 2px 8px rgba(62,40,25,0.10);">
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div style="flex:1;background:#FFF3DC;border:2px solid #6E7A48;border-radius:8px;padding:12px 8px;text-align:center;">
+        <p style="font-size:13px;font-weight:700;color:#6E7A48;margin:0;">Adynamic bone / Osteomalacia</p>
+        <p style="font-size:12px;color:#7A5C3E;margin:4px 0 0 0;"><b>Low turnover</b></p>
+      </div>
+      <div style="font-size:16px;color:#A84A2A;font-weight:700;">&#8594;</div>
+      <div style="flex:1;background:#F5EAD6;border:2px dashed #7A5C3E;border-radius:8px;padding:12px 8px;text-align:center;">
+        <p style="font-size:13px;font-weight:700;color:#7A5C3E;margin:0;">Normal</p>
+      </div>
+      <div style="font-size:16px;color:#A84A2A;font-weight:700;">&#8594;</div>
+      <div style="flex:1;background:#F5EAD6;border:2px dashed #7A5C3E;border-radius:8px;padding:12px 8px;text-align:center;">
+        <p style="font-size:13px;font-weight:700;color:#7A5C3E;margin:0;">Mild</p>
+      </div>
+      <div style="font-size:16px;color:#A84A2A;font-weight:700;">&#8594;</div>
+      <div style="flex:1;background:#FDE9DC;border:2px solid #A84A2A;border-radius:8px;padding:12px 8px;text-align:center;">
+        <p style="font-size:13px;font-weight:700;color:#A84A2A;margin:0;">Osteitis fibrosa</p>
+        <p style="font-size:12px;color:#7A5C3E;margin:4px 0 0 0;"><b>High turnover &mdash; Hyperparathyroidism</b></p>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:12px;">
+      <div style="background:#3D2C20;border:2px solid #B97A2E;border-radius:8px;padding:8px 22px;text-align:center;">
+        <p style="font-size:13px;font-weight:700;color:#FFF6E4;margin:0;">Mixed</p>
+        <p style="font-size:11px;color:#7A5C3E;margin:2px 0 0 0;">(between Adynamic/Osteomalacia and Osteitis fibrosa)</p>
+      </div>
+    </div>
+    <div style="margin-top:12px;text-align:center;font-size:13px;color:#7A5C3E;">
+      <b>Below the spectrum:</b> Calcium, calcitriol and Aluminum
+    </div>
+  </div>
+</div>
+
+<svg style="position:absolute;right:30px;bottom:20px;width:40px;height:32px;z-index:100;" aria-hidden="true"><rect x="0" y="0" width="40" height="32" rx="6" fill="#B97A2E"/><text x="20" y="23" font-family="Times New Roman,serif" font-size="15" font-weight="700" fill="#FFFDF6" text-anchor="middle">17</text></svg>
+</div>
+</body>
+</html>

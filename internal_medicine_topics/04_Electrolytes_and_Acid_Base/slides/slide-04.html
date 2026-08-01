@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">01</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Overview of Acid-Base Disturbances &mdash; Primary Events</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<p style="font-size:14px;color:#5C4A38;margin:0 0 10px 0;font-style:italic;">Overview of Acid-Base Disturbances &mdash; the primary event in each of the four disturbances</p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+  <tr style="background:#7A5636;color:#FBF3E3;">
+    <th style="padding:8px 10px;border:1px solid #7A5636;text-align:left;">Disturbance</th>
+    <th style="padding:8px 10px;border:1px solid #7A5636;text-align:left;">Primary event</th>
+  </tr>
+  <tr style="background:#FBF3E3;">
+      <td style="padding:9px 10px;border:1px solid #C9AC85;width:20%;font-weight:700;color:#7A5636;">Metabolic acidosis</td>
+      <td style="padding:9px 10px;border:1px solid #C9AC85;color:#3A2A1B;">Primary reduction of plasma HCO<sub>3</sub><sup>&minus;</sup>, leading to decrease in pH stimulating ventilation to decrease CO<sub>2</sub> <b style="color:{DANGER};">(low pH, CO<sub>2</sub> and HCO<sub>3</sub><sup>&minus;</sup>)</b></td>
+    </tr><tr style="background:#F4E6CC;">
+      <td style="padding:9px 10px;border:1px solid #C9AC85;width:20%;font-weight:700;color:#7A5636;">Metabolic alkalosis</td>
+      <td style="padding:9px 10px;border:1px solid #C9AC85;color:#3A2A1B;">Primary increase of plasma HCO<sub>3</sub><sup>&minus;</sup>, leading to increase in pH inhibiting ventilation to increase CO<sub>2</sub> <b style="color:{DANGER};">(high pH, CO<sub>2</sub> and HCO<sub>3</sub><sup>&minus;</sup>)</b></td>
+    </tr><tr style="background:#FBF3E3;">
+      <td style="padding:9px 10px;border:1px solid #C9AC85;width:20%;font-weight:700;color:#7A5636;">Respiratory acidosis</td>
+      <td style="padding:9px 10px;border:1px solid #C9AC85;color:#3A2A1B;">Primary retention of CO<sub>2</sub>, leading to decrease in pH enhancing renal retention of HCO<sub>3</sub><sup>&minus;</sup> <b style="color:{DANGER};">(low pH, high CO<sub>2</sub> and HCO<sub>3</sub><sup>&minus;</sup>)</b></td>
+    </tr><tr style="background:#F4E6CC;">
+      <td style="padding:9px 10px;border:1px solid #C9AC85;width:20%;font-weight:700;color:#7A5636;">Respiratory alkalosis</td>
+      <td style="padding:9px 10px;border:1px solid #C9AC85;color:#3A2A1B;">Primary loss of CO<sub>2</sub>, leading to increase in pH enhancing renal excretion of HCO<sub>3</sub><sup>&minus;</sup> <b style="color:{DANGER};">(high pH, low CO<sub>2</sub> and HCO<sub>3</sub><sup>&minus;</sup>)</b></td>
+    </tr>
+</table>
+<div style="height:10px;"></div>
+<div style="background:#EFE7D2;border-radius:8px;padding:8px 14px;border-left:5px solid #D9A23B;">
+  <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.45;"><b style="color:#B07C44;">NB:</b> The <b>primary event</b> (H<sup>+</sup> gain/loss or CO<sub>2</sub> retention/loss) triggers a <b>physiologic compensatory response</b> by the other organ system (lungs or kidneys) to defend the pH.</p>
+</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:10px;background:linear-gradient(90deg,#4A2F16,#7A5233,#B0722F,#A86E1C);"></div>
+<div style="position:absolute;top:26px;left:52px;right:52px;">
+  <p style="font-size:12px;color:#B0722F;letter-spacing:2.5px;font-weight:700;margin:0;text-transform:uppercase;">Ch 03 · Nephrotic Syndrome</p>
+  <p style="font-size:28px;color:#4A2F16;margin:1px 0 0 0;font-weight:700;line-height:1.1;">Treatment — 1. General Treatment</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:6px 0 0 0;border-radius:2px;"></div>
+</div>
+<div style="position:absolute;top:112px;left:52px;right:52px;bottom:58px;">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Protein intake</p><div style="font-size:12px;color:#3A2A18;line-height:1.45;">Daily physiological need (<b style="color:#8E3B2B;">1 gm/kg</b>) + the daily protein losses in urine.<br><br><b style="color:#8E3B2B;">N.B:</b> Protein restriction (0.6–0.8 gm/kg/day) in the presence of renal impairment.<br><br><b>High protein intake (1.5–2 gm/kg/day) is NOT advised because:</b><br><span style="padding-left:8px;">– Ineffective, due to increased protein loss</span><br><span style="padding-left:8px;">– Such a diet is difficult to manage with concomitant salt restriction</span><br><span style="padding-left:8px;">– Such a diet could aggravate glomerular damage</span></div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Drug control of proteinuria</p><div style="font-size:12.5px;color:#3A2A18;line-height:1.45;">• <b>ACE &amp; ARBs:</b> cause ↓ intraglomerular hydrostatic pressure → ↓ filtered urinary protein losses.<br>• <b style="color:#8E3B2B;">Medical nephrectomy</b> (mercurial drug or renal infarction) to abolish severe persistent proteinuria in ESRD.</div>
+</div>
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #7A5233;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Control of Edema</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:12px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Bed rest → induces diuresis</li><li style="margin:0 0 3px 0;">Na<sup>+</sup> restriction</li><li style="margin:0 0 3px 0;">Diuretics in unresponsive patients</li><li style="margin:0 0 3px 0;">Human albumin infusion:</li><li style="margin:0 0 3px 0;"><span style="padding-left:10px;">– <b>Indications:</b> severe hypoalbuminemia; diuretic-resistant patient undergoing surgery or an invasive procedure (biopsy)</span></li><li style="margin:0 0 3px 0;"><span style="padding-left:10px;">– <b>Disadvantages:</b> expensive &amp; transient effect (24–48 hours)</span></li></ul></div>
+</div>
+  <div style="background:rgba(168,110,28,0.10);border:1px solid #E2CFAD;border-left:5pxpx solid #A86E1C;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Rationale</p><div style="font-size:12.5px;color:#3A2A18;line-height:1.45;"><b style="color:#8E3B2B;">Contrast note:</b> unlike the general principles chapter, here the emphasis is on replacing losses (albumin) while restricting sodium — never use high-protein diets in nephrotic patients.</div>
+</div>
+</div>
+</div><div style="position:absolute;left:52px;bottom:24px;font-size:10.5px;color:#6B5238;font-style:italic;">PRINCIPLES OF NEPHROLOGY — Page 12</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">28</text>
+</svg>
+</div>
+</body>
+</html>

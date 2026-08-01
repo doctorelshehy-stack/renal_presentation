@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:10px;background:linear-gradient(90deg,#4A2F16,#7A5233,#B0722F,#A86E1C);"></div>
+<div style="position:absolute;top:26px;left:52px;right:52px;">
+  <p style="font-size:12px;color:#B0722F;letter-spacing:2.5px;font-weight:700;margin:0;text-transform:uppercase;">Ch 01 · Principles of Glomerulopathies</p>
+  <p style="font-size:28px;color:#4A2F16;margin:1px 0 0 0;font-weight:700;line-height:1.1;">Principles of Treatment — II: Hypertension, Lipids, Thrombosis</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:6px 0 0 0;border-radius:2px;"></div>
+</div>
+<div style="position:absolute;top:112px;left:52px;right:52px;bottom:58px;">
+<div style="display:grid;grid-template-columns:3fr 2fr;gap:12px;">
+  <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5px solid #8E3B2B;border-radius:10px;padding:11px 14px;">
+    <p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 5px 0;">Control of Hypertension</p>
+    <p style="font-size:12.5px;color:#3A2A18;margin:0 0 3px 0;"><b style="color:#B0722F;">Value of BP control:</b></p>
+    <ul style="margin:0;padding-left:17px;font-size:12px;color:#3A2A18;line-height:1.45;">
+      <li>Relief of symptoms</li>
+      <li>Prevent hypertensive complications on other systems</li>
+      <li>Decrease progression of renal disease (renoprotective)</li>
+    </ul>
+    <p style="font-size:12.5px;color:#3A2A18;margin:6px 0 3px 0;"><b style="color:#B0722F;">Target BP — according to degree of proteinuria:</b></p>
+    <ul style="margin:0;padding-left:17px;font-size:12px;color:#3A2A18;line-height:1.45;">
+      <li>If proteinuria <b style="color:#8E3B2B;">&gt; 1 gm/day</b> → target BP <b style="color:#8E3B2B;">&lt; 125/75</b> (mean BP &lt; 92)</li>
+      <li>If proteinuria <b style="color:#8E3B2B;">&lt; 1 gm/day</b> → target BP <b style="color:#8E3B2B;">&lt; 130/80</b> (mean BP &lt; 98)</li>
+    </ul>
+    <p style="font-size:12.5px;color:#3A2A18;margin:6px 0 3px 0;"><b style="color:#B0722F;">Choice of antihypertensive agent:</b></p>
+    <ul style="margin:0;padding-left:17px;font-size:12px;color:#3A2A18;line-height:1.45;">
+      <li>ACEIs / ARBs</li>
+      <li>Calcium-channel blockers (CCB)</li>
+      <li>All have <b style="color:#8E3B2B;">renoprotective effect</b></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #5F6B2E;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Control of Hyperlipidemia</p><div style="font-size:13px;color:#3A2A18;line-height:1.45;"><ul style="margin:0;padding-left:18px;font-size:12px;color:#3A2A18;line-height:1.45;"><li style="margin:0 0 3px 0;">Avoid high-fat diet</li><li style="margin:0 0 3px 0;">Physical activity</li><li style="margin:0 0 3px 0;">Use statins</li></ul></div>
+</div>
+    <div style="background:#FBF3E4;border:1px solid #E2CFAD;border-left:5pxpx solid #B5522E;border-radius:10px;padding:12px 14px;">
+<p style="font-size:15px;font-weight:700;color:#4A2F16;margin:0 0 6px 0;">Control of Hypercoagulability &amp; Thrombosis</p><div style="font-size:12px;color:#3A2A18;line-height:1.45;"><b>Prophylactic anticoagulation</b> should be employed in nephrotic syndrome patients at high risk of thromboembolism:<br><br><span style="padding-left:8px;">• Increased risk of <b style="color:#8E3B2B;">venous thrombosis</b> (albumin &lt; 2.5) → <b style="color:#8E3B2B;">anticoagulants</b></span><br><span style="padding-left:8px;">• Increased risk of <b style="color:#8E3B2B;">arterial thrombosis</b> → <b style="color:#8E3B2B;">aspirin</b></span></div>
+</div>
+  </div>
+</div>
+</div><div style="position:absolute;left:52px;bottom:24px;font-size:10.5px;color:#6B5238;font-style:italic;">PRINCIPLES OF NEPHROLOGY — Page 5–6</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">13</text>
+</svg>
+</div>
+</body>
+</html>

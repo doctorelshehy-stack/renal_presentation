@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#2E2012; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F4EADA;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:24px;left:56px;right:56px;z-index:10;">
+  <p style="font-size:13px;letter-spacing:2.5px;color:#6E7A3E;margin:0 0 3px 0;font-weight:700;text-transform:uppercase;">Cystic Kidney Diseases · ADPKD</p>
+  <p style="font-size:28px;font-weight:700;color:#55361C;margin:0;line-height:1.12;">Clinical Features — Symptoms & Causes (1/2)</p>
+  <div style="width:74px;height:4px;background:#C08A3E;margin-top:7px;border-radius:2px;"></div>
+</div><div style="position:absolute;top:100px;left:56px;right:56px;bottom:56px;z-index:10;"><table style="width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(85,54,28,0.12);">
+  <tr style="background:#4A3118;"><th style="padding:8px 10px;text-align:left;font-size:13.5px;color:#FBF5E9;">Symptom</th><th style="padding:8px 10px;text-align:left;font-size:13.5px;color:#FBF5E9;">Cause</th></tr>
+  <tr style="background:#FBF5E9;border-bottom:1px solid #E0CDAA;"><td style="padding:7px 10px;text-align:left;font-size:13.5px;color:#3B2A1A;vertical-align:top;"><b style="color:#B0502A;">Hematuria</b></td><td style="padding:7px 10px;text-align:left;font-size:13.5px;color:#3B2A1A;vertical-align:top;">Due to; <b>rupture of a cyst</b> into the renal pelvis, <b>renal stone</b> or <b>UTI</b>.</td></tr><tr style="background:#F1E4CC;border-bottom:1px solid #E0CDAA;"><td style="padding:7px 10px;text-align:left;font-size:13.5px;color:#3B2A1A;vertical-align:top;"><b style="color:#B0502A;">Renal infection</b></td><td style="padding:7px 10px;text-align:left;font-size:13.5px;color:#3B2A1A;vertical-align:top;">Flank pain, fever, and leukocytosis. Blood cultures may be positive and urine analysis may be normal because the cyst <b>does not communicate directly with the urinary tract</b>.</td></tr>
+</table><div style="margin-top:13px;">
+  <div style="background:#4A3118;border-radius:10px;padding:11px 15px;border-left:4px solid #C08A3E;box-shadow:0 1px 5px rgba(74,49,24,0.35);">
+  <p style="font-size:14px;color:#FBF5E9;margin:0;line-height:1.45;"><b style="color:#E8B84B;">Exam Pearl:</b> In ADPKD, <b>urine analysis may be normal</b> during cyst infection — the infected cyst does not communicate with the urinary tract; blood cultures are more reliable.</p>
+</div>
+</div></div>
+<svg style="position:absolute;right:32px;bottom:22px;width:44px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="44" height="34" rx="6" fill="#C08A3E"/>
+  <text x="22" y="24" font-family="Times New Roman,serif" font-size="17" font-weight="700" fill="#FBF5E9" text-anchor="middle">11</text>
+</svg>
+</div>
+</body>
+</html>

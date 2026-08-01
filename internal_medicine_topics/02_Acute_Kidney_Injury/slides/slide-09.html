@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">03</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Causes &mdash; 3. Post-renal Causes</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;"><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">1. Congenital anomalies:</b> ureterocele, bladder diverticulosis, post-urethral valves, neurogenic bladder.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">2. Acquired uropathies:</b> BPH, ureterolithiasis, papillary necrosis, ureteral ligation.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">3. Malignant disease:</b> prostate, bladder, cervix, colon.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">4. Gynecologic non-neoplastic:</b> uterine prolapse, endometriosis.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">5. Drugs:</b> sulfonamides, aminocaproic acid.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">6. Infections:</b> schistosomiasis, TB, candidiasis, aspergillosis, actinomycosis.</p>
+    </div><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E3;border-radius:8px;padding:8px 14px;border-left:4px solid #7A5636;margin-bottom:8px;">
+      <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.4;"><b style="color:#B07C44;">7. Others:</b> accidental urethral catheter occlusion.</p>
+    </div><div style="height:6px;"></div><div style="background:#F6DFD2;border-radius:8px;padding:11px 18px;border:1.5px solid #B85C38;">
+  <p style="font-size:13.5px;color:#3A2A1B;margin:0;line-height:1.5;"><b style="color:#9E3B2C;">&#9888; Important:</b> Nearly all cases of <b>ICU-associated AKI</b> result from <b>more than a single insult</b>.</p>
+</div></div>
+
+</div>
+</body>
+</html>

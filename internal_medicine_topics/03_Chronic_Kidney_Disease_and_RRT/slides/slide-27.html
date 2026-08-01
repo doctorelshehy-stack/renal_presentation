@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){var s=document.querySelector('.slide-content');if(!s)return;var sx=window.innerWidth/960;var sy=window.innerHeight/540;var sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F1E8D9;font-family:'Times New Roman',serif;color:#3A2B22;overflow:hidden;">
+
+<div style="position:absolute;top:26px;left:60px;right:60px;z-index:5;"><p style="font-size:30px;font-weight:700;color:#4B3223;margin:0;line-height:1.1;">Treatment &mdash; Mineral Bone Disease (1)</p><div style="width:64px;height:4px;background:#B97A2E;margin:8px 0 0 0;border-radius:2px;"></div></div>
+<div style="position:absolute;top:92px;left:60px;right:60px;z-index:5;display:grid;grid-template-columns:1fr;gap:12px;">
+  <p style="font-size:16px;font-weight:700;color:#4B3223;margin:0;">Mineral Bone Disease (MBD) &mdash; Control of hypocalcemia, hyperphosphatemia, vitamin D deficiency and secondary hyperparathyroidism</p>
+  <div style="background:#FBF4E7;border-radius:10px;padding:14px 16px;border-left:4px solid #B97A2E;box-shadow:0 2px 8px rgba(62,40,25,0.10);"><p style="font-size:18px;font-weight:700;color:#4B3223;margin:0 0 6px 0;">Diet Control</p><ul style="margin:0;padding:0 0 0 20px;font-size:14px;color:#3A2B22;line-height:1.45;"><li style="margin:0 0 6px 0;"><b>1.</b> Increased elementary dietary calcium to 1500&ndash;2000 mg/day (hold if there is hypercalcemia).</li><li style="margin:0 0 6px 0;"><b>2.</b> Low phosphate diet (800&ndash;1000 mg/day) adjusted by requirement of protein in grades 3&ndash;5 CKD patients.</li></ul></div>
+  <div style="background:#FBF4E7;border-radius:10px;padding:14px 16px;border-left:4px solid #B97A2E;box-shadow:0 2px 8px rgba(62,40,25,0.10);"><p style="font-size:18px;font-weight:700;color:#4B3223;margin:0 0 6px 0;">Phosphate Binders &mdash; indicated when dietary phosphate restriction is insufficient to control phosphate and PTH levels</p><ul style="margin:0;padding:0 0 0 20px;font-size:13px;color:#3A2B22;line-height:1.45;"><li style="margin:0 0 4px 0;"><b style="color:#4B3223;">Calcium-based phosphate binders; </b>e.g. Ca carbonate, given orally during meals.</li><li style="margin:0 0 4px 0;">A. Decreases serum phosphate level effectively and can be used for initial phosphate binding treatment.</li><li style="margin:0 0 4px 0;">B. Long-term administration can result in hypercalcemia.</li><li style="margin:0 0 4px 0;">C. Should not be used in dialysis patients with hypercalcemia and in patients with plasma PTH level &lt; 130 pg/dL. In these conditions use calcium-free phosphate binders.</li><li style="margin:0 0 4px 0;"><b style="color:#4B3223;">Non-calcium-based phosphate binders; </b>Sevelamer (Renagel) hydrochloride or bicarbonate &mdash; safe and effective but expensive.</li><li style="margin:0 0 4px 0;"><b style="color:#4B3223;">Lanthanum carbonate.</b></li></ul></div>
+</div>
+
+<svg style="position:absolute;right:30px;bottom:20px;width:40px;height:32px;z-index:100;" aria-hidden="true"><rect x="0" y="0" width="40" height="32" rx="6" fill="#B97A2E"/><text x="20" y="23" font-family="Times New Roman,serif" font-size="15" font-weight="700" fill="#FFFDF6" text-anchor="middle">27</text></svg>
+</div>
+</body>
+</html>

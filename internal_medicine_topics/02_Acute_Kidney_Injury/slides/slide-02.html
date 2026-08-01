@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:#EDDCC2;"></div>
+<div style="position:absolute;top:20px;left:60px;z-index:10;">
+  <p style="font-size:34px;color:#5B3A21;font-weight:700;margin:0;">Table of Contents</p>
+  <div style="width:70px;height:4px;background:#B07C44;margin:9px 0 24px 0;"></div>
+</div>
+<div style="position:absolute;top:95px;left:60px;right:60px;z-index:10;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;">
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">01</span>
+      <span style="font-size:18px;color:#3A2A1B;">Definition</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">02</span>
+      <span style="font-size:18px;color:#3A2A1B;">Categorization of AKI (RIFLE &amp; AKIN staging)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">03</span>
+      <span style="font-size:18px;color:#3A2A1B;">Causes &mdash; Pre-renal &middot; Renal &middot; Post-renal</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">04</span>
+      <span style="font-size:18px;color:#3A2A1B;">Clinical Manifestations</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">05</span>
+      <span style="font-size:18px;color:#3A2A1B;">Investigations</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:#FBF3E3;border-radius:8px;border-left:4px solid #7A5636;box-shadow:0 1px 3px rgba(91,58,33,0.16);">
+      <span style="font-size:22px;font-weight:700;color:#B07C44;min-width:34px;">06</span>
+      <span style="font-size:18px;color:#3A2A1B;">Principles of Treatment</span>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</body>
+</html>

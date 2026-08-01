@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#1F1207; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F2E4CE;font-family:'Times New Roman, serif';overflow:hidden;">
+<div style="position:absolute;top:0;left:0;width:960px;height:540px;background:linear-gradient(135deg,#3E2A16 0%,#6B4A28 55%,#8A6238 100%);"></div>
+<div style="position:absolute;top:0;left:0;width:26px;height:540px;background:linear-gradient(180deg,#B0722F,#D3A75B);"></div>
+<div style="position:absolute;bottom:0;left:26px;width:934px;height:14px;background:linear-gradient(90deg,#B0722F,#A86E1C);"></div>
+<svg style="position:absolute;top:-90px;right:-70px;width:520px;height:420px;z-index:1;" aria-hidden="true">
+  <circle cx="260" cy="210" r="205" fill="#B0722F" opacity="0.16"/>
+  <circle cx="260" cy="210" r="150" fill="#D3A75B" opacity="0.12"/>
+</svg>
+<svg style="position:absolute;bottom:-80px;left:120px;width:420px;height:300px;z-index:1;" aria-hidden="true">
+  <ellipse cx="200" cy="150" rx="220" ry="120" fill="#3E2A16" opacity="0.35"/>
+</svg>
+<div style="position:absolute;top:88px;left:70px;right:70px;z-index:10;">
+  <div style="width:84px;height:5px;background:#D3A75B;border-radius:2px;margin-bottom:18px;"></div>
+  <p style="font-size:20px;color:#D3A75B;margin:0;font-weight:400;letter-spacing:5px;">INTERNAL MEDICINE · NEPHROLOGY</p>
+  <p style="font-size:62px;color:#FBF3E4;margin:10px 0 0 0;font-weight:700;line-height:1.05;">Glomerular Diseases</p>
+  <p style="font-size:40px;color:#E8C98A;margin:4px 0 0 0;font-weight:700;">Principles of Glomerulopathies</p>
+  <div style="width:64px;height:4px;background:#B0722F;margin:22px 0 16px 0;border-radius:2px;"></div>
+  <p style="font-size:21px;color:#FBF3E4;margin:0;font-weight:400;">Acute GN · Nephrotic Syndrome · Anti-GBM · PSGN · Lupus Nephritis · Diabetic Nephropathy</p>
+</div>
+<div style="position:absolute;bottom:34px;left:70px;z-index:10;">
+  <p style="font-size:16px;color:#FBF3E4;margin:0;opacity:0.95;">Dr. Hassan Abd-Elhady — Professor of Internal Medicine &amp; Nephrology</p>
+  <p style="font-size:13px;color:#E8C98A;margin:3px 0 0 0;opacity:0.9;">Menoufia University · Principles of Nephrology</p>
+</div><svg style="position:absolute;right:28px;bottom:20px;width:46px;height:34px;z-index:100;" aria-hidden="true">
+  <rect x="0" y="0" width="46" height="34" rx="7" fill="#B0722F"/>
+  <rect x="2.5" y="2.5" width="41" height="29" rx="5.5" fill="none" stroke="#FBF3E4" stroke-width="1"/>
+  <text x="23" y="23" font-family="Times New Roman, serif" font-size="15.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+</svg>
+</div>
+</body>
+</html>

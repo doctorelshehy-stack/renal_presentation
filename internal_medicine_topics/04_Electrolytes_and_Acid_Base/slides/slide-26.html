@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#EDDCC2;font-family:'Times New Roman',serif;overflow:hidden;">
+<div style="position:absolute;top:20px;left:50px;right:50px;z-index:10;">
+  <div style="display:flex;align-items:baseline;gap:12px;">
+    <span style="font-size:24px;font-weight:700;color:#B07C44;">02</span>
+    <p style="font-size:30px;font-weight:700;color:#5B3A21;margin:0;line-height:1.1;">Hyponatremia &mdash; Treatment</p>
+  </div>
+  <div style="width:70px;height:4px;background:#B07C44;margin:7px 0 0 0;"></div>
+</div><div style="position:absolute;top:88px;left:50px;right:50px;bottom:46px;z-index:10;">
+<div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #9E3B2C;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>General principles</b></p>
+<ul style="margin:0;padding:0 0 0 18px;color:#3A2A1B;font-size:13.5px;line-height:1.45;">
+  <li style="margin-bottom:6px;">Primary goal is to <b style="color:#9E3B2C;">control symptoms</b>, then to <b style="color:#9E3B2C;">correct Na<sup>+</sup> level</b>.</li>
+  <li style="margin-bottom:6px;">Determine whether hyponatremia is <b style="color:#B85C38;">acute or chronic</b>.</li>
+  <li style="margin-bottom:6px;">Be careful of the <b style="color:#9E3B2C;">rate of correction</b> according to the rate of development (acute or chronic) to avoid <b style="color:#9E3B2C;">osmotic demyelination</b>, i.e. <b style="color:#9E3B2C;">central pontine myelinolysis</b>.</li>
+  <li>The fluid of choice for correction depends on the <b style="color:#B85C38;">volume status</b> of the patient.</li>
+</ul>
+</div>
+<div style="height:10px;"></div>
+<div style="background:#FBF3E3;border-radius:10px;padding:12px 16px;border-left:5px solid #6E7F4A;box-shadow:0 1px 3px rgba(91,58,33,0.18);"><p style="font-size:17px;font-weight:700;color:#5B3A21;margin:0 0 6px 0;"><b>Medications</b></p>
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+  <tr style="background:#7A5636;color:#FBF3E3;">
+    <th style="padding:7px 10px;border:1px solid #7A5636;text-align:left;">Fluid / drug</th>
+    <th style="padding:7px 10px;border:1px solid #7A5636;text-align:left;">Indicated states</th>
+  </tr>
+  <tr style="background:#FBF3E3;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">Isotonic 0.9% NaCl</b></td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">Hypo- and euvolemic states</td>
+  </tr>
+  <tr style="background:#F4E6CC;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">Hypertonic 3% NaCl + Loop diuretics</b></td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">Hyper- and euvolemic states</td>
+  </tr>
+  <tr style="background:#FBF3E3;">
+    <td style="padding:7px 10px;border:1px solid #C9AC85;"><b style="color:#9E3B2C;">Vasopressin receptor antagonists</b>: Conivaptan, Tolvaptan</td>
+    <td style="padding:7px 10px;border:1px solid #C9AC85;">&mdash;</td>
+  </tr>
+</table>
+</div>
+<div style="height:10px;"></div>
+<div style="background:#F6DFD2;border-radius:8px;padding:9px 14px;border:1.5px solid #B85C38;">
+  <p style="font-size:14px;color:#3A2A1B;margin:0;line-height:1.45;"><b style="color:#9E3B2C;">&#9888; Important:</b> Too rapid correction of chronic hyponatremia may cause <b>osmotic demyelination syndrome (central pontine myelinolysis)</b> &mdash; correct slowly in chronic cases.</p>
+</div>
+</div>
+
+</div>
+</body>
+</html>

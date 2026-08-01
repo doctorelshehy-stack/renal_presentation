@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){var s=document.querySelector('.slide-content');if(!s)return;var sx=window.innerWidth/960;var sy=window.innerHeight/540;var sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform='scale('+sc+')';s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="width:960px;height:540px;background:#F1E8D9;font-family:'Times New Roman',serif;color:#3A2B22;overflow:hidden;">
+
+<div style="position:absolute;top:26px;left:60px;right:60px;z-index:5;"><p style="font-size:30px;font-weight:700;color:#4B3223;margin:0;line-height:1.1;">HD &mdash; Chronic Complications (1): Cardiovascular</p><div style="width:64px;height:4px;background:#B97A2E;margin:8px 0 0 0;border-radius:2px;"></div></div>
+<div style="position:absolute;top:92px;left:60px;right:60px;z-index:5;">
+  <p style="font-size:16px;font-weight:700;color:#4B3223;margin:0 0 8px 0;">Chronic (Long-term) HD Complications &mdash; 1. Cardiovascular Disease</p>
+  <div style="background:#FBF4E7;border-radius:10px;padding:14px 16px;border-left:4px solid #B97A2E;box-shadow:0 2px 8px rgba(62,40,25,0.10);"><p style="font-size:18px;font-weight:700;color:#4B3223;margin:0 0 6px 0;">Dialysis patients are more likely to die from CV disease than the general population. The cause is multifactorial; cardiac or vascular.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"><div style="background:#FBF4E7;border-radius:10px;padding:14px 16px;border-left:4px solid #A84A2A;box-shadow:0 2px 8px rgba(62,40,25,0.10);"><p style="font-size:18px;font-weight:700;color:#4B3223;margin:0 0 6px 0;">Cardiac</p><ul style="margin:0;padding:0 0 0 20px;font-size:13px;color:#3A2B22;line-height:1.45;"><li style="margin:0 0 4px 0;">Ischemic heart disease.</li><li style="margin:0 0 4px 0;">Valvular heart disease (aortic and mitral valves).</li><li style="margin:0 0 4px 0;">Uremic pericarditis and pericardial effusion.</li><li style="margin:0 0 4px 0;">Uremic endocarditis.</li><li style="margin:0 0 4px 0;">Cardiomyopathy (dilated).</li></ul></div><div style="background:#FBF4E7;border-radius:10px;padding:14px 16px;border-left:4px solid #6E7A48;box-shadow:0 2px 8px rgba(62,40,25,0.10);"><p style="font-size:18px;font-weight:700;color:#4B3223;margin:0 0 6px 0;">Vascular</p><ul style="margin:0;padding:0 0 0 20px;font-size:13px;color:#3A2B22;line-height:1.45;"><li style="margin:0 0 4px 0;"><b style="color:#4B3223;">Peripheral vascular disease</b> due to:</li><li style="margin:0 0 4px 0;">&bull; Decreased peripheral blood flow, related to vascular access.</li><li style="margin:0 0 4px 0;">&bull; Hypertension and dyslipidemia.</li><li style="margin:0 0 4px 0;"><b style="color:#4B3223;">Metastatic calcification:</b> abnormal calcification of soft tissues due to persistent elevation of plasma phosphate and calcium.</li></ul></div></div></div>
+</div>
+
+<svg style="position:absolute;right:30px;bottom:20px;width:40px;height:32px;z-index:100;" aria-hidden="true"><rect x="0" y="0" width="40" height="32" rx="6" fill="#B97A2E"/><text x="20" y="23" font-family="Times New Roman,serif" font-size="15" font-weight="700" fill="#FFFDF6" text-anchor="middle">43</text></svg>
+</div>
+</body>
+</html>
