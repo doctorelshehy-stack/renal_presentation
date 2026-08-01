@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Acid-base balance — metabolic and respiratory acidosis and alkalosis: overview, anion gap, causes, clinical features, investigations and treatment.">
+<title>Acid-Base Balance — Internal Medicine Nephrology</title>
+<style>
+/* ============================================================
+   MASTER TEMPLATE — Internal Medicine Nephrology slide decks
+   Self-contained, offline, 16:9, keyboard navigable, print-ready.
+   Do NOT modify the <style> or <script> blocks when building decks.
+   ============================================================ */
+:root{
+  --navy:#0e2a47; --navy2:#17406b; --teal:#0f7d8c; --teal-soft:#e3f2f4;
+  --accent:#d97706; --accent-soft:#fdf0dd;
+  --ink:#1d2a38; --muted:#5c6f82; --line:#dbe3ea; --bg:#f4f7fa;
+  --key:#147a4d; --key-bg:#e5f4ec; --warn:#c0392b; --warn-bg:#fdecea;
+  --info:#175a9b; --info-bg:#e8f1fa; --nb:#8a6500; --nb-bg:#fef7e0;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#0b1622;color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh}
+
+/* ---------- Slides ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  padding:5vh 6vw 7vh;background:var(--paper,#fff);overflow:hidden;
+  font-size:clamp(13px,1.5vw,20px)}
+.slide.active{display:flex;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72em;font-weight:700;
+  color:var(--teal);margin:0 0 1.2vh}
+.slide h2{margin:0 0 2vh;font-size:2.1em;line-height:1.12;color:var(--navy);font-weight:800}
+.slide h3{margin:1.4vh 0 .8vh;font-size:1.2em;line-height:1.2;color:var(--navy2);font-weight:700}
+.slide p{margin:.6vh 0;line-height:1.45}
+.slide ul,.slide ol{margin:.6vh 0;padding-left:1.3em}
+.slide li{margin-bottom:.7vh;line-height:1.42}
+.slide li::marker{color:var(--teal);font-weight:700}
+.slide strong{color:var(--navy)}
+.slide em{color:var(--muted)}
+.content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
+.lead{font-size:1.15em;color:var(--navy2);line-height:1.5}
+
+/* ---------- Columns / cards ---------- */
+.cols{display:flex;gap:2vw;flex:1;min-height:0}
+.cols>div{flex:1;min-width:0}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:2vh 1.4vw}
+.card h3{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4vw}
+.grid .card{margin:0}
+
+/* ---------- Tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:.92em}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:1.1vh 1vw;font-weight:600;line-height:1.3}
+.tbl td{padding:1vh 1vw;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+.tbl tbody tr:nth-child(even) td{background:var(--bg)}
+.tbl .hl{color:var(--warn);font-weight:700}
+
+/* ---------- Callouts ---------- */
+.callout{display:flex;gap:1vw;align-items:flex-start;border-radius:10px;
+  padding:1.5vh 1.4vw;margin:1.4vh 0;border-left:6px solid;font-size:.95em}
+.callout .ic{font-size:1.4em;line-height:1.15}
+.callout .body{flex:1;min-width:0}
+.callout .t{display:block;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  font-size:.8em;margin-bottom:.4vh}
+.callout.key{background:var(--key-bg);border-color:var(--key)}
+.callout.key .t{color:var(--key)}
+.callout.warn{background:var(--warn-bg);border-color:var(--warn)}
+.callout.warn .t{color:var(--warn)}
+.callout.info{background:var(--info-bg);border-color:var(--info)}
+.callout.info .t{color:var(--info)}
+.callout.nb{background:var(--nb-bg);border-color:var(--nb)}
+.callout.nb .t{color:var(--nb)}
+.callout p{margin:.2vh 0}
+
+/* ---------- Definition box ---------- */
+.def{background:var(--bg);border:1px solid var(--line);border-left:6px solid var(--teal);
+  border-radius:10px;padding:1.8vh 1.6vw;font-size:1.02em}
+.def .term{color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  font-size:.8em;display:block;margin-bottom:.6vh}
+
+/* ---------- Chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:.7vw}
+.chip{background:var(--teal-soft);color:var(--navy2);border-radius:999px;padding:.55vh 1vw;
+  font-size:.82em;font-weight:600;border:1px solid #c4e0e4}
+
+/* ---------- Numbered steps ---------- */
+.steps{list-style:none;counter-reset:step;padding-left:0}
+.steps li{position:relative;padding-left:2.6em;margin-bottom:1.3vh}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.05em;
+  width:1.8em;height:1.8em;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.82em;font-weight:700}
+
+/* ---------- Title slide ---------- */
+.slide.title-slide{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 58%,var(--teal) 135%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.title-slide .kicker{color:var(--accent)}
+.title-slide h1{margin:0 0 3vh;font-size:clamp(30px,4.6vw,64px);line-height:1.08;font-weight:800;max-width:90%}
+.title-slide .sub{font-size:clamp(14px,1.7vw,22px);color:#cfe0ee;line-height:1.5;max-width:80%}
+.title-slide .src{margin-top:7vh;font-size:.8em;color:#8fb0cd;letter-spacing:.04em;max-width:85%}
+.title-slide .no{position:absolute;top:5vh;right:6vw;font-size:clamp(18px,2.2vw,28px);font-weight:800;color:#f5b041}
+
+/* ---------- Section slide ---------- */
+.slide.section-slide{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 70%,var(--teal) 140%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.section-slide .big{font-size:clamp(56px,9vw,120px);font-weight:800;color:rgba(255,255,255,.14);
+  position:absolute;right:4vw;top:2vh;line-height:1}
+.section-slide h2{color:#fff;font-size:clamp(28px,4vw,54px);margin:0}
+.section-slide .kicker{color:var(--accent)}
+
+/* ---------- Footer / chrome ---------- */
+.foot{position:absolute;bottom:2.2vh;left:6vw;right:6vw;display:flex;justify-content:space-between;
+  gap:2vw;font-size:.68em;color:var(--muted);letter-spacing:.03em}
+.title-slide .foot,.section-slide .foot{color:#8fb0cd}
+.foot .help{opacity:.75;white-space:nowrap}
+#counter{position:fixed;top:2vh;right:2vw;background:rgba(14,42,71,.88);color:#fff;padding:.5vh 1vw;
+  border-radius:999px;font-size:clamp(10px,.95vw,13px);z-index:60;font-weight:600}
+#progress{position:fixed;bottom:0;left:0;height:4px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .25s ease}
+.deck-nav{position:fixed;right:2vw;bottom:5.5vh;display:flex;gap:.6vw;z-index:65}
+.deck-nav button{width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(14,42,71,.88);color:#fff;font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:transform .15s,background .15s}
+.deck-nav button:hover{background:var(--teal);transform:scale(1.06)}
+
+/* ---------- Overview mode ---------- */
+body.overview{overflow:auto;background:#0b1622}
+body.overview .deck{width:100%;height:auto}
+body.overview #deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2.5vh;padding:3vh 4vw}
+body.overview .slide{position:relative;display:flex;aspect-ratio:16/9;height:auto;margin:0;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35);border-radius:8px;overflow:hidden;animation:none}
+body.overview .foot,body.overview #counter,body.overview .deck-nav{display:none}
+body.overview .slide::after{content:attr(data-n);position:absolute;top:1vh;right:1vw;
+  background:rgba(14,42,71,.85);color:#fff;border-radius:6px;padding:.3vh .6vw;font-size:.7em;font-weight:700}
+
+/* ---------- Auto-fit (overflow protection) ---------- */
+.slide.fit{font-size:clamp(11px,1.28vw,16px)}
+.slide.fit-sm{font-size:clamp(9px,1.05vw,13px)}
+
+/* ---------- Print (PDF export) ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body{overflow:visible;background:#fff}
+  #counter,#progress,.deck-nav{display:none!important}
+  .slide{display:flex!important;position:relative;width:297mm;height:209mm;overflow:hidden;
+    padding:14mm 18mm;page-break-after:always;break-after:page}
+  .foot{position:absolute;bottom:8mm;left:18mm;right:18mm}
+}
+/* Fallback if JS is disabled: show all slides stacked */
+noscript ~ .deck .slide{display:flex;position:relative;height:auto;min-height:100vh}
+</style>
+</head>
+<body>
+<main class="deck">
+  <div id="deck">
+
+<section class="slide title-slide" data-n="1">
+      <div class="no">01</div>
+      <p class="kicker">Internal Medicine — Nephrology</p>
+      <h1>Acid-Base Balance</h1>
+      <p class="sub">Overview of acid-base disturbances — metabolic and respiratory acidosis and alkalosis: definition, the anion gap, causes, clinical features, investigations and treatment.</p>
+      <p class="src">Source: Internal Medicine Nephrology (Principles of Nephrology) – Dr. Hassan Abd-Elhady, Menoufia University</p>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+
+    <section class="slide" data-n="2">
+      <p class="kicker">Objectives</p>
+      <h2>What we will cover</h2>
+      <div class="content">
+        <div class="chips">
+          <span class="chip">Overview of acid-base disturbances</span>
+          <span class="chip">Body compensation</span>
+          <span class="chip">Metabolic acidosis</span>
+          <span class="chip">The anion gap</span>
+          <span class="chip">Metabolic alkalosis</span>
+          <span class="chip">Clinical features</span>
+          <span class="chip">Investigations</span>
+          <span class="chip">Treatment</span>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="3">
+      <div class="big">01</div>
+      <p class="kicker">Part 1 — Overview of Acid-Base Disturbances</p>
+      <h2>Overview of Acid-Base Disturbances</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="4">
+      <p class="kicker">Overview — Primary events</p>
+      <h2>Primary Events of the Four Disturbances</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th>Disturbance</th><th>Primary event</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Metabolic acidosis</strong></td><td>Primary reduction of plasma HCO3- → decrease in pH → stimulates ventilation to decrease CO2 (low pH, CO2 and HCO3-)</td></tr>
+            <tr><td><strong>Metabolic alkalosis</strong></td><td>Primary increase of plasma HCO3- → increase in pH → inhibits ventilation to increase CO2 (high pH, CO2 and HCO3-)</td></tr>
+            <tr><td><strong>Respiratory acidosis</strong></td><td>Primary retention of CO2 → decrease in pH → enhances renal retention of HCO3 (low pH, high CO2 and HCO3)</td></tr>
+            <tr><td><strong>Respiratory alkalosis</strong></td><td>Primary loss of CO2 → increase in pH → enhances renal excretion of HCO3 (high pH, low CO2 and HCO3-)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="5">
+      <p class="kicker">Overview — Compensation</p>
+      <h2>Body Compensation to Acid-Base Imbalance</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th></th><th>Metabolic Acidosis</th><th>Metabolic Alkalosis</th><th>Respiratory Acidosis</th><th>Respiratory Alkalosis</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>pH</strong></td><td>↓</td><td>↑</td><td>↓</td><td>↑</td></tr>
+            <tr><td><strong>CO2</strong></td><td>↓</td><td>↑</td><td>↑</td><td>↓</td></tr>
+            <tr><td><strong>HCO3-</strong></td><td>↓</td><td>↑</td><td>↑</td><td>↓</td></tr>
+          </tbody>
+        </table>
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Pattern</span><p>Metabolic disturbances are compensated by ventilation (CO2); respiratory disturbances are compensated by the kidney (HCO3-).</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="6">
+      <div class="big">02</div>
+      <p class="kicker">Part 2 — Metabolic Acidosis</p>
+      <h2>Metabolic Acidosis</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="7">
+      <p class="kicker">Metabolic Acidosis</p>
+      <h2>Definition</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">Definition</span>
+          <p>Decrease in blood pH due to a decrease in serum <strong>HCO3-</strong> concentrations.</p>
+        </div>
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Classification</span><p>Metabolic acidosis can be either <strong>high anion gap (AG)</strong> or <strong>normal (non-) AG</strong> — recognizing the AG helps differentiate the cause.</p></div>
+        </div>
+        <div class="chips">
+          <span class="chip">High AG acidosis</span>
+          <span class="chip">Normal (non-) AG — hyperchloremic acidosis</span>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="8">
+      <p class="kicker">Metabolic Acidosis — The Anion Gap</p>
+      <h2>The Anion Gap (AG)</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">Formula</span>
+          <p>AG = Na+ - (HCO3- + Cl-)</p>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h3>Electro-neutrality of plasma</h3>
+            <ul>
+              <li>Major measured cation: <strong>Na+</strong>; major measured anions: <strong>HCO3- and Cl-</strong>.</li>
+              <li>Unmeasured plasma cations: e.g. K+, Mg+2 and Ca+2.</li>
+              <li>Unmeasured anions: e.g. sulfate, phosphate and some organic anions.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Origin and meaning of the AG</h3>
+            <ul>
+              <li>Total cations = total anions; the unmeasured anions are <strong>slightly more</strong> than the unmeasured cations — this difference is the anion gap.</li>
+              <li>Increased AG results from a <strong>decrease in unmeasured cations</strong> (e.g. hypokalemia) or an <strong>increase in unmeasured anions</strong> (e.g. hyperphosphatemia).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="9">
+      <p class="kicker">Metabolic Acidosis — Types</p>
+      <h2>High AG vs Normal AG Acidosis</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>High AG metabolic acidosis</h3>
+            <ul>
+              <li>Acidic substances (anions) accumulate and increase the AG.</li>
+              <li>The reduction in plasma HCO3- <strong>equals</strong> the increase in AG.</li>
+              <li>Recognizing the increase in AG helps to differentiate the cause of acidosis.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Normal (non-) AG metabolic acidosis</h3>
+            <ul>
+              <li>The reduction in plasma HCO3- is <strong>compensated by an increase in plasma Cl-</strong> to maintain electro-neutrality.</li>
+              <li>Hyperchloremic metabolic acidosis.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="10">
+      <p class="kicker">Metabolic Acidosis — Causes</p>
+      <h2>Causes of Normal AG (Hyperchloremic) Acidosis</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th>Mechanism</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>GI loss of HCO3-</strong></td><td>Diarrhea, enteric fistula</td></tr>
+            <tr><td><strong>Renal loss of HCO3-</strong></td><td>Proximal (Type II) RTA</td></tr>
+            <tr><td><strong>Failure of renal H+ secretion</strong></td><td>Distal (Type I) RTA</td></tr>
+            <tr><td><strong>Acid infusion</strong></td><td>Ammonium chloride, hyperalimentation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="11">
+      <p class="kicker">Metabolic Acidosis — Causes</p>
+      <h2>Causes of High AG Metabolic Acidosis</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th>Cause</th><th>Accumulated anion</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Ketoacidosis</strong></td><td>Beta-hydroxybutyrate and acetoacetate</td></tr>
+            <tr><td><strong>Renal failure</strong></td><td>Phosphate, sulfate, urate</td></tr>
+            <tr><td><strong>Lactic acidosis</strong></td><td>L-lactate, D-lactate</td></tr>
+            <tr><td><strong>Massive rhabdomyolysis</strong></td><td>H+ and organic anions from the damaged muscles</td></tr>
+            <tr><td><strong>Exogenous</strong></td><td>Salicylate, methanol, ethylene glycol, metformin</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="12">
+      <p class="kicker">Metabolic Acidosis — Clinical Features</p>
+      <h2>Clinical Features</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>Symptoms</h3>
+            <ul>
+              <li>Variable degrees of dyspnea (due to hyperventilation).</li>
+              <li>Other symptoms are non-specific, plus symptoms of the cause if present, e.g.:
+                <ul>
+                  <li>Symptoms of diabetic ketoacidosis (DKA) or of CKD.</li>
+                  <li>History of alcoholism, drug intake (e.g. salicylates, acetazolamide, metformin), or of renal stone (e.g. in RTA).</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Signs</h3>
+            <ul>
+              <li>The most prominent sign is <strong>Kussmaul respiration</strong> (rapid deep breathing).</li>
+              <li>Other signs are non-specific if present, e.g.:
+                <ul>
+                  <li>Hypotension, cardiac arrhythmia.</li>
+                  <li>Disturbed consciousness and coma.</li>
+                  <li>Signs of the cause: DKA, CKD, or alcoholism.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="13">
+      <p class="kicker">Metabolic Acidosis — Investigations</p>
+      <h2>Investigations</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>General — to diagnose metabolic acidosis and calculate AG</h3>
+            <ul>
+              <li>ABG (arterial blood gases): <strong>pH, HCO3-, CO2</strong>.</li>
+              <li>Serum electrolytes: <strong>Na+, K+ and Cl-</strong>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Specific — to diagnose the etiology</h3>
+            <ul>
+              <li>Kidney functions.</li>
+              <li>Blood glucose level.</li>
+              <li>Urinary ketones.</li>
+              <li>Serum lactate.</li>
+              <li>Toxicological screening.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="14">
+      <p class="kicker">Metabolic Acidosis — Treatment</p>
+      <h2>Treatment Principles</h2>
+      <div class="content">
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">General rule</span><p>Treatment is generally directed to the <strong>underlying condition or disease</strong>.</p></div>
+        </div>
+        <h3>Alkali therapy (HCO3-) is indicated to raise plasma pH above 7.20 in:</h3>
+        <ol class="steps">
+          <li><strong>Low serum HCO3- and PCO2 close to the lower limit of compensation (approximately 15 mmHg):</strong> any further drop in HCO3- will not be matched by a corresponding fall in PCO2 → marked drop in pH.</li>
+          <li><strong>Well-compensated metabolic acidosis with impending respiratory failure</strong> (respiratory muscle fatigue): PCO2 starts to rise → dramatic drop in pH.</li>
+        </ol>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="15">
+      <p class="kicker">Metabolic Acidosis — Treatment</p>
+      <h2>Bicarbonate Therapy: Routes and Deficit</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">HCO3- deficit calculation</span>
+          <p>(Desired HCO3- - Measured HCO3-) × 0.5 × body weight</p>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h3>Intravenous sodium bicarbonate (NaHCO3)</h3>
+            <ul>
+              <li>Corrects <strong>acute</strong> metabolic acidosis.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Oral sodium bicarbonate (NaHCO3)</h3>
+            <ul>
+              <li>Corrects <strong>chronic</strong> metabolic acidosis (e.g. RTA).</li>
+              <li>Uncommonly used in acute situations when the I.V. route is not suitable.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout warn">
+          <span class="ic">⚠</span>
+          <div class="body"><span class="t">Monitoring</span><p>Assess serum HCO3- and pH frequently; monitor serum Na+, volume status and PCO2 during treatment.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="16">
+      <div class="big">03</div>
+      <p class="kicker">Part 3 — Metabolic Alkalosis</p>
+      <h2>Metabolic Alkalosis</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="17">
+      <p class="kicker">Metabolic Alkalosis</p>
+      <h2>Definition and Classification</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">Definition</span>
+          <p>An increase in blood pH due to increase in serum <strong>HCO3-</strong> concentrations.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Chloride-responsive — urine Cl- &lt; 20 mEq/L</span>
+          <span class="chip">Chloride-resistant — urine Cl- &gt; 20 mEq/L</span>
+          <span class="chip">Other causes — alkali-loading alkalosis</span>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="18">
+      <p class="kicker">Metabolic Alkalosis — Causes</p>
+      <h2>Chloride-Responsive Causes (urine Cl- &lt; 20 mEq/L)</h2>
+      <div class="content">
+        <ul>
+          <li>Loss of <strong>gastric secretions</strong>: vomiting, nasogastric suction.</li>
+          <li>Loss of <strong>colonic secretions</strong>: congenital chloridorrhea, villous adenoma.</li>
+          <li><strong>Volume depletion</strong>.</li>
+          <li><strong>Thiazides and loop diuretics</strong> (after discontinuation).</li>
+          <li><strong>Cystic fibrosis</strong>.</li>
+        </ul>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="19">
+      <p class="kicker">Metabolic Alkalosis — Causes</p>
+      <h2>Chloride-Resistant Causes (urine Cl- &gt; 20 mEq/L)</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>With hypertension</h3>
+            <ul>
+              <li>Hyperaldosteronism (primary, adrenal adenoma, hyperplasia, carcinoma, glucocorticoid-remediable hyperaldosteronism).</li>
+              <li>Cushing syndrome.</li>
+              <li>Exogenous steroids.</li>
+              <li>Liddle's syndrome.</li>
+              <li>Renovascular hypertension.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Without hypertension</h3>
+            <ul>
+              <li>Bartter's syndrome.</li>
+              <li>Gitelman syndrome.</li>
+              <li>Severe potassium depletion.</li>
+              <li>Current use of thiazides and loop diuretics.</li>
+              <li>Hypomagnesemia — mechanism probably involves hypokalemia, usually caused by or associated with magnesium depletion.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="20">
+      <p class="kicker">Metabolic Alkalosis — Causes</p>
+      <h2>Other Causes of Metabolic Alkalosis</h2>
+      <div class="content">
+        <ul>
+          <li><strong>Exogenous alkali administration:</strong> sodium bicarbonate or massive blood transfusion (high citrate content) in the presence of renal insufficiency.</li>
+          <li><strong>Recovery of metabolic acidosis</strong> (due to the metabolism of lactic acid or ketoacids).</li>
+          <li><strong>Milk-alkali syndrome</strong> — comprises hypercalcemia, renal insufficiency, and metabolic alkalosis.</li>
+          <li><strong>Hypercalcemia</strong> — causes volume depletion and enhanced bicarbonate reabsorption.</li>
+          <li><strong>Hypoalbuminemia</strong> — may be related to loss of negative charges of albumin.</li>
+        </ul>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="21">
+      <p class="kicker">Metabolic Alkalosis — Clinical Features</p>
+      <h2>Clinical Features</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>History</h3>
+            <ul>
+              <li>Helpful in establishing the etiology: GI fluid loss, surgery, drug history, or renal insufficiency.</li>
+              <li>Symptoms are not specific.</li>
+              <li><strong>Hypoventilation</strong> because of inhibition of the respiratory centers.</li>
+              <li>Symptoms of <strong>hypokalemia</strong>: weakness, myalgia, polyuria, cardiac arrhythmias.</li>
+              <li>Symptoms of <strong>hypocalcemia</strong> (e.g. perioral tingling, muscle cramps, carpopedal spasms) due to decreased ionized calcium.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Signs</h3>
+            <ul>
+              <li>Also not specific, but may help to establish the cause.</li>
+              <li><strong>Volume depletion</strong> usually accompanies chloride-responsive alkalosis; <strong>volume expansion</strong> accompanies chloride-resistant alkalosis.</li>
+              <li>Signs of hypocalcemia: tetany, Chvostek sign, and Trousseau sign.</li>
+              <li>Change in mental status, or seizures.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="22">
+      <p class="kicker">Metabolic Alkalosis — Investigations</p>
+      <h2>Investigations</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>General — for the diagnosis of metabolic alkalosis</h3>
+            <ul>
+              <li>ABG (arterial blood gases): <strong>pH, HCO3-, CO2</strong>.</li>
+              <li>Serum electrolytes: <strong>Na+, K+, Cl-, Ca+2 and Mg+2</strong>.</li>
+              <li><strong>Urinary Cl-</strong>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Specific — for determination of the etiology</h3>
+            <ul>
+              <li>Plasma aldosterone and cortisol levels.</li>
+              <li>Plasma renin activity.</li>
+              <li>Renovascular imaging.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="23">
+      <p class="kicker">Metabolic Alkalosis — Treatment</p>
+      <h2>Treatment of Chloride-Responsive Alkalosis</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>Patients with volume depletion</h3>
+            <ul>
+              <li>Infusion of <strong>isotonic (0.9% NaCl) sodium chloride</strong> to correct alkalosis and restore volume.</li>
+              <li><strong>Potassium chloride</strong> (I.V. or oral) to correct the hypokalemia, if present.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Patients with volume overload (edematous states)</h3>
+            <ul>
+              <li><strong>Potassium chloride</strong> (I.V. or oral) to correct the alkalosis and avoid volume overload.</li>
+              <li><strong>Carbonic anhydrase inhibitors</strong> or <strong>potassium-sparing diuretics</strong> to decrease volume and correct the alkalosis.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="24">
+      <p class="kicker">Metabolic Alkalosis — Treatment</p>
+      <h2>Treatment of Chloride-Resistant Alkalosis</h2>
+      <div class="content">
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Principle</span><p>Treatment depends on the <strong>underlying etiology</strong> and on the <strong>patient's volume status</strong>.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Chloride-resistant</span><p>Management is based on the <strong>specific cause</strong> (e.g. hyperaldosteronism, Cushing syndrome, Bartter's or Gitelman syndrome, potassium or magnesium depletion).</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="25">
+      <p class="kicker">Closing</p>
+      <h2>Key Takeaways</h2>
+      <div class="content">
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Identify the disturbance</span><p>From the pattern of pH, CO2 and HCO3- (metabolic vs respiratory, acidosis vs alkalosis) and the compensation table.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Use the anion gap</span><p>AG = Na+ - (HCO3- + Cl-); classify metabolic acidosis into high AG vs normal (hyperchloremic) AG to narrow the cause.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Alkali therapy is selective</span><p>Give HCO3- to raise pH above 7.20 only when compensation limits are reached; deficit = (Desired - Measured HCO3-) × 0.5 × body weight.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Classify metabolic alkalosis by urine chloride</span><p>Chloride-responsive (&lt; 20 mEq/L) → saline and KCl; chloride-resistant (&gt; 20 mEq/L) → treat the specific cause.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="26">
+      <p class="kicker">Closing</p>
+      <h2>Thank You / Reference</h2>
+      <div class="content">
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Reference</span><p>Source: Internal Medicine Nephrology — Principles of Nephrology, pp. 51–55.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+</div>
+</main>
+
+<div id="counter">1 / 1</div>
+<div id="progress"></div>
+<div class="deck-nav" aria-label="Slide navigation">
+  <button id="btnPrev" aria-label="Previous slide">‹</button>
+  <button id="btnNext" aria-label="Next slide">›</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var counter=document.getElementById("counter");
+  var progress=document.getElementById("progress");
+  var i=0;
+
+  function fit(s){
+    s.classList.remove("fit","fit-sm");
+    if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit");
+      if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit-sm");}}
+  }
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle("active",k===i);});
+    progress.style.width=((i+1)/slides.length*100)+"%";
+    counter.textContent=(i+1)+" / "+slides.length;
+    try{history.replaceState(null,"","#"+slides[i].getAttribute("data-n"));}catch(e){}
+    fit(slides[i]);
+  }
+  function toggleOverview(){
+    document.body.classList.toggle("overview");
+    if(!document.body.classList.contains("overview")){show(i);}
+  }
+  function toggleFull(){if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}}
+
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"||e.key==="Enter"){e.preventDefault();show(i+1);}
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();show(i-1);}
+    else if(e.key==="Home"){e.preventDefault();show(0);}
+    else if(e.key==="End"){e.preventDefault();show(slides.length-1);}
+    else if(e.key==="o"||e.key==="O"){toggleOverview();}
+    else if(e.key==="f"||e.key==="F"){toggleFull();}
+    else if(e.key==="Escape"){if(document.body.classList.contains("overview")){toggleOverview();}}
+  });
+  document.getElementById("btnNext").addEventListener("click",function(){show(i+1);});
+  document.getElementById("btnPrev").addEventListener("click",function(){show(i-1);});
+
+  var tx=0,ty=0;
+  document.addEventListener("touchstart",function(e){tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  document.addEventListener("touchend",function(e){
+    var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){show(i+(dx<0?1:-1));}
+  },{passive:true});
+
+  slides.forEach(function(s,k){
+    s.addEventListener("click",function(){
+      if(document.body.classList.contains("overview")){document.body.classList.remove("overview");show(k);}
+    });
+  });
+  window.addEventListener("resize",function(){if(!document.body.classList.contains("overview")){fit(slides[i]);}});
+
+  var m=location.hash.match(/#(\d+)/);
+  var start=0;
+  if(m){slides.forEach(function(s,k){if(s.getAttribute("data-n")===m[1]){start=k;}});}
+  show(start);
+})();
+</script>
+</body>
+</html>

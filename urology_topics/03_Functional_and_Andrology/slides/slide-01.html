@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform=`scale(${sc})`;s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="display:flex; flex-direction:column; background:#edf6f9; box-sizing:border-box; font-family:'Times New Roman', serif; overflow:hidden;">
+<svg aria-hidden="true" style="position:absolute; right:20px; top:50px; width:480px; height:420px; overflow:visible;" xmlns="http://www.w3.org/2000/svg" opacity="0.85"><ellipse cx="760" cy="120" rx="46" ry="26" fill="none" stroke="#83c5be" stroke-width="3"/><ellipse cx="876" cy="120" rx="46" ry="26" fill="none" stroke="#83c5be" stroke-width="3"/><line x1="768" y1="144" x2="792" y2="250" stroke="#83c5be" stroke-width="3"/><line x1="868" y1="144" x2="844" y2="250" stroke="#83c5be" stroke-width="3"/><ellipse cx="818" cy="296" rx="70" ry="40" fill="none" stroke="#83c5be" stroke-width="3"/><line x1="818" y1="336" x2="818" y2="390" stroke="#83c5be" stroke-width="3"/><line x1="760" y1="100" x2="720" y2="70" stroke="#83c5be" stroke-width="2.5"/><line x1="876" y1="100" x2="916" y2="70" stroke="#83c5be" stroke-width="2.5"/><line x1="800" y1="94" x2="800" y2="66" stroke="#83c5be" stroke-width="2.5"/><line x1="836" y1="94" x2="836" y2="66" stroke="#83c5be" stroke-width="2.5"/></svg><svg aria-hidden="true" style="position:absolute; top:-60px; left:-60px; width:340px; height:340px;" xmlns="http://www.w3.org/2000/svg"><circle cx="170" cy="170" r="150" fill="none" stroke="#83c5be" stroke-width="2" opacity="0.35"/><circle cx="170" cy="170" r="100" fill="none" stroke="#83c5be" stroke-width="2" opacity="0.25"/></svg><div style="position:absolute; top:110px; left:70px; width:86px; height:6px; background:#e29578; border-radius:3px;"></div><div style="position:absolute; top:130px; left:70px; font-size:30px; font-weight:400; color:#ffddd2; letter-spacing:1px; font-family:'Times New Roman', serif;">Urology Course</div><div style="position:absolute; top:176px; left:70px; width:640px; font-size:52px; font-weight:700; color:#edf6f9; line-height:1.08; font-family:'Times New Roman', serif;">Functional Urology & Andrology</div><div style="position:absolute; top:300px; left:70px; width:600px; font-size:19px; color:#83c5be; line-height:1.4; font-family:'Times New Roman', serif;">Urinary Incontinence · Benign Prostatic Hyperplasia · Male Infertility · Male Sexual Dysfunction & Sexually Transmitted Diseases</div><div style="position:absolute; top:404px; left:70px; font-size:17px; color:#ffddd2; font-family:'Times New Roman', serif;">Medical Professor — Urology Teaching Series</div><div style="position:absolute; top:444px; left:70px; font-size:14px; color:rgba(255,221,210,0.7); font-family:'Times New Roman', serif;">Renal and Urinary Diseases and Andrology (2022–2023) · Section: Functional Urology and Andrology</div>
+
+</div>
+</body>
+</html>

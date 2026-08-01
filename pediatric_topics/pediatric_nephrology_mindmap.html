@@ -1,0 +1,2662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pediatric Nephrology Mind Maps — Pediatric Renal Book (4th Grade) · Prof. Dr. Mohamed Bahbah & Prof. Dr. Ghada Al-Mashad</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, Helvetica, sans-serif; background: #ffffff; }
+
+  :root {
+    --connector-color: #7a9bb5;
+    --root-bg: #2d5a3d;
+    --root-text: #ffffff;
+    --focus-ring: #4a90d9;
+    --toolbar-bg: rgba(255,255,255,0.92);
+    --toolbar-border: #e0e0e0;
+    --tab-bg: #f5f5f5;
+    --tab-active-bg: #ffffff;
+    --tab-border: #e0e0e0;
+    --tab-active-border: #7a9bb5;
+    --tab-text: #555;
+    --tab-active-text: #2d5a3d;
+  }
+
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; flex-wrap: wrap; gap: 4px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border-bottom: 1px solid var(--tab-border);
+    padding: 8px 340px 8px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .tab-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border: 1px solid var(--tab-border);
+    border-radius: 6px 6px 0 0; background: var(--tab-bg);
+    color: var(--tab-text); font-size: 13px; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.15s ease;
+    position: relative; z-index: 1; margin-bottom: -1px;
+  }
+  .tab-btn:hover { background: #eee; color: #333; }
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    border-color: var(--tab-active-border);
+    border-bottom-color: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    font-weight: 600;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  }
+  .tab-btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .tab-btn .count { font-size: 11px; font-weight: 600; opacity: 0.7; }
+
+  .toolbar {
+    position: fixed; top: 16px; right: 16px; z-index: 300;
+    display: flex; gap: 6px; align-items: center;
+    background: var(--toolbar-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--toolbar-border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .toolbar button {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border: none; border-radius: 6px;
+    background: transparent; color: #666;
+    cursor: pointer; font-size: 15px; line-height: 1;
+    transition: background 0.15s, color 0.15s;
+  }
+  .toolbar button:hover { background: #e8e8e8; color: #333; }
+  .toolbar button:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .toolbar .sep { width: 1px; height: 22px; background: #e0e0e0; margin: 0 4px; }
+  .toolbar .expand-all { font-size: 12px; font-weight: 600; padding: 0 12px; width: auto; gap: 4px; color: #555; }
+  .toolbar .zoom-fit { font-size: 12px; font-weight: 600; padding: 0 12px; width: auto; gap: 4px; color: #555; }
+
+  #svg-container {
+    width: 100%; height: 100vh; overflow: hidden;
+    cursor: grab; background: #ffffff;
+  }
+  #svg-container:active { cursor: grabbing; }
+  svg { width: 100%; height: 100%; display: block; }
+
+  .node-group { cursor: pointer; }
+  .node-group:focus-visible { outline: none; }
+
+  .node-bg {
+    fill: var(--node-fill, #d4edda);
+    stroke: var(--node-stroke, #b8dabe);
+    stroke-width: 1;
+    rx: 8; ry: 8;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.06));
+    transition: fill 0.15s, stroke 0.15s;
+  }
+  .node-group:hover .node-bg {
+    fill: var(--node-fill-hover, #c3e6cb);
+    stroke: #a8ccb0;
+  }
+  .node-group:focus-visible .node-bg {
+    stroke: var(--focus-ring);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 0 3px rgba(74,144,217,0.2));
+  }
+
+  .is-root .node-bg {
+    fill: var(--root-bg);
+    stroke: var(--root-bg);
+    filter: drop-shadow(0 2px 8px rgba(45,90,61,0.2));
+  }
+  .is-root:hover .node-bg { fill: #3a6e4e; }
+  .is-root .node-text { fill: var(--root-text); }
+
+  .node-text {
+    fill: var(--node-text-color, #1a1a2e);
+    font-family: Arial, Helvetica, sans-serif;
+    dominant-baseline: central;
+    text-anchor: middle;
+    pointer-events: none;
+    user-select: none;
+  }
+  .is-root .node-text { fill: #ffffff; }
+  .node-text .label { font-weight: 500; }
+
+  .toggle-circle { transition: fill 0.15s; }
+  .toggle-text {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    pointer-events: none;
+    user-select: none;
+    dominant-baseline: central;
+    text-anchor: middle;
+  }
+
+  .connector {
+    stroke: var(--connector-color);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+  }
+  /* Node appear animation */
+  @keyframes node-appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .node-group {
+    animation: node-appear 0.18s ease-out forwards;
+  }
+
+  /* Connector appear animation */
+  @keyframes connector-appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .connector {
+    animation: connector-appear 0.22s ease-out;
+  }
+
+  .connector.focused { stroke: #4a90d9; stroke-width: 2.5; }
+  .node-group.focused .node-bg { stroke: #4a90d9; stroke-width: 2; filter: drop-shadow(0 0 6px rgba(74,144,217,0.4)); }
+
+  .color-0 { --node-fill: #d4edda; --node-fill-hover: #c3e6cb; --node-stroke: #b8dabe; --node-text-color: #1a3a1a; --toggle-fill: #7a9bb5; }
+  .color-1 { --node-fill: #d6ecf0; --node-fill-hover: #c5e0e6; --node-stroke: #b0d0d8; --node-text-color: #1a2a3a; --toggle-fill: #6b8f9e; }
+  .color-2 { --node-fill: #fce4d6; --node-fill-hover: #f5d5c0; --node-stroke: #e8c4a8; --node-text-color: #3a2a1a; --toggle-fill: #b88d7a; }
+  .color-3 { --node-fill: #f0d9f0; --node-fill-hover: #e5c8e5; --node-stroke: #d8b8d8; --node-text-color: #2a1a3a; --toggle-fill: #9a7a9e; }
+  .color-4 { --node-fill: #d6e4f0; --node-fill-hover: #c5d8e6; --node-stroke: #b0c8d8; --node-text-color: #1a2a3a; --toggle-fill: #6b8a9e; }
+  .color-5 { --node-fill: #e8f0d6; --node-fill-hover: #dae6c5; --node-stroke: #c8d8b0; --node-text-color: #2a3a1a; --toggle-fill: #8a9e6b; }
+  .color-6 { --node-fill: #fce8d6; --node-fill-hover: #f5dcc0; --node-stroke: #e8ccb0; --node-text-color: #3a2a1a; --toggle-fill: #b88a6b; }
+  .color-7 { --node-fill: #f0d6d6; --node-fill-hover: #e5c5c5; --node-stroke: #d8b0b0; --node-text-color: #3a1a1a; --toggle-fill: #9e6b6b; }
+
+  .node-group .toggle-circle { fill: var(--toggle-fill, #7a9bb5); }
+  .node-group:hover .toggle-circle { fill: #5a7a9a; }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 6px 270px 6px 8px; gap: 2px; }
+    .tab-btn { padding: 6px 10px; font-size: 12px; }
+    .toolbar { top: 10px; right: 10px; padding: 4px 8px; }
+    .toolbar button { width: 26px; height: 26px; font-size: 13px; }
+    .toolbar .expand-all, .toolbar .zoom-fit { padding: 0 8px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" role="tablist" aria-label="Pediatric nephrology topics" id="topbar"></div>
+
+<div id="svg-container">
+  <svg id="mindmap-svg" role="tree" aria-label="Interactive mind map" style="overflow:visible;">
+    <defs>
+      <filter id="node-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+      </filter>
+      <filter id="root-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+      </filter>
+    </defs>
+    <g id="connections-layer"></g>
+    <g id="nodes-layer"></g>
+  </svg>
+</div>
+
+<div class="toolbar" role="toolbar" aria-label="Mind map controls">
+  <button id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+  <button id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+  <button id="zoom-reset" aria-label="Reset zoom & view" title="Reset zoom & view">⟲</button>
+  <div class="sep"></div>
+  <button id="expand-all-btn" class="expand-all" title="Expand all branches">
+    <span>▸</span> Expand all
+  </button>
+  <div class="sep"></div>
+  <button id="collapse-all-btn" class="expand-all" title="Collapse all, return to root">
+    <span>▾</span> Collapse all
+  </button>
+  <div class="sep"></div>
+  <button id="fit-branch-btn" class="zoom-fit" title="Zoom to focused branch" disabled>
+    <span>🔍</span> Focus branch
+  </button>
+</div>
+
+<script>
+
+// ============================================================
+// data_part1.js — 01 · Anatomy & Physiology of the Kidney
+// Source: Pediatric Renal Book 4th Grade (pages 55-58)
+// ============================================================
+const folder1 = {
+  label: "01 · Anatomy & Physiology of the Kidney",
+  children: [
+    {
+      label: "Functions of the kidneys",
+      children: [
+        { label: "Both regulatory and excretory organs" },
+        {
+          label: "Major functions",
+          children: [
+            { label: "1. Regulation of body fluid osmolarity and volume" },
+            { label: "2. Regulation of electrolyte balance" },
+            { label: "3. Regulation of acid-base balance" },
+            { label: "4. Excretion of metabolic products and foreign substances" },
+            { label: "5. Production and secretion of hormones" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Gross anatomy",
+      children: [
+        { label: "Medial indentation (hilum): renal artery, vein, nerves and pelvis pass through" },
+        { label: "Cut surface: outer cortex and inner medulla" },
+        { label: "Cortex and medulla composed of nephrons — the functional units of the kidney" },
+        { label: "Renal pelvis: upper expanded region of the ureter" },
+        { label: "Ureter: carries urine from pelvis to urinary bladder" },
+        { label: "Pelvis divides into 2-3 major calyces, which divide into minor calyces" },
+        { label: "Figure (1) diagram labels: Kidney, Calyces, Renal pelvis, Renal artery, Renal vein, Medulla, Ureter, Cortex" }
+      ]
+    },
+    {
+      label: "Ultra-structure of the nephron",
+      children: [
+        { label: "Ultrafiltration: passive movement of essentially protein-free fluid from glomerular capillaries into Bowman's space" },
+        { label: "Glomerulus: network of capillaries — supplied by afferent arteriole, drained by efferent arteriole" },
+        { label: "Bowman's capsule: podocytes (visceral layer) reflected at vascular pole to form parietal layer" },
+        { label: "Bowman's space: between visceral and parietal layers; at urinary pole becomes proximal tubule lumen" },
+        { label: "Filtration barrier: capillary endothelium + basement membrane + foot processes of podocytes" },
+        { label: "Fenestrated endothelium: freely permeable to water and small solutes (urea, glucose, small proteins)" },
+        { label: "Figure (2a) labels: Pores in endothelium, Capillary lumen, Glomerulus, Pedicels of podocytes, Lamina densa, Filtration slit, Capsular space" },
+        { label: "Figure (2c) labels: Capillary, Capillary endothelium, Basement membrane, Foot processes of podocyte, Filtration slit, Slit diaphragm, Filtrate in capsular space, Plasma, Fenestration" },
+        { label: "Figure 2: Renal corpuscle and the juxtaglomerular apparatus" },
+        { label: "Figure 3: E/M podocytes and glomerular capillary" }
+      ]
+    },
+    {
+      label: "Glomerular filtration",
+      children: [
+        { label: "Glomerular network of specialized capillaries = filtering mechanism of the kidney" },
+        { label: "Ultrafiltrate: cell-free; contains all plasma substances (electrolytes, glucose, phosphate, urea, creatinine, peptides, low MW proteins) except proteins > 68,000 MW (albumin, globulin)" },
+        { label: "Filtrate collected in Bowman space, modified in tubules per body needs → leaves as urine" },
+        { label: "Fetal life: placenta serves as the major excretory organ" }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part2.js — 02 · Change in Colour of Urine
+// Source: Pediatric Renal Book 4th Grade (pages 58-59)
+// ============================================================
+const folder2 = {
+  label: "02 · Change in Colour of Urine",
+  children: [
+    {
+      label: "Causes of urine colour changes",
+      children: [
+        {
+          label: "White milky urine",
+          children: [
+            { label: "Pus" },
+            { label: "Phosphate crystals" },
+            { label: "Chylous" }
+          ]
+        },
+        {
+          label: "Green urine",
+          children: [
+            { label: "Pseudomonas infection" },
+            { label: "Food with excess chlorophyll" }
+          ]
+        },
+        {
+          label: "Dark yellow urine",
+          children: [
+            { label: "↑ Bilirubin" },
+            { label: "Concentrated urine" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Dark red / brown urine",
+      children: [
+        { label: "Normal urine colour: yellow / almost colourless to amber yellow, depending on fluid intake and foods eaten" },
+        { label: "Colour changes may be caused by foods, drinks or drugs, or may reflect diseases of different origins" },
+        { label: "Most common causes: hematuria, bilirubinuria and hemoglobinuria" },
+        { label: "Colour of urine gives a diagnostic clue to the underlying cause" }
+      ]
+    },
+    {
+      label: "Diagnostic approach",
+      children: [
+        {
+          label: "Centrifuge result of urine",
+          children: [
+            { label: "Supernatant red = without RBCs" },
+            { label: "Sediment red = with RBCs (hematuria)" }
+          ]
+        },
+        {
+          label: "Dipstick heme",
+          children: [
+            { label: "Heme-positive: Hemoglobinuria, Myoglobinuria" },
+            { label: "Heme-negative: Drugs, Dyes" }
+          ]
+        },
+        {
+          label: "Macroscopic vs microscopic",
+          children: [
+            { label: "Macroscopic: pink or red (gross hematuria)" },
+            { label: "Microscopic: normal" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Heme-positive causes",
+      children: [
+        {
+          label: "Hemoglobinuria",
+          children: [
+            { label: "With acute hemolytic anemia" },
+            { label: "CBC: fragmented RBCs and reticulocytosis" },
+            { label: "Hemoglobin in urine" },
+            { label: "Plasma color: red" }
+          ]
+        },
+        {
+          label: "Myoglobinuria",
+          children: [
+            { label: "Due to rhabdomyolysis (skeletal muscle injury): viral myositis, crush injury, prolonged fits" },
+            { label: "High serum creatine kinase" },
+            { label: "Plasma color: clear" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Heme-negative causes",
+      children: [
+        {
+          label: "Drugs",
+          children: [
+            { label: "a) Chloroquine" },
+            { label: "b) Deferoxamine" },
+            { label: "c) Ibuprofen" },
+            { label: "d) Iron sorbitol" },
+            { label: "e) Metronidazole" },
+            { label: "f) Nitrofurantoin" },
+            { label: "g) Phenazopyridine (Pyridium)" },
+            { label: "h) Phenolphthalein" },
+            { label: "i) Rifampin" },
+            { label: "j) Salicylates" },
+            { label: "k) Sulfasalazine" }
+          ]
+        },
+        { label: "Dyes (vegetable/fruit): beets, blackberries, food coloring" },
+        { label: "Methemoglobin" },
+        { label: "Urates" }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part3.js — 03 · Hematuria
+// Source: Pediatric Renal Book 4th Grade (pages 59-67)
+// ============================================================
+const folder3 = {
+  label: "03 · Hematuria",
+  children: [
+    {
+      label: "Definition",
+      children: [
+        { label: "Hematuria: presence of blood in urine" },
+        { label: "Gross hematuria: visible to the naked eye" },
+        { label: "Microscopic hematuria: detected only by dipstick or microscopy" },
+        { label: "Microscopic hematuria = more than 5 RBCs per high power field in sediment from 10 ml of centrifuged freshly voided urine" }
+      ]
+    },
+    {
+      label: "Causes in children",
+      children: [
+        {
+          label: "Glomerular hematuria",
+          children: [
+            {
+              label: "Isolated renal disease",
+              children: [
+                { label: "IgA nephropathy (Berger disease)" },
+                { label: "Post-infectious GN (post-streptococcal GN)" },
+                { label: "Membranous nephropathy" },
+                { label: "Membrano-proliferative GN" },
+                { label: "Focal segmental glomerulosclerosis" },
+                { label: "Anti-glomerular basement membrane disease" }
+              ]
+            },
+            {
+              label: "Multi-system disease",
+              children: [
+                { label: "Systemic lupus erythematosus nephritis" },
+                { label: "Henoch–Schönlein purpura nephritis" },
+                { label: "Goodpasture syndrome" },
+                { label: "Hemolytic-uremic syndrome" },
+                { label: "Sickle cell glomerulopathy" },
+                { label: "HIV nephropathy" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Extra-glomerular hematuria",
+          children: [
+            {
+              label: "Upper urinary tract",
+              children: [
+                {
+                  label: "Tubulointerstitial",
+                  children: [
+                    { label: "Pyelonephritis" },
+                    { label: "Interstitial nephritis" },
+                    { label: "Acute tubular necrosis" }
+                  ]
+                },
+                {
+                  label: "Vascular",
+                  children: [
+                    { label: "Arterial / venous thrombosis" },
+                    { label: "Malformations (aneurysms, hemangiomas)" }
+                  ]
+                },
+                {
+                  label: "Crystalluria",
+                  children: [
+                    { label: "Calcium" },
+                    { label: "Oxalate" },
+                    { label: "Uric acid" }
+                  ]
+                },
+                {
+                  label: "Anatomical",
+                  children: [
+                    { label: "Cystic kidney disease" },
+                    { label: "Poly-cystic kidney disease" },
+                    { label: "Multi-cystic dysplasia" },
+                    { label: "Tumor (Wilms)" },
+                    { label: "Trauma" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Lower urinary tract",
+              children: [
+                { label: "Cystitis" },
+                { label: "Urethritis" },
+                { label: "Urolithiasis" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Common causes of gross hematuria",
+      children: [
+        {
+          label: "Extra-glomerular",
+          children: [
+            { label: "Urinary tract infection" },
+            { label: "Meatal stenosis" },
+            { label: "Perineal irritation" },
+            { label: "Trauma" },
+            { label: "Urolithiasis / hypercalciuria" },
+            { label: "Coagulopathy" },
+            { label: "Tumor" }
+          ]
+        },
+        {
+          label: "Glomerular",
+          children: [
+            { label: "IgA nephropathy (Berger disease)" },
+            { label: "Alport syndrome (hereditary nephritis)" },
+            { label: "Thin glomerular basement membrane nephropathy" },
+            { label: "Post-infectious GN (post-streptococcal GN)" },
+            { label: "Henoch–Schönlein purpura nephritis" },
+            { label: "Systemic lupus erythematosus nephritis" }
+          ]
+        },
+        { label: "Recurrent gross hematuria" }
+      ]
+    },
+    {
+      label: "Evaluation of the child with hematuria",
+      children: [
+        {
+          label: "Begins with",
+          children: [
+            { label: "1) A careful history" },
+            { label: "2) Physical examination" },
+            { label: "3) Laboratory investigations" }
+          ]
+        },
+        { label: "Purpose: determine level of hematuria (upper or lower tract) and urgency based on symptomatology" },
+        { label: "Special consideration: family history, anatomic abnormalities / malformation syndromes, presence of gross hematuria" },
+        {
+          label: "Renal vs urinary tract hematuria",
+          children: [
+            { label: "Source: nephron (glomerulus, tubules, interstitium) vs pelvicalyceal system, ureter, bladder, urethra" },
+            { label: "Color: cola or smoky vs pink or red (gross hematuria)" },
+            { label: "RBCs: deformed (dysmorphic) vs normal" },
+            { label: "RBC casts: + vs −" },
+            { label: "Blood clots: − vs +" },
+            { label: "Proteinuria (dipstick): > 100 mg/dL vs < 100 mg/dL" },
+            { label: "c/p: oedema, hypertension vs dysuria" }
+          ]
+        },
+        { label: "Tubular hematuria: may show leukocyte or renal tubular epithelial cell casts" },
+        { label: "Lower tract: terminal hematuria (gross hematuria at the end of the urine)" }
+      ]
+    },
+    {
+      label: "Approach to diagnosis",
+      children: [
+        {
+          label: "Stepwise questions",
+          children: [
+            { label: "a) Is this red urine 'hematuria'?" },
+            { label: "b) What are the causes of hematuria?" },
+            { label: "c) Clinical approach: search for signs suggestive of each cause" },
+            { label: "d) Laboratory approach: localize hematuria (glomerular or extraglomerular)" }
+          ]
+        },
+        {
+          label: "For all cases",
+          children: [
+            { label: "1. Analysis of fresh urine: casts, bacteria, crystals, RBCs shape" },
+            { label: "2. Abdominal ultrasound: stones, tumors, malformations" },
+            { label: "3. Renal functions tests" },
+            { label: "4. Blood picture" },
+            { label: "5. Coagulation profile" }
+          ]
+        },
+        {
+          label: "Glomerular hematuria — reduced C3 in",
+          children: [
+            { label: "1. Post-infectious glomerulonephritis" },
+            { label: "2. Systemic lupus nephritis" },
+            { label: "3. Nephritis with chronic infection" },
+            { label: "4. Membranoproliferative glomerulonephritis" }
+          ]
+        },
+        {
+          label: "Post-streptococcal GN workup",
+          children: [
+            { label: "1. ASO titre" },
+            { label: "2. Anti-DNase titre" },
+            { label: "3. Throat or skin culture" }
+          ]
+        },
+        {
+          label: "Lupus nephritis workup",
+          children: [
+            { label: "1. ANA" },
+            { label: "2. Anti-double-strand DNA" }
+          ]
+        },
+        {
+          label: "Extra-glomerular hematuria workup",
+          children: [
+            { label: "1. Urine culture for urinary tract infections" },
+            { label: "2. 24-hour urine calcium, uric acid & oxalate for crystalluria / stones" },
+            { label: "3. Cystogram & renal scan for hydronephrosis" },
+            { label: "4. Renal Doppler for renal vein thrombosis" }
+          ]
+        },
+        {
+          label: "Renal biopsy indications",
+          children: [
+            { label: "1. Unexplained persistent or recurrent gross hematuria" },
+            { label: "2. Lupus nephritis" },
+            { label: "3. Glomerulonephritis with nephritic nephrosis or absent low C3" },
+            { label: "4. Unexplained acute renal failure" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part4.js — 04 · Acute Post-Streptococcal GN (APSGN)
+// Source: Pediatric Renal Book 4th Grade (pages 67-69)
+// ============================================================
+const folder4 = {
+  label: "04 · Acute Post-Streptococcal GN (APSGN)",
+  children: [
+    {
+      label: "Definition",
+      children: [
+        { label: "Acute specific self-limited glomerulonephritis due to prior streptococcal infection" },
+        {
+          label: "Characterized by",
+          children: [
+            { label: "1. Sudden onset of gross hematuria" },
+            { label: "2. Edema (mild to moderate)" },
+            { label: "3. Hypertension" },
+            { label: "4. Oliguria may be present" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Etiology & epidemiology",
+      children: [
+        { label: "Follows throat or skin infection by certain nephritogenic strains of group A β-hemolytic streptococci" },
+        {
+          label: "AGN after throat infection",
+          children: [
+            { label: "Strain of streptococcus: Type 4, 12" },
+            { label: "Season: winter and spring" },
+            { label: "Latent period: 1-2 weeks" },
+            { label: "ASO titre: elevated" }
+          ]
+        },
+        {
+          label: "AGN after skin infection",
+          children: [
+            { label: "Strain of streptococcus: Type 49" },
+            { label: "Season: summer" },
+            { label: "Latent period: 2-3 weeks" },
+            { label: "ASO titre: may be normal" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Pathogenesis",
+      children: [
+        { label: "Immune complex mediated — suggested by morphologic studies and depressed serum complement (C3)" },
+        { label: "Precise mechanisms of immune complex formation remain to be determined" },
+        {
+          label: "Flow diagram",
+          children: [
+            { label: "1. Streptococcal infection" },
+            { label: "2. Antibody formation (Abs)" },
+            { label: "3. Ag–Ab + complement (C3) immune complexes" },
+            { label: "4. Deposited in GBM (subepithelial humps)" },
+            { label: "5. Edema, hypertension, oliguria" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Pathology",
+      children: [
+        { label: "Gross: kidneys appear symmetrically enlarged (as in most acute GN forms)" },
+        { label: "Light microscopy: all glomeruli enlarged and relatively bloodless; diffuse mesangial cell proliferation with increased mesangial matrix" },
+        { label: "Immunofluorescence: lumpy-bumpy deposits of immunoglobulin and complement on GBM and in the mesangium" },
+        { label: "Electron microscopy: electron-dense deposits ('humps') on the epithelial side of the GBM" }
+      ]
+    },
+    {
+      label: "Clinical manifestations",
+      children: [
+        { label: "Age: 5-12 yr; uncommon before the age of 3 yr" },
+        { label: "Acute nephritic syndrome 1-2 wk after streptococcal pharyngitis or 3-6 wk after streptococcal pyoderma" },
+        { label: "Severity varies: asymptomatic microscopic hematuria with normal renal function → acute kidney injury" },
+        { label: "Various degrees of edema, hypertension, and oliguria depending on severity" },
+        { label: "Encephalopathy and/or heart failure due to hypertension or hypervolemia" },
+        { label: "Encephalopathy may also result from direct toxic effects of streptococci on the CNS" },
+        { label: "Edema typically results from salt and water retention" },
+        { label: "Nonspecific symptoms: malaise, lethargy, abdominal or flank pain, fever" },
+        { label: "Acute phase generally resolves within 6-8 wk" },
+        { label: "Proteinuria and hypertension usually normalize by 6 wk; microscopic hematuria may persist 1-2 yr" }
+      ]
+    },
+    {
+      label: "Complications",
+      children: [
+        { label: "May be the presenting event" },
+        { label: "Acute complications result primarily from hypertension and acute renal dysfunction" },
+        { label: "Hypertension: seen in 60% of patients; hypertensive encephalopathy in 10% of cases" },
+        { label: "Others: heart failure, hyperkalemia, hyperphosphatemia, hypocalcemia, acidosis, seizures, uremia" },
+        {
+          label: "Medical emergencies in APSGN",
+          children: [
+            { label: "A. Hyperkalemia" },
+            { label: "B. Hypertensive encephalopathy" },
+            { label: "C. Congestive heart failure" },
+            { label: "D. Rapidly progressive glomerulonephritis (RPGN)" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Diagnosis",
+      children: [
+        {
+          label: "Urine analysis",
+          children: [
+            { label: "Color: smoky red or cola-like color" },
+            { label: "Volume: oliguria or may be anuria with high specific gravity" },
+            { label: "Dysmorphic RBCs" },
+            { label: "RBC casts" },
+            { label: "Nephritic range proteinuria" },
+            { label: "Polymorphonuclear leukocytes" }
+          ]
+        },
+        { label: "Serum C3: usually reduced in acute phase; returns to normal 6-8 wk after onset" },
+        {
+          label: "Evidence of invasive streptococcal infection",
+          children: [
+            { label: "1. Positive throat culture may support diagnosis or simply represent carrier state" },
+            { label: "2. Rising antibody titre to streptococcal antigens confirms recent infection; ASOT commonly elevated after pharyngeal infection but rarely after skin infection" },
+            { label: "3. Best single antibody titre for cutaneous streptococcal infection: DNase B antigen" }
+          ]
+        },
+        {
+          label: "Clinical diagnosis likely in a child with",
+          children: [
+            { label: "Acute nephritic syndrome" },
+            { label: "Evidence of recent streptococcal infection" },
+            { label: "Low C3 level" }
+          ]
+        },
+        {
+          label: "Renal biopsy considered only with",
+          children: [
+            { label: "1. Acute kidney injury and RPGN" },
+            { label: "2. Nephrotic range proteinuria" },
+            { label: "3. Absence of evidence for streptococcal infection" },
+            { label: "4. Normal complement levels" },
+            { label: "5. Persistent hematuria, proteinuria, diminished renal function, and/or low C3 persisting > 2 months after onset" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Differential diagnosis",
+      children: [
+        { label: "Includes many of the causes of hematuria" }
+      ]
+    },
+    {
+      label: "Prevention",
+      children: [
+        { label: "Early systemic antibiotic therapy for streptococcal throat and skin infections does not eliminate the risk of GN" },
+        { label: "Family members: culture for group A β-hemolytic streptococci and treat if culture positive" }
+      ]
+    },
+    {
+      label: "Treatment",
+      children: [
+        {
+          label: "A) General measures",
+          children: [
+            { label: "1. Bed rest: only indicated during the oliguric phase" },
+            { label: "2. Fluid restriction: fluid intake = UOP + 400 ml / m² of body surface area" },
+            { label: "3. Protein and salt restriction" },
+            { label: "4. High carbohydrate diet to provide adequate calories" }
+          ]
+        },
+        {
+          label: "B) Specific measures",
+          children: [
+            { label: "1. Management of acute effects of renal insufficiency and hypertension" },
+            { label: "2. Eradication of streptococcal infection: 10-day course of systemic penicillin (does not affect natural history of GN)" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Prognosis",
+      children: [
+        { label: "Complete recovery occurs in more than 95% of children" },
+        { label: "Mortality in acute stage avoidable by appropriate management of AKI, cardiac failure, and hypertension" },
+        { label: "Infrequently: severe acute phase → glomerular hyalinization → chronic renal insufficiency" },
+        { label: "Recurrences are extremely rare" }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part5.js — 05 · Proteinuria
+// Source: Pediatric Renal Book 4th Grade (pages 69-70)
+// ============================================================
+const folder5 = {
+  label: "05 · Proteinuria",
+  children: [
+    {
+      label: "Detection",
+      children: [
+        {
+          label: "Urine dipstick test",
+          children: [
+            { label: "Qualitative assessment of urinary protein excretion" },
+            { label: "Detects primarily albuminuria; less sensitive for other forms of proteinuria" },
+            { label: "Reported as: Negative, Trace (10-20 mg/dL), 1+ (30 mg/dL), 2+ (100 mg/dL), 3+ (300 mg/dL), 4+ (1000-2000 mg/dL)" }
+          ]
+        },
+        {
+          label: "24-hour urine collection",
+          children: [
+            { label: "Normal upper limit in healthy children: 150 mg/24 hr (4 mg/m²/hr)" },
+            { label: "Abnormal: > 4 mg/m²/hr" },
+            { label: "Nephritic range proteinuria: 4-40 mg/m²/hr" },
+            { label: "Nephrotic range: more than 40 mg/m²/hr" }
+          ]
+        },
+        {
+          label: "Urine protein/creatinine (Upr/UCr) ratio",
+          children: [
+            { label: "Random urine specimen; useful when timed collection is not practical" },
+            { label: "Normal: < 0.5 in children < 2 yr; < 0.2 in children ≥ 2 yr" },
+            { label: "Ratio 0.2-2: nephritic range proteinuria" },
+            { label: "Ratio > 2: nephrotic-range proteinuria" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Classification & etiology",
+      children: [
+        {
+          label: "Transient proteinuria",
+          children: [
+            { label: "Fever" },
+            { label: "Exercise" },
+            { label: "Dehydration" },
+            { label: "Cold exposure" },
+            { label: "Seizure" }
+          ]
+        },
+        {
+          label: "Orthostatic (postural) proteinuria",
+          children: [
+            { label: "Most common cause of persistent proteinuria in school-aged children and adolescents (up to 60%)" },
+            { label: "Usually asymptomatic; discovered on routine urinalysis with unknown cause" },
+            { label: "Supine: normal or slightly increased protein; upright: increased up to 10-fold, up to 1,000 mg/24 hr (1 g/24 hr)" },
+            { label: "Hematuria, hypertension, and renal dysfunction are absent" },
+            { label: "Long-term follow-up prudent: monitor for hematuria, hypertension, diminished renal function, or proteinuria > 1,000 mg/24 hr" }
+          ]
+        },
+        {
+          label: "Glomerular proteinuria",
+          children: [
+            {
+              label: "Causes",
+              children: [
+                { label: "Acute post-infectious glomerulonephritis" },
+                { label: "Focal segmental glomerulosclerosis" },
+                { label: "Mesangial proliferative glomerulonephritis" },
+                { label: "Membranous nephropathy" },
+                { label: "Membranoproliferative glomerulonephritis" },
+                { label: "Lupus nephritis" },
+                { label: "IgA nephropathy" },
+                { label: "Henoch-Schönlein purpura nephritis" },
+                { label: "Sickle cell nephropathy" }
+              ]
+            },
+            { label: "Mechanism: increased permeability of the glomerular capillary wall" },
+            { label: "Level: from less than 1 g to more than 3 g/24 hr" },
+            {
+              label: "Types",
+              children: [
+                { label: "Selective: loss of plasma proteins of molecular weight up to and including albumin" },
+                { label: "Nonselective: loss of albumin and larger MW proteins such as IgG" }
+              ]
+            },
+            { label: "Associations: hypertension, hematuria, or renal dysfunction" },
+            { label: "Protein selectivity determination of little clinical value (considerable overlap among renal diseases)" }
+          ]
+        },
+        {
+          label: "Tubulo-interstitial proteinuria",
+          children: [
+            {
+              label: "Causes",
+              children: [
+                { label: "Heavy metal poisoning" },
+                { label: "Cystinosis" },
+                { label: "Wilson disease" },
+                { label: "Acute tubular necrosis" },
+                { label: "Tubulointerstitial nephritis" },
+                { label: "Polycystic kidney disease" }
+              ]
+            },
+            { label: "Mechanism: injury to proximal tubules → diminished re-absorptive capacity" },
+            { label: "Level: fixed low-grade proteinuria (usually < 1 g/24 hr)" },
+            { label: "Type: low molecular weight proteins" },
+            { label: "Associations: glucosuria, phosphaturia, bicarbonate wasting, aminoaciduria; acquired and inherited disorders" }
+          ]
+        },
+        {
+          label: "Clinical pearls",
+          children: [
+            { label: "Asymptomatic persistent proteinuria: generally glomerular rather than tubular" },
+            { label: "Electrophoresis distinguishes: tubular → little or no albumin; glomerular → albumin is the major protein" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Initial evaluation of persistent fixed proteinuria",
+      children: [
+        { label: "1. Measurement of serum creatinine" },
+        { label: "2. 24-hr urinary protein excretion" },
+        { label: "3. Serum albumin level" },
+        { label: "4. C3 level" },
+        { label: "Low-grade proteinuria (150-1,000 mg/24 hr) with normal findings: biopsy may not be indicated (transient resolving process or pathology not yet apparent)" },
+        {
+          label: "Periodic re-evaluation",
+          children: [
+            { label: "Physical examination" },
+            { label: "Blood pressure determination" },
+            { label: "Urine analysis" },
+            { label: "Measurement of serum creatinine" },
+            { label: "24-hr urinary protein excretion" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part6.js — 06 · Nephrotic Syndrome (Pediatric)
+// Source: Pediatric Renal Book 4th Grade (pages 70-81)
+// ============================================================
+const folder6 = {
+  label: "06 · Nephrotic Syndrome (Pediatric)",
+  children: [
+    {
+      label: "Definition",
+      children: [
+        { label: "Primarily a pediatric disorder — 15 times more common in children than adults" },
+        { label: "Incidence: 2-3 / 100,000 children per year" },
+        { label: "Vast majority of affected children: steroid-sensitive minimal change disease" },
+        {
+          label: "Characteristic features",
+          children: [
+            { label: "1. Heavy proteinuria (> 3.5 g/24 hr in adults or 40 mg/m²/hr in children)" },
+            { label: "2. Hypoalbuminemia (< 2.5 g/dL)" },
+            { label: "3. Generalized edema" },
+            { label: "4. Hyperlipidemia (hypercholesterolemia > 250 mg/dL)" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Etiology",
+      children: [
+        {
+          label: "Classification",
+          children: [
+            {
+              label: "Acquired",
+              children: [
+                { label: "Primary: Idiopathic NS" },
+                {
+                  label: "Secondary",
+                  children: [
+                    { label: "S.L.E" },
+                    { label: "H.S.P" }
+                  ]
+                }
+              ]
+            },
+            { label: "Congenital" }
+          ]
+        },
+        { label: "Approximately 90% of children: idiopathic nephrotic syndrome" },
+        {
+          label: "Idiopathic NS — three histological types",
+          children: [
+            { label: "Minimal change disease" },
+            { label: "Diffuse mesangial proliferation" },
+            { label: "Focal segmental glomerulosclerosis" }
+          ]
+        },
+        { label: "Debate: three separate diseases with similar presentation vs spectrum of a single disease" }
+      ]
+    },
+    {
+      label: "Pathogenesis",
+      children: [
+        { label: "Proteinuria: ↑ GBM permeability (defect in size or −ve charges of GBM barriers)" },
+        {
+          label: "Proteinuria types",
+          children: [
+            { label: "Selective: escape of low MW proteins — albumin, transferrin, IgG" },
+            { label: "Non-selective: escape of both low & high MW proteins" }
+          ]
+        },
+        { label: "Hypoproteinemia: low total serum proteins → mainly hypoalbuminemia" },
+        { label: "Generalized edema: ↓ plasma osmotic pressure (↓ proteins & albumin) → fluid shift to interstitial tissue (mainly lax & gravity dependent)" },
+        {
+          label: "Hyperlipidemia — mainly ↑ cholesterol",
+          children: [
+            { label: "Hypoproteinemia → liver ↑ protein synthesis including lipoproteins (not lost in urine)" },
+            { label: "↓ Lipoprotein lipase → ↓ lipid catabolism" }
+          ]
+        },
+        {
+          label: "Pathophysiology of edema",
+          children: [
+            { label: "↓ intravascular volume → ↓ renal blood flow → JGA → ↑ aldosterone → Na & H2O retention → more edema" },
+            { label: "↓ intravascular volume → ↑ ADH → H2O retention" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Pathology",
+      children: [
+        {
+          label: "Minimal change disease (MCNS) — 85% of total cases",
+          children: [
+            { label: "Light microscopy: glomeruli appear normal or show minimal increase in mesangial cells and matrix" },
+            { label: "Immunofluorescence: typically negative" },
+            { label: "Electron microscopy: effacement of the epithelial cell foot processes" }
+          ]
+        },
+        { label: "More than 95% of children with MCNS respond to corticosteroid therapy" }
+      ]
+    },
+    {
+      label: "Clinical manifestations",
+      children: [
+        { label: "M:F ratio 2:1; most commonly appears between ages 2 and 6 yr" },
+        { label: "Initial episode and relapses may follow minor infections; occasionally insect bites, bee stings" },
+        { label: "Mild edema initially: around the eyes and lower extremities; becomes generalized: ascites, pleural effusions, genital edema" },
+        { label: "Anorexia, irritability, abdominal pain, and diarrhea are common" },
+        { label: "Hypertension and gross hematuria are uncommon" }
+      ]
+    },
+    {
+      label: "Differential diagnosis",
+      children: [
+        {
+          label: "Other causes of generalized oedema",
+          children: [
+            { label: "Renal: age child; starts periorbital (in the morning); associations: hematuria, oliguria, ± hypertension (absent in MCNS)" },
+            { label: "Cardiac: age any; starts in lower limbs (sacral in bed-ridden); associations: heart failure — dyspnea, orthopnea" },
+            { label: "Hepatic: starts with ascites; associations: liver cell failure — jaundice, bleeding" },
+            { label: "Nutritional: age infant; starts dorsa of hand & foot; poor dietetic history, features of KWO" },
+            { label: "Angioneurotic: age any; starts tongue, lips & cheeks; itching, recurrence" }
+          ]
+        },
+        {
+          label: "Secondary NS more likely if associated with",
+          children: [
+            { label: "Age > 8 years" },
+            { label: "Low C3" },
+            { label: "Hypertension" },
+            { label: "Extra-renal symptoms: arthritis, organomegaly" },
+            { label: "Gross hematuria" },
+            { label: "Renal impairment" },
+            { label: "Nephrotic vs nephritic syndrome: by c/p & lab" },
+            { label: "Histological type: by renal biopsy" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Diagnosis",
+      children: [
+        {
+          label: "Urine analysis",
+          children: [
+            { label: "1. Color: yellowish, frothy" },
+            { label: "2. Volume: normal (may be oliguria; may be polyuria with steroid ttt)" },
+            { label: "3. Specific gravity: high" },
+            {
+              label: "4. Proteinuria",
+              children: [
+                { label: "Heavy (nephrotic level)" },
+                { label: "Dipstick: 3+ or 4+" },
+                { label: "Urinary protein excretion exceeds 40 mg/m²/hr" },
+                { label: "Spot urine protein to creatinine ratio exceeds 2.0" }
+              ]
+            },
+            {
+              label: "5. Microscopic examination",
+              children: [
+                { label: "Microscopic hematuria may be present in 20% of children" },
+                { label: "Casts: waxy (lipoid) & hyaline" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Biochemical",
+          children: [
+            { label: "1. Serum creatinine usually normal; may increase from diminished renal perfusion (contraction of intravascular volume)" },
+            { label: "2. Serum albumin generally < 2.5 g/dL" },
+            { label: "3. Low total serum protein < 4.5 g/dL" },
+            { label: "4. Serum cholesterol and triglyceride levels elevated" },
+            { label: "5. C3 and C4 levels normal" }
+          ]
+        },
+        { label: "Renal biopsy: not required for diagnosis in most children" },
+        {
+          label: "Indications of renal biopsy",
+          children: [
+            {
+              label: "I. Before treatment",
+              children: [
+                { label: "1. Hematuria" },
+                { label: "2. Hypertension" },
+                { label: "3. Renal insufficiency" },
+                { label: "4. Hypocomplementemia" },
+                { label: "5. Age < 1 yr OR > 10 yr" },
+                { label: "6. Low C3" }
+              ]
+            },
+            {
+              label: "II. After treatment",
+              children: [
+                { label: "1. Frequent relapsers" },
+                { label: "2. Steroid resistant" }
+              ]
+            }
+          ]
+        },
+        { label: "Pathophysiology and treatment should be carefully reviewed with the family" }
+      ]
+    },
+    {
+      label: "Treatment",
+      children: [
+        {
+          label: "Supportive treatment",
+          children: [
+            {
+              label: "1) Monitoring",
+              children: [
+                { label: "24 hr urine protein" },
+                { label: "Daily weight" },
+                { label: "Signs of infection" },
+                { label: "Blood pressure" },
+                { label: "Urine output" }
+              ]
+            },
+            { label: "First episode with mild-moderate edema: managed as outpatients; may attend school and participate in physical activities" },
+            { label: "Severe symptomatic edema (large pleural effusions, ascites, severe genital edema): hospitalize" },
+            {
+              label: "2) Diet",
+              children: [
+                { label: "Low sodium diet; may be normalized when the child enters remission" },
+                { label: "Fluid restriction if progressive weight loss or hyponatremia" }
+              ]
+            },
+            {
+              label: "3) Oral diuretics",
+              children: [
+                { label: "No data on safety or efficacy; used by many clinicians; judicious use, carefully supervised by pediatric nephrologists" },
+                { label: "Swollen scrotum may be elevated with pillows to enhance fluid removal by gravity" }
+              ]
+            },
+            {
+              label: "Risks of heavy diuretic use alone",
+              children: [
+                { label: "Depletion of intravascular volume (hypovolemia)" },
+                { label: "Pre-renal failure" },
+                { label: "Thrombosis" },
+                { label: "↓ K" }
+              ]
+            },
+            {
+              label: "Salt-free albumin",
+              children: [
+                { label: "IV 25% human albumin (0.5 g/kg/12 hr)" },
+                {
+                  label: "Indications",
+                  children: [
+                    { label: "Massive generalized oedema (anasarca) with respiratory difficulty → albumin + furosemide (1-2 mg/kg IV)" },
+                    { label: "Hypovolemic shock → albumin alone" }
+                  ]
+                },
+                { label: "Mandates close monitoring of volume status, serum electrolytes and renal function" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Curative treatment (steroids)",
+          children: [
+            { label: "Onset between 1 and 8 yr: likely steroid-responsive MCNS → steroid therapy may be initiated without renal biopsy" },
+            {
+              label: "Induction of remission",
+              children: [
+                { label: "Prednisone 60 mg/m²/day (maximum daily dose 60 mg)" },
+                { label: "Divided into two to three doses" },
+                { label: "For at least 4 consecutive weeks" }
+              ]
+            },
+            {
+              label: "Response",
+              children: [
+                { label: "80% to 90% of children respond to steroid therapy" },
+                { label: "Urine trace or negative for protein for 3 consecutive days = steroid responsive NS" }
+              ]
+            },
+            {
+              label: "Alternate-day dose",
+              children: [
+                { label: "After the initial 4-6 wk course, the prednisone dose should be tapered" },
+                { label: "40 mg/m²/day every other day as a single morning dose" },
+                { label: "Then slowly tapered and discontinued over the next 2-3 mo" }
+              ]
+            },
+            {
+              label: "Response categories",
+              children: [
+                { label: "No relapse" },
+                { label: "Steroid dependent" },
+                { label: "Frequent relapsers" },
+                { label: "Steroid resistant" }
+              ]
+            },
+            { label: "Steroid dependent: relapse while on alternate-day steroid therapy OR within 14 days of stopping prednisone" },
+            { label: "Frequent relapsers: respond well to prednisone but relapse ≥ 4 times in a 12-month period" },
+            {
+              label: "Steroid resistant",
+              children: [
+                { label: "Fail to respond to prednisone within 4-6 wk" },
+                { label: "Diagnostic renal biopsy should be performed" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Treatment of relapse",
+      children: [
+        { label: "Daily divided-dose prednisone until remission (urine trace or negative for 3 consecutive days), then alternate-day dosing tapered over 1-2 mo periods" },
+        {
+          label: "Alternative agents (steroid-dependent, frequent relapsers, steroid-resistant; severe steroid toxicity: cushingoid appearance, hypertension, cataracts, growth failure)",
+          children: [
+            { label: "Cyclophosphamide" },
+            { label: "Methylprednisolone" },
+            { label: "Cyclosporine" },
+            { label: "ACE inhibitor & angiotensin II blockers — adjuvant therapy to reduce proteinuria in steroid-resistant patients" }
+          ]
+        },
+        {
+          label: "Recent supportive treatment",
+          children: [
+            { label: "Low-dose aspirin → ↓ risk of intravascular thrombosis" },
+            { label: "Levamisole → immunomodulator → consolidates remission in relapses" },
+            { label: "Pneumococcal & H-influenza vaccines for NS on prolonged steroids or immunosuppressive treatment" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Complications",
+      children: [
+        {
+          label: "1. Infection — the major complication",
+          children: [
+            {
+              label: "Increased susceptibility in relapse due to",
+              children: [
+                { label: "Urinary losses of immunoglobulins and properdin factor B" },
+                { label: "Defective cell-mediated immunity" },
+                { label: "Immunosuppressive therapy" },
+                { label: "Malnutrition" },
+                { label: "Edema & ascites fluid acting as potential 'culture medium' for bacteria" },
+                { label: "Abnormal leucocytic function" },
+                { label: "Hypoperfusion of spleen" }
+              ]
+            },
+            { label: "Spontaneous bacterial peritonitis: most frequent type; also sepsis, pneumonia, cellulitis, UTIs" },
+            { label: "Organisms: Streptococcus pneumoniae most common; gram-negative (Escherichia coli) may be encountered" },
+            { label: "Prophylactic antibiotic therapy during relapse: remains controversial" },
+            { label: "All children should receive polyvalent pneumococcal vaccine (if not previously immunized), ideally in remission and off daily prednisone" }
+          ]
+        },
+        {
+          label: "2. Thromboembolic events",
+          children: [
+            { label: "Incidence in children: 2-5% — much lower risk than adults" },
+            { label: "Arterial and venous thrombosis: renal vein thrombosis, pulmonary embolus, sagittal sinus thrombosis, catheter thrombosis" },
+            {
+              label: "Causes (risk factors)",
+              children: [
+                { label: "Increased prothrombotic factors: fibrinogen, thrombocytosis, hemoconcentration, relative immobilization" },
+                { label: "Decreased fibrinolytic factors: urinary losses of antithrombin III, proteins C and S" },
+                { label: "Hyperlipidemia: ↑ lipoprotein by liver, ↓ lipase enzyme" }
+              ]
+            },
+            { label: "Prophylactic anticoagulation not recommended unless previous thromboembolic event" },
+            { label: "Avoid aggressive diuresis; limit indwelling catheters (increase clotting risk)" }
+          ]
+        },
+        { label: "3. Hypovolemic shock with aggressive diuretic therapy" },
+        { label: "4. Renal failure (from hypovolemia and renal vein thrombosis)" },
+        { label: "5. Relapse" },
+        {
+          label: "6. Complications of therapy",
+          children: [
+            { label: "Steroids" },
+            { label: "Cyclophosphamide (endoxan)" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Prognosis",
+      children: [
+        { label: "Majority of steroid-responsive children have repeated relapses; frequency decreases with age" },
+        {
+          label: "Counsel the family",
+          children: [
+            { label: "Steroid-responsive NS will not develop chronic renal failure" },
+            { label: "Disease is generally not hereditary" },
+            { label: "Child remains fertile (in the absence of prolonged cyclophosphamide therapy)" },
+            { label: "Child should be considered normal in remission: unrestricted diet and activity, no need for urine testing" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Early onset NS (in 1st year)",
+      children: [
+        {
+          label: "1. Congenital NS → Finnish NS",
+          children: [
+            { label: "AR inheritance → defect in nephrin protein in GBM" },
+            { label: "Presentation usually in first 3 months" },
+            { label: "At birth: large oedematous placenta" },
+            { label: "Prognosis: poor → ends in CRF" },
+            { label: "Treatment: albumin, ACE inhibitors, NSAIDs, nephrectomy & transplantation" }
+          ]
+        },
+        { label: "2. Congenital infections (TORCH)" },
+        { label: "3. Denys-Drash syndrome: Wilms' tumor, genitourinary anomalies & NS" },
+        { label: "4. Drug induced" },
+        { label: "5. Idiopathic" }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part7.js — 07 · Acute Kidney Injury (AKI)
+// Source: Pediatric Renal Book 4th Grade (pages 81-83)
+// ============================================================
+const folder7 = {
+  label: "07 · Acute Kidney Injury (AKI)",
+  children: [
+    {
+      label: "Definition",
+      children: [
+        { label: "Rapid decline (few hours to days) in glomerular filtration rate (GFR)" },
+        {
+          label: "Disturbance of renal physiological functions",
+          children: [
+            { label: "Impairment of nitrogenous waste product excretion" },
+            { label: "Loss of water and electrolyte regulation" },
+            { label: "Loss of acid-base regulation" }
+          ]
+        },
+        { label: "Epidemiology: 2-3% of children admitted to pediatric tertiary care centers; up to 8% of NICU infants" }
+      ]
+    },
+    {
+      label: "Grading of AKI",
+      children: [
+        { label: "Divided into 5 stages using modified pediatric RIFLE criteria (pRIFLE)" },
+        { label: "Risk: GFR decrease by 25%; UOP < 0.5 ml/kg/h for 8 h" },
+        { label: "Injury: GFR decrease by 50%; UOP < 0.5 ml/kg/h for 16 h" },
+        { label: "Failure: GFR decrease by 75% or < 35 ml/min/1.73 m²; UOP < 0.3 ml/kg/h for 24 h or anuric for 12 h" },
+        { label: "Loss: persistent failure > 4 weeks" },
+        { label: "End stage: ESRD (persistent failure > 3 months)" }
+      ]
+    },
+    {
+      label: "Pathogenesis — three categories",
+      children: [
+        {
+          label: "1. Prerenal AKI (prerenal azotemia)",
+          children: [
+            { label: "Diminished effective circulating arterial volume → inadequate renal perfusion → decreased GFR" },
+            { label: "Evidence of kidney damage is absent" },
+            { label: "Prompt reversal of cause → renal function returns to normal" },
+            { label: "Sustained hypo-perfusion → intrinsic renal parenchymal damage may develop" }
+          ]
+        },
+        {
+          label: "2. Intrinsic renal AKI",
+          children: [
+            { label: "Renal parenchymal damage, including sustained hypo-perfusion / ischemia" }
+          ]
+        },
+        {
+          label: "3. Post-renal AKI",
+          children: [
+            { label: "Obstruction of the urinary tract" },
+            { label: "With two functioning kidneys: obstruction must be bilateral to result in AKI" },
+            { label: "Relief of obstruction → recovery of renal function, except with associated renal dysplasia or prolonged obstruction" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Common causes",
+      children: [
+        {
+          label: "1. Prerenal (marked ↓↓ renal blood flow)",
+          children: [
+            { label: "Dehydration" },
+            { label: "Hemorrhage" },
+            { label: "Sepsis" },
+            { label: "Hypoalbuminemia" },
+            { label: "Cardiac failure" }
+          ]
+        },
+        {
+          label: "2. Intrinsic renal (renal parenchymal damage)",
+          children: [
+            {
+              label: "Glomerulonephritis",
+              children: [
+                { label: "Post-infectious / post-streptococcal" },
+                { label: "Lupus erythematosus" },
+                { label: "Henoch-Schönlein purpura" },
+                { label: "Membranoproliferative" },
+                { label: "Anti-glomerular basement membrane" },
+                { label: "Hemolytic-uremic syndrome" }
+              ]
+            },
+            {
+              label: "Acute tubular necrosis",
+              children: [
+                { label: "Cortical necrosis" },
+                { label: "Renal vein thrombosis" }
+              ]
+            },
+            {
+              label: "Acute interstitial nephritis",
+              children: [
+                { label: "Tumor infiltration" },
+                { label: "Tumor lysis syndrome" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "3. Postrenal (urine outflow obstruction)",
+          children: [
+            { label: "Posterior urethral valve" },
+            { label: "Pelviureteric junction obstruction (PUJ)" },
+            { label: "Ureterovesicular junction obstruction" },
+            { label: "Ureterocele" },
+            { label: "Tumors" },
+            { label: "Urolithiasis" },
+            { label: "Hemorrhagic cystitis" },
+            { label: "Neurogenic bladder" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Clinical manifestations",
+      children: [
+        { label: "1. Manifestation of the cause" },
+        {
+          label: "2. Oliguric phase — early AKI",
+          children: [
+            { label: "Oliguria or anuria" },
+            { label: "Oedema" },
+            { label: "Hypertension" },
+            { label: "Acidotic breathing (rapid + deep)" }
+          ]
+        },
+        {
+          label: "Advanced AKI — as above plus",
+          children: [
+            { label: "↑ Urea → uremic encephalopathy (confusion, convulsion, coma)" },
+            { label: "↓ Na → convulsion" },
+            { label: "↑ K → arrhythmias" },
+            { label: "Hypervolemia heart failure up to acute pulmonary oedema" },
+            { label: "Metabolic acidosis; GIT stress ulcer" }
+          ]
+        },
+        {
+          label: "3. Polyuric phase",
+          children: [
+            { label: "May indicate early recovery — new tubular cells can't retain fluid & electrolytes → polyuria & electrolyte loss" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Diagnosis",
+      children: [
+        {
+          label: "Diagnosis of AKI",
+          children: [
+            { label: "1. Urine volume: oliguria (UOP < 1 ml/kg/hr or < 400 ml/m²/day); anuria (UOP < 30 ml/m²/day)" },
+            { label: "2. Renal function tests: increased serum creatinine, urea & blood urea nitrogen" },
+            { label: "3. Acid/base disturbance: metabolic acidosis (↓ pH, ↓ PaCO2, ↓ HCO3)" },
+            { label: "4. Electrolytes: hyperkalemia, dilutional hyponatremia, hypocalcemia, hyperphosphatemia" }
+          ]
+        },
+        {
+          label: "Diagnosis of the cause — prerenal",
+          children: [
+            { label: "History: infant with 3-day history of vomiting and diarrhea → prerenal AKI from volume depletion" },
+            { label: "Examination: tachycardia, dry mucous membranes, poor peripheral perfusion → inadequate circulating volume" },
+            {
+              label: "Laboratory — urine shows",
+              children: [
+                { label: "Elevated specific gravity (> 1020)" },
+                { label: "Elevated urine osmolality (Uosm > 500 mOsm/kg)" },
+                { label: "Low urine sodium (UNa < 20 mEq/L)" },
+                { label: "FENa less than 1% (2.5% in neonates)" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Diagnosis of the cause — intrinsic renal",
+          children: [
+            { label: "History: 6-yr-old with recent pharyngitis + peri-orbital edema, hypertension, gross hematuria → post-infectious GN" },
+            { label: "History: critically ill child with protracted hypotension + nephrotoxic medications → ATN" },
+            { label: "Examination: peripheral edema, rales, cardiac gallop → volume overload (GN or ATN)" },
+            { label: "Examination: rash and arthritis → SLE or Henoch-Schönlein purpura nephritis" },
+            {
+              label: "Laboratory — urine shows",
+              children: [
+                { label: "Specific gravity less than 1010" },
+                { label: "Low urine osmolality (Uosm < 350 mOsm/kg)" },
+                { label: "High urine sodium (UNa > 40 mEq/L)" },
+                { label: "FENa greater than 2% (> 10% in neonates)" }
+              ]
+            },
+            {
+              label: "For the cause",
+              children: [
+                { label: "Hematuria, proteinuria, RBC or granular casts → intrinsic AKI, in particular glomerular disease" },
+                { label: "WBCs and WBC casts with low-grade hematuria and proteinuria → tubulointerstitial disease" },
+                { label: "Urinary eosinophils → drug-induced tubulointerstitial nephritis" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Diagnosis of the cause — post-renal",
+          children: [
+            { label: "History: neonate with prenatal hydronephrosis + palpable bladder → congenital urinary tract obstruction (posterior urethral valves)" },
+            { label: "Examination: palpable flank masses → renal vein thrombosis, tumors, cystic disease, or obstruction" },
+            {
+              label: "For the cause",
+              children: [
+                { label: "Bladder catheterization" },
+                { label: "Abdominal ultrasound to exclude obstructive uropathy" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Other findings that help in diagnosis of the cause",
+          children: [
+            { label: "Anemia (usually dilutional or hemolytic — SLE, renal vein thrombosis, HUS)" },
+            { label: "Leukopenia (SLE)" },
+            { label: "Thrombocytopenia (SLE, renal vein thrombosis, HUS)" },
+            { label: "Low C3: post-infectious, SLE, membranoproliferative GN" },
+            { label: "Serum antibodies: streptococcal (post-streptococcal GN), nuclear (SLE), ANCA (Wegener granulomatosis, microscopic polyarteritis), anti-GBM (Goodpasture disease)" },
+            { label: "Chest radiography: cardiomegaly and pulmonary congestion (fluid overload)" },
+            { label: "Renal ultrasonography: hydronephrosis and/or hydroureter → urinary tract obstruction" },
+            { label: "Renal biopsy: ultimately required when cause not clearly prerenal or post-renal" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Treatment",
+      children: [
+        { label: "Hospitalization" },
+        {
+          label: "Medical management",
+          children: [
+            { label: "Treatment of the cause" },
+            { label: "Correction of electrolyte and acid-base disturbances" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part8.js — 08 · Chronic Kidney Disease (CKD)
+// Source: Pediatric Renal Book 4th Grade (pages 81-87)
+// ============================================================
+const folder8 = {
+  label: "08 · Chronic Kidney Disease (CKD)",
+  children: [
+    {
+      label: "Definition",
+      children: [
+        { label: "Abnormalities of kidney structure or function for more than 3 months with implications for health" },
+        { label: "Or persistent decrease in GFR less than 60 ml/min/1.73 m² for more than 3 months" },
+        {
+          label: "KDOQI criteria for the definition of CKD",
+          children: [
+            {
+              label: "1. Kidney damage for 3 months or longer (structural or functional, with or without decreased GFR), manifest by",
+              children: [
+                { label: "a. Pathologic abnormalities" },
+                { label: "b. Markers of kidney damage: abnormalities in blood or urine composition, or in imaging tests" }
+              ]
+            },
+            { label: "2. GFR less than 60 mL/min/1.73 m² for 3 months or longer, with or without kidney damage" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Staging of CKD",
+      children: [
+        { label: "Stage 1: GFR more than 90" },
+        { label: "Stage 2: GFR 60-89" },
+        { label: "Stage 3: GFR 30-59" },
+        { label: "Stage 4: GFR 15-29" },
+        { label: "Stage 5: GFR < 15" }
+      ]
+    },
+    {
+      label: "Etiology",
+      children: [
+        { label: "In children: congenital, acquired, inherited, or metabolic renal disease" },
+        { label: "Underlying cause correlates closely with the age at which CKD is first detected" },
+        { label: "< 5 yr: most commonly congenital abnormalities — renal hypoplasia, dysplasia, and/or obstructive uropathy" },
+        { label: "> 5 yr: acquired diseases (various forms of glomerulonephritis) and inherited disorders (familial juvenile nephronophthisis, Alport syndrome) predominate" },
+        { label: "Metabolic disorders (cystinosis, hyperoxaluria) and certain inherited disorders (polycystic kidney disease): throughout childhood" },
+        {
+          label: "In < 5 years of age",
+          children: [
+            {
+              label: "Congenital malformations",
+              children: [
+                { label: "Hypoplastic / dysplastic kidneys" },
+                { label: "Reflux nephropathy" },
+                { label: "Obstructive uropathy" },
+                { label: "Posterior urethral valves" }
+              ]
+            },
+            {
+              label: "Metabolic / genetic disorders",
+              children: [
+                { label: "Cystinosis" },
+                { label: "Oxalosis" },
+                { label: "Nephronophthisis" }
+              ]
+            },
+            { label: "Polycystic kidney disease" },
+            { label: "Congenital nephrotic syndrome" }
+          ]
+        },
+        {
+          label: "In > 5 years of age",
+          children: [
+            {
+              label: "Glomerular disease",
+              children: [
+                { label: "Focal segmental glomerulosclerosis" },
+                { label: "Hemolytic uremic syndrome" },
+                { label: "Chronic glomerulonephritis" },
+                { label: "Alport's syndrome" }
+              ]
+            },
+            {
+              label: "Tubulointerstitial disease",
+              children: [
+                { label: "Chronic tubulointerstitial nephritis" },
+                { label: "Nephrotoxic drugs" }
+              ]
+            },
+            { label: "Wilms' tumor" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "CKD progression",
+      children: [
+        { label: "Postulated mechanisms: perturbations in filtration or hemodynamics, hypertension, proteinuria, podocyte injury, proinflammatory cytokines, profibrotic growth factors" }
+      ]
+    },
+    {
+      label: "Clinical & laboratory findings",
+      children: [
+        {
+          label: "Fluid, electrolyte & acid-base",
+          children: [
+            { label: "Accumulation of nitrogenous waste products ← decrease in GFR" },
+            { label: "Acidosis ← impaired bicarbonate reabsorption; decreased net acid excretion" },
+            { label: "Sodium retention ← excessive renin production; oliguria" },
+            { label: "Sodium wasting ← solute diuresis; tubular damage" },
+            { label: "Urinary concentrating defect ← solute diuresis; tubular damage" },
+            { label: "Hyperkalemia ← decreased GFR; metabolic acidosis; excessive potassium intake; hyporeninemic hypoaldosteronism" },
+            { label: "Hypertension ← volume overload; excessive renin production" }
+          ]
+        },
+        {
+          label: "Bone & growth",
+          children: [
+            { label: "Renal osteodystrophy ← impaired renal production of 1,25-dihydroxycholecalciferol; hyperphosphatemia; hypocalcemia; secondary hyperparathyroidism" },
+            { label: "Growth retardation ← inadequate caloric intake; renal osteodystrophy; metabolic acidosis; anemia; growth hormone resistance" }
+          ]
+        },
+        {
+          label: "Hematologic & immune",
+          children: [
+            { label: "Anemia ← decreased erythropoietin production; iron, folate, vitamin B12 deficiency; decreased erythrocyte survival" },
+            { label: "Bleeding tendency ← defective platelet function" },
+            { label: "Infection ← defective granulocyte function; impaired cellular immune functions; indwelling dialysis catheters" }
+          ]
+        },
+        {
+          label: "Neurological & GI",
+          children: [
+            { label: "Neurological symptoms (fatigue, poor concentration, headache, drowsiness, memory loss, seizures, peripheral neuropathy) ← uremic factor; aluminum toxicity; hypertension" },
+            { label: "Gastrointestinal symptoms (feeding intolerance, abdominal pain) ← gastro-esophageal reflux; decreased gastrointestinal motility" }
+          ]
+        },
+        {
+          label: "Cardiovascular & metabolic",
+          children: [
+            { label: "Pericarditis / cardiomyopathy ← uremic factor(s); hypertension; fluid overload" },
+            { label: "Hyperlipidemia ← decreased plasma lipoprotein lipase activity" },
+            { label: "Glucose intolerance ← tissue insulin resistance" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Laboratory findings",
+      children: [
+        { label: "Elevations in blood urea nitrogen and serum creatinine" },
+        { label: "Hyperkalemia" },
+        { label: "Hyponatremia (if volume overloaded)" },
+        { label: "Acidosis" },
+        { label: "Hypocalcemia" },
+        { label: "Hyperphosphatemia" },
+        { label: "Elevation in uric acid" },
+        { label: "Hypoalbuminemia with heavy proteinuria" },
+        { label: "Normochromic normocytic anemia" },
+        { label: "Serum cholesterol and triglyceride levels usually elevated" },
+        { label: "CKD from glomerulonephritis: urinalysis shows hematuria and proteinuria" },
+        { label: "CKD from congenital lesions (renal dysplasia): low specific gravity, minimal abnormalities" }
+      ]
+    },
+    {
+      label: "Treatment",
+      children: [
+        {
+          label: "Aims",
+          children: [
+            { label: "Replacing absent / diminished renal functions (progressively increase with loss of GFR)" },
+            { label: "Slowing the progression of renal dysfunction" }
+          ]
+        },
+        { label: "Treat at a medical center with multidisciplinary services: medical, nursing, social service, nutritional, psychological support" },
+        {
+          label: "Routine monitoring",
+          children: [
+            { label: "Blood studies: hemoglobin, serum electrolytes, BUN, creatinine, calcium, phosphorus, albumin, alkaline phosphatase" },
+            { label: "Periodic PTH levels and radiographic studies of bone (early renal osteodystrophy)" },
+            { label: "Echocardiography: left ventricular hypertrophy and cardiac dysfunction" }
+          ]
+        },
+        {
+          label: "Fluid and electrolyte management",
+          children: [
+            { label: "Most children maintain normal sodium and water balance with appropriate diet" },
+            { label: "High BP, edema, or heart failure: sodium restriction and diuretic therapy; fluid restriction rarely necessary until ESRD requires dialysis" },
+            { label: "Potassium balance maintained until renal function deteriorates to dialysis level" },
+            { label: "Hyperkalemia: moderate insufficiency with excessive dietary K, severe acidosis, or hyporeninemic hypoaldosteronism; treat with K restriction, oral alkalinizing agents, and/or Kayexalate" }
+          ]
+        },
+        {
+          label: "Acidosis",
+          children: [
+            { label: "Develops in almost all children with CKD (decreased net acid excretion)" },
+            { label: "Bicitra (1 mEq sodium citrate/ml) or sodium bicarbonate tablets (650 mg = 8 mEq base); maintain serum bicarbonate above 22 mEq/L" }
+          ]
+        },
+        {
+          label: "Nutrition",
+          children: [
+            { label: "Restrict dietary phosphorus, potassium, and sodium per laboratory studies and fluid balance; provide RDA caloric intake for age" },
+            { label: "Protein: 2.5 g/kg/24 hr of high biologic value (eggs, milk, then meat, fish)" },
+            { label: "Water-soluble vitamins, zinc, iron: add only if deficiencies confirmed; fat-soluble vitamins A, E, K usually not required" }
+          ]
+        },
+        {
+          label: "Growth",
+          children: [
+            { label: "Short stature: one of the most significant long-term sequelae of childhood CKD" },
+            { label: "Key factor: GH-resistant state — elevated GH, decreased IGF-I, abnormalities of IGF-binding proteins" },
+            { label: "rHuGH if height < −2 SD despite optimal support: 0.05 mg/kg/24 hr subcutaneously, periodic dose adjustment" },
+            {
+              label: "Continue rHuGH until",
+              children: [
+                { label: "1. Reaches 50th percentile for midparental height" },
+                { label: "2. Achieves a final adult height" },
+                { label: "3. Undergoes renal transplantation" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Renal osteodystrophy",
+          children: [
+            { label: "Spectrum of bone disorders in CKD; most common in children: high-turnover bone disease from secondary hyperparathyroidism (osteitis fibrosa cystica)" },
+            { label: "Clinical: muscle weakness, bone pain, fractures with minor trauma; rachitic changes, varus/valgus deformities of long bones, slipped capital femoral epiphyses" },
+            { label: "Labs: decreased serum calcium, increased phosphorus, increased alkaline phosphatase, normal PTH; radiographs: subperiosteal resorption, metaphyseal widening" },
+            { label: "Treatment goals: prevent bony deformity, normalize growth velocity; low phosphorus diet and phosphate binders" },
+            {
+              label: "Vitamin D therapy indicated when",
+              children: [
+                { label: "1. PTH levels > 3 times the upper limit of normal" },
+                { label: "2. Persistent hypocalcemia despite serum phosphorus < 6 mg/dl" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Anemia",
+          children: [
+            { label: "Primarily inadequate erythropoietin production by failing kidneys; usually manifest at GFR < 35 mL/min/1.73 m²" },
+            { label: "Recombinant human erythropoietin (rHuEPO) therapy has dramatically decreased the need for transfusion" }
+          ]
+        },
+        {
+          label: "Hypertension",
+          children: [
+            { label: "Suspected volume overload: salt-restricted diet (2-3 g/24 hr) + loop diuretic (furosemide)" },
+            { label: "ACE inhibitors (enalapril, lisinopril): antihypertensive of choice in CKD with proteinuria" }
+          ]
+        },
+        {
+          label: "Immunization",
+          children: [
+            { label: "All standard immunizations according to the schedule for healthy children" },
+            { label: "Live vaccines contraindicated during treatment with immunosuppressive medications" }
+          ]
+        },
+        {
+          label: "Adjustment in drug dosage",
+          children: [
+            { label: "Many drugs excreted by the kidneys → dosing adjusted to maximize effectiveness and minimize toxicity" },
+            { label: "Strategies: lengthening the interval between doses, decreasing the absolute dose, or both" },
+            { label: "GFR = 0.413 × (length in cm / serum creatinine mg/dL) — modified Schwartz formula" }
+          ]
+        },
+        {
+          label: "Renal replacement therapy",
+          children: [
+            { label: "Hemodialysis or peritoneal dialysis in stage 5 CKD or end-stage renal disease" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// data_part9.js — 09 · Urinary Tract Infections (UTIs)
+// Source: Pediatric Renal Book 4th Grade (page 87)
+// ============================================================
+const folder9 = {
+  label: "09 · Urinary Tract Infections (UTIs)",
+  children: [
+    {
+      label: "Prevalence & etiology",
+      children: [
+        { label: "UTI occurs in 3-5% of girls and 1% of boys" },
+        { label: "Girls: first UTI usually by age 5 yr; peaks during infancy and toilet training" },
+        { label: "After first UTI: 60-80% of girls develop a second UTI within 18 months" },
+        { label: "Boys: most UTIs during the 1st year of life; much more common in uncircumcised boys" },
+        { label: "Age variation: 1st year of life M:F = 2.8-5.4:1; beyond 1-2 yr female preponderance M:F = 1:10" },
+        {
+          label: "Main causative organisms",
+          children: [
+            { label: "Escherichia coli" },
+            { label: "Klebsiella and Proteus" },
+            { label: "Staphylococcus saprophyticus (pathogen in both sexes)" },
+            { label: "Viral infections, particularly adenovirus" }
+          ]
+        },
+        { label: "UTIs: important risk factor for renal insufficiency or end-stage renal disease" }
+      ]
+    },
+    {
+      label: "Clinical manifestations & classification",
+      children: [
+        {
+          label: "Pyelonephritis",
+          children: [
+            { label: "Characterized by: abdominal or flank pain, fever, malaise, nausea, vomiting, occasionally diarrhea" },
+            { label: "Newborns/infants: nonspecific symptoms — jaundice, poor feeding, irritability, weight loss" },
+            { label: "Parenchymal involvement = acute pyelonephritis; without parenchymal involvement = pyelitis" },
+            { label: "Acute pyelonephritis may result in renal injury — pyelonephritic scarring" }
+          ]
+        },
+        {
+          label: "Cystitis",
+          children: [
+            { label: "Bladder involvement" },
+            { label: "Dysuria, urgency, frequency, suprapubic pain" },
+            { label: "Incontinence and malodorous urine" },
+            { label: "Cystitis does not cause fever and does not result in renal injury" }
+          ]
+        },
+        {
+          label: "Asymptomatic bacteriuria",
+          children: [
+            { label: "Positive urine culture without any manifestations of infection; occurs almost exclusively in girls" },
+            { label: "Benign; does not cause renal injury" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Pathogenesis",
+      children: [
+        { label: "Nearly all UTIs are ascending infections" },
+        { label: "Bacteria arise from fecal flora, colonize the perineum, and enter the bladder via the urethra" },
+        { label: "Rare: renal infection by hematogenous spread" },
+        { label: "Bacteria ascend from bladder to kidney → acute pyelonephritis" }
+      ]
+    },
+    {
+      label: "Risk factors",
+      children: [
+        {
+          label: "Demographic",
+          children: [
+            { label: "Female" },
+            { label: "Uncircumcised male" }
+          ]
+        },
+        {
+          label: "Anatomic & structural",
+          children: [
+            { label: "Vesicoureteral reflux" },
+            { label: "Obstructive uropathy" },
+            { label: "Anatomic abnormality (e.g., labial adhesion)" },
+            { label: "Neuropathic bladder" },
+            { label: "Urethral instrumentation" }
+          ]
+        },
+        {
+          label: "Functional & behavioral",
+          children: [
+            { label: "Toilet training" },
+            { label: "Voiding dysfunction" },
+            { label: "Tight clothing (underwear)" },
+            { label: "Pinworm infestation" },
+            { label: "Constipation" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Diagnosis",
+      children: [
+        { label: "Suspected by symptoms or urinalysis findings; urine culture necessary for confirmation and therapy" },
+        { label: "Acute renal infection: leukocytosis, neutrophilia, elevated ESR and C-reactive protein" },
+        { label: "Renal abscess: WBC count markedly elevated > 20,000-25,000/mm³" },
+        { label: "Sepsis common in pyelonephritis (especially infants and obstructive uropathy) → blood cultures should be considered" },
+        {
+          label: "Imaging studies",
+          children: [
+            { label: "Goal: identify anatomic abnormalities that predispose to infection" },
+            { label: "Renal ultrasonogram: rule out hydronephrosis and renal/perirenal abscess; may show acute pyelonephritis in 30-60% (enlarged kidney)" },
+            { label: "Power Doppler ultrasonography: slightly more sensitive but unreliable in identifying all cases" },
+            { label: "VCUG in a young infant male with a past history of UTI" },
+            {
+              label: "Voiding cystourethrogram (VCUG) also indicated in",
+              children: [
+                { label: "1. All children younger than 5 yr with a UTI" },
+                { label: "2. Any child with a febrile UTI" },
+                { label: "3. School-aged girls with two or more UTIs" },
+                { label: "4. Any male with a UTI" }
+              ]
+            },
+            { label: "Most common finding: vesicoureteral reflux" },
+            { label: "Uncertain acute pyelonephritis: renal scanning with technetium-labeled DMSA or glucoheptonate" },
+            { label: "If vesicoureteral reflux present: DMSA scan often performed to assess renal scarring" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Treatment",
+      children: [
+        {
+          label: "Acute cystitis — treat promptly to prevent progression to pyelonephritis",
+          children: [
+            { label: "Severe symptoms: obtain bladder urine for culture and start treatment immediately" },
+            { label: "Mild symptoms: 3-5-day course of trimethoprim-sulfamethoxazole (effective against most E. coli strains)" },
+            { label: "Nitrofurantoin (5-7 mg/kg/24 hr in three to four divided doses); active against Klebsiella-Enterobacter" },
+            { label: "Amoxicillin (50 mg/kg/24 hr): effective as initial treatment but no clear advantages" }
+          ]
+        },
+        {
+          label: "Acute febrile infections suggestive of pyelonephritis",
+          children: [
+            { label: "14-day course of broad-spectrum antibiotics capable of reaching significant tissue levels" },
+            { label: "Parenteral: ceftriaxone (50-75 mg/kg/24 hr, not to exceed 2 g) or ampicillin (100 mg/kg/24 hr) with an aminoglycoside (gentamicin 3-5 mg/kg/24 hr)" },
+            { label: "Consider aminoglycoside ototoxicity and nephrotoxicity; serum creatinine and trough gentamicin levels before and daily during treatment" },
+            { label: "Aminoglycosides particularly effective against Pseudomonas; urine alkalinization with sodium bicarbonate increases effectiveness" },
+            { label: "Oral third-generation cephalosporins (cefixime): as effective as parenteral ceftriaxone against gram-negatives other than Pseudomonas" }
+          ]
+        },
+        {
+          label: "Abscess or obstructed urinary tracts",
+          children: [
+            { label: "Renal or perirenal abscess / infection in obstructed tracts: surgical or percutaneous drainage + antibiotics + other supportive measures" }
+          ]
+        }
+      ]
+    },
+    {
+      label: "Prophylaxis",
+      children: [
+        { label: "Against re-infection: sulfamethoxazole-trimethoprim or nitrofurantoin at one third of the normal therapeutic dose once a day" },
+        { label: "Prophylaxis with amoxicillin or cephalexin also may be effective" }
+      ]
+    }
+  ]
+};
+
+// ==== FOLDERS: one tab per folder (order = numbered prefixes) ====
+const FOLDERS = [folder1, folder2, folder3, folder4, folder5, folder6, folder7, folder8, folder9];
+</script>
+<script>
+/* ============================================================
+   engine.js — NotebookLM-style mind map rendering engine
+   Patched for multi-folder builds:
+   - One tab per folder (no merged "All" tab); FOLDERS array
+     provided by the data block (data_part*.js) loaded before
+     this script.
+   - wrapText limits raised (maxChars 64, 14 lines) so full
+     detail labels are never truncated.
+   All other behavior identical to the original template engine
+   (multi-open toggles, click-to-focus zoom, wheel zoom, drag
+   pan, collapse-all reset, fade-in animations).
+   ============================================================ */
+(() => {
+  'use strict';
+
+  // ==== Topics =====
+  // One tab per folder — generated from the FOLDERS array (no "All" tab).
+  function countNodes(node) {
+    let c = 1;
+    if (node.children) for (const ch of node.children) c += countNodes(ch);
+    return c;
+  }
+  const TOPICS = FOLDERS.map((f, i) => ({ key: 'f' + i, label: f.label, count: countNodes(f) }));
+
+  // ==== DOM refs ====
+  const svg = document.getElementById('mindmap-svg');
+  const connectionsLayer = document.getElementById('connections-layer');
+  const nodesLayer = document.getElementById('nodes-layer');
+  const container = document.getElementById('svg-container');
+  const topbar = document.getElementById('topbar');
+
+  // ==== State ====
+  const state = {
+    expanded: new Set(),     // set of node IDs that are expanded
+    nodeMap: {},             // id -> node object (stable across renders)
+    focusedNodeId: null,
+    activeTopic: 0,          // index into FOLDERS
+  };
+
+  let nodeCounter = 0;
+  const X_GAP = 90;
+  const Y_GAP = 14;
+  let needsViewFit = true;  // true on first render or topic switch
+
+  // ================================================================
+  //  TREE BUILDING — called once per topic switch
+  // ================================================================
+
+  function buildTree() {
+    state.nodeMap = {};
+    nodeCounter = 0;
+
+    function cloneAndId(node, parentId) {
+      // Create a fresh object preserving label + children
+      const n = { label: node.label };
+      n.id = 'n' + (nodeCounter++);
+      if (node.children) n.children = node.children.map(c => cloneAndId(c, n.id));
+      n.parentId = parentId || null;
+      state.nodeMap[n.id] = n;
+      return n;
+    }
+
+    let root;
+    if (state.activeTopic < 0 || state.activeTopic >= FOLDERS.length) {
+      root = cloneAndId(FOLDERS[0], null);
+    } else {
+      root = cloneAndId(FOLDERS[state.activeTopic], null);
+    }
+
+    // Always expand root
+    state.expanded.add(root.id);
+    return root;
+  }
+
+  // ================================================================
+  //  COLOR ASSIGNMENT
+  // ================================================================
+
+  function assignColors(node, depth, branchIdx) {
+    const colors = ['color-0','color-1','color-2','color-3','color-4','color-5','color-6','color-7'];
+    if (depth === 0) node._colorClass = 'is-root';
+    else node._colorClass = colors[branchIdx % colors.length];
+    if (node.children) node.children.forEach((c, i) => assignColors(c, depth + 1, depth === 0 ? i : branchIdx));
+  }
+
+  // ================================================================
+  //  TEXT MEASUREMENT
+  // ================================================================
+
+  function measureText(text, fontSize) {
+    const c = document.createElement('canvas');
+    const ctx = c.getContext('2d');
+    ctx.font = fontSize + 'px Arial, Helvetica, sans-serif';
+    return ctx.measureText(text || '').width;
+  }
+
+  function wrapText(text, maxWidth, fontSize) {
+    if (!text) return [{ text: '', width: 0 }];
+    const words = text.split(/\s+/);
+    const lines = [];
+    let cur = '', curW = 0;
+    for (const w of words) {
+      const ww = measureText(w + ' ', fontSize);
+      if (curW + ww > maxWidth && cur) {
+        lines.push({ text: cur.trim(), width: curW });
+        cur = w + ' '; curW = ww;
+      } else { cur += w + ' '; curW += ww; }
+    }
+    if (cur.trim()) lines.push({ text: cur.trim(), width: curW });
+    // PATCH: raised from 3 lines — full-detail labels must never truncate
+    return lines.slice(0, 14);
+  }
+
+  function computeDims(label, fontSize, isRoot) {
+    // PATCH: raised from 28/24 chars — full-detail labels must never truncate
+    const maxChars = 64;
+    const cw = fontSize * 0.58;
+    const maxTW = maxChars * cw;
+    const lines = wrapText(label, maxTW, fontSize);
+    const lh = fontSize * 1.35;
+    const tw = Math.max(...lines.map(l => l.width));
+    const th = lines.length * lh;
+    const px = isRoot ? 24 : 16;
+    const py = isRoot ? 14 : 10;
+    return {
+      width: Math.max(isRoot ? 100 : 56, tw + px * 2),
+      height: Math.max(isRoot ? 40 : 30, th + py * 2),
+      lines, lineHeight: lh,
+    };
+  }
+
+  // ================================================================
+  //  LAYOUT — sequential top-to-bottom, uses state.expanded
+  // ================================================================
+
+  function layout(node, depth, startX, startY) {
+    const isRoot = depth === 0;
+    const fs = isRoot ? 15 : 13;
+    const dims = computeDims(node.label, fs, isRoot);
+    node.isRoot = isRoot;
+    node._dims = dims;
+    node._x = startX;
+    node._y = startY;
+    node._w = dims.width;
+    node._h = dims.height;
+
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return;
+
+    const childX = startX + dims.width + X_GAP;
+    let curY = startY;
+    for (const child of node.children) {
+      layout(child, depth + 1, childX, curY);
+      curY += subtreeHeight(child) + Y_GAP;
+    }
+  }
+
+  function subtreeHeight(node) {
+    if (!node._h) return 0;
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return node._h;
+    let total = 0;
+    for (const c of node.children) total += subtreeHeight(c);
+    return Math.max(node._h, total + (node.children.length - 1) * Y_GAP);
+  }
+
+  function computeBounds(root) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    function walk(n) {
+      if (n._x === undefined) return;
+      const pad = 50;
+      minX = Math.min(minX, n._x - pad);
+      minY = Math.min(minY, n._y - pad);
+      maxX = Math.max(maxX, n._x + n._w + pad);
+      maxY = Math.max(maxY, n._y + n._h + pad);
+      if (n.children && state.expanded.has(n.id)) n.children.forEach(walk);
+    }
+    walk(root);
+    if (minX === Infinity) return { minX: -200, minY: -200, maxX: 200, maxY: 200 };
+    return { minX, minY, maxX, maxY };
+  }
+
+  // ================================================================
+  //  RENDER — re-renders SVG for the current tree (no ID changes)
+  // ================================================================
+
+  function render() {
+    const root = state.currentRoot;
+    if (!root) return;
+
+    // Clear layers
+    connectionsLayer.innerHTML = '';
+    nodesLayer.innerHTML = '';
+
+    // Re-layout (positions change when expanded set changes)
+    layout(root, 0, 30, 30);
+
+    // Fit viewBox on first render or topic switch
+    if (needsViewFit) {
+      needsViewFit = false;
+      const b = computeBounds(root);
+      const pad = 60;
+      const vw = (b.maxX - b.minX) + pad * 2;
+      const vh = (b.maxY - b.minY) + pad * 2;
+      const vcx = (b.minX + b.maxX) / 2;
+      const vcy = (b.minY + b.maxY) / 2;
+      svg.setAttribute('viewBox', `${vcx - vw / 2} ${vcy - vh / 2} ${vw} ${vh}`);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+
+    // === Render visible nodes (depth-first) ===
+    function renderNode(node) {
+      if (node._x === undefined) return;
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.classList.add('node-group', node._colorClass || 'color-0');
+      if (node.isRoot) g.classList.add('is-root');
+      if (node.id === state.focusedNodeId) g.classList.add('focused');
+      g.setAttribute('role', 'treeitem');
+      const hasCh = !!(node.children && node.children.length > 0);
+      const isExp = state.expanded.has(node.id);
+      g.setAttribute('aria-expanded', hasCh ? (isExp ? 'true' : 'false') : 'undefined');
+      g.setAttribute('aria-label', node.label + (hasCh ? (isExp ? ' — expanded' : ' — collapsed, ' + node.children.length + ' items') : ''));
+      g.setAttribute('tabindex', '0');
+      g.dataset.nodeId = node.id;
+
+      // Rect
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', 0); rect.setAttribute('y', 0);
+      rect.setAttribute('width', node._w); rect.setAttribute('height', node._h);
+      rect.setAttribute('rx', '8'); rect.setAttribute('ry', '8');
+      rect.classList.add('node-bg');
+      rect.setAttribute('filter', node.isRoot ? 'url(#root-shadow)' : 'url(#node-shadow)');
+      g.appendChild(rect);
+
+      // Text
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.classList.add('node-text');
+      txt.setAttribute('font-size', node.isRoot ? 15 : 13);
+      const d = node._dims;
+      const th = d.lines.length * d.lineHeight;
+      const sy = (node._h - th) / 2 + d.lineHeight / 2;
+      d.lines.forEach((line, i) => {
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+        t.setAttribute('x', node._w / 2);
+        t.setAttribute('y', sy + i * d.lineHeight);
+        t.setAttribute('class', 'label');
+        t.textContent = line.text;
+        txt.appendChild(t);
+      });
+      g.appendChild(txt);
+
+      // Toggle circle
+      if (hasCh) {
+        const cx = node._w + 10, cy = node._h / 2;
+        const circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circ.setAttribute('cx', cx); circ.setAttribute('cy', cy);
+        circ.setAttribute('r', '8');
+        circ.classList.add('toggle-circle');
+        g.appendChild(circ);
+        const ic = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        ic.setAttribute('x', cx); ic.setAttribute('y', cy);
+        ic.setAttribute('text-anchor', 'middle');
+        ic.setAttribute('font-size', '11'); ic.setAttribute('font-weight', '700');
+        ic.setAttribute('fill', '#ffffff'); ic.setAttribute('dominant-baseline', 'central');
+        ic.textContent = isExp ? '−' : '+';
+        ic.classList.add('toggle-text');
+        g.appendChild(ic);
+      }
+
+      g.setAttribute('transform', `translate(${node._x}, ${node._y})`);
+
+      // Connector bezier
+      if (node.parentId && state.nodeMap[node.parentId]) {
+        const p = state.nodeMap[node.parentId];
+        if (p._x !== undefined) {
+          const sx = p._x + p._w, sy2 = p._y + p._h / 2;
+          const ex = node._x, ey = node._y + node._h / 2;
+          const cp = sx + (ex - sx) * 0.5;
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', `M${sx},${sy2} C${cp},${sy2} ${cp},${ey} ${ex},${ey}`);
+          path.classList.add('connector');
+          if (node.id === state.focusedNodeId || p.id === state.focusedNodeId) path.classList.add('focused');
+          connectionsLayer.appendChild(path);
+        }
+      }
+
+      nodesLayer.appendChild(g);
+
+      if (hasCh && isExp) node.children.forEach(renderNode);
+    }
+
+    renderNode(root);
+  }
+
+  // ================================================================
+  //  TOPIC SWITCHING
+  // ================================================================
+
+  function switchTopic(key) {
+    state.activeTopic = parseInt(key.slice(1), 10) || 0;
+    state.expanded.clear();
+    state.focusedNodeId = null;
+    state.currentRoot = buildTree();  // fresh tree with stable IDs
+    assignColors(state.currentRoot, 0, 0);
+    needsViewFit = true;
+    document.getElementById('fit-branch-btn').disabled = true;
+    renderTopbar();
+    render();
+  }
+
+  function renderTopbar() {
+    topbar.innerHTML = '';
+    TOPICS.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (t.key === 'f' + state.activeTopic ? ' active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', t.key === 'f' + state.activeTopic ? 'true' : 'false');
+      btn.dataset.topic = t.key;
+      btn.innerHTML = `${t.label} <span class="count">(${t.count})</span>`;
+      btn.addEventListener('click', () => switchTopic(t.key));
+      topbar.appendChild(btn);
+    });
+  }
+
+  // ================================================================
+  //  TOGGLE / FOCUS / ZOOM
+  // ================================================================
+
+  function toggleNode(nodeId) {
+    const node = state.nodeMap[nodeId];
+    if (!node || !node.children || node.children.length === 0) return;
+
+    if (state.expanded.has(nodeId)) {
+      state.expanded.delete(nodeId);
+      function closeDesc(n) {
+        if (n.children) n.children.forEach(c => { state.expanded.delete(c.id); closeDesc(c); });
+      }
+      closeDesc(node);
+    } else {
+      state.expanded.add(nodeId);
+    }
+    render();
+  }
+
+  function focusNode(nodeId) {
+    const node = state.nodeMap[nodeId];
+    if (!node) return;
+    // Expand ancestors and self
+    let cur = node;
+    while (cur.parentId) {
+      state.expanded.add(cur.parentId);
+      cur = state.nodeMap[cur.parentId];
+    }
+    if (node.children && node.children.length > 0) state.expanded.add(node.id);
+
+    state.focusedNodeId = nodeId;
+    render();
+
+    zoomToNode(node);
+    document.getElementById('fit-branch-btn').disabled = false;
+  }
+
+  function zoomToNode(node) {
+    if (!node._x) return;
+    const pad = 80;
+    const startX = node.parentId ? state.nodeMap[node.parentId]._x - 40 : state.currentRoot._x - 40;
+    const endX = branchRightmost(node);
+    const w = endX - startX + pad * 2;
+    const cy = node._y + node._h / 2;
+    const h = Math.max(w * 0.7, node._h * 6);
+    animateViewBox({ x: startX - pad, y: cy - h / 2, w, h });
+  }
+
+  function branchRightmost(node) {
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return node._x + node._w;
+    let max = node._x + node._w;
+    for (const c of node.children) max = Math.max(max, branchRightmost(c));
+    return max;
+  }
+
+  function animateViewBox(target) {
+    const cur = svg.getAttribute('viewBox').split(' ').map(Number);
+    const [cx, cy, cw, ch] = cur;
+    const [tx, ty, tw, th] = [target.x, target.y, target.w, target.h];
+    const dur = 200; // ms — snappy
+    const t0 = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - (1 - p) * (1 - p) * (1 - p); // ease-out
+      svg.setAttribute('viewBox',
+        `${cx + (tx - cx) * e} ${cy + (ty - cy) * e} ${cw + (tw - cw) * e} ${ch + (th - ch) * e}`);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function expandAll() {
+    function ex(n) { if (n.children) { state.expanded.add(n.id); n.children.forEach(ex); } }
+    ex(state.currentRoot);
+    state.focusedNodeId = null;
+    document.getElementById('fit-branch-btn').disabled = true;
+    render();
+  }
+
+  function collapseAll() {
+    // FIX: traverse children unconditionally — the original template's
+    // recursion lived inside the `if` block, so the root's children were
+    // never visited and "Collapse all" did nothing.
+    function col(n) {
+      if (n.children) n.children.forEach(col);
+      if (n.id !== state.currentRoot.id) state.expanded.delete(n.id);
+    }
+    col(state.currentRoot);
+    state.focusedNodeId = null;
+    document.getElementById('fit-branch-btn').disabled = true;
+    render();
+    resetView();
+  }
+
+  function resetView() {
+    const b = computeBounds(state.currentRoot);
+    const pad = 60;
+    const vw = (b.maxX - b.minX) + pad * 2;
+    const vh = (b.maxY - b.minY) + pad * 2;
+    const vcx = (b.minX + b.maxX) / 2;
+    const vcy = (b.minY + b.maxY) / 2;
+    animateViewBox({ x: vcx - vw / 2, y: vcy - vh / 2, w: vw, h: vh });
+  }
+
+  // ================================================================
+  //  EVENTS
+  // ================================================================
+
+  function setupEvents() {
+
+    // Click on nodes
+    nodesLayer.addEventListener('click', (e) => {
+      const g = e.target.closest('.node-group');
+      if (!g) return;
+      const id = g.dataset.nodeId;
+
+      // Toggle circle?
+      if (e.target.closest('.toggle-circle') || e.target.closest('.toggle-text')) {
+        toggleNode(id);
+        return;
+      }
+
+      // Card body → focus / unfocus
+      if (id !== state.focusedNodeId) {
+        focusNode(id);
+      } else {
+        state.focusedNodeId = null;
+        document.getElementById('fit-branch-btn').disabled = true;
+        resetView();
+      }
+    });
+
+    nodesLayer.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const g = e.target.closest('.node-group');
+        if (g) focusNode(g.dataset.nodeId);
+      }
+    });
+
+    // Zoom buttons
+    document.getElementById('zoom-in').addEventListener('click', () => zoomViewBox(0.75));
+    document.getElementById('zoom-out').addEventListener('click', () => zoomViewBox(1.33));
+    document.getElementById('zoom-reset').addEventListener('click', resetView);
+
+    function zoomViewBox(factor) {
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      const [vx, vy, vw, vh] = vb;
+      const nw = vw * factor, nh = vh * factor;
+      svg.setAttribute('viewBox', `${vx + (vw - nw) / 2} ${vy + (vh - nh) / 2} ${nw} ${nh}`);
+    }
+
+    // Expand / collapse all toggle
+    const eab = document.getElementById('expand-all-btn');
+    eab.addEventListener('click', () => {
+      if (eab.dataset.mode === 'collapse') {
+        collapseAll();
+        eab.innerHTML = '<span>▸</span> Expand all';
+        eab.dataset.mode = 'expand';
+      } else {
+        expandAll();
+        eab.innerHTML = '<span>▾</span> Collapse all';
+        eab.dataset.mode = 'collapse';
+      }
+    });
+
+    document.getElementById('collapse-all-btn').addEventListener('click', collapseAll);
+
+    document.getElementById('fit-branch-btn').addEventListener('click', () => {
+      if (state.focusedNodeId) zoomToNode(state.nodeMap[state.focusedNodeId]);
+    });
+
+    // ======== MOUSE WHEEL: zoom (no modifier) / horizontal pan (Shift) ========
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      const [vx, vy, vw, vh] = vb;
+
+      if (e.shiftKey) {
+        // Horizontal pan
+        const panX = e.deltaY * vw / container.clientWidth * 0.5;
+        svg.setAttribute('viewBox', `${vx + panX} ${vy} ${vw} ${vh}`);
+      } else {
+        // Zoom towards mouse cursor
+        const rect = container.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / container.clientWidth;
+        const relY = (e.clientY - rect.top) / container.clientHeight;
+        const factor = e.deltaY > 0 ? 1.12 : 0.89;
+        const nw = vw * factor, nh = vh * factor;
+        const nx = vx + relX * (vw - nw);
+        const ny = vy + relY * (vh - nh);
+        svg.setAttribute('viewBox', `${nx} ${ny} ${nw} ${nh}`);
+      }
+    }, { passive: false });
+
+    // ======== DRAG PAN ========
+    let drag = false, dsx, dsy, dvb;
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.toolbar') || e.target.closest('.topbar') || e.target.closest('.node-group')) return;
+      drag = true;
+      dsx = e.clientX; dsy = e.clientY;
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      dvb = { x: vb[0], y: vb[1], w: vb[2], h: vb[3] };
+      container.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - dsx, dy = e.clientY - dsy;
+      const sx = dvb.w / container.clientWidth, sy = dvb.h / container.clientHeight;
+      svg.setAttribute('viewBox', `${dvb.x - dx * sx} ${dvb.y - dy * sy} ${dvb.w} ${dvb.h}`);
+    });
+    window.addEventListener('mouseup', () => { if (drag) { drag = false; container.style.cursor = 'grab'; } });
+
+    // ======== TOUCH PAN ========
+    let tsx, tsy, tvb;
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1 && !e.target.closest('.toolbar') && !e.target.closest('.topbar')) {
+        tsx = e.touches[0].clientX; tsy = e.touches[0].clientY;
+        const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+        tvb = { x: vb[0], y: vb[1], w: vb[2], h: vb[3] };
+      }
+    }, { passive: true });
+    container.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && tvb) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - tsx, dy = e.touches[0].clientY - tsy;
+        const sx = tvb.w / container.clientWidth, sy = tvb.h / container.clientHeight;
+        svg.setAttribute('viewBox', `${tvb.x - dx * sx} ${tvb.y - dy * sy} ${tvb.w} ${tvb.h}`);
+      }
+    }, { passive: false });
+    container.addEventListener('touchend', () => { tvb = null; }, { passive: true });
+  }
+
+  // ================================================================
+  //  INIT
+  // ================================================================
+
+  renderTopbar();
+  state.currentRoot = buildTree();
+  assignColors(state.currentRoot, 0, 0);
+  needsViewFit = true;
+  render();
+  setupEvents();
+})();
+
+</script>
+</body>
+</html>

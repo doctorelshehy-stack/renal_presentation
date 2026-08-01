@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body { margin:0; padding:0; width:100%; height:100%; overflow:hidden; display:flex; justify-content:center; align-items:center; background:#000; }
+.slide-content { width:960px; height:540px; position:relative; transform-origin:center center; }
+</style>
+<script>
+function scaleSlide(){const s=document.querySelector('.slide-content');if(!s)return;const sx=window.innerWidth/960;const sy=window.innerHeight/540;const sc=Math.min(sx,sy);s.style.width='960px';s.style.height='540px';s.style.transform=`scale(${sc})`;s.style.transformOrigin='center center';s.style.flexShrink='0';}
+window.addEventListener('load',scaleSlide);window.addEventListener('resize',scaleSlide);
+</script>
+</head>
+<body>
+<div class="slide-content" style="display:flex; flex-direction:column; background:#edf6f9; box-sizing:border-box; font-family:'Times New Roman', serif; overflow:hidden;">
+<header style="padding:24px 56px 0 56px; flex:none;"><div style="display:flex; align-items:center; gap:10px;"><svg width="26" height="6" xmlns="http://www.w3.org/2000/svg"><rect width="26" height="6" rx="3" fill="#e29578"/></svg><span style="font-size:13px; font-weight:700; letter-spacing:2.5px; color:#e29578;">Contents</span></div><h1 style="margin:2px 0 0 0; font-size:36px; font-weight:700; color:#006d77;">Stones & Infections — Table of Contents</h1></header><main style="flex:1; min-height:0; padding:14px 56px 26px 56px;"><div style="display:flex; flex-direction:column; gap:4px;"><div style="display:grid; grid-template-columns:64px 1fr 90px; align-items:center; border-bottom:1.5px solid rgba(131,197,190,0.6); padding:7px 2px;"><span style="font-size:26px; font-weight:700; color:#e29578;">01</span><span style="font-size:19px; font-weight:700; color:#006d77;">Stone Disease — pathophysiology, stone types, clinical picture, investigations, management</span><span style="font-size:13px; color:rgba(0,109,119,0.65); text-align:right; font-style:italic;">Slides 3–18</span></div><div style="display:grid; grid-template-columns:64px 1fr 90px; align-items:center; border-bottom:1.5px solid rgba(131,197,190,0.6); padding:7px 2px;"><span style="font-size:26px; font-weight:700; color:#e29578;">02</span><span style="font-size:19px; font-weight:700; color:#006d77;">Urinary Tract Infections — evaluation, pathogenesis, classification, treatment in special groups</span><span style="font-size:13px; color:rgba(0,109,119,0.65); text-align:right; font-style:italic;">Slides 19–34</span></div></div></main><svg aria-hidden="true" style="position:absolute; top:24px; right:24px; width:190px; height:150px; overflow:visible;" xmlns="http://www.w3.org/2000/svg"><circle cx="150" cy="20" r="70" fill="none" stroke="#83c5be" stroke-width="2" opacity="0.225"/><circle cx="150" cy="20" r="46" fill="none" stroke="#83c5be" stroke-width="2" opacity="0.325"/><circle cx="150" cy="20" r="24" fill="none" stroke="#e29578" stroke-width="2" opacity="0.5"/></svg>
+<svg aria-hidden="true" style="position:absolute; right:32px; bottom:22px; width:46px; height:30px;" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="44" height="28" rx="14" fill="#edf6f9" stroke="#83c5be" stroke-width="1.5"/><text x="23" y="21" text-anchor="middle" font-family="'Times New Roman', serif" font-size="15" font-weight="700" fill="#006d77">1</text></svg>
+</div>
+</body>
+</html>

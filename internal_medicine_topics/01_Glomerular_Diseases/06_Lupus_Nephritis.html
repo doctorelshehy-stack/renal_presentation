@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lupus Nephritis — Internal Medicine Nephrology lecture slides">
+<title>Lupus Nephritis (LN) — Internal Medicine Nephrology</title>
+<style>
+/* ============================================================
+   MASTER TEMPLATE — Internal Medicine Nephrology slide decks
+   Self-contained, offline, 16:9, keyboard navigable, print-ready.
+   Do NOT modify the <style> or <script> blocks when building decks.
+   ============================================================ */
+:root{
+  --navy:#0e2a47; --navy2:#17406b; --teal:#0f7d8c; --teal-soft:#e3f2f4;
+  --accent:#d97706; --accent-soft:#fdf0dd;
+  --ink:#1d2a38; --muted:#5c6f82; --line:#dbe3ea; --bg:#f4f7fa;
+  --key:#147a4d; --key-bg:#e5f4ec; --warn:#c0392b; --warn-bg:#fdecea;
+  --info:#175a9b; --info-bg:#e8f1fa; --nb:#8a6500; --nb-bg:#fef7e0;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#0b1622;color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh}
+
+/* ---------- Slides ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  padding:5vh 6vw 7vh;background:var(--paper,#fff);overflow:hidden;
+  font-size:clamp(13px,1.5vw,20px)}
+.slide.active{display:flex;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72em;font-weight:700;
+  color:var(--teal);margin:0 0 1.2vh}
+.slide h2{margin:0 0 2vh;font-size:2.1em;line-height:1.12;color:var(--navy);font-weight:800}
+.slide h3{margin:1.4vh 0 .8vh;font-size:1.2em;line-height:1.2;color:var(--navy2);font-weight:700}
+.slide p{margin:.6vh 0;line-height:1.45}
+.slide ul,.slide ol{margin:.6vh 0;padding-left:1.3em}
+.slide li{margin-bottom:.7vh;line-height:1.42}
+.slide li::marker{color:var(--teal);font-weight:700}
+.slide strong{color:var(--navy)}
+.slide em{color:var(--muted)}
+.content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
+.lead{font-size:1.15em;color:var(--navy2);line-height:1.5}
+
+/* ---------- Columns / cards ---------- */
+.cols{display:flex;gap:2vw;flex:1;min-height:0}
+.cols>div{flex:1;min-width:0}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:2vh 1.4vw}
+.card h3{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4vw}
+.grid .card{margin:0}
+
+/* ---------- Tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:.92em}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:1.1vh 1vw;font-weight:600;line-height:1.3}
+.tbl td{padding:1vh 1vw;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+.tbl tbody tr:nth-child(even) td{background:var(--bg)}
+.tbl .hl{color:var(--warn);font-weight:700}
+
+/* ---------- Callouts ---------- */
+.callout{display:flex;gap:1vw;align-items:flex-start;border-radius:10px;
+  padding:1.5vh 1.4vw;margin:1.4vh 0;border-left:6px solid;font-size:.95em}
+.callout .ic{font-size:1.4em;line-height:1.15}
+.callout .body{flex:1;min-width:0}
+.callout .t{display:block;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  font-size:.8em;margin-bottom:.4vh}
+.callout.key{background:var(--key-bg);border-color:var(--key)}
+.callout.key .t{color:var(--key)}
+.callout.warn{background:var(--warn-bg);border-color:var(--warn)}
+.callout.warn .t{color:var(--warn)}
+.callout.info{background:var(--info-bg);border-color:var(--info)}
+.callout.info .t{color:var(--info)}
+.callout.nb{background:var(--nb-bg);border-color:var(--nb)}
+.callout.nb .t{color:var(--nb)}
+.callout p{margin:.2vh 0}
+
+/* ---------- Definition box ---------- */
+.def{background:var(--bg);border:1px solid var(--line);border-left:6px solid var(--teal);
+  border-radius:10px;padding:1.8vh 1.6vw;font-size:1.02em}
+.def .term{color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  font-size:.8em;display:block;margin-bottom:.6vh}
+
+/* ---------- Chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:.7vw}
+.chip{background:var(--teal-soft);color:var(--navy2);border-radius:999px;padding:.55vh 1vw;
+  font-size:.82em;font-weight:600;border:1px solid #c4e0e4}
+
+/* ---------- Numbered steps ---------- */
+.steps{list-style:none;counter-reset:step;padding-left:0}
+.steps li{position:relative;padding-left:2.6em;margin-bottom:1.3vh}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.05em;
+  width:1.8em;height:1.8em;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.82em;font-weight:700}
+
+/* ---------- Title slide ---------- */
+.slide.title-slide{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 58%,var(--teal) 135%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.title-slide .kicker{color:var(--accent)}
+.title-slide h1{margin:0 0 3vh;font-size:clamp(30px,4.6vw,64px);line-height:1.08;font-weight:800;max-width:90%}
+.title-slide .sub{font-size:clamp(14px,1.7vw,22px);color:#cfe0ee;line-height:1.5;max-width:80%}
+.title-slide .src{margin-top:7vh;font-size:.8em;color:#8fb0cd;letter-spacing:.04em;max-width:85%}
+.title-slide .no{position:absolute;top:5vh;right:6vw;font-size:clamp(18px,2.2vw,28px);font-weight:800;color:#f5b041}
+
+/* ---------- Section slide ---------- */
+.slide.section-slide{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 70%,var(--teal) 140%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.section-slide .big{font-size:clamp(56px,9vw,120px);font-weight:800;color:rgba(255,255,255,.14);
+  position:absolute;right:4vw;top:2vh;line-height:1}
+.section-slide h2{color:#fff;font-size:clamp(28px,4vw,54px);margin:0}
+.section-slide .kicker{color:var(--accent)}
+
+/* ---------- Footer / chrome ---------- */
+.foot{position:absolute;bottom:2.2vh;left:6vw;right:6vw;display:flex;justify-content:space-between;
+  gap:2vw;font-size:.68em;color:var(--muted);letter-spacing:.03em}
+.title-slide .foot,.section-slide .foot{color:#8fb0cd}
+.foot .help{opacity:.75;white-space:nowrap}
+#counter{position:fixed;top:2vh;right:2vw;background:rgba(14,42,71,.88);color:#fff;padding:.5vh 1vw;
+  border-radius:999px;font-size:clamp(10px,.95vw,13px);z-index:60;font-weight:600}
+#progress{position:fixed;bottom:0;left:0;height:4px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .25s ease}
+.deck-nav{position:fixed;right:2vw;bottom:5.5vh;display:flex;gap:.6vw;z-index:65}
+.deck-nav button{width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(14,42,71,.88);color:#fff;font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:transform .15s,background .15s}
+.deck-nav button:hover{background:var(--teal);transform:scale(1.06)}
+
+/* ---------- Overview mode ---------- */
+body.overview{overflow:auto;background:#0b1622}
+body.overview .deck{width:100%;height:auto}
+body.overview #deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2.5vh;padding:3vh 4vw}
+body.overview .slide{position:relative;display:flex;aspect-ratio:16/9;height:auto;margin:0;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35);border-radius:8px;overflow:hidden;animation:none}
+body.overview .foot,body.overview #counter,body.overview .deck-nav{display:none}
+body.overview .slide::after{content:attr(data-n);position:absolute;top:1vh;right:1vw;
+  background:rgba(14,42,71,.85);color:#fff;border-radius:6px;padding:.3vh .6vw;font-size:.7em;font-weight:700}
+
+/* ---------- Auto-fit (overflow protection) ---------- */
+.slide.fit{font-size:clamp(11px,1.28vw,16px)}
+.slide.fit-sm{font-size:clamp(9px,1.05vw,13px)}
+
+/* ---------- Print (PDF export) ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body{overflow:visible;background:#fff}
+  #counter,#progress,.deck-nav{display:none!important}
+  .slide{display:flex!important;position:relative;width:297mm;height:209mm;overflow:hidden;
+    padding:14mm 18mm;page-break-after:always;break-after:page}
+  .foot{position:absolute;bottom:8mm;left:18mm;right:18mm}
+}
+/* Fallback if JS is disabled: show all slides stacked */
+noscript ~ .deck .slide{display:flex;position:relative;height:auto;min-height:100vh}
+</style>
+</head>
+<body>
+<main class="deck">
+  <div id="deck">
+
+    <section class="slide title-slide" data-n="1">
+      <div class="no">06</div>
+      <p class="kicker">Internal Medicine — Nephrology</p>
+      <h1>Lupus Nephritis (LN)</h1>
+      <p class="sub">Renal involvement in SLE — definition, prevalence, pathology, ISN/RPS classes, diagnosis, management and prognosis.</p>
+      <p class="src">Source: Internal Medicine Nephrology (Principles of Nephrology) – Dr. Hassan Abd-Elhady, Menoufia University</p>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+
+    <section class="slide" data-n="2">
+      <p class="kicker">Objectives</p>
+      <h2>What we will cover</h2>
+      <div class="content">
+        <div class="chips">
+          <span class="chip">Definition</span>
+          <span class="chip">Prevalence</span>
+          <span class="chip">Pathology</span>
+          <span class="chip">ISN/RPS classes</span>
+          <span class="chip">Clinical features</span>
+          <span class="chip">Diagnosis</span>
+          <span class="chip">Management</span>
+          <span class="chip">Prognosis</span>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="3">
+      <div class="big">01</div>
+      <p class="kicker">Part 1 — Definition &amp; Prevalence</p>
+      <h2>Definition &amp; Prevalence</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="4">
+      <p class="kicker">Definition</p>
+      <h2>What is Lupus Nephritis?</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">Definition</span>
+          <p>L.N. is the <strong>renal involvement in patients with SLE</strong>. It exists with or without clinical manifestations of SLE, and is extremely diverse in its presentation and pathology.</p>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="5">
+      <p class="kicker">Prevalence</p>
+      <h2>How Common is it?</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>The kidney</h3>
+            <p>The kidney is the <strong>most common organ involvement</strong> in SLE.</p>
+          </div>
+          <div class="card">
+            <h3>At diagnosis</h3>
+            <p>Clinically, about <strong>50%</strong> of lupus patients have L.N. at diagnosis.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="6">
+      <div class="big">02</div>
+      <p class="kicker">Part 2 — Pathology</p>
+      <h2>Pathology</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="7">
+      <p class="kicker">Pathology</p>
+      <h2>Glomerular Lesions</h2>
+      <div class="content">
+        <div class="grid">
+          <div class="card">
+            <h3>Haematoxylin bodies</h3>
+            <p>Rounded bluish inclusions in Hx &amp; E stained sections. They represent the naked nuclei that have been altered by binding to ANA, resulting in clumping of nuclear chromatin. Seen in only <strong>2%</strong> of cases — pathognomonic of active L.N.</p>
+          </div>
+          <div class="card">
+            <h3>Wire loop deposits</h3>
+            <p>Subendothelial immune deposits which encircle the entire gl. tuft circumference. Best seen in trichrome &amp; silver stained sections.</p>
+          </div>
+          <div class="card">
+            <h3>Hyaline thrombi</h3>
+            <p>Massive subendothelial immune deposits that protrude into or occlude the glomerular tuft lumina (i.e. intraluminal immune deposits).</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="8">
+      <p class="kicker">Pathology</p>
+      <h2>Tubulo-Interstitial Disease</h2>
+      <div class="content">
+        <div class="card">
+          <p>The glomeruli are essentially involved. Tubulo-interstitial disease is seen in <strong>50%</strong> of cases, especially proliferative L.N.</p>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="9">
+      <div class="big">03</div>
+      <p class="kicker">Part 3 — Pathological Classes</p>
+      <h2>Pathological Classes</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="10">
+      <p class="kicker">Pathological classes</p>
+      <h2>ISN/RPS Classification — 6 Major Classes</h2>
+      <div class="content">
+        <p class="lead">Based upon LM, IF and EM studies of renal biopsy, according to the International Society of Nephrology / Renal Pathology Society (ISN/RPS) classification.</p>
+        <table class="tbl">
+          <thead>
+            <tr><th>Class</th><th>Name</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>I</strong></td><td>Minimal mesangial LN</td><td>Normal glomeruli by LM and mesangial immune deposits by IF or EM.</td></tr>
+            <tr><td><strong>II</strong></td><td>Mesangial proliferative LN</td><td>Mesangial hypercellularity and/or matrix expansion of any degree, in addition to mesangial immune deposits.</td></tr>
+            <tr><td><strong>III</strong></td><td>Focal proliferative LN</td><td>&lt;50% of glomeruli are involved.</td></tr>
+            <tr><td><strong>IV</strong></td><td>Diffuse proliferative LN</td><td>&gt;50% of glomeruli are involved.</td></tr>
+            <tr><td><strong>V</strong></td><td>Membranous LN</td><td>Diffuse (global) glomerular capillary wall thickness plus continuous subepithelial immune deposits.</td></tr>
+            <tr><td><strong>VI</strong></td><td>Advanced-stage LN</td><td>Global glomerulosclerosis of ≥90% of the total glomeruli, without evidence of active lesion.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="11">
+      <div class="big">04</div>
+      <p class="kicker">Part 4 — Clinical Features</p>
+      <h2>Clinical Features</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="12">
+      <p class="kicker">Clinical features</p>
+      <h2>Presentation</h2>
+      <div class="content">
+        <div class="callout nb">
+          <span class="ic">✎</span>
+          <div class="body"><span class="t">N.B.</span><p>Asymptomatic in <strong>many patients</strong>.</p></div>
+        </div>
+        <div class="card">
+          <h3>Symptomatic — manifested as</h3>
+          <ul>
+            <li><strong>Hypertension</strong> — a clue of renal disease.</li>
+            <li>Symptoms and signs of: acute nephritis, N.S., or rapidly progressive R.F., and ESRD.</li>
+          </ul>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="13">
+      <div class="big">05</div>
+      <p class="kicker">Part 5 — Diagnosis</p>
+      <h2>Diagnosis</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="14">
+      <p class="kicker">Diagnosis</p>
+      <h2>Clinical &amp; Laboratory</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>Clinical</h3>
+            <p>Hypertension and/or renal edema.</p>
+          </div>
+          <div class="card">
+            <h3>Laboratory findings</h3>
+            <ul>
+              <li>Urine exam: red cells, casts, proteinuria.</li>
+              <li>Elevated serum creatinine level.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="15">
+      <p class="kicker">Diagnosis</p>
+      <h2>Renal Biopsy</h2>
+      <div class="content">
+        <div class="card">
+          <p>Useful in determining initial management. Every patient suspected of microangiopathy with L.N. requires a biopsy to:</p>
+          <ul>
+            <li><strong>A.</strong> Determine the nature of the renal pathology and the pathological class.</li>
+            <li><strong>B.</strong> Exclude other lesions that may complicate the course of SLE, such as: hypersensitivity interstitial nephritis when the patient develops ATN, and pure antiphospholipid $.</li>
+            <li><strong>C.</strong> Assessment of the <strong>activity index "0–24 score"</strong> (acute and potentially treatable lesions) and the <strong>chronicity index "0–12 score"</strong> (irreversible lesions) — these determine therapy &amp; prognosis.</li>
+          </ul>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="16">
+      <div class="big">06</div>
+      <p class="kicker">Part 6 — Management</p>
+      <h2>Management</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="17">
+      <p class="kicker">Management</p>
+      <h2>I. General Treatment</h2>
+      <div class="content">
+        <p class="lead">To treat extra-renal manifestations that may affect the kidney.</p>
+        <table class="tbl">
+          <thead>
+            <tr><th>Measure</th><th>Recommendation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hydroxychloroquine</td><td>Or an equivalent antimalarial, to <strong>all</strong> patients with L.N. unless contraindicated.</td></tr>
+            <tr><td>Control of hypertension</td><td>Target blood pressure is ≤120/80 mmHg.</td></tr>
+            <tr><td>Control of proteinuria</td><td>Low doses of ACEIs or ARBs &amp; protein restriction.</td></tr>
+            <tr><td>Control of hyperlipidemia</td><td>Use statins and low-fat diet.</td></tr>
+            <tr><td>Avoid nephrotoxic drugs</td><td>e.g. NSAIDs; non-acetylated salicylates are safe.</td></tr>
+            <tr><td>Avoid pregnancy in active L.N.</td><td>It may worsen their renal disease; moreover, certain medications may be teratogenic.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="18">
+      <p class="kicker">Management</p>
+      <h2>II. Specific Treatment</h2>
+      <div class="content">
+        <p class="lead">Principal goal in L.N.: <strong>normalize renal function &amp; prevent loss of renal function</strong>.</p>
+        <div class="card">
+          <ul>
+            <li>Corticosteroids and immunosuppressive treatment of L.N. is divided into <strong>induction</strong> and <strong>maintenance</strong> phases.</li>
+            <li>Corticosteroids should be instituted if the patient has clinically significant renal disease.</li>
+            <li>Immunosuppressive agents: cyclophosphamide, mycophenolate mofetil, azathioprine, or cyclosporine A.</li>
+          </ul>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="19">
+      <div class="big">07</div>
+      <p class="kicker">Part 7 — Prognosis</p>
+      <h2>Prognosis</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="20">
+      <p class="kicker">Prognosis</p>
+      <h2>Prognosis by Class</h2>
+      <div class="content">
+        <div class="grid">
+          <div class="card">
+            <h3>Classes I, II &amp; V</h3>
+            <p>Generally <strong>good</strong> prognosis.</p>
+          </div>
+          <div class="card">
+            <h3>Classes III &amp; IV</h3>
+            <p><strong>Poor</strong> prognosis — tend to progress to ESRD, particularly class IV.</p>
+          </div>
+          <div class="card">
+            <h3>Class VI</h3>
+            <p>HD or transplantation.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="21">
+      <p class="kicker">Summary</p>
+      <h2>Key Takeaways</h2>
+      <div class="content">
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Definition</span><p>L.N. is renal involvement in SLE — the most common organ involvement; about 50% of lupus patients have L.N. at diagnosis.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Pathology</span><p>Haematoxylin bodies (2% of cases), wire loop deposits and hyaline thrombi are glomerular lesions of active L.N.; tubulo-interstitial disease in 50% (especially proliferative).</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">ISN/RPS classes</span><p>Six classes (I–VI); classes III (&lt;50%) and IV (&gt;50%) are proliferative with poor prognosis; activity index (0–24) and chronicity index (0–12) guide therapy &amp; prognosis.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Management</span><p>Hydroxychloroquine for all (unless contraindicated), BP ≤120/80 mmHg, ACEIs/ARBs, statins, avoid NSAIDs and pregnancy in active disease; corticosteroids + immunosuppressives (induction and maintenance).</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="22">
+      <p class="kicker">Closing</p>
+      <h2>Thank You / Reference</h2>
+      <div class="content">
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Thank you</span><p>Good luck with your studies of nephrology.</p></div>
+        </div>
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Reference</span><p>Source: Internal Medicine Nephrology — Principles of Nephrology, pp. 17–19.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+  </div>
+</main>
+
+<div id="counter">1 / 1</div>
+<div id="progress"></div>
+<div class="deck-nav" aria-label="Slide navigation">
+  <button id="btnPrev" aria-label="Previous slide">‹</button>
+  <button id="btnNext" aria-label="Next slide">›</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var counter=document.getElementById("counter");
+  var progress=document.getElementById("progress");
+  var i=0;
+
+  function fit(s){
+    s.classList.remove("fit","fit-sm");
+    if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit");
+      if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit-sm");}}
+  }
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle("active",k===i);});
+    progress.style.width=((i+1)/slides.length*100)+"%";
+    counter.textContent=(i+1)+" / "+slides.length;
+    try{history.replaceState(null,"","#"+slides[i].getAttribute("data-n"));}catch(e){}
+    fit(slides[i]);
+  }
+  function toggleOverview(){
+    document.body.classList.toggle("overview");
+    if(!document.body.classList.contains("overview")){show(i);}
+  }
+  function toggleFull(){if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}}
+
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"||e.key==="Enter"){e.preventDefault();show(i+1);}
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();show(i-1);}
+    else if(e.key==="Home"){e.preventDefault();show(0);}
+    else if(e.key==="End"){e.preventDefault();show(slides.length-1);}
+    else if(e.key==="o"||e.key==="O"){toggleOverview();}
+    else if(e.key==="f"||e.key==="F"){toggleFull();}
+    else if(e.key==="Escape"){if(document.body.classList.contains("overview")){toggleOverview();}}
+  });
+  document.getElementById("btnNext").addEventListener("click",function(){show(i+1);});
+  document.getElementById("btnPrev").addEventListener("click",function(){show(i-1);});
+
+  var tx=0,ty=0;
+  document.addEventListener("touchstart",function(e){tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  document.addEventListener("touchend",function(e){
+    var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){show(i+(dx<0?1:-1));}
+  },{passive:true});
+
+  slides.forEach(function(s,k){
+    s.addEventListener("click",function(){
+      if(document.body.classList.contains("overview")){document.body.classList.remove("overview");show(k);}
+    });
+  });
+  window.addEventListener("resize",function(){if(!document.body.classList.contains("overview")){fit(slides[i]);}});
+
+  var m=location.hash.match(/#(\d+)/);
+  var start=0;
+  if(m){slides.forEach(function(s,k){if(s.getAttribute("data-n")===m[1]){start=k;}});}
+  show(start);
+})();
+</script>
+</body>
+</html>

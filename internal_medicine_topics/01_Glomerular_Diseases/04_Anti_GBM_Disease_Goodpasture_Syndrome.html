@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Anti-GBM Disease and Goodpasture Syndrome — Internal Medicine Nephrology lecture slides">
+<title>Anti-GBM Disease &amp; Goodpasture Syndrome — Internal Medicine Nephrology</title>
+<style>
+/* ============================================================
+   MASTER TEMPLATE — Internal Medicine Nephrology slide decks
+   Self-contained, offline, 16:9, keyboard navigable, print-ready.
+   Do NOT modify the <style> or <script> blocks when building decks.
+   ============================================================ */
+:root{
+  --navy:#0e2a47; --navy2:#17406b; --teal:#0f7d8c; --teal-soft:#e3f2f4;
+  --accent:#d97706; --accent-soft:#fdf0dd;
+  --ink:#1d2a38; --muted:#5c6f82; --line:#dbe3ea; --bg:#f4f7fa;
+  --key:#147a4d; --key-bg:#e5f4ec; --warn:#c0392b; --warn-bg:#fdecea;
+  --info:#175a9b; --info-bg:#e8f1fa; --nb:#8a6500; --nb-bg:#fef7e0;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#0b1622;color:var(--ink);font-family:var(--sans);overflow:hidden;-webkit-font-smoothing:antialiased}
+.deck{position:relative;width:100vw;height:100vh}
+
+/* ---------- Slides ---------- */
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  padding:5vh 6vw 7vh;background:var(--paper,#fff);overflow:hidden;
+  font-size:clamp(13px,1.5vw,20px)}
+.slide.active{display:flex;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:.72em;font-weight:700;
+  color:var(--teal);margin:0 0 1.2vh}
+.slide h2{margin:0 0 2vh;font-size:2.1em;line-height:1.12;color:var(--navy);font-weight:800}
+.slide h3{margin:1.4vh 0 .8vh;font-size:1.2em;line-height:1.2;color:var(--navy2);font-weight:700}
+.slide p{margin:.6vh 0;line-height:1.45}
+.slide ul,.slide ol{margin:.6vh 0;padding-left:1.3em}
+.slide li{margin-bottom:.7vh;line-height:1.42}
+.slide li::marker{color:var(--teal);font-weight:700}
+.slide strong{color:var(--navy)}
+.slide em{color:var(--muted)}
+.content{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-start}
+.lead{font-size:1.15em;color:var(--navy2);line-height:1.5}
+
+/* ---------- Columns / cards ---------- */
+.cols{display:flex;gap:2vw;flex:1;min-height:0}
+.cols>div{flex:1;min-width:0}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:2vh 1.4vw}
+.card h3{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.4vw}
+.grid .card{margin:0}
+
+/* ---------- Tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:.92em}
+.tbl th{background:var(--navy);color:#fff;text-align:left;padding:1.1vh 1vw;font-weight:600;line-height:1.3}
+.tbl td{padding:1vh 1vw;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+.tbl tbody tr:nth-child(even) td{background:var(--bg)}
+.tbl .hl{color:var(--warn);font-weight:700}
+
+/* ---------- Callouts ---------- */
+.callout{display:flex;gap:1vw;align-items:flex-start;border-radius:10px;
+  padding:1.5vh 1.4vw;margin:1.4vh 0;border-left:6px solid;font-size:.95em}
+.callout .ic{font-size:1.4em;line-height:1.15}
+.callout .body{flex:1;min-width:0}
+.callout .t{display:block;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
+  font-size:.8em;margin-bottom:.4vh}
+.callout.key{background:var(--key-bg);border-color:var(--key)}
+.callout.key .t{color:var(--key)}
+.callout.warn{background:var(--warn-bg);border-color:var(--warn)}
+.callout.warn .t{color:var(--warn)}
+.callout.info{background:var(--info-bg);border-color:var(--info)}
+.callout.info .t{color:var(--info)}
+.callout.nb{background:var(--nb-bg);border-color:var(--nb)}
+.callout.nb .t{color:var(--nb)}
+.callout p{margin:.2vh 0}
+
+/* ---------- Definition box ---------- */
+.def{background:var(--bg);border:1px solid var(--line);border-left:6px solid var(--teal);
+  border-radius:10px;padding:1.8vh 1.6vw;font-size:1.02em}
+.def .term{color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  font-size:.8em;display:block;margin-bottom:.6vh}
+
+/* ---------- Chips ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:.7vw}
+.chip{background:var(--teal-soft);color:var(--navy2);border-radius:999px;padding:.55vh 1vw;
+  font-size:.82em;font-weight:600;border:1px solid #c4e0e4}
+
+/* ---------- Numbered steps ---------- */
+.steps{list-style:none;counter-reset:step;padding-left:0}
+.steps li{position:relative;padding-left:2.6em;margin-bottom:1.3vh}
+.steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.05em;
+  width:1.8em;height:1.8em;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.82em;font-weight:700}
+
+/* ---------- Title slide ---------- */
+.slide.title-slide{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 58%,var(--teal) 135%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.title-slide .kicker{color:var(--accent)}
+.title-slide h1{margin:0 0 3vh;font-size:clamp(30px,4.6vw,64px);line-height:1.08;font-weight:800;max-width:90%}
+.title-slide .sub{font-size:clamp(14px,1.7vw,22px);color:#cfe0ee;line-height:1.5;max-width:80%}
+.title-slide .src{margin-top:7vh;font-size:.8em;color:#8fb0cd;letter-spacing:.04em;max-width:85%}
+.title-slide .no{position:absolute;top:5vh;right:6vw;font-size:clamp(18px,2.2vw,28px);font-weight:800;color:#f5b041}
+
+/* ---------- Section slide ---------- */
+.slide.section-slide{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 70%,var(--teal) 140%);
+  color:#fff;justify-content:center;align-items:flex-start}
+.section-slide .big{font-size:clamp(56px,9vw,120px);font-weight:800;color:rgba(255,255,255,.14);
+  position:absolute;right:4vw;top:2vh;line-height:1}
+.section-slide h2{color:#fff;font-size:clamp(28px,4vw,54px);margin:0}
+.section-slide .kicker{color:var(--accent)}
+
+/* ---------- Footer / chrome ---------- */
+.foot{position:absolute;bottom:2.2vh;left:6vw;right:6vw;display:flex;justify-content:space-between;
+  gap:2vw;font-size:.68em;color:var(--muted);letter-spacing:.03em}
+.title-slide .foot,.section-slide .foot{color:#8fb0cd}
+.foot .help{opacity:.75;white-space:nowrap}
+#counter{position:fixed;top:2vh;right:2vw;background:rgba(14,42,71,.88);color:#fff;padding:.5vh 1vw;
+  border-radius:999px;font-size:clamp(10px,.95vw,13px);z-index:60;font-weight:600}
+#progress{position:fixed;bottom:0;left:0;height:4px;width:0;z-index:70;
+  background:linear-gradient(90deg,var(--teal),var(--accent));transition:width .25s ease}
+.deck-nav{position:fixed;right:2vw;bottom:5.5vh;display:flex;gap:.6vw;z-index:65}
+.deck-nav button{width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(14,42,71,.88);color:#fff;font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:transform .15s,background .15s}
+.deck-nav button:hover{background:var(--teal);transform:scale(1.06)}
+
+/* ---------- Overview mode ---------- */
+body.overview{overflow:auto;background:#0b1622}
+body.overview .deck{width:100%;height:auto}
+body.overview #deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2.5vh;padding:3vh 4vw}
+body.overview .slide{position:relative;display:flex;aspect-ratio:16/9;height:auto;margin:0;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.35);border-radius:8px;overflow:hidden;animation:none}
+body.overview .foot,body.overview #counter,body.overview .deck-nav{display:none}
+body.overview .slide::after{content:attr(data-n);position:absolute;top:1vh;right:1vw;
+  background:rgba(14,42,71,.85);color:#fff;border-radius:6px;padding:.3vh .6vw;font-size:.7em;font-weight:700}
+
+/* ---------- Auto-fit (overflow protection) ---------- */
+.slide.fit{font-size:clamp(11px,1.28vw,16px)}
+.slide.fit-sm{font-size:clamp(9px,1.05vw,13px)}
+
+/* ---------- Print (PDF export) ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body{overflow:visible;background:#fff}
+  #counter,#progress,.deck-nav{display:none!important}
+  .slide{display:flex!important;position:relative;width:297mm;height:209mm;overflow:hidden;
+    padding:14mm 18mm;page-break-after:always;break-after:page}
+  .foot{position:absolute;bottom:8mm;left:18mm;right:18mm}
+}
+/* Fallback if JS is disabled: show all slides stacked */
+noscript ~ .deck .slide{display:flex;position:relative;height:auto;min-height:100vh}
+</style>
+</head>
+<body>
+<main class="deck">
+  <div id="deck">
+
+    <section class="slide title-slide" data-n="1">
+      <div class="no">04</div>
+      <p class="kicker">Internal Medicine — Nephrology</p>
+      <h1>Anti-GBM Disease &amp; Goodpasture Syndrome (GPD &amp; GPS)</h1>
+      <p class="sub">Anti-GBM glomerulonephritis and Goodpasture syndrome — definition, pathology, differential diagnosis, investigations and treatment.</p>
+      <p class="src">Source: Internal Medicine Nephrology (Principles of Nephrology) – Dr. Hassan Abd-Elhady, Menoufia University</p>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+
+    <section class="slide" data-n="2">
+      <p class="kicker">Objectives</p>
+      <h2>What we will cover</h2>
+      <div class="content">
+        <div class="chips">
+          <span class="chip">Definition</span>
+          <span class="chip">Pathology</span>
+          <span class="chip">Differential diagnosis</span>
+          <span class="chip">Investigations</span>
+          <span class="chip">Treatment</span>
+          <span class="chip">Plasma exchange</span>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="3">
+      <div class="big">01</div>
+      <p class="kicker">Part 1 — Definition</p>
+      <h2>Definition</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="4">
+      <p class="kicker">Definition</p>
+      <h2>Disease vs Syndrome</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th>Goodpasture Disease (Anti-GBM GN)</th><th>Goodpasture's syndrome</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A kidney-limited disease with:<br>a) G.N. resulted from glomerular deposition of anti-GBM antibodies.<br>b) Circulating anti-GBM antibodies.</td>
+              <td>A systemic disease with a triad of:<br>a) G.N. resulted from glomerular deposition of anti-GBM antibodies.<br>b) Circulating anti-GBM antibodies.<br>c) Pulmonary hemorrhage.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="5">
+      <div class="big">02</div>
+      <p class="kicker">Part 2 — Pathology</p>
+      <h2>Pathology / Histopathology</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="6">
+      <p class="kicker">Pathology</p>
+      <h2>Histopathology</h2>
+      <div class="content">
+        <div class="def">
+          <span class="term">Pathology / Histopathology</span>
+          <p>Diffuse Proliferative GN by L/M, and <strong>linear deposits of anti-GBM IgG antibody</strong> by IF.</p>
+        </div>
+        <div class="cols">
+          <div class="card">
+            <h3>G.P. Disease</h3>
+            <p>G.N.</p>
+          </div>
+          <div class="card">
+            <h3>G.P. Syndrome</h3>
+            <p>G.N. + pulmonary hemorrhage.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="7">
+      <div class="big">03</div>
+      <p class="kicker">Part 3 — Differential Diagnosis</p>
+      <h2>Differential Diagnosis</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="8">
+      <p class="kicker">Differential diagnosis</p>
+      <h2>D.D. of Hemoptysis with Renal Disease</h2>
+      <div class="content">
+        <p class="lead">Pulmonary-renal syndromes:</p>
+        <div class="grid">
+          <div class="card">
+            <ol>
+              <li>Goodpasture syndrome.</li>
+              <li>Henoch-Schonlen purpura.</li>
+              <li>Systemic Lupus Erythematosus (SLE).</li>
+              <li>Microscopic polyangitis.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <ol start="5">
+              <li>Cryoglobulinaemia.</li>
+              <li>Advanced uremia with pulmonary edema and coagulopathies.</li>
+              <li>Thrombotic Thrombocytopenic Purpura (TTP).</li>
+              <li>Pulmonary embolism with R.V. thrombosis.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="9">
+      <div class="big">04</div>
+      <p class="kicker">Part 4 — Investigations</p>
+      <h2>Investigations</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="10">
+      <p class="kicker">Investigations</p>
+      <h2>1. Urine Examination</h2>
+      <div class="content">
+        <div class="card">
+          <p>Evidence of G.N.: hematuria with <strong>dysmorphic red cells</strong>, <strong>red cell casts</strong> and variable degrees of proteinuria.</p>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="11">
+      <p class="kicker">Investigations</p>
+      <h2>Blood &amp; Renal Biopsy</h2>
+      <div class="content">
+        <div class="cols">
+          <div class="card">
+            <h3>2. Blood</h3>
+            <ul>
+              <li>Positive circulating <strong>anti-GBM antibodies</strong>.</li>
+              <li>Other serological tests, e.g. complements, ASOT, ANA, are normal.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>3. Renal biopsy</h3>
+            <p>Diffuse proliferative GN.</p>
+          </div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide section-slide" data-n="12">
+      <div class="big">05</div>
+      <p class="kicker">Part 5 — Treatment</p>
+      <h2>Treatment</h2>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="13">
+      <p class="kicker">Treatment</p>
+      <h2>Corticosteroids &amp; Cyclophosphamide</h2>
+      <div class="content">
+        <table class="tbl">
+          <thead>
+            <tr><th>Corticosteroids</th><th>Cyclophosphamide</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IV methylprednisolone <strong>7–15 mg/kg/day</strong> (maximum 1 gm/day) for 3 days, then oral prednisone <strong>1 mg/kg/day</strong>; reduce to 20 mg/day by 6 weeks &amp; continue for 6 months.</td>
+              <td>Dose depends upon the patient's age:
+                <ul>
+                  <li>&lt;55 y: <strong>3 mg/kg</strong> (down to 50 mg) for 3 months.</li>
+                  <li>&gt;55 y: <strong>2 mg/kg</strong> (down to 50 mg) for 3 months.</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="14">
+      <p class="kicker">Treatment</p>
+      <h2>Plasma Exchange (Plasmapheresis)</h2>
+      <div class="content">
+        <div class="card">
+          <p>Replacement with daily <strong>40–50 ml/kg</strong> plasma with albumin for <strong>2 weeks</strong>, or until anti-GBM antibody disappears.</p>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="15">
+      <p class="kicker">Treatment</p>
+      <h2>N.B. — When to Withhold Plasmapheresis</h2>
+      <div class="content">
+        <div class="callout warn">
+          <span class="ic">⚠</span>
+          <div class="body"><span class="t">Warning</span><p>Plasmapheresis should <strong>not</strong> be given in patients with anuria and/or crescents &gt;85% of glomeruli, <em>unless there is pulmonary hemorrhage</em>.</p></div>
+        </div>
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Note</span><p>Albumin is the recommended fluid with plasmapheresis, because of the lower incidence of complications.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="16">
+      <p class="kicker">Treatment</p>
+      <h2>Summary of Treatment</h2>
+      <div class="content">
+        <ol class="steps">
+          <li>3 days of pulse methylprednisolone.</li>
+          <li>2 weeks course of daily plasmapheresis.</li>
+          <li>6 months of oral corticosteroids.</li>
+          <li>3 months of cyclophosphamide.</li>
+        </ol>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="17">
+      <p class="kicker">Summary</p>
+      <h2>Key Takeaways</h2>
+      <div class="content">
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Disease vs syndrome</span><p>Goodpasture disease is kidney-limited (anti-GBM GN); Goodpasture syndrome adds pulmonary hemorrhage (triad with circulating anti-GBM antibodies).</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Histology</span><p>Diffuse proliferative GN by LM with <em>linear</em> deposits of anti-GBM IgG by IF; other serological tests (complements, ASOT, ANA) are normal.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Treatment</span><p>Pulse methylprednisolone 7–15 mg/kg/day × 3 days → oral prednisone 1 mg/kg/day → reduce to 20 mg/day by 6 weeks, continue 6 months; cyclophosphamide 2–3 mg/kg (down to 50 mg) for 3 months; plasma exchange 40–50 ml/kg daily for 2 weeks.</p></div>
+        </div>
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Contraindication</span><p>No plasmapheresis with anuria and/or crescents &gt;85% of glomeruli unless pulmonary hemorrhage is present; albumin is the recommended replacement fluid.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span></footer>
+    </section>
+
+    <section class="slide" data-n="18">
+      <p class="kicker">Closing</p>
+      <h2>Thank You / Reference</h2>
+      <div class="content">
+        <div class="callout key">
+          <span class="ic">✓</span>
+          <div class="body"><span class="t">Thank you</span><p>Good luck with your studies of nephrology.</p></div>
+        </div>
+        <div class="callout info">
+          <span class="ic">ℹ</span>
+          <div class="body"><span class="t">Reference</span><p>Source: Internal Medicine Nephrology — Principles of Nephrology, pp. 14–15.</p></div>
+        </div>
+      </div>
+      <footer class="foot"><span>Internal Medicine — Nephrology</span><span>Principles of Nephrology — Dr. H. Abd-Elhady</span><span class="help">← → navigate · O overview · F fullscreen</span></footer>
+    </section>
+  </div>
+</main>
+
+<div id="counter">1 / 1</div>
+<div id="progress"></div>
+<div class="deck-nav" aria-label="Slide navigation">
+  <button id="btnPrev" aria-label="Previous slide">‹</button>
+  <button id="btnNext" aria-label="Next slide">›</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var deck=document.getElementById("deck");
+  var slides=Array.prototype.slice.call(deck.querySelectorAll(".slide"));
+  var counter=document.getElementById("counter");
+  var progress=document.getElementById("progress");
+  var i=0;
+
+  function fit(s){
+    s.classList.remove("fit","fit-sm");
+    if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit");
+      if(s.scrollHeight>s.clientHeight+4){s.classList.add("fit-sm");}}
+  }
+  function show(n){
+    i=(n+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle("active",k===i);});
+    progress.style.width=((i+1)/slides.length*100)+"%";
+    counter.textContent=(i+1)+" / "+slides.length;
+    try{history.replaceState(null,"","#"+slides[i].getAttribute("data-n"));}catch(e){}
+    fit(slides[i]);
+  }
+  function toggleOverview(){
+    document.body.classList.toggle("overview");
+    if(!document.body.classList.contains("overview")){show(i);}
+  }
+  function toggleFull(){if(document.fullscreenElement){document.exitFullscreen();}else{document.documentElement.requestFullscreen();}}
+
+  document.addEventListener("keydown",function(e){
+    if(e.key==="ArrowRight"||e.key===" "||e.key==="PageDown"||e.key==="Enter"){e.preventDefault();show(i+1);}
+    else if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();show(i-1);}
+    else if(e.key==="Home"){e.preventDefault();show(0);}
+    else if(e.key==="End"){e.preventDefault();show(slides.length-1);}
+    else if(e.key==="o"||e.key==="O"){toggleOverview();}
+    else if(e.key==="f"||e.key==="F"){toggleFull();}
+    else if(e.key==="Escape"){if(document.body.classList.contains("overview")){toggleOverview();}}
+  });
+  document.getElementById("btnNext").addEventListener("click",function(){show(i+1);});
+  document.getElementById("btnPrev").addEventListener("click",function(){show(i-1);});
+
+  var tx=0,ty=0;
+  document.addEventListener("touchstart",function(e){tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  document.addEventListener("touchend",function(e){
+    var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){show(i+(dx<0?1:-1));}
+  },{passive:true});
+
+  slides.forEach(function(s,k){
+    s.addEventListener("click",function(){
+      if(document.body.classList.contains("overview")){document.body.classList.remove("overview");show(k);}
+    });
+  });
+  window.addEventListener("resize",function(){if(!document.body.classList.contains("overview")){fit(slides[i]);}});
+
+  var m=location.hash.match(/#(\d+)/);
+  var start=0;
+  if(m){slides.forEach(function(s,k){if(s.getAttribute("data-n")===m[1]){start=k;}});}
+  show(start);
+})();
+</script>
+</body>
+</html>

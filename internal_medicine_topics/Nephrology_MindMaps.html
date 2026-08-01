@@ -1,0 +1,4410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nephrology Mind Maps — Internal Medicine · Dr. Hassan Abd-Elhady</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; font-family: Arial, Helvetica, sans-serif; background: #ffffff; }
+
+  :root {
+    --connector-color: #7a9bb5;
+    --root-bg: #2d5a3d;
+    --root-text: #ffffff;
+    --focus-ring: #4a90d9;
+    --toolbar-bg: rgba(255,255,255,0.92);
+    --toolbar-border: #e0e0e0;
+    --tab-bg: #f5f5f5;
+    --tab-active-bg: #ffffff;
+    --tab-border: #e0e0e0;
+    --tab-active-border: #7a9bb5;
+    --tab-text: #555;
+    --tab-active-text: #2d5a3d;
+  }
+
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; flex-wrap: wrap; gap: 4px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    border-bottom: 1px solid var(--tab-border);
+    padding: 8px 12px;
+    padding-right: 340px; /* keep tabs clear of the floating toolbar */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .tab-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border: 1px solid var(--tab-border);
+    border-radius: 6px 6px 0 0; background: var(--tab-bg);
+    color: var(--tab-text); font-size: 13px; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.15s ease;
+    position: relative; z-index: 1; margin-bottom: -1px;
+  }
+  .tab-btn:hover { background: #eee; color: #333; }
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    border-color: var(--tab-active-border);
+    border-bottom-color: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    font-weight: 600;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  }
+  .tab-btn:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .tab-btn .count { font-size: 11px; font-weight: 600; opacity: 0.7; }
+
+  .toolbar {
+    position: fixed; top: 16px; right: 16px; z-index: 300;
+    display: flex; gap: 6px; align-items: center;
+    background: var(--toolbar-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--toolbar-border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .toolbar button {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border: none; border-radius: 6px;
+    background: transparent; color: #666;
+    cursor: pointer; font-size: 15px; line-height: 1;
+    transition: background 0.15s, color 0.15s;
+  }
+  .toolbar button:hover { background: #e8e8e8; color: #333; }
+  .toolbar button:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .toolbar .sep { width: 1px; height: 22px; background: #e0e0e0; margin: 0 4px; }
+  .toolbar .expand-all { font-size: 12px; font-weight: 600; padding: 0 12px; width: auto; gap: 4px; color: #555; }
+  .toolbar .zoom-fit { font-size: 12px; font-weight: 600; padding: 0 12px; width: auto; gap: 4px; color: #555; }
+
+  #svg-container {
+    width: 100%; height: 100vh; overflow: hidden;
+    cursor: grab; background: #ffffff;
+  }
+  #svg-container:active { cursor: grabbing; }
+  svg { width: 100%; height: 100%; display: block; }
+
+  .node-group { cursor: pointer; }
+  .node-group:focus-visible { outline: none; }
+
+  .node-bg {
+    fill: var(--node-fill, #d4edda);
+    stroke: var(--node-stroke, #b8dabe);
+    stroke-width: 1;
+    rx: 8; ry: 8;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.06));
+    transition: fill 0.15s, stroke 0.15s;
+  }
+  .node-group:hover .node-bg {
+    fill: var(--node-fill-hover, #c3e6cb);
+    stroke: #a8ccb0;
+  }
+  .node-group:focus-visible .node-bg {
+    stroke: var(--focus-ring);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 0 3px rgba(74,144,217,0.2));
+  }
+
+  .is-root .node-bg {
+    fill: var(--root-bg);
+    stroke: var(--root-bg);
+    filter: drop-shadow(0 2px 8px rgba(45,90,61,0.2));
+  }
+  .is-root:hover .node-bg { fill: #3a6e4e; }
+  .is-root .node-text { fill: var(--root-text); }
+
+  .node-text {
+    fill: var(--node-text-color, #1a1a2e);
+    font-family: Arial, Helvetica, sans-serif;
+    dominant-baseline: central;
+    text-anchor: middle;
+    pointer-events: none;
+    user-select: none;
+  }
+  .is-root .node-text { fill: #ffffff; }
+  .node-text .label { font-weight: 500; }
+
+  .toggle-circle { transition: fill 0.15s; }
+  .toggle-text {
+    fill: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    pointer-events: none;
+    user-select: none;
+    dominant-baseline: central;
+    text-anchor: middle;
+  }
+
+  .connector {
+    stroke: var(--connector-color);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+  }
+  /* Node appear animation */
+  @keyframes node-appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .node-group {
+    animation: node-appear 0.18s ease-out forwards;
+  }
+
+  /* Connector appear animation */
+  @keyframes connector-appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .connector {
+    animation: connector-appear 0.22s ease-out;
+  }
+
+  .connector.focused { stroke: #4a90d9; stroke-width: 2.5; }
+  .node-group.focused .node-bg { stroke: #4a90d9; stroke-width: 2; filter: drop-shadow(0 0 6px rgba(74,144,217,0.4)); }
+
+  .color-0 { --node-fill: #d4edda; --node-fill-hover: #c3e6cb; --node-stroke: #b8dabe; --node-text-color: #1a3a1a; --toggle-fill: #7a9bb5; }
+  .color-1 { --node-fill: #d6ecf0; --node-fill-hover: #c5e0e6; --node-stroke: #b0d0d8; --node-text-color: #1a2a3a; --toggle-fill: #6b8f9e; }
+  .color-2 { --node-fill: #fce4d6; --node-fill-hover: #f5d5c0; --node-stroke: #e8c4a8; --node-text-color: #3a2a1a; --toggle-fill: #b88d7a; }
+  .color-3 { --node-fill: #f0d9f0; --node-fill-hover: #e5c8e5; --node-stroke: #d8b8d8; --node-text-color: #2a1a3a; --toggle-fill: #9a7a9e; }
+  .color-4 { --node-fill: #d6e4f0; --node-fill-hover: #c5d8e6; --node-stroke: #b0c8d8; --node-text-color: #1a2a3a; --toggle-fill: #6b8a9e; }
+  .color-5 { --node-fill: #e8f0d6; --node-fill-hover: #dae6c5; --node-stroke: #c8d8b0; --node-text-color: #2a3a1a; --toggle-fill: #8a9e6b; }
+  .color-6 { --node-fill: #fce8d6; --node-fill-hover: #f5dcc0; --node-stroke: #e8ccb0; --node-text-color: #3a2a1a; --toggle-fill: #b88a6b; }
+  .color-7 { --node-fill: #f0d6d6; --node-fill-hover: #e5c5c5; --node-stroke: #d8b0b0; --node-text-color: #3a1a1a; --toggle-fill: #9e6b6b; }
+
+  .node-group .toggle-circle { fill: var(--toggle-fill, #7a9bb5); }
+  .node-group:hover .toggle-circle { fill: #5a7a9a; }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 6px 8px; padding-right: 270px; gap: 2px; }
+    .tab-btn { padding: 6px 10px; font-size: 12px; }
+    .toolbar { top: 10px; right: 10px; padding: 4px 8px; }
+    .toolbar button { width: 26px; height: 26px; font-size: 13px; }
+    .toolbar .expand-all, .toolbar .zoom-fit { padding: 0 8px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar" role="tablist" aria-label="Nephrology units — one mind map per folder" id="topbar"></div>
+
+<div id="svg-container">
+  <svg id="mindmap-svg" role="tree" aria-label="Interactive mind map" style="overflow:visible;">
+    <defs>
+      <filter id="node-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+      </filter>
+      <filter id="root-shadow" x="-10%" y="-10%" width="130%" height="130%">
+        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.15"/>
+      </filter>
+    </defs>
+    <g id="connections-layer"></g>
+    <g id="nodes-layer"></g>
+  </svg>
+</div>
+
+<div class="toolbar" role="toolbar" aria-label="Mind map controls">
+  <button id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+  <button id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+  <button id="zoom-reset" aria-label="Reset zoom & view" title="Reset zoom & view">⟲</button>
+  <div class="sep"></div>
+  <button id="expand-all-btn" class="expand-all" title="Expand all branches">
+    <span>▸</span> Expand all
+  </button>
+  <div class="sep"></div>
+  <button id="collapse-all-btn" class="expand-all" title="Collapse all, return to root">
+    <span>▾</span> Collapse all
+  </button>
+  <div class="sep"></div>
+  <button id="fit-branch-btn" class="zoom-fit" title="Zoom to focused branch" disabled>
+    <span>🔍</span> Focus branch
+  </button>
+</div>
+
+<script>// ============================================================
+
+// NEPHROLOGY — INTERNAL MEDICINE (Dr. Hassan Abd-Elhady, Menoufia University)
+
+// One mind map per folder, selectable from the top tab bar.
+
+// Full content preserved — nothing summarized or omitted.
+
+// ============================================================
+
+// ============================================================
+// Folder 01 — Glomerular Diseases
+// Separate cards per common title (Definition / Causes /
+// Pathology / Clinical / Investigations / Treatment / Course)
+// ============================================================
+const folderGlomerular = {
+  label: "01 · Glomerular Diseases",
+  children: [
+    // ---------------- Topic 1 ----------------
+    {
+      label: "1. Principles of Glomerulopathies",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Group of glomerular disorders" },
+            { label: "Characterized clinically, pathologically & etiologically" },
+            { label: "5 cardinal features, singly or combined: proteinuria, hematuria, oliguria, hypertension, edema" },
+            { label: "Both kidneys involved symmetrically" },
+            { label: "Primary GN = unknown cause (idiopathic)" },
+            { label: "Secondary GN = various causes" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Primary (idiopathic)",
+              children: [
+                { label: "Unknown causes" }
+              ]
+            },
+            {
+              label: "Secondary",
+              children: [
+                {
+                  label: "Infections (post-infectious)",
+                  children: [
+                    {
+                      label: "Bacterial",
+                      children: [
+                        { label: "Streptococcal β-hemolytic types 1, 4, 12, 49 → post-streptococcal GN" },
+                        { label: "Non-streptococcal: staphylococci, gonococci, salmonella, meningococcal, secondary syphilis, leprosy" }
+                      ]
+                    },
+                    {
+                      label: "Viral",
+                      children: [
+                        { label: "HBV, HCV, HIV, EBV (infectious mononucleosis), mumps, measles, coxsackie, varicella" }
+                      ]
+                    },
+                    {
+                      label: "Parasitic",
+                      children: [
+                        { label: "Malaria, schistosomiasis, filariasis, toxoplasmosis" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  label: "Multisystem diseases",
+                  children: [
+                    { label: "SLE, rheumatoid arthritis, dermatomyositis, Sjögren's syndrome, Goodpasture's syndrome" },
+                    { label: "Vasculitis: PAN, Wegener's granulomatosis, Henoch-Schönlein purpura" }
+                  ]
+                },
+                {
+                  label: "Malignant diseases & paraproteinemias",
+                  children: [
+                    { label: "Carcinoma: lung, colon, melanoma" },
+                    { label: "Hematological: lymphomas (HL, non-HL) and leukemias" },
+                    { label: "Paraproteinemias: multiple myeloma, amyloidosis, Waldenström's macroglobulinemia, cryoglobulinemia" }
+                  ]
+                },
+                {
+                  label: "Drugs & toxins",
+                  children: [
+                    { label: "Penicillin, heavy metals (mercury, gold), heroin, captopril, antivenom, antitoxins, contrast media" }
+                  ]
+                },
+                {
+                  label: "Metabolic",
+                  children: [
+                    { label: "Diabetes mellitus and gout" }
+                  ]
+                },
+                {
+                  label: "Heredofamilial",
+                  children: [
+                    { label: "Thin basement membrane disease, Alport's syndrome, Fabry's disease, Nail-Patella syndrome, sickle cell disease" }
+                  ]
+                },
+                {
+                  label: "Others",
+                  children: [
+                    { label: "Sarcoidosis, pre-eclampsia, thyrotoxicosis & myxedema, serum sickness, chronic graft rejection" },
+                    { label: "Allergic: bee stings, pollens, cow milk" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Pathology",
+          children: [
+            {
+              label: "Macroscopic",
+              children: [
+                { label: "Of no value (evaluated by ultrasound)" },
+                {
+                  label: "Acute GN",
+                  children: [
+                    { label: "Kidney size: normal or increased" },
+                    { label: "Surface: punctate hemorrhage" }
+                  ]
+                },
+                {
+                  label: "Chronic GN",
+                  children: [
+                    { label: "Kidney size: normal or decreased" },
+                    { label: "Surface: fine granular or cortical scars" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Microscopic (renal biopsy)",
+              children: [
+                {
+                  label: "LM (light microscopy)",
+                  children: [
+                    { label: "Histopathological type" },
+                    { label: "Severity / degree of disease" }
+                  ]
+                },
+                {
+                  label: "EM (electron microscopy)",
+                  children: [
+                    { label: "Site of immune deposition: subendothelial, subepithelial, mesangial" }
+                  ]
+                },
+                {
+                  label: "IF (immunofluorescence)",
+                  children: [
+                    { label: "Type of immune deposition e.g. IgA, C3, C4" },
+                    { label: "Immune-complex GN → diffuse granular pattern" },
+                    { label: "Anti-GBM antibody → smooth linear pattern" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Histopathological types",
+          children: [
+            {
+              label: "Minimal lesion GN (Minimal Change Disease, MCD)",
+              children: [
+                { label: "LM: normal or mild increase in mesangial cells" },
+                { label: "EM: fusion of foot processes of podocytes" },
+                { label: "IF: no deposits" }
+              ]
+            },
+            {
+              label: "Membranous GN (MGN)",
+              children: [
+                { label: "LM: diffuse thickening of glomerular basement membrane" }
+              ]
+            },
+            {
+              label: "Proliferative GN",
+              children: [
+                {
+                  label: "Diffuse proliferative",
+                  children: [
+                    { label: "Proliferation of all glomerular cells (endothelial, epithelial & mesangial)" },
+                    { label: "Acute diffuse proliferative GN" },
+                    { label: "Diffuse proliferation with crescents (crescentic GN, RPGN)" },
+                    { label: "Mesangio-proliferative GN (MPGN): increased mesangial cells & matrix" },
+                    { label: "Mesangio-capillary GN (MCGN): mesangial proliferation + matrix + GBM thickening" }
+                  ]
+                },
+                {
+                  label: "Focal proliferative",
+                  children: [
+                    { label: "Focal segmental GN (FSGN): cellular proliferation of some segments in some glomeruli" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Focal segmental glomerulosclerosis (FSGS)",
+              children: [
+                { label: "Sclerosis of some segments in some glomeruli" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Clinical presentations (5 syndromes)",
+          children: [
+            {
+              label: "Acute GN (acute nephritic syndrome)",
+              children: [
+                { label: "Onset: relatively abrupt" },
+                { label: "Features: hematuria, proteinuria, oliguria, edema, hypertension" },
+                { label: "Pathology: DPGN" },
+                { label: "Course: spontaneous resolution" }
+              ]
+            },
+            {
+              label: "Nephrotic syndrome",
+              children: [
+                { label: "Onset: variable" },
+                { label: "Features: albumin <2.5 g/dl, proteinuria ≥3+, hyperlipidemia, edema, hypertension (MCGN)" },
+                { label: "Pathology: variable lesions" },
+                { label: "Course: variable" },
+                { label: "Notes: variable onset, pathology & course" }
+              ]
+            },
+            {
+              label: "Chronic GN",
+              children: [
+                { label: "Onset: insidious / progressive" },
+                { label: "Features: proteinuria 0-1+, hypertension, urinary sediment +, slow progressive GFR decline" },
+                { label: "Pathology: glomerulosclerosis, chronic interstitial fibrosis" },
+                { label: "Course: progress to renal failure" },
+                { label: "Notes: the common path to ESRD" }
+              ]
+            },
+            {
+              label: "Rapidly Progressive GN (RPGN)",
+              children: [
+                { label: "Onset: rapid decline in GFR" },
+                { label: "Features: hematuria, proteinuria, oliguria, absent or mild hypertension" },
+                { label: "Pathology: DPGN with crescents" },
+                { label: "Course: rapidly progress to AKI" },
+                { label: "Notes: renal emergency, intensive therapy" }
+              ]
+            },
+            {
+              label: "Asymptomatic proteinuria ± hematuria",
+              children: [
+                { label: "Onset: insidious" },
+                { label: "Features: hematuria/proteinuria, hypertension ±, normal GFR" },
+                { label: "Pathology: FSGN" },
+                { label: "Course: persist or recurrent" },
+                { label: "Notes: accidentally discovered, relatively benign" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            {
+              label: "Urine examination",
+              children: [
+                { label: "Volume in 24 hours: may be decreased or normal" },
+                { label: "24-hour urinary protein or urinary protein/creatinine ratio" },
+                { label: "Microscopy of sediment: red cells may or may not be present" },
+                { label: "Dysmorphic red cells → strongly suggestive of GN" },
+                { label: "Granular & red cell casts → diagnostic of acute GN" }
+              ]
+            },
+            {
+              label: "Blood examination",
+              children: [
+                { label: "Blood urea" },
+                { label: "Serum creatinine" },
+                { label: "Serum electrolytes (Ca, PO4, K+, Na+)" },
+                { label: "Assessment of GFR (normal 90-120 ml/min)" }
+              ]
+            },
+            {
+              label: "Renal imaging (US)",
+              children: [
+                { label: "To exclude other renal pathology" },
+                { label: "Smooth renal outline" },
+                { label: "Normal pelvicalyceal system & lower urinary tract" }
+              ]
+            },
+            {
+              label: "Renal biopsy",
+              children: [
+                { label: "Accurate histopathological diagnosis" },
+                { label: "Assess severity & response to treatment" },
+                { label: "Prognosis" }
+              ]
+            },
+            {
+              label: "Specific investigations (for cause)",
+              children: [
+                { label: "Blood glucose → diabetes mellitus" },
+                { label: "ASOT + throat/skin swab → recent streptococcal infection" },
+                { label: "ANA & anti-dsDNA → systemic disease e.g. SLE" },
+                { label: "Anti-GBM antibody → Goodpasture's disease" },
+                { label: "Serum IgA → IgA nephropathy (Berger's disease)" },
+                {
+                  label: "Serum complement — decreased in",
+                  children: [
+                    { label: "Post-infection e.g. acute post-streptococcal GN (transient ~8 weeks), infective endocarditis, shunt nephropathy" },
+                    { label: "SLE" },
+                    { label: "Cryoglobulinemia" },
+                    { label: "Serum sickness" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "General aims",
+              children: [
+                { label: "Control of symptoms" },
+                { label: "Prevent complications" },
+                { label: "Slow progression of the disease" }
+              ]
+            },
+            {
+              label: "Diet",
+              children: [
+                { label: "Salt & water restriction for edematous and/or hypertensive patients, especially with oliguria" },
+                { label: "High protein intake → ↑proteinuria in RF patients, nephron damage → progression" },
+                { label: "Low protein intake → negative nitrogen balance and malnutrition" },
+                { label: "Normal GFR → physiological needs (1 g/kg/day) + daily urinary protein loss" },
+                { label: "↓GFR → moderate protein restriction (0.6-0.8 g/kg/day) to control anorexia, nausea, vomiting" }
+              ]
+            },
+            {
+              label: "Control of edema",
+              children: [
+                { label: "Bed rest" },
+                { label: "Salt restriction (<2 g/day) & fluid restriction" },
+                { label: "Diuretics: preferably loop diuretics; thiazides can be combined" },
+                { label: "Salt-poor albumin (in resistant cases with hypoalbuminemia)" },
+                { label: "Ultrafiltration" },
+                { label: "Hemodialysis" }
+              ]
+            },
+            {
+              label: "Control of proteinuria",
+              children: [
+                { label: "Avoid high protein diet (0.8-1 g/day + estimated daily loss)" },
+                {
+                  label: "ACEIs & ARBs",
+                  children: [
+                    { label: "Compete with vasoconstriction of angiotensin II on efferent arterioles → efferent VD → ↓intraglomerular pressure → ↓GFR → ↓filtered protein → ↓proteinuria" },
+                    { label: "Small doses in normotensives; cautious in renal failure & hyperkalemia" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Control of hypertension",
+              children: [
+                {
+                  label: "Value of BP control",
+                  children: [
+                    { label: "Relief of symptoms" },
+                    { label: "Prevent hypertensive complications on other systems" },
+                    { label: "Decrease progression of renal disease (reno-protective)" }
+                  ]
+                },
+                {
+                  label: "Targets by proteinuria",
+                  children: [
+                    { label: "Proteinuria >1 g/day → BP <125/75 (mean <92)" },
+                    { label: "Proteinuria <1 g/day → BP <130/80 (mean <98)" }
+                  ]
+                },
+                {
+                  label: "Agents",
+                  children: [
+                    { label: "ACEIs/ARBs" },
+                    { label: "CCBs" },
+                    { label: "All have reno-protective effect" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Control of hyperlipidemia",
+              children: [
+                { label: "Avoid high-fat diet" },
+                { label: "Physical activity" },
+                { label: "Statins (not used in HD patients)" }
+              ]
+            },
+            {
+              label: "Hypercoagulability & thrombosis",
+              children: [
+                { label: "Prophylactic anticoagulation in nephrotic syndrome with high thromboembolism risk" },
+                { label: "Increased venous thrombosis risk (albumin <2.5) → anticoagulants" },
+                { label: "Increased arterial thrombosis risk → aspirin" }
+              ]
+            },
+            {
+              label: "Specific treatment (by etiology)",
+              children: [
+                {
+                  label: "Primary GN",
+                  children: [
+                    { label: "Immunosuppressive + cytotoxic agents" },
+                    { label: "Other measures e.g. plasma exchange" }
+                  ]
+                },
+                {
+                  label: "Secondary GN",
+                  children: [
+                    { label: "Treat the cause: control infection, treat malignancy, stop toxins & drugs, control disease activity (SLE, DM, gout)" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Course",
+          children: [
+            { label: "Variable depending on renal pathology & etiology" },
+            { label: "Anti-GBM & ANCA-associated crescentic GN → rapid progression to ESRD unless treated" },
+            { label: "IgA nephropathy & FSGS → indolent but persistent course → renal failure" },
+            { label: "Post-streptococcal GN → tends to resolve completely, little risk of ESRD" },
+            { label: "MGN → unpredictable: may remit spontaneously, persist/relapse, or progress over years to ESRD" }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 2 ----------------
+    {
+      label: "2. Acute GN — Nephritic Syndrome",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Acute onset of: hematuria (macro or microscopic)" },
+            { label: "Proteinuria <3.5 g/day/1.73 m2" },
+            { label: "Hypertension" },
+            { label: "Edema" },
+            { label: "Oliguria (<300 ml/day) in severe cases" }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            {
+              label: "Hematuria",
+              children: [
+                {
+                  label: "Macroscopic",
+                  children: [
+                    { label: "Red color urine in alkaline urine" },
+                    { label: "Smoky / reddish-brown in acidic urine: denaturation of Hb → acid hematin; methemoglobin gives smoky color; prolonged transit time" }
+                  ]
+                },
+                {
+                  label: "Microscopic",
+                  children: [
+                    { label: "Dysmorphic red cells: small & distorted (mechanical injury through damaged glomerular capillary walls)" },
+                    { label: "Low Hb content" },
+                    { label: "Best seen by phase-contrast microscopy" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Proteinuria",
+              children: [
+                { label: "Glomerular origin (mainly albumin)" },
+                { label: "Non-nephrotic range <3.5 g/day" },
+                { label: "Due to: increased glomerular capillary permeability" },
+                { label: "Mechanical disruption of glomerular capillary walls" },
+                { label: "Altered glomerular hemodynamics" }
+              ]
+            },
+            {
+              label: "Edema",
+              children: [
+                { label: "Early: eyelids (puffiness) — low tissue pressure" },
+                { label: "Then legs and other parts" },
+                { label: "Salt & water retention: increased distal Na+ reabsorption + decreased GFR → decreased salt delivery" }
+              ]
+            },
+            {
+              label: "Hypertension",
+              children: [
+                { label: "Salt & water retention → volume-dependent" }
+              ]
+            },
+            {
+              label: "Oliguria",
+              children: [
+                { label: "Urine output <300 ml/day due to decreased GFR" }
+              ]
+            },
+            {
+              label: "Manifestations of associated specific disease",
+              children: [
+                { label: "Infection (PSGN), SLE, vasculitis, malignancy" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            {
+              label: "Urine examination",
+              children: [
+                { label: "Color: red or smoky (dark brown)" },
+                { label: "Oliguria <300 ml/day in severe cases" },
+                { label: "Proteinuria <3.5 g/day" },
+                { label: "Hematuria" },
+                { label: "Dysmorphic red cells & red cell casts — pathognomonic for acute GN" },
+                { label: "Granular casts" }
+              ]
+            },
+            {
+              label: "Blood",
+              children: [
+                { label: "Urea, creatinine & GFR: variable impairment of renal function" }
+              ]
+            },
+            {
+              label: "Renal imaging",
+              children: [
+                { label: "Usually unnecessary" }
+              ]
+            },
+            {
+              label: "Renal biopsy",
+              children: [
+                { label: "Most acute GN pathology is proliferative (focal or diffuse)" },
+                {
+                  label: "Indications",
+                  children: [
+                    { label: "Unusual clinical features" },
+                    { label: "Uncertain diagnosis" },
+                    { label: "Rapid deterioration of renal function → crescentic GN" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Specific investigations (etiology)",
+              children: [
+                { label: "ANA, ds-DNA → SLE" },
+                { label: "Throat swab & ASOT + transient decrease of C3 (<8 weeks) → PSGN" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "General",
+              children: [
+                { label: "Fluid chart (intake and output)" },
+                { label: "Measurement of body weight and blood pressure" },
+                {
+                  label: "Home treatment (uncomplicated)",
+                  children: [
+                    { label: "Daily follow-up of blood pressure" },
+                    { label: "Urea and creatinine every few days" }
+                  ]
+                },
+                {
+                  label: "Hospital admission (complicated)",
+                  children: [
+                    { label: "Severe hypertension" },
+                    { label: "Renal failure & oliguria" },
+                    { label: "Pulmonary edema" },
+                    { label: "Encephalopathy" },
+                    { label: "Until hematuria, HTN & edema disappear & proteinuria decreases" },
+                    { label: "Strict bed rest in complicated cases (severe HTN, pulmonary edema)" }
+                  ]
+                },
+                { label: "Salt restriction" },
+                { label: "Fluid restriction in oliguric patients (0.5 L + volume of previous day urine)" },
+                { label: "Protein restriction in renal failure (0.6-0.8 g/kg/day ≈ 40 g/day for adult)" }
+              ]
+            },
+            {
+              label: "Hypertension & edema",
+              children: [
+                { label: "Salt restriction" },
+                { label: "Diuretics: loop diuretic" },
+                { label: "Antihypertensives: β-blockers with caution — may precipitate pulmonary edema in impending HF" }
+              ]
+            },
+            {
+              label: "Hypertensive encephalopathy",
+              children: [
+                { label: "Maintain airway" },
+                { label: "Control BP by parenteral agent: hydralazine 5-20 mg infusion" },
+                { label: "Control fits: IV diazepam 10 mg" }
+              ]
+            },
+            {
+              label: "Pulmonary edema / HF",
+              children: [
+                { label: "Salt and water restriction" },
+                { label: "Ultrafiltration (dialysis) to remove excess fluid in oliguric patient" },
+                { label: "Acute RF → dialysis" }
+              ]
+            },
+            {
+              label: "Specific treatment",
+              children: [
+                {
+                  label: "Primary GN",
+                  children: [
+                    { label: "Corticosteroid ± immunosuppressives depending on histopathological type" }
+                  ]
+                },
+                {
+                  label: "Secondary GN",
+                  children: [
+                    { label: "Treat the cause: PSGN, diabetic nephropathy, lupus nephritis" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 3 ----------------
+    {
+      label: "3. Nephrotic Syndrome",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Heavy proteinuria ≥3.5 g/day/1.73 m2 or UPCR >3.5 in adults" },
+            { label: "Hypoalbuminemia ≤2.5 g/dl" },
+            { label: "Edema" },
+            { label: "Hyperlipidemia (hypercholesterolemia)" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            { label: "All causes of acute GN" },
+            {
+              label: "Primary",
+              children: [
+                { label: "MCD, MGN, MPGN, MCGN, FSGN" }
+              ]
+            },
+            {
+              label: "Secondary",
+              children: [
+                { label: "Infection, multisystem, malignancy, drugs, metabolic, familial" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            { label: "Proteinuria: frothy urine (protein decreases surface tension, like bile salts & detergents)" },
+            { label: "Edema: generalized — limbs, face, genitalia & serous cavities (ascites, pleural & pericardial effusion); severity correlates with serum albumin & urinary protein losses; conditioned by HF" },
+            {
+              label: "Hypertension (variable)",
+              children: [
+                { label: "MCD → blood pressure always normal" },
+                { label: "MCGN → hypertension always present" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            { label: "24 h urine protein >3.5 g/day in adults" },
+            {
+              label: "Plasma proteins",
+              children: [
+                { label: "Serum albumin ≤2.5 g/dl" },
+                { label: "Electrophoresis: ↓albumin, ↑alpha-2 & beta globulin, normal or slightly ↑gamma globulin, ↑fibrinogen" }
+              ]
+            },
+            {
+              label: "Plasma lipids",
+              children: [
+                { label: "↑cholesterol and LDL" },
+                { label: "↑TG in 50%" },
+                { label: "Normal or ↓HDL (urine loss)" }
+              ]
+            },
+            { label: "Hypocalcemia: urinary loss of cholecalciferol-binding protein" },
+            {
+              label: "Renal function tests",
+              children: [
+                { label: "Urea, creatinine, eGFR usually normal" },
+                { label: "Impaired in: severe hypovolemia → pre-renal AKI, MGN and MCGN" },
+                { label: "NB: with impaired renal function, biochemical features of NS are uncommon (concomitant decreased GFR)" }
+              ]
+            },
+            { label: "Urine exam: red cells & red cell casts → GN and exclude MCD" },
+            { label: "PLA2R antibody → primary membranous nephropathy" },
+            { label: "↓serum C3 → immune-complex mediated GN" },
+            { label: "ASOT & throat swab → streptococcal infection" },
+            { label: "ANA → SLE; ANCA → systemic vasculitis" },
+            { label: "Hyperglycemia → diabetes mellitus" },
+            {
+              label: "Selective proteinuria (tested in children)",
+              children: [
+                { label: "Clearance of large MW protein (IgG) vs small MW protein (albumin, transferrin) measured simultaneously" },
+                { label: "Low ratio → selective: MCD, DM, renal amyloidosis" },
+                { label: "High ratio → unselective: crescentic GN" }
+              ]
+            },
+            {
+              label: "Renal biopsy",
+              children: [
+                {
+                  label: "Indications",
+                  children: [
+                    { label: "Histological diagnosis and to plan therapy" },
+                    {
+                      label: "In children",
+                      children: [
+                        { label: "Steroid resistant, dependent and frequent relapse" },
+                        { label: "Children with renal impairment" }
+                      ]
+                    },
+                    { label: "In adults: most adults" }
+                  ]
+                },
+                {
+                  label: "Not indicated",
+                  children: [
+                    { label: "Young children with selective proteinuria, normotensive & benign urinary sediment → MCD" },
+                    { label: "Long-standing DM (>10 years type 1, >5 years type 2) with retinopathy or neuropathy" },
+                    { label: "Patient under drug therapy such as penicillamine" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "Protein intake",
+              children: [
+                { label: "Daily physiological need (1 g/kg) + daily urinary protein losses" },
+                { label: "Protein restriction 0.6-0.8 g/kg/day in renal impairment" },
+                {
+                  label: "High protein intake (1.5-2 g/kg/day) NOT advised",
+                  children: [
+                    { label: "Ineffective: increases protein loss" },
+                    { label: "Difficult to manage with concomitant salt restriction" },
+                    { label: "Could aggravate glomerular damage" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Drug control of proteinuria",
+              children: [
+                { label: "ACEI & ARBs: ↓intraglomerular hydrostatic pressure → ↓filtered urinary protein losses" },
+                { label: "Medical nephrectomy (mercurial drug or renal infarction) to abolish severe persistent proteinuria in ESRD" }
+              ]
+            },
+            {
+              label: "Control of edema",
+              children: [
+                { label: "Bed rest → induces diuresis" },
+                { label: "Na+ restriction" },
+                { label: "Diuretics in unresponsive patients" },
+                {
+                  label: "Human albumin infusion",
+                  children: [
+                    { label: "Indications: severe hypoalbuminemia; diuretic-resistant patient undergoing surgery/invasive procedure (biopsy)" },
+                    { label: "Disadvantages: expensive; transient effect (24-48 hours)" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Control of complications",
+              children: [
+                { label: "Subnutrition: proper diet, minerals, vitamins; severe proteinuria may justify renal ablation (medical or surgical)" },
+                { label: "Sepsis: early detection and aggressive treatment" },
+                { label: "Hyperlipidemia: statins" },
+                { label: "Hypertension: salt restriction + antihypertensives" },
+                {
+                  label: "Thrombotic complications",
+                  children: [
+                    { label: "Long-term oral anticoagulant" },
+                    { label: "Heparin ineffective: urinary loss of antithrombin III" },
+                    { label: "Prophylaxis in membranous GN (thromboembolic complications common)" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Specific treatment",
+              children: [
+                {
+                  label: "Primary NS",
+                  children: [
+                    { label: "Depends on histopathological type: MCD, MGN, MCGN, FSGN" }
+                  ]
+                },
+                {
+                  label: "Secondary NS",
+                  children: [
+                    { label: "SLE → steroids + cyclophosphamide" },
+                    { label: "DM → control of hyperglycemia" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 4 ----------------
+    {
+      label: "4. Anti-GBM Disease & Goodpasture Syndrome",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            {
+              label: "Goodpasture Disease (Anti-GBM GN)",
+              children: [
+                { label: "Kidney-limited disease" },
+                { label: "GN from glomerular deposition of anti-GBM antibodies" },
+                { label: "Circulating anti-GBM antibodies" }
+              ]
+            },
+            {
+              label: "Goodpasture Syndrome",
+              children: [
+                { label: "Systemic disease with triad" },
+                { label: "GN from glomerular deposition of anti-GBM antibodies" },
+                { label: "Circulating anti-GBM antibodies" },
+                { label: "Pulmonary hemorrhage" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Pathology / Histopathology",
+          children: [
+            { label: "Diffuse proliferative GN by LM" },
+            { label: "Linear deposits of anti-GBM IgG antibody by IF" },
+            { label: "G.P. Disease → GN only" },
+            { label: "G.P. Syndrome → GN + pulmonary hemorrhage" }
+          ]
+        },
+        {
+          label: "Differential diagnosis (pulmonary-renal syndromes)",
+          children: [
+            { label: "Goodpasture syndrome" },
+            { label: "Henoch-Schönlein purpura" },
+            { label: "Systemic lupus erythematosus (SLE)" },
+            { label: "Microscopic polyangiitis" },
+            { label: "Cryoglobulinemia" },
+            { label: "Advanced uremia with pulmonary edema and coagulopathies" },
+            { label: "Thrombotic thrombocytopenic purpura (TTP)" },
+            { label: "Pulmonary embolism with RV thrombosis" }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            { label: "Urine: evidence of GN — hematuria with dysmorphic red cells, red cell casts, variable proteinuria" },
+            { label: "Blood: positive circulating anti-GBM antibodies" },
+            { label: "Other serology (complements, ASOT, ANA) normal" },
+            { label: "Renal biopsy: diffuse proliferative GN" }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "Corticosteroids",
+              children: [
+                { label: "IV methylprednisolone 7-15 mg/kg/day (max 1 g/day) for 3 days" },
+                { label: "Then oral prednisone 1 mg/kg/day" },
+                { label: "Reduce to 20 mg/day by 6 weeks" },
+                { label: "Continue for 6 months" }
+              ]
+            },
+            {
+              label: "Cyclophosphamide (dose by age)",
+              children: [
+                { label: "<55 years: 3 mg/kg (down to 50 mg) for 3 months" },
+                { label: ">55 years: 2 mg/kg (down to 50 mg) for 3 months" }
+              ]
+            },
+            {
+              label: "Plasma exchange (plasmapheresis)",
+              children: [
+                { label: "Daily 40-50 ml/kg plasma replaced with albumin" },
+                { label: "For 2 weeks or until anti-GBM antibody disappears" },
+                { label: "Not given in anuria and/or crescents >85% of glomeruli unless pulmonary hemorrhage" },
+                { label: "Albumin is the recommended replacement (lower incidence of complications)" }
+              ]
+            },
+            {
+              label: "Summary",
+              children: [
+                { label: "3 days pulse methylprednisolone → 2 weeks daily plasmapheresis → 6 months oral corticosteroids + 3 months cyclophosphamide" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 5 ----------------
+    {
+      label: "5. Post-Streptococcal GN",
+      children: [
+        {
+          label: "Organism",
+          children: [
+            { label: "Group A β-hemolytic streptococci (nephritogenic strains, types 1, 4, 12, 49)" },
+            { label: "Type 49 is the most common isolated type" }
+          ]
+        },
+        {
+          label: "History of streptococcal infection",
+          children: [
+            { label: "Tonsillitis, pharyngitis, otitis media, or cellulitis: 1-2 weeks before onset of acute nephritis" },
+            { label: "Skin infection → latent period may be prolonged to 4 weeks" },
+            { label: "Latent period = time for immune-complex formation, deposition & glomerular injury" },
+            { label: "Shorter latent period → exacerbation of underlying CKD (e.g. IgA nephropathy) rather than de novo acute GN" }
+          ]
+        },
+        {
+          label: "Presentations",
+          children: [
+            {
+              label: "Acute GN",
+              children: [
+                { label: "Children: picture of acute GN" },
+                { label: "Adults: strep history less commonly obtained; subacute/insidious onset with progressive slowly developing edema of lower limbs" },
+                { label: "~10% of infected develop GN" },
+                { label: "Infection may be mild and pass unnoticed" },
+                { label: "No relationship between severity of infection & probability of developing acute nephritis" }
+              ]
+            },
+            { label: "Nephrotic syndrome: uncommon (<20% of cases)" },
+            { label: "RPGN: in 5% of cases" },
+            { label: "Asymptomatic: discovered during routine urine examination" }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            {
+              label: "Evidence of streptococcal infection",
+              children: [
+                { label: "Antibodies to streptococcal exo-enzymes (SO, DNAase, BNDase, hyaluronidase)" },
+                { label: "Decreased CH50 & C3 during acute phase, returns to normal within 8 weeks (transient hypocomplementemia)" }
+              ]
+            },
+            {
+              label: "Evidence of acute GN",
+              children: [
+                { label: "Urine: dysmorphic red cells, red cell casts, proteinuria <3 g/day" },
+                { label: "Blood: transient ↑serum cholesterol (in NS), ↓serum albumin, renal impairment" },
+                {
+                  label: "Renal biopsy",
+                  children: [
+                    { label: "LM: diffuse endocapillary proliferative GN ± few crescents" },
+                    { label: "EM: subepithelial electron-dense deposits (humps) ± variable mesangial deposits" },
+                    { label: "IF: granular deposits of C3 & IgG" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "General / supportive (see treatment of GN)",
+              children: [
+                { label: "Bed rest" },
+                { label: "Diet: salt, fluid and protein restriction" },
+                { label: "Drugs: diuretics; vasodilators for BP control" },
+                { label: "Steroids, cytotoxic drugs & anticoagulants of no value, may be harmful — except in RPGN" },
+                { label: "Dialysis for renal failure" }
+              ]
+            },
+            {
+              label: "Antibiotic (penicillin) therapy",
+              children: [
+                {
+                  label: "For patients",
+                  children: [
+                    { label: "Decrease antigen load → decrease immune-complex formation → may stop disease progression" },
+                    { label: "Halt spread of nephritogenic streptococci to close family contacts" },
+                    { label: "Not very effective in aborting or ameliorating the disease course" }
+                  ]
+                },
+                {
+                  label: "For close contacts",
+                  children: [
+                    { label: "Short-term penicillin prophylaxis (phenoxy penicillin 500 mg/day) for high-risk individuals in closed community/family" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "N.B.",
+          children: [
+            { label: "No effect of long-term penicillin prophylaxis after development of GN" },
+            { label: "Removal of infected tonsil/septic foci delayed until convalescence advanced (operation may exacerbate disease)" },
+            { label: "If needed: benzyl penicillin on day of operation and 3 days after" }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 6 ----------------
+    {
+      label: "6. Lupus Nephritis",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Renal involvement in patients with SLE" },
+            { label: "Exists with or without clinical manifestations of SLE" },
+            { label: "Extremely diverse in presentation and pathology" }
+          ]
+        },
+        {
+          label: "Prevalence",
+          children: [
+            { label: "Kidney is the most common organ involvement in SLE" },
+            { label: "Clinically ~50% of lupus patients have LN at diagnosis" }
+          ]
+        },
+        {
+          label: "Pathology",
+          children: [
+            {
+              label: "Glomerular",
+              children: [
+                { label: "Haematoxylin bodies: rounded bluish inclusions in H&E; naked nuclei altered by binding to ANA; seen in only 2% of cases; pathognomonic of active LN" },
+                { label: "Wire loop deposits: subendothelial immune deposits encircling entire glomerular tuft circumference; best seen in trichrome & silver stains" },
+                { label: "Hyaline thrombi: massive subendothelial immune deposits protruding into or occluding tuft lumina (intraluminal immune deposits)" }
+              ]
+            },
+            {
+              label: "Tubulo-interstitial",
+              children: [
+                { label: "Seen in 50% of cases, especially proliferative LN" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Pathological classes (ISN/RPS)",
+          children: [
+            { label: "Class I — Minimal mesangial LN: normal glomeruli by LM; mesangial immune deposits by IF or EM" },
+            { label: "Class II — Mesangial proliferative LN: mesangial hypercellularity and/or matrix expansion + mesangial immune deposits" },
+            { label: "Class III — Focal proliferative LN: <50% of glomeruli involved" },
+            { label: "Class IV — Diffuse proliferative LN: >50% of glomeruli involved" },
+            { label: "Class V — Membranous LN: diffuse (global) capillary wall thickening + continuous subepithelial immune deposits" },
+            { label: "Class VI — Advanced-stage LN: global glomerulosclerosis ≥90% of glomeruli, no active lesion" }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            { label: "Asymptomatic in many patients" },
+            { label: "Hypertension — a clue of renal disease" },
+            { label: "Symptoms & signs of: acute nephritis, nephrotic syndrome, rapidly progressive renal failure, and ESRD" }
+          ]
+        },
+        {
+          label: "Diagnosis",
+          children: [
+            { label: "Clinical: hypertension and/or renal edema" },
+            { label: "Laboratory: urine exam (red cells, casts, proteinuria); elevated serum creatinine" },
+            {
+              label: "Renal biopsy",
+              children: [
+                { label: "Determine nature of renal pathology and pathological class" },
+                { label: "Exclude other lesions complicating SLE: hypersensitivity interstitial nephritis (when patient develops ATN), pure antiphospholipid syndrome" },
+                { label: "Assess activity index (0-24 score, acute & potentially treatable lesions) and chronicity index (0-12 score, irreversible lesions) → therapy & prognosis" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Management",
+          children: [
+            {
+              label: "General (extra-renal manifestations affecting kidney)",
+              children: [
+                { label: "Hydroxychloroquine (or equivalent antimalarial) to all LN patients unless contraindicated" },
+                { label: "Control of hypertension: target ≤120/80 mmHg" },
+                { label: "Control of proteinuria: low-dose ACEIs or ARBs + protein restriction" },
+                { label: "Control of hyperlipidemia: statins + low-fat diet" },
+                { label: "Avoid nephrotoxic drugs e.g. NSAIDs; non-acetylated salicylates safe" },
+                { label: "Avoid pregnancy in active LN (worsens renal disease; some medications teratogenic)" }
+              ]
+            },
+            {
+              label: "Specific (corticosteroids + immunosuppression)",
+              children: [
+                { label: "Divided into induction and maintenance phases" },
+                { label: "Corticosteroids if clinically significant renal disease" },
+                { label: "Immunosuppressives: cyclophosphamide, mycophenolate mofetil, azathioprine, or cyclosporine A" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Prognosis",
+          children: [
+            { label: "Classes I, II and V: generally good prognosis" },
+            { label: "Classes III and IV: poor — tend to progress to ESRD, particularly class IV" },
+            { label: "Class VI: hemodialysis or transplantation" }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 7 ----------------
+    {
+      label: "7. Diabetic Nephropathy",
+      children: [
+        {
+          label: "Renal complications in diabetic patients",
+          children: [
+            { label: "Diabetic nephropathy (DN, diabetic glomerulosclerosis)" },
+            { label: "Papillary necrosis" },
+            { label: "UTI: asymptomatic bacteriuria, acute pyelonephritis, perinephric abscess" },
+            { label: "Ischemic nephropathy due to renal artery atherosclerosis" },
+            { label: "Hydronephrosis due to atonic bladder" },
+            {
+              label: "AKI secondary to",
+              children: [
+                { label: "Reaction to contrast (contrast nephropathy)" },
+                { label: "UT obstruction secondary to papillary necrosis" }
+              ]
+            },
+            { label: "NB: type 2 DM more common → most DN cases associated with type 2 DM" }
+          ]
+        },
+        {
+          label: "Definition",
+          children: [
+            { label: "Proteinuria with or without hypertension and renal impairment in DM of several years duration" }
+          ]
+        },
+        {
+          label: "Prevalence",
+          children: [
+            { label: "Type 1: ~30-50% develop DN (survive longer)" },
+            { label: "Type 2: ~20% develop DN (usually die earlier)" }
+          ]
+        },
+        {
+          label: "Stages — Type 1 DM (5 stages)",
+          children: [
+            {
+              label: "Stage I — Hyperfiltration / hypertrophy",
+              children: [
+                { label: "GFR ↑20-40% above age-matched controls" },
+                { label: "Kidney hypertrophy on US" },
+                { label: "Clinically may have polyuria" }
+              ]
+            },
+            {
+              label: "Stage II — Silent stage",
+              children: [
+                { label: "Normal GFR (most patients)" },
+                { label: "Normal urinary albumin (<30 mg/day)" },
+                { label: "Early structural renal damage" },
+                { label: "~30-50% proceed to stage III" }
+              ]
+            },
+            {
+              label: "Stage III — Incipient nephropathy",
+              children: [
+                { label: "GFR starts to decline" },
+                { label: "Microalbuminuria 30-300 mg/day (5-10 years after DM onset)" },
+                { label: "Early hypertension or BP rise" }
+              ]
+            },
+            {
+              label: "Stage IV — Overt nephropathy",
+              children: [
+                { label: "Progressive GFR reduction" },
+                { label: "Overt proteinuria >0.5 g/day" },
+                { label: "Hypertension" }
+              ]
+            },
+            {
+              label: "Stage V — ESRD",
+              children: [
+                { label: "Requires RRT" },
+                { label: "Other diabetic complications: retinopathy, neuropathy, CHF, cerebrovascular & peripheral vascular disease" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Stages — Type 2 DM",
+          children: [
+            { label: "Hyperfiltration stage rarely detected" },
+            { label: "Microalbuminuria frequently present at diagnosis of DM" },
+            { label: "Hypertension usually present at diagnosis of nephropathy" }
+          ]
+        },
+        {
+          label: "Pathology (3 major lesions)",
+          children: [
+            {
+              label: "Glomerulosclerosis",
+              children: [
+                { label: "Diffuse: more common but non-specific" },
+                { label: "Nodular: less common but pathognomonic" }
+              ]
+            },
+            { label: "Chronic tubulo-interstitial nephritis" },
+            { label: "Vasculitic lesions: arteriolosclerosis in afferent & efferent arterioles (pathognomonic for DM)" }
+          ]
+        },
+        {
+          label: "Pathogenesis (multifactorial)",
+          children: [
+            {
+              label: "Hemodynamic",
+              children: [
+                { label: "Hyperglycemia → ↑GFR → ↑intraglomerular pressure → endothelial injury → glomerulosclerosis" }
+              ]
+            },
+            {
+              label: "Metabolic",
+              children: [
+                { label: "Hyperglycemia → glycosylation of mesangial & GBM proteins → trapping of circulating macromolecules → mesangial hyperplasia → altered GBM permeability" }
+              ]
+            },
+            {
+              label: "Genetic susceptibility",
+              children: [
+                { label: "Not all diabetic patients develop DN" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Risk factors for progression",
+          children: [
+            { label: "Proteinuria" },
+            { label: "Hypertension" },
+            { label: "Hyperglycemia" },
+            { label: "Smoking" },
+            { label: "High protein diet" },
+            { label: "Genetic factors" }
+          ]
+        },
+        {
+          label: "Diagnosis",
+          children: [
+            {
+              label: "Clinical",
+              children: [
+                { label: "DM ≥10 years duration with proteinuria ± HTN & renal insufficiency" },
+                { label: "Presence of diabetic retinopathy strengthens diagnosis" }
+              ]
+            },
+            {
+              label: "Criteria of DN as cause of CKD",
+              children: [
+                { label: "Long-standing DM (≥10 years) before onset of CKD" },
+                { label: "Normal-sized kidneys (by US)" },
+                { label: "Presence of diabetic retinopathy" },
+                { label: "Benign urinary sediment: no hematuria, no cellular casts" },
+                { label: "Proteinuria still present when patient already started dialysis" }
+              ]
+            },
+            {
+              label: "Urine examination",
+              children: [
+                { label: "Proteinuria (micro- or macroalbuminuria)" }
+              ]
+            },
+            {
+              label: "Renal biopsy — needed if",
+              children: [
+                { label: "Duration of DM <10 years without retinopathy or neuropathy" },
+                {
+                  label: "Suspicion of alternative diagnosis",
+                  children: [
+                    { label: "Sudden onset of NS in early DM (<7 years type 1, <5 years type 2)" },
+                    { label: "Renal insufficiency + active urinary sediment (red cells, cellular casts)" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "Aim",
+              children: [
+                { label: "Slow progression by tight control of hyperglycemia, hypertension, UTI, and protein restriction" },
+                { label: "RRT for ESRD diabetic patients" }
+              ]
+            },
+            {
+              label: "Control of hyperglycemia",
+              children: [
+                { label: "Insulin + proper diet" }
+              ]
+            },
+            {
+              label: "Control of hypertension (one of the most important factors)",
+              children: [
+                {
+                  label: "Goals",
+                  children: [
+                    { label: "<130/80 mmHg in patients without proteinuria" },
+                    { label: "<125/75 mmHg in patients with proteinuria" }
+                  ]
+                },
+                {
+                  label: "Drugs",
+                  children: [
+                    { label: "ACEI/ARBs" },
+                    { label: "Diuretics in addition to ACEIs" },
+                    { label: "CCB (non-dihydropyridine: verapamil & diltiazem)" },
+                    { label: "β-blockers" },
+                    { label: "Alpha-receptor antagonist e.g. prazosin" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Control of UTI",
+              children: [
+                { label: "Proper antibiotic according to urine culture & sensitivity" }
+              ]
+            },
+            {
+              label: "Dietary protein restriction",
+              children: [
+                { label: "0.6-0.8 g/kg/day in patients with decreased GFR" }
+              ]
+            },
+            {
+              label: "RRT for ESRD patients",
+              children: [
+                { label: "Considered early at GFR <20 ml/min" }
+              ]
+            },
+            {
+              label: "N.B. — Insulin dosing",
+              children: [
+                { label: "Kidney metabolizes & excretes insulin → half-life prolonged with decreased GFR" },
+                { label: "Decrease insulin dose in DN patients to avoid hypoglycemia" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
+// ============================================================
+// Folder 02 — Acute Kidney Injury
+// Separate cards per common title
+// ============================================================
+const folderAKI = {
+  label: "02 · Acute Kidney Injury",
+  children: [
+    // ---------------- Topic 9 ----------------
+    {
+      label: "9. Acute Kidney Injury",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Abrupt (within 48 hours) and sustained decrease in kidney function" },
+            { label: "Accompanied by changes in blood biochemistry (e.g. rise in serum creatinine), urine output, or both" },
+            { label: "AKI encompasses the whole spectrum: mild transient creatinine rise → overt renal failure requiring RRT" },
+            { label: "Term AKI more precise than acute renal failure" }
+          ]
+        },
+        {
+          label: "Classification (RIFLE & AKIN)",
+          children: [
+            { label: "Risk (RIFLE) / Stage 1 (AKIN): serum creatinine ≥1.5-2× baseline, or ↑≥0.3; urine output <0.5 ml/kg/h for 6 hours" },
+            { label: "Injury (RIFLE) / Stage 2 (AKIN): serum creatinine ≥2× baseline; urine output <0.5 ml/kg/h for 12 hours" },
+            { label: "Failure (RIFLE) / Stage 3 (AKIN): serum creatinine ≥3×, or ≥4.0 with rise ≥0.5; urine output <0.3 ml/kg/h for 24 hours or anuria for 12 hours" },
+            { label: "Loss (RIFLE): persistent loss of renal function >4 weeks" },
+            { label: "ESRD (RIFLE): permanent loss of renal function >3 months" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Pre-renal",
+              children: [
+                {
+                  label: "Decreased effective extracellular volume",
+                  children: [
+                    { label: "Fluid loss: hemorrhage, vomiting, diarrhea, burns, diuretics" },
+                    { label: "Redistribution: liver cell failure, nephrotic syndrome, intestinal obstruction, pancreatitis, malnutrition" }
+                  ]
+                },
+                {
+                  label: "Decreased cardiac output",
+                  children: [
+                    { label: "Cardiogenic shock, valvulopathy, myocarditis, MI, arrhythmias, CHF, pulmonary emboli, cardiac tamponade" }
+                  ]
+                },
+                {
+                  label: "Peripheral vasodilatation",
+                  children: [
+                    { label: "Hypotension, sepsis, hypoxemia, anaphylactic shock" }
+                  ]
+                },
+                {
+                  label: "Renal vasoconstriction",
+                  children: [
+                    { label: "Prostaglandin inhibition, adrenergics, sepsis, hepato-renal syndrome, hypercalcemia" }
+                  ]
+                },
+                {
+                  label: "Efferent arteriole vasodilatation",
+                  children: [
+                    { label: "ACEIs & ARBs → decreased intraglomerular pressure and renal blood flow → renal ischemia" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Intra-renal (intrinsic)",
+              children: [
+                {
+                  label: "Acute tubular necrosis (ATN)",
+                  children: [
+                    {
+                      label: "Hemodynamic",
+                      children: [
+                        { label: "Cardiovascular surgery, sepsis, prolonged pre-renal cause" }
+                      ]
+                    },
+                    {
+                      label: "Toxic",
+                      children: [
+                        { label: "Antimicrobials, iodide contrast agents, immunosuppression or antineoplastic agents, organic solvents, heavy metals, radiation" }
+                      ]
+                    },
+                    {
+                      label: "Intratubular deposits",
+                      children: [
+                        { label: "Acute uric acid nephropathy, myeloma, severe hypercalcemia, primary oxalosis, sulfadiazine" }
+                      ]
+                    },
+                    {
+                      label: "Organic pigments (endogenous nephrotoxins)",
+                      children: [
+                        { label: "Myoglobin (rhabdomyolysis), hemoglobinuria (intravascular hemolysis)" }
+                      ]
+                    }
+                  ]
+                },
+                { label: "Acute GN e.g. RPGN" },
+                { label: "Acute interstitial nephritis" },
+                { label: "Renal vascular occlusion" }
+              ]
+            },
+            {
+              label: "Post-renal",
+              children: [
+                { label: "Congenital anomalies: ureterocele, bladder diverticulosis, post-urethral valves, neurogenic bladder" },
+                { label: "Acquired uropathies: BPH, ureterolithiasis, papillary necrosis, ureteral ligation" },
+                { label: "Malignant disease: prostate, bladder, cervix, colon" },
+                { label: "Gynecologic non-neoplastic: uterine prolapse, endometriosis" },
+                { label: "Drugs: sulfonamides, aminocaproic acid" },
+                { label: "Infections: schistosomiasis, TB, candidiasis, aspergillosis, actinomycosis" },
+                { label: "Others: accidental urethral catheter occlusion" }
+              ]
+            },
+            { label: "NB: nearly all cases of ICU-associated AKI result from more than a single insult" }
+          ]
+        },
+        {
+          label: "Clinical manifestations",
+          children: [
+            {
+              label: "Oliguria / anuria",
+              children: [
+                { label: "Oliguria: <300 ml/day, <5 ml/kg/day or 0.5 ml/kg/h" },
+                { label: "Oliguria significantly associated with AKI; oliguria alone is the best predictor" },
+                { label: "~50% or more of AKI cases are non-oliguric → normal urine output does not assure normal GFR" },
+                {
+                  label: "Causes of anuric AKI",
+                  children: [
+                    { label: "Complete UT obstruction (90% of cases)" },
+                    {
+                      label: "Renal vascular occlusion",
+                      children: [
+                        { label: "Renal artery thrombosis" },
+                        { label: "Renal vein thrombosis" },
+                        { label: "Cortical necrosis: sepsis, obstetric accidents, DIC" },
+                        { label: "Renal vasculitis and RPGN" }
+                      ]
+                    },
+                    { label: "AKI complicating: sepsis, heat stroke, rhabdomyolysis" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Manifestations of loss of kidney function",
+              children: [
+                { label: "Volume overload: peripheral edema, weight gain, shortness of breath" },
+                { label: "GIT symptoms: anorexia, nausea, vomiting, diarrhea" },
+                { label: "Flank/back pain (edematous kidneys or UT obstruction)" },
+                { label: "Altered mental status or seizures" },
+                { label: "Anemia and bleeding" },
+                { label: "Other symptoms" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            {
+              label: "Urine examination",
+              children: [
+                { label: "Urine volume / 24 h" },
+                { label: "Color: reddish-brown or cola → myoglobin or Hb (positive dipstick with no red cells on microscopy)" },
+                {
+                  label: "Red blood cells",
+                  children: [
+                    { label: "Eumorphic → bleeding along the collecting system" },
+                    { label: "Dysmorphic or red cell casts → GN" }
+                  ]
+                },
+                {
+                  label: "Urinary casts",
+                  children: [
+                    { label: "Muddy brown casts → ATN (tubular cell casts & oxalate crystals support)" },
+                    { label: "WBC casts/cells → pyelonephritis or acute interstitial nephritis (urine eosinophils help confirm AIN)" }
+                  ]
+                },
+                { label: "Proteinuria" }
+              ]
+            },
+            {
+              label: "Fractional excretion of sodium (FENa)",
+              children: [
+                { label: "FENa = (UNa/PNa) / (Ucr/Pcr) × 100" },
+                { label: "<1% → pre-renal AKI" },
+                { label: ">1% → ATN" },
+                { label: "Exceptions (ATN with low FENa): radio-contrast, severe burns, acute GN, rhabdomyolysis" },
+                { label: "Valuable in hepato-renal syndrome (extreme renal avidity for Na)" },
+                { label: "Useful only in oliguria; NOT in: non-oliguric states, GN, patients receiving diuretics, liver cirrhosis" }
+              ]
+            },
+            {
+              label: "Fractional excretion of urea (FEurea)",
+              children: [
+                { label: "FEurea = (Uur/Pur) / (Ucr/Pcr) × 100" },
+                { label: "Used in patients receiving diuretics (urea transport not affected by diuretics)" },
+                { label: "Levels <35% suggestive of pre-renal state" }
+              ]
+            },
+            {
+              label: "Blood examination & serology",
+              children: [
+                { label: "Serum creatinine and blood urea" },
+                { label: "Serum creatinine better surrogate for GFR than BUN" },
+                {
+                  label: "BUN/creatinine ratio",
+                  children: [
+                    { label: "20:1 → pre-renal AKI" },
+                    { label: "<20:1 → intrinsic or post-renal AKI" }
+                  ]
+                },
+                { label: "Increased serum uric acid → tumor lysis syndrome" },
+                { label: "Increased serum LDH → renal infarction" },
+                { label: "Schistocytes in blood film → HUS or TTP" },
+                { label: "Increased rouleaux formation → multiple myeloma" },
+                { label: "Myoglobin or free Hb → pigment nephropathy" },
+                { label: "Serology: complement levels, ANA, ANCA, anti-GBM Ab, HBV & HCV, ASOT" }
+              ]
+            },
+            {
+              label: "Bladder pressure (intra-abdominal)",
+              children: [
+                { label: "<10 mmHg → normal" },
+                { label: ">10 mmHg → abnormal" },
+                { label: "15-25 mmHg → risk of abdominal compartment syndrome and AKI" }
+              ]
+            },
+            {
+              label: "Ultrasound & Doppler",
+              children: [
+                { label: "US: evaluates existing renal disease & obstruction; small kidney → suggests CKD" },
+                { label: "Doppler: reduced flow in pre-renal & renal AKI (little diagnostic value there)" },
+                { label: "Doppler useful in thrombo-embolic or renal vascular disease" }
+              ]
+            },
+            {
+              label: "Renal biopsy",
+              children: [
+                { label: "Indicated if cause of intrinsic renal AKI unclear after excluding pre- and post-renal causes" }
+              ]
+            },
+            {
+              label: "Biomarkers",
+              children: [
+                { label: "Serum creatinine and eGFR" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment (principles)",
+          children: [
+            { label: "No definitive therapy; supportive care is the mainstay regardless of etiology" },
+            {
+              label: "First — recognize etiology & risk factors",
+              children: [
+                { label: "DM, CKD, hypertension, cardiac or liver dysfunction → evaluate and manage" }
+              ]
+            },
+            {
+              label: "Second — monitoring",
+              children: [
+                { label: "Monitor serum creatinine and urine output for staging" }
+              ]
+            },
+            {
+              label: "Third — manage comorbidities",
+              children: [
+                { label: "Tight glucose control with intensive insulin therapy" },
+                { label: "Control of hyperkalemia" },
+                { label: "Balance nephrotoxic drugs & planned procedures against potential benefits" },
+                { label: "Maintain renal perfusion: volume resuscitation, inotropic or vasopressor support" },
+                {
+                  label: "Small-dose dopamine (1-3 mcg/kg/min)",
+                  children: [
+                    { label: "Selective dilatation of renal vasculature, enhances renal perfusion" },
+                    { label: "Reduces sodium absorption → enhances urine flow → prevents tubular cast obstruction" },
+                    { label: "Controversial decision in treating AKI" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Fourth — renal replacement therapy",
+              children: [
+                { label: "No current consensus on indications; RRT itself may introduce complications" },
+                {
+                  label: "Absolute indications for dialysis in AKI",
+                  children: [
+                    { label: "Clinically apparent signs & symptoms of uremia" },
+                    { label: "Management of refractory hyperkalemia, acidosis, and hypervolemia" }
+                  ]
+                },
+                { label: "Many nephrologists initiate dialysis empirically for BUN >100 mg/dl" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 10 ----------------
+    {
+      label: "10. AKI in Special Situations",
+      children: [
+        {
+          label: "Situations",
+          children: [
+            { label: "1. Contrast-induced nephropathy (CIN)" },
+            { label: "2. Tumor lysis syndrome (TLS)" },
+            { label: "3. AKI in pregnancy" },
+            { label: "4. AKI in rhabdomyolysis" }
+          ]
+        },
+        {
+          label: "Contrast-induced nephropathy (CIN)",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Rise of serum creatinine ≥0.5 mg/dl or 25% above baseline within 48 hours after contrast administration" }
+              ]
+            },
+            {
+              label: "Risk factors",
+              children: [
+                {
+                  label: "Patient-related",
+                  children: [
+                    { label: "Pre-existing CKD — most potent risk factor; ~60% of CIN patients have CKD; incidence parallels severity of pre-existing renal impairment" },
+                    { label: "Diabetes mellitus" },
+                    { label: "Congestive heart failure" },
+                    { label: "Hypotension" },
+                    { label: "Volume depletion" },
+                    { label: "Old age" }
+                  ]
+                },
+                {
+                  label: "Contrast-related",
+                  children: [
+                    { label: "Large volume (dose) of parenteral contrast material" },
+                    { label: "Type of contrast (osmolarity): high osmolar contrast → higher incidence of CIN" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Pathogenesis",
+              children: [
+                {
+                  label: "Renal ischemia",
+                  children: [
+                    { label: "Production of vasoconstrictive compounds: endothelin, adenosine" },
+                    { label: "Increased oxygen utilization in renal tubules" }
+                  ]
+                },
+                {
+                  label: "Hyperosmolarity (intra-tubular)",
+                  children: [
+                    { label: "↑intra-tubular hydrostatic pressure → ↓glomerular filtration" },
+                    { label: "↑tubular cell apoptosis" }
+                  ]
+                },
+                { label: "Generation of oxygen free radicals" },
+                { label: "Direct cellular toxicity" }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                { label: "Vast majority: no symptoms or signs" },
+                { label: "Smaller subset: oliguria ± volume overload" },
+                { label: "Rarely: symptoms & signs of uremia" },
+                {
+                  label: "Laboratory (serum creatinine)",
+                  children: [
+                    { label: "Begins to rise 24-48 h after exposure" },
+                    { label: "Peaks within 3-5 days" },
+                    { label: "Returns to baseline within 7-10 days" },
+                    { label: "Severe cases: peaks 5-10 days, may have oliguria & require dialysis" }
+                  ]
+                },
+                { label: "Imaging: to exclude other causes of AKI" }
+              ]
+            },
+            {
+              label: "Management",
+              children: [
+                {
+                  label: "Prevention",
+                  children: [
+                    { label: "Use non-iodinated contrast media" },
+                    { label: "Use low osmolar contrast media" },
+                    { label: "Minimize contrast volume: formula = 5 ml contrast/kg body weight (max 300 ml) / serum creatinine (mg/dl)" },
+                    { label: "Space between contrast administrations" },
+                    { label: "Avoid nephrotoxic drugs before and after the procedure" },
+                    { label: "Adequate hydration before, during, and after the procedure" },
+                    { label: "N-acetyl cysteine: unclear benefit (conflicting studies)" }
+                  ]
+                },
+                {
+                  label: "Treatment (no specific therapy)",
+                  children: [
+                    { label: "Manage fluid and electrolytes" },
+                    { label: "Adjust medications eliminated by the kidney" },
+                    { label: "Regular monitoring of electrolytes, creatinine, BUN" },
+                    { label: "Dialysis as needed" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Prognosis",
+              children: [
+                { label: "Most patients: complete recovery of renal function" },
+                { label: "Small minority: may progress to CKD" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Tumor lysis syndrome (TLS)",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Acute critical illness: severe hyperuricemia, hyperphosphatemia, hyperkalemia, hypocalcemia, and AKI" },
+                { label: "Seen in rapidly growing cancers (especially Burkitt's lymphoma) after chemotherapy" },
+                { label: "Electrolyte disorders from massive sudden tumor cell death → release of uric acid, phosphorus, potassium" },
+                { label: "Hypocalcemia secondary to hyperphosphatemia (maintains calcium-phosphorus balance)" }
+              ]
+            },
+            {
+              label: "Patients at risk",
+              children: [
+                { label: "Hematological & lymphoproliferative malignancy with marked elevation of serum LDH" },
+                { label: "Volume depletion" },
+                { label: "Acidic urinary pH" },
+                { label: "Patients with CKD (renal clearance is primary excretion mechanism of uric acid & phosphates)" }
+              ]
+            },
+            {
+              label: "Clinical features",
+              children: [
+                { label: "Varying degrees of AKI" },
+                { label: "Intra-tubular precipitation of uric acid (acute UA nephropathy)" },
+                { label: "Acute nephrocalcinosis secondary to marked hyperphosphatemia" },
+                { label: "AKI most marked during induction of chemotherapy" }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                { label: "Known/suspected malignancy (especially Burkitt's lymphoma) + AKI + hyperuricemia + elevated LDH" },
+                { label: "Concomitant volume depletion, hyperkalemia, hyperphosphatemia & hypocalcemia strongly support diagnosis" }
+              ]
+            },
+            {
+              label: "Differential diagnosis (AKI in cancer patients)",
+              children: [
+                { label: "UT obstruction" },
+                { label: "Severe volume depletion" },
+                {
+                  label: "Parenchymal renal diseases",
+                  children: [
+                    { label: "GN secondary to cryoglobulinemia or tumor-related Ag-Ab complexes" },
+                    { label: "Vasculitis" },
+                    { label: "Hypercalcemic nephropathy" },
+                    { label: "Tumor infiltrating the kidney parenchyma" },
+                    { label: "Myeloma kidney (cast nephropathy)" },
+                    { label: "Nephrotoxic drugs: methotrexate, cisplatinum, mitomycin C, INF-alpha, antibiotics" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Prevention (prophylactic)",
+              children: [
+                { label: "Early identification of patients at risk" },
+                {
+                  label: "Before anti-neoplastic drug therapy",
+                  children: [
+                    { label: "Correct initial electrolyte and fluid disorders" },
+                    { label: "Maintain adequate hydration and urine output" },
+                    { label: "Alkalinize urine to pH >7.0 (enhances UA solubility, prevents precipitation)" },
+                    { label: "Oral phosphate-binding antacids" },
+                    { label: "Allopurinol 300 mg/m2, 1-2 days before chemotherapy" },
+                    { label: "Correct any renal or pre-renal dysfunction" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Treatment of established AKI",
+              children: [
+                { label: "Allopurinol 600 mg/day" },
+                { label: "IV isotonic NaHCO3 at 200-300 ml/h: expand volume, wash out renal medulla, alkalinize urine" },
+                {
+                  label: "Dialysis (HD life-saving; consider for every patient; generally required during induction)",
+                  children: [
+                    { label: "Decrease plasma levels of uric acid, phosphorus, potassium" },
+                    { label: "Restore volume overload" },
+                    { label: "Control uremia" }
+                  ]
+                },
+                {
+                  label: "Post-chemotherapy measures",
+                  children: [
+                    { label: "Discontinue urine alkalinization once UA homeostasis achieved (avoid Ca3PO4 precipitation)" },
+                    { label: "Treat symptomatic hypocalcemia after correction of hyperphosphatemia" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Rhabdomyolysis",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Injury or metabolic defect in skeletal muscle cell → lysis of cell membrane" },
+                { label: "Leakage of contents (myoglobin, enzymes, phosphorus, potassium) into blood" }
+              ]
+            },
+            {
+              label: "Causes",
+              children: [
+                {
+                  label: "Direct trauma",
+                  children: [
+                    { label: "Crush syndrome" },
+                    { label: "Electrical shock" },
+                    { label: "Prolonged pressure with coma" },
+                    { label: "Thermal burns & freezing" }
+                  ]
+                },
+                {
+                  label: "Excessive exercise",
+                  children: [
+                    { label: "Athletic injury" },
+                    { label: "Convulsive seizures" }
+                  ]
+                },
+                {
+                  label: "Hereditary myopathies",
+                  children: [
+                    { label: "Myophosphorylase deficiency (McArdle's disease)" }
+                  ]
+                },
+                {
+                  label: "Acquired metabolic disorders",
+                  children: [
+                    { label: "Hyperthyroidism" },
+                    { label: "Hypokalemia (acute)" },
+                    { label: "Diabetic ketoacidosis" },
+                    { label: "Hypophosphatemia (acute)" },
+                    { label: "Alcoholism" },
+                    { label: "Hyponatremia (acute)" }
+                  ]
+                },
+                {
+                  label: "Hypoxia and ischemia",
+                  children: [
+                    { label: "Carbon monoxide poisoning" },
+                    { label: "Vascular occlusion" },
+                    { label: "Atheromatous embolism" },
+                    { label: "Compartment syndrome" }
+                  ]
+                },
+                {
+                  label: "Drugs",
+                  children: [
+                    { label: "Statins & lipid-lowering drugs" },
+                    { label: "Cocaine" },
+                    { label: "Amphetamine derivatives" }
+                  ]
+                },
+                {
+                  label: "Infectious diseases",
+                  children: [
+                    { label: "Viral: Coxsackie, HIV, influenza" },
+                    { label: "Bacterial: Clostridia, Legionella, streptococcal, staphylococcal, pneumococcal pneumonia" }
+                  ]
+                },
+                {
+                  label: "Toxins",
+                  children: [
+                    { label: "Snake venom, poisonous mushrooms, fish poisoning (Haff disease)" }
+                  ]
+                },
+                {
+                  label: "Miscellaneous",
+                  children: [
+                    { label: "Malignant hyperthermia, neuroleptic malignant syndrome" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Pathogenesis",
+              children: [
+                { label: "Mild/moderate (intense exertion, violent repetitive activity, grand mal seizure): direct muscle injury + energy store depletion → muscle pain & weakness" },
+                {
+                  label: "Severe acute (crush injury / pigmented nephropathy) — AKI due to",
+                  children: [
+                    {
+                      label: "Renal ischemia",
+                      children: [
+                        { label: "Myoglobin has intense vasoconstrictive effect" }
+                      ]
+                    },
+                    {
+                      label: "Tubular obstruction and injury",
+                      children: [
+                        { label: "Filtered myoglobin enters PCT cells → releases elemental iron & iron compounds → toxic products injure cells" },
+                        { label: "Unabsorbed pigment passes to distal nephron, interacts with Tamm-Horsfall protein (in acidic urine) → gel obstructs urine flow" },
+                        { label: "Tubular pigment concentration rises → augments proximal tubular absorption & toxicity" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                {
+                  label: "Clinical features (depend on severity)",
+                  children: [
+                    { label: "Mild/moderate: muscular pain, tenderness, edema, stiffness, weakness, impaired mobility" },
+                    { label: "Severe acute (crush injury): AKI" }
+                  ]
+                },
+                {
+                  label: "Laboratory",
+                  children: [
+                    { label: "Total serum CK >500 IU/L → high suspicion of acute rhabdomyolysis" },
+                    { label: "CK-MM isoform → most sensitive test to confirm diagnosis" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Treatment (severe cases in ICU)",
+              children: [
+                { label: "Aggressive & urgent volume replacement to maintain organ perfusion (avoid volume overload & pulmonary edema)" },
+                { label: "Alkalinization of urine with bicarbonate infusion (prevent obstructive cast formation)" },
+                { label: "Special care for respiratory failure due to diaphragmatic weakness if severe" },
+                { label: "Monitor hyperkalemia by ECG and serum potassium" },
+                { label: "Dialysis for severe AKI" }
+              ]
+            },
+            {
+              label: "Prognosis",
+              children: [
+                { label: "Survivors at risk of permanent disability (muscle fibrosis)" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+
+// ============================================================
+// Folder 03 — Chronic Kidney Disease & RRT
+// Separate cards per common title
+// ============================================================
+const folderCKD = {
+  label: "03 · Chronic Kidney Disease & RRT",
+  children: [
+    // ---------------- Topic 11 ----------------
+    {
+      label: "11. Chronic Kidney Disease",
+      children: [
+        {
+          label: "Definitions",
+          children: [
+            { label: "CKD: abnormalities of kidney structure or function present >3 months with health implications; classified by cause, GFR category & albuminuria category" },
+            { label: "Chronic renal failure (CRF): GFR <60 ml/min for ≥3 months (Grade 3 CKD)" },
+            { label: "ESRD: permanent & irreversible renal impairment requiring renal replacement therapy (= Grade 5 CKD)" }
+          ]
+        },
+        {
+          label: "Markers of kidney damage",
+          children: [
+            {
+              label: "Functional",
+              children: [
+                { label: "Albuminuria: AER ≥30 mg/24h or ACR ≥30 mg/g" },
+                { label: "Urine sediment abnormalities" },
+                { label: "Electrolyte and other abnormalities due to tubular disorders" }
+              ]
+            },
+            {
+              label: "Structural",
+              children: [
+                { label: "Structural abnormalities detected by histology" },
+                { label: "Structural abnormalities detected by imaging" },
+                { label: "History of kidney transplantation" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Grades (GFR categories)",
+          children: [
+            { label: "G1: ≥90 — normal or high" },
+            { label: "G2: 60-89 — mildly decreased (relative to young adult level)" },
+            { label: "G3a: 45-59 — mildly to moderately decreased" },
+            { label: "G3b: 30-44 — moderately to severely decreased" },
+            { label: "G4: 15-29 — severely decreased" },
+            { label: "G5: <15 — ESRD" },
+            { label: "NB: without evidence of kidney damage, G1 & G2 do NOT fulfill criteria for CKD" }
+          ]
+        },
+        {
+          label: "Grades (albuminuria categories)",
+          children: [
+            { label: "A1: AER <30 mg/24h, ACR <30 mg/g — normal to mildly increased" },
+            { label: "A2: AER 30-300, ACR 30-300 — moderately increased" },
+            { label: "A3: AER >300, ACR >300 — severely increased (nephrotic syndrome usually AER >2200 mg/24h & ACR >2200 mg/g)" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            { label: "Diabetes mellitus" },
+            { label: "Hypertension" },
+            { label: "Glomerulopathies (primary or secondary)" },
+            { label: "Tubulo-interstitial diseases" },
+            { label: "Renal vascular diseases (renal artery stenosis)" },
+            { label: "Hereditary renal diseases: PCKD, Alport's syndrome, oxalosis" },
+            { label: "Obstructive uropathy: urolithiasis, prostatic enlargement, tumors, retroperitoneal fibrosis" },
+            { label: "Recurrent UTI: pyelonephritis, vesicoureteral reflux" },
+            { label: "Drugs & toxins: NSAID, chronic lead poisoning" },
+            { label: "Uncertain (up to 15% of cases)" }
+          ]
+        },
+        {
+          label: "Clinical features & complications",
+          children: [
+            { label: "Grades 1-3 usually asymptomatic; grades 4 & 5 symptomatic" },
+            {
+              label: "Gastrointestinal",
+              children: [
+                { label: "Anorexia, nausea, vomiting, hiccough" },
+                { label: "Uremic fetor" },
+                { label: "Mucosal ulcerations → GIT bleeding" },
+                { label: "Peptic ulcer" },
+                { label: "Diverticulosis ↑ (PCKD)" },
+                { label: "NB: GIT symptoms improve with dialysis except peptic ulcer & diverticulosis" }
+              ]
+            },
+            {
+              label: "Cardiovascular",
+              children: [
+                { label: "CHF & pulmonary edema" },
+                { label: "Arrhythmias" },
+                { label: "Hypertension (absence in CKD → salt wasting PCKD, drug effect, volume depletion)" },
+                { label: "Pericarditis & pericardial effusion" },
+                { label: "Accelerated atherosclerosis" }
+              ]
+            },
+            {
+              label: "Respiratory",
+              children: [
+                { label: "Acidotic breathing, pleurisy, chest infection" }
+              ]
+            },
+            {
+              label: "Hematological",
+              children: [
+                {
+                  label: "Anemia",
+                  children: [
+                    { label: "Decreased EPO production" },
+                    { label: "Decreased RBC lifespan" },
+                    { label: "Decreased nutrients" },
+                    { label: "Bleeding" },
+                    { label: "Secondary HPT" },
+                    { label: "Inflammatory inhibition" },
+                    { label: "Blood loss" }
+                  ]
+                },
+                { label: "Bleeding diathesis: bleeding time, factor III, platelets, prothrombin" },
+                { label: "Infection susceptibility: leukocyte dysfunction, mucosal barriers, steroids" }
+              ]
+            },
+            {
+              label: "Endocrine & metabolism",
+              children: [
+                { label: "Insulin resistance" },
+                { label: "↓insulin requirement" },
+                { label: "Thyroid: ↑TRH → ↑prolactin (galactorrhea, amenorrhea, impotence)" },
+                { label: "Hypocalcemia → secondary HPT" },
+                { label: "↓testosterone (impotence, infertility)" },
+                { label: "Menstrual abnormalities" }
+              ]
+            },
+            {
+              label: "Bone (CKD-MBD)",
+              children: [
+                {
+                  label: "Definition: systemic disorder of mineral & bone metabolism due to CKD (Ca/P/PTH/vit D; bone turnover/mineralization; vascular/soft tissue calcification incl. calciphylaxis)"
+                },
+                {
+                  label: "Pathophysiology",
+                  children: [
+                    { label: "↓P filtration → hyperphosphatemia → ↑PTH secretion" },
+                    { label: "↓1α-hydroxylase → ↓calcitriol → ↓Ca absorption → hypocalcemia → SHPT" },
+                    { label: "Flow: hyperphosphatemia → ↓calcitriol → hypocalcemia → SHPT → bone disease → vascular calcification → CV mortality" }
+                  ]
+                },
+                {
+                  label: "Renal osteodystrophy",
+                  children: [
+                    { label: "Definition: bone pain, pathological fractures, imaging/biopsy changes" },
+                    { label: "Osteitis fibrosa (high turnover)" },
+                    { label: "Osteomalacia (low turnover)" },
+                    { label: "Adynamic bone disease (↓formation, normal mineralization; aggressive PTH suppression)" },
+                    { label: "Osteopenia / osteoporosis" },
+                    { label: "Mixed lesions (high PTH + impaired formation; aluminum-related)" },
+                    { label: "Spectrum: low turnover (adynamic) ↔ high turnover (osteitis fibrosa)" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Neurological",
+              children: [
+                {
+                  label: "CNS — early",
+                  children: [
+                    { label: "Concentration & memory impairment, drowsiness, insomnia, hiccups, cramps, twitching" }
+                  ]
+                },
+                {
+                  label: "CNS — late",
+                  children: [
+                    { label: "Asterixis, myoclonus, chorea, stupor, seizures, coma" }
+                  ]
+                },
+                {
+                  label: "Peripheral",
+                  children: [
+                    { label: "Sensory & motor neuropathy; restless legs syndrome" }
+                  ]
+                },
+                {
+                  label: "Dialysis-related",
+                  children: [
+                    { label: "Dialysis dementia" },
+                    { label: "Dialysis disequilibrium syndrome: first few sessions, rapid urea removal → cerebral edema" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Dermatological",
+              children: [
+                { label: "Earthy face, pallor, ecchymosis/hematomas, pruritus, poor turgor, malnutrition, uremic frost, hemochromatosis discoloration, half-and-half nails, calciphylaxis" },
+                { label: "NB: most improve with dialysis except pruritus" }
+              ]
+            },
+            {
+              label: "Urinary",
+              children: [
+                { label: "UTI" },
+                { label: "Polyuria/nocturia early; oliguria/anuria late" }
+              ]
+            },
+            {
+              label: "Electrolytes & acid-base",
+              children: [
+                { label: "Hyperkalemia" },
+                { label: "Hypocalcemia (tetany rare)" },
+                { label: "Hyperphosphatemia (itching, metastatic calcification)" },
+                { label: "Metabolic acidosis" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            {
+              label: "For degree & complications",
+              children: [
+                { label: "Urine analysis (albumin, ACR, sediment)" },
+                { label: "KFT (urea, creatinine, eGFR)" },
+                { label: "Electrolytes, ABG, uric acid" },
+                { label: "CBC, iron studies, iPTH" },
+                { label: "Skeletal survey" }
+              ]
+            },
+            {
+              label: "For underlying disease",
+              children: [
+                { label: "Electrophoresis" },
+                { label: "ANA, dsDNA, C3, C4, ANCA, anti-GBM Ab" },
+                { label: "HCV, HBV, HIV" },
+                { label: "Imaging: KUB, US, CT, MRI, renogram" },
+                { label: "Renal biopsy (not if small atrophic kidney)" }
+              ]
+            },
+            {
+              label: "Acute-on-chronic features (help identify CKD even in first presentation)",
+              children: [
+                { label: "Bone disease (CKD-MBD)" },
+                { label: "Uremic neuropathy" },
+                { label: "Profound anemia + hyperphosphatemia + high creatinine with mild symptoms" },
+                { label: "Small kidneys by US (except: DM, amyloidosis, multiple myeloma, PCKD)" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "Conservative management",
+              children: [
+                {
+                  label: "Correct reversible causes",
+                  children: [
+                    { label: "Glucose control" },
+                    { label: "BP control" },
+                    { label: "Hydration" },
+                    { label: "Relieve obstruction / treat UTI" },
+                    { label: "Control active disease" },
+                    { label: "Treat sepsis" },
+                    { label: "Proteinuria: ACEI/ARB" },
+                    { label: "Dyslipidemia" },
+                    { label: "Lifestyle modifications" },
+                    { label: "Avoid nephrotoxins" }
+                  ]
+                },
+                {
+                  label: "Diet",
+                  children: [
+                    { label: "Low protein: 0.6-0.8 g/kg/day (↑ to 1.0-1.2 on dialysis)" },
+                    { label: "Low potassium" },
+                    { label: "Low phosphate" },
+                    { label: "Salt restriction" },
+                    { label: "Fluid balance" }
+                  ]
+                },
+                {
+                  label: "GIT complications",
+                  children: [
+                    { label: "Prokinetics → consider dialysis" },
+                    { label: "PPI (avoid long-term)" }
+                  ]
+                },
+                {
+                  label: "CVS complications",
+                  children: [
+                    { label: "ACEI/ARB/CCB/BB" },
+                    { label: "Loop diuretics for volume overload" },
+                    { label: "Dialysis for pericarditis" }
+                  ]
+                },
+                {
+                  label: "Mineral & bone disorder (CKD-MBD)",
+                  children: [
+                    {
+                      label: "Diet",
+                      children: [
+                        { label: "Ca 1500-2000 mg/day" },
+                        { label: "Low PO4: 800-1000 mg/day" }
+                      ]
+                    },
+                    {
+                      label: "Phosphate binders",
+                      children: [
+                        { label: "Calcium-based: Ca carbonate; hypercalcemia risk; avoid if PTH <130" },
+                        { label: "Non-calcium: sevelamer, lanthanum" }
+                      ]
+                    },
+                    { label: "Calcimimetics: cinacalcet" },
+                    {
+                      label: "Vitamin D analogs",
+                      children: [
+                        { label: "Alfacalcidol / calcitriol 0.25-2 µg/day" },
+                        { label: "Indications: Ca <9.5, PO4 <4.6, ↑PTH" }
+                      ]
+                    },
+                    {
+                      label: "Parathyroidectomy",
+                      children: [
+                        { label: "PTH >800 not responding to medical therapy" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  label: "Anemia",
+                  children: [
+                    { label: "Iron: oral / IV" },
+                    { label: "EPO alpha / beta" },
+                    { label: "Darbepoetin alpha" },
+                    { label: "CERA" }
+                  ]
+                },
+                {
+                  label: "Pruritus",
+                  children: [
+                    { label: "Ointment" },
+                    { label: "Gabapentin / naltrexone" },
+                    { label: "UV therapy" },
+                    { label: "Increase dialysis" }
+                  ]
+                },
+                {
+                  label: "Electrolytes & acid-base",
+                  children: [
+                    { label: "See Chapter V" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Educational program",
+              children: [
+                { label: "Explain eventual renal failure & available therapies" },
+                { label: "HD: prepare AV fistula early" },
+                { label: "PD/transplant: early family education" }
+              ]
+            },
+            {
+              label: "Renal replacement therapy",
+              children: [
+                { label: "Dialysis and transplantation" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 12 ----------------
+    {
+      label: "12. Renal Replacement Therapy",
+      children: [
+        {
+          label: "RRT overview",
+          children: [
+            { label: "Dialysis (peritoneal & hemodialysis)" },
+            { label: "Renal transplantation" }
+          ]
+        },
+        {
+          label: "Dialysis",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Diffusion across semipermeable membrane (blood ↔ dialysate)" }
+              ]
+            },
+            {
+              label: "Indications",
+              children: [
+                {
+                  label: "Temporary (acute/urgent)",
+                  children: [
+                    { label: "AKI: early dialysis advice" },
+                    { label: "Uremic symptoms & complications: refractory hyperkalemia, intractable acidosis, fluid overload, pericarditis/pleuritis, CNS, GIT, bleeding" },
+                    { label: "Dialyzable toxins: alcohols, aspirin, lithium, contrast" }
+                  ]
+                },
+                {
+                  label: "Permanent (chronic/maintenance)",
+                  children: [
+                    { label: "Grade 5 CKD, GFR ≤10 ml/min (Cr 8-10 mg/dL)" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Contraindications",
+              children: [
+                { label: "Refractory hypotension" },
+                { label: "Terminal illness" },
+                { label: "Organic brain damage" }
+              ]
+            },
+            {
+              label: "Types",
+              children: [
+                {
+                  label: "Peritoneal dialysis (PD)",
+                  children: [
+                    { label: "Principles: peritoneal membrane as semipermeable; equilibration; effluent removal" },
+                    {
+                      label: "Indications",
+                      children: [
+                        { label: "Symptomatic uremia" },
+                        { label: "Slowly rising urea" },
+                        { label: "Cardiovascular instability (unsuitable for HD)" },
+                        { label: "No HD facilities" },
+                        { label: "Immature AVF" },
+                        { label: "Poor vascular access" },
+                        { label: "Anticoagulation risk (unsuitable for HD)" }
+                      ]
+                    },
+                    {
+                      label: "Contraindications",
+                      children: [
+                        {
+                          label: "Absolute",
+                          children: [
+                            { label: "Peritoneal fibrosis >50%" },
+                            { label: "Pleuro-peritoneal leak" },
+                            { label: "Multiple abdominal wounds" }
+                          ]
+                        },
+                        {
+                          label: "Relative",
+                          children: [
+                            { label: "Abdominal problems" },
+                            { label: "Hypercatabolism" },
+                            { label: "Aortic prosthesis" },
+                            { label: "Huge PCKD" },
+                            { label: "Diverticulosis" },
+                            { label: "Morbid obesity" },
+                            { label: "Hyperlipidemia" },
+                            { label: "Gastroparesis" },
+                            { label: "Self-care inability" }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      label: "Advantages",
+                      children: [
+                        { label: "Safe and easy" },
+                        { label: "Preserves residual renal function" },
+                        { label: "No anticoagulation" },
+                        { label: "No vascular surgery" },
+                        { label: "Slow clearance (gentle)" },
+                        { label: "Better PTH control" },
+                        { label: "Liberal diet & fluid" },
+                        { label: "Fewer medications" },
+                        { label: "Cheaper" },
+                        { label: "Less virus transmission" }
+                      ]
+                    },
+                    {
+                      label: "Disadvantages",
+                      children: [
+                        { label: "Long time (continuous)" },
+                        { label: "Low efficiency" },
+                        { label: "Inadequate clearance in hypercatabolic/large patients" },
+                        { label: "Recent abdominal surgery or severe pulmonary compromise" },
+                        { label: "Complications" }
+                      ]
+                    },
+                    {
+                      label: "Complications",
+                      children: [
+                        { label: "Peritonitis" },
+                        { label: "Exit-site/tunnel infection" },
+                        { label: "Constipation" },
+                        { label: "Dialysate leak: pleural (hydrothorax), scrotal" },
+                        { label: "Ultrafiltration failure" },
+                        { label: "Sclerosing peritonitis" },
+                        { label: "Protein loss & malnutrition" },
+                        { label: "Hyperlipidemia" },
+                        { label: "Obesity" },
+                        { label: "Hernias" },
+                        { label: "Traumatic catheter perforation" },
+                        { label: "Cannula clotting" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  label: "Hemodialysis (HD)",
+                  children: [
+                    { label: "Definition: diffusion; remove unwanted, add desirable" },
+                    {
+                      label: "Advantages",
+                      children: [
+                        { label: "Short time (intermittent)" },
+                        { label: "Efficient" },
+                        { label: "Home HD possible" }
+                      ]
+                    },
+                    {
+                      label: "Complications",
+                      children: [
+                        {
+                          label: "Surgical (vascular access)",
+                          children: [
+                            {
+                              label: "Catheters",
+                              children: [
+                                { label: "Bleeding" },
+                                { label: "Infection" },
+                                { label: "Thrombosis / stenosis" },
+                                { label: "Pneumothorax" },
+                                { label: "Air embolism" }
+                              ]
+                            },
+                            {
+                              label: "AV fistula & graft",
+                              children: [
+                                { label: "Stenosis" },
+                                { label: "Thrombosis" },
+                                { label: "Infection" },
+                                { label: "Outflow failure" },
+                                { label: "Steal syndrome" },
+                                { label: "Venous hypertension" },
+                                { label: "High-output heart failure" },
+                                { label: "Pseudo-aneurysms" }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          label: "Acute medical",
+                          children: [
+                            { label: "IDH (intradialytic hypotension)" },
+                            { label: "Hypertension" },
+                            { label: "Cramps" },
+                            { label: "Nausea & vomiting" },
+                            { label: "Headache" },
+                            { label: "Fever" },
+                            { label: "Hemolysis" },
+                            { label: "Bleeding" },
+                            { label: "Circuit clotting" },
+                            { label: "Chest pain" },
+                            { label: "Arrhythmias" },
+                            { label: "Cardiac arrest" },
+                            { label: "Air embolism" },
+                            { label: "Disequilibrium syndrome" }
+                          ]
+                        },
+                        {
+                          label: "Chronic",
+                          children: [
+                            {
+                              label: "Cardiovascular",
+                              children: [
+                                {
+                                  label: "Cardiac",
+                                  children: [
+                                    { label: "Ischemic heart disease" },
+                                    { label: "Valvular heart disease" },
+                                    { label: "Uremic pericarditis & endocarditis" },
+                                    { label: "Dilated cardiomyopathy" }
+                                  ]
+                                },
+                                {
+                                  label: "Vascular",
+                                  children: [
+                                    { label: "Peripheral vascular disease" },
+                                    { label: "Metastatic calcification" }
+                                  ]
+                                }
+                              ]
+                            },
+                            { label: "Neuropsychiatric: anxiety, depression, dementia" },
+                            { label: "Malnutrition" },
+                            { label: "Dialysis osteomalacia" },
+                            { label: "Dialysis-related amyloidosis" },
+                            {
+                              label: "Rheumatologic",
+                              children: [
+                                { label: "Crystal arthritis" },
+                                { label: "Joint & bone infection" },
+                                { label: "Ischemic necrosis" }
+                              ]
+                            },
+                            { label: "Hypersplenism" },
+                            { label: "Acquired renal cystic disease (>3 years, malignant change)" }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Kidney transplantation",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Implantation of a kidney from living or deceased donor" }
+              ]
+            },
+            {
+              label: "Donors",
+              children: [
+                { label: "Living related" },
+                { label: "Living unrelated" },
+                { label: "Deceased (cadaveric)" }
+              ]
+            },
+            {
+              label: "Contraindications",
+              children: [
+                { label: "Patient refusal" },
+                { label: "Psychosis" },
+                { label: "Elderly (relative)" },
+                { label: "Active sepsis" },
+                { label: "Unstable CVD" },
+                { label: "Severe respiratory distress" },
+                { label: "Cerebrovascular hemorrhage" },
+                { label: "Advanced liver disease (unless combined liver-kidney)" },
+                { label: "Malignancies" },
+                { label: "Urological abnormalities" }
+              ]
+            },
+            {
+              label: "Complications",
+              children: [
+                {
+                  label: "Surgical",
+                  children: [
+                    { label: "Technical failures" },
+                    { label: "Vascular thrombosis" },
+                    { label: "Urine leak at anastomosis" },
+                    { label: "Leg lymphedema" }
+                  ]
+                },
+                {
+                  label: "Medical",
+                  children: [
+                    { label: "ATN (acute tubular necrosis)" },
+                    { label: "Rejection: hyperacute, acute, chronic" },
+                    { label: "Immunosuppression complications" },
+                    { label: "Recurrence of original disease" },
+                    { label: "Opportunistic infections" },
+                    { label: "Malignancy: Kaposi sarcoma, lymphoproliferative disorders" },
+                    { label: "HTN, DM, atherosclerosis, bone disease" },
+                    { label: "GIT bleeding, cataract, marrow suppression" },
+                    { label: "Nephrotoxicity, hepatotoxicity" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// Folder 04 — Electrolytes & Acid-Base
+// Separate cards per common title (Definition / Causes /
+// Classification / Clinical / Investigations / Treatment)
+// ============================================================
+const folderElectrolytes = {
+  label: "04 · Electrolytes & Acid-Base",
+  children: [
+    // ---------------- Topic 14 ----------------
+    {
+      label: "14. Acid-Base Balance",
+      children: [
+        {
+          label: "Overview of acid-base disturbances",
+          children: [
+            { label: "Metabolic acidosis: primary ↓HCO3 → ↓pH → ↑ventilation → ↓CO2 (respiratory compensation)" },
+            { label: "Metabolic alkalosis: primary ↑HCO3 → ↑pH → ↓ventilation → ↑CO2 (respiratory compensation)" },
+            { label: "Respiratory acidosis: primary CO2 retention → ↓pH → renal HCO3 retention (renal compensation)" },
+            { label: "Respiratory alkalosis: primary CO2 loss → ↑pH → renal HCO3 excretion (renal compensation)" },
+            {
+              label: "Compensation summary",
+              children: [
+                { label: "Metabolic acidosis: pH↓, HCO3↓, CO2↓" },
+                { label: "Metabolic alkalosis: pH↑, HCO3↑, CO2↑" },
+                { label: "Respiratory acidosis: pH↓, HCO3↑, CO2↑" },
+                { label: "Respiratory alkalosis: pH↑, HCO3↓, CO2↓" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Metabolic acidosis",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Primary decrease in serum bicarbonate leading to low pH" }
+              ]
+            },
+            {
+              label: "Anion gap",
+              children: [
+                { label: "Principle of electro-neutrality: total cations = total anions" },
+                { label: "AG = Na − (HCO3 + Cl)" },
+                { label: "Increased AG: ↓unmeasured cations (hypokalemia) or ↑unmeasured anions (hyperphosphatemia)" },
+                { label: "High AG acidosis: ↓HCO3 balanced by ↑unmeasured anions (AG ↑)" },
+                { label: "Normal AG (hyperchloremic) acidosis: ↓HCO3 balanced by ↑Cl (AG normal)" }
+              ]
+            },
+            {
+              label: "Causes",
+              children: [
+                {
+                  label: "Normal AG (hyperchloremic)",
+                  children: [
+                    { label: "GI HCO3 loss: diarrhea, pancreatic fistula, ureteral diversion" },
+                    { label: "Renal HCO3 loss: proximal RTA (type II)" },
+                    { label: "Failure of H+ secretion: distal RTA (type I)" },
+                    { label: "Acid infusion: NH4Cl, hyperalimentation" }
+                  ]
+                },
+                {
+                  label: "High AG",
+                  children: [
+                    { label: "Ketoacidosis (diabetic, alcoholic, starvation)" },
+                    { label: "Renal failure (uremic acidosis)" },
+                    { label: "Lactic acidosis" },
+                    { label: "Massive rhabdomyolysis" },
+                    {
+                      label: "Exogenous toxins",
+                      children: [
+                        { label: "Salicylate" },
+                        { label: "Methanol" },
+                        { label: "Ethylene glycol" },
+                        { label: "Metformin" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Clinical features",
+              children: [
+                { label: "Symptoms: dyspnea; plus symptoms of underlying cause (DKA, CKD, drugs, stones)" },
+                { label: "Signs: Kussmaul respiration; hypotension, arrhythmia, coma in severe cases" }
+              ]
+            },
+            {
+              label: "Investigations",
+              children: [
+                {
+                  label: "General",
+                  children: [
+                    { label: "ABG: pH, HCO3, PCO2" },
+                    { label: "Serum electrolytes: Na+, K+, Cl−" }
+                  ]
+                },
+                {
+                  label: "Specific (for cause)",
+                  children: [
+                    { label: "Renal functions" },
+                    { label: "Blood glucose" },
+                    { label: "Ketones" },
+                    { label: "Lactate" },
+                    { label: "Toxicology screen" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Treatment",
+              children: [
+                { label: "Treat the underlying condition" },
+                { label: "Alkali therapy when pH >7.20 needed: low HCO3 + PCO2 near physiological limit (~15); impending respiratory failure" },
+                { label: "IV NaHCO3 for acute; deficit = (Desired HCO3 − Measured HCO3) × 0.5 × weight (kg)" },
+                { label: "Oral NaHCO3 for chronic (e.g. RTA)" },
+                { label: "Monitoring: HCO3/pH, Na+, volume status, PCO2" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Metabolic alkalosis",
+          children: [
+            {
+              label: "Definition",
+              children: [
+                { label: "Primary increase in serum bicarbonate leading to high pH" }
+              ]
+            },
+            {
+              label: "Classification",
+              children: [
+                { label: "Chloride-responsive (urine Cl <20 mmol/L)" },
+                { label: "Chloride-resistant (urine Cl >20 mmol/L)" },
+                { label: "Other (alkali-loading)" }
+              ]
+            },
+            {
+              label: "Causes",
+              children: [
+                {
+                  label: "Chloride-responsive",
+                  children: [
+                    { label: "Gastric loss: vomiting, nasogastric suction" },
+                    { label: "Colonic loss: congenital chloridorrhea, villous adenoma" },
+                    { label: "Volume depletion (contraction alkalosis)" },
+                    { label: "Thiazides & loop diuretics (after discontinuation, secondary to volume depletion)" },
+                    { label: "Cystic fibrosis" }
+                  ]
+                },
+                {
+                  label: "Chloride-resistant with hypertension",
+                  children: [
+                    { label: "Primary hyperaldosteronism" },
+                    { label: "Cushing's syndrome" },
+                    { label: "Exogenous steroid therapy" },
+                    { label: "Liddle's syndrome" },
+                    { label: "Renovascular hypertension" }
+                  ]
+                },
+                {
+                  label: "Chloride-resistant without hypertension",
+                  children: [
+                    { label: "Bartter's syndrome" },
+                    { label: "Gitelman's syndrome" },
+                    { label: "Severe K+ depletion" },
+                    { label: "Current diuretic therapy (diuretics still active)" },
+                    { label: "Hypomagnesemia" }
+                  ]
+                },
+                {
+                  label: "Other (alkali-loading)",
+                  children: [
+                    { label: "Exogenous alkali: antacids, bicarbonate infusion" },
+                    { label: "Recovery of acidosis (renal overcorrection)" },
+                    { label: "Milk-alkali syndrome" },
+                    { label: "Hypercalcemia" },
+                    { label: "Hypoalbuminemia" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Clinical features",
+              children: [
+                { label: "History: GI loss, surgery, drugs, renal insufficiency" },
+                { label: "Symptoms: hypoventilation, hypokalemia, hypocalcemia" },
+                { label: "Signs: volume status assessment, tetany (Chvostek's & Trousseau's), mental changes, seizures" }
+              ]
+            },
+            {
+              label: "Investigations",
+              children: [
+                {
+                  label: "General",
+                  children: [
+                    { label: "ABG: pH, HCO3, PCO2" },
+                    { label: "Serum electrolytes: Na+, K+, Cl−, Ca2+, Mg2+" },
+                    { label: "Urinary chloride" }
+                  ]
+                },
+                {
+                  label: "Specific (for chloride-resistant)",
+                  children: [
+                    { label: "Aldosterone, cortisol, renin" },
+                    { label: "Renovascular imaging" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Treatment",
+              children: [
+                {
+                  label: "Chloride-responsive with volume depletion",
+                  children: [
+                    { label: "Isotonic NaCl + KCl replacement" }
+                  ]
+                },
+                {
+                  label: "Chloride-responsive with volume overload",
+                  children: [
+                    { label: "KCl + carbonic anhydrase inhibitors / K-sparing diuretics" }
+                  ]
+                },
+                {
+                  label: "Chloride-resistant",
+                  children: [
+                    { label: "Treat specific underlying cause" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 15 ----------------
+    {
+      label: "15. Hyponatremia",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Serum Na+ <135 mmol/L" },
+            { label: "Dilutional hyponatremia: water retention (most common)" },
+            { label: "Pseudohyponatremia: spurious low Na+ due to ↑lipids/proteins" }
+          ]
+        },
+        {
+          label: "Pathological effects",
+          children: [
+            { label: "Water shifts from ECF to ICF" },
+            { label: "Cell swelling" },
+            { label: "Brain edema & neurologic manifestations" }
+          ]
+        },
+        {
+          label: "Clinical manifestations",
+          children: [
+            { label: "Manifestations of underlying cause" },
+            {
+              label: "Neurologic (from brain edema)",
+              children: [
+                { label: "Personality change, lethargy, confusion" },
+                { label: "Stupor, hyperexcitability, hyperreflexia, seizures" },
+                { label: "Coma, death" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Classification (true hyponatremia = hypotonic)",
+          children: [
+            { label: "Hypertonic (pseudohyponatremia): hyperglycemia, mannitol" },
+            { label: "Isotonic (pseudohyponatremia): hyperlipidemia, hyperproteinemia" },
+            {
+              label: "Hypotonic (true hyponatremia)",
+              children: [
+                { label: "Hypervolemic" },
+                { label: "Euvolemic" },
+                { label: "Hypovolemic" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Hypervolemic (total body Na+ ↑, water ↑↑)",
+              children: [
+                { label: "Heart failure" },
+                { label: "Liver failure" },
+                { label: "Oliguric AKI" },
+                { label: "CKD" },
+                { label: "Nephrotic syndrome" },
+                { label: "Hypoalbuminemia" }
+              ]
+            },
+            {
+              label: "Euvolemic (total body Na+ normal, water ↑)",
+              children: [
+                { label: "SIADH" },
+                { label: "Nephrogenic SIAD (drugs, malignancy, CNS disease)" },
+                { label: "Primary polydipsia" },
+                { label: "Thiazide diuretics" },
+                { label: "Hypothyroidism" }
+              ]
+            },
+            {
+              label: "Hypovolemic (total body Na+ ↓, water ↓ less)",
+              children: [
+                {
+                  label: "Extra-renal losses",
+                  children: [
+                    { label: "Vomiting, diarrhea, hemorrhage" },
+                    { label: "Pancreatitis, burns" },
+                    { label: "Third-space losses" }
+                  ]
+                },
+                {
+                  label: "Renal losses",
+                  children: [
+                    { label: "Diuretics (especially thiazides)" },
+                    { label: "Adrenal insufficiency" },
+                    { label: "Tubulointerstitial nephritis" },
+                    { label: "AKI recovery phase (polyuric)" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Diagnostic algorithm",
+          children: [
+            {
+              label: "Step 1: Plasma osmolality low → assess extracellular volume status",
+              children: [
+                {
+                  label: "Increased EVS (hypervolemic)",
+                  children: [
+                    { label: "HF, cirrhosis, nephrosis" }
+                  ]
+                },
+                {
+                  label: "Normal EVS (euvolemic)",
+                  children: [
+                    { label: "Urine osmolality <100 → primary polydipsia" },
+                    { label: "Urine osmolality >100 → SIADH, hypothyroidism, hypocortisolism" }
+                  ]
+                },
+                {
+                  label: "Decreased EVS (hypovolemic)",
+                  children: [
+                    { label: "GI losses, Addison's disease" },
+                    { label: "Salt-losing nephritis, cerebral salt wasting" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Step 2: Normal or high plasma osmolality",
+              children: [
+                { label: "Hyperglycemia (true hyponatremia with high osmolality)" },
+                { label: "Pseudohyponatremia (spurious)" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            { label: "Control symptoms then correct Na+" },
+            { label: "Acute vs chronic; rate of correction (avoid osmotic demyelination / CPM)" },
+            { label: "Fluid therapy per volume status" },
+            { label: "Isotonic 0.9% NaCl (hypo/euvolemic)" },
+            { label: "Hypertonic 3% NaCl + loop diuretics (hyper/euvolemic)" },
+            {
+              label: "Vasopressin antagonists",
+              children: [
+                { label: "Conivaptan" },
+                { label: "Tolvaptan" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 16 ----------------
+    {
+      label: "16. Hypernatremia",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Serum Na+ >145 mmol/L" },
+            { label: "Always hypertonic → water shifts from ICF to ECF" },
+            { label: "Cell shrinkage (brain shrinkage → vascular rupture, seizures, coma)" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Water loss (most common)",
+              children: [
+                {
+                  label: "Extra-renal",
+                  children: [
+                    { label: "Insensible losses: fever, hyperventilation, burns" },
+                    { label: "Inadequate intake: impaired thirst, unconscious, no access" }
+                  ]
+                },
+                {
+                  label: "Renal",
+                  children: [
+                    { label: "Diabetes insipidus: central (ADH deficiency) / nephrogenic (ADH resistance)" },
+                    { label: "Osmotic diuresis: hyperglycemia, mannitol" },
+                    { label: "Diuretic therapy" }
+                  ]
+                }
+              ]
+            },
+            {
+              label: "Sodium gain",
+              children: [
+                { label: "Hypertonic saline infusion" },
+                { label: "Sodium bicarbonate infusion" },
+                { label: "Salt poisoning" },
+                { label: "Mineralocorticoid excess (hyperaldosteronism, Cushing's)" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            { label: "Thirst (early)" },
+            { label: "Neurologic: irritability, weakness, lethargy, confusion, seizures, coma" },
+            { label: "Signs of volume status (depending on cause)" }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            { label: "Serum Na+, osmolality" },
+            { label: "Urine osmolality, urine Na+" },
+            { label: "Volume status assessment" },
+            { label: "Water deprivation test (for DI)" }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            { label: "Correct free water deficit slowly (avoid cerebral edema)" },
+            { label: "Formula: water deficit = 0.6 × weight × (1 − 140/Na+)" },
+            { label: "Hypovolemic: isotonic saline first → then free water" },
+            { label: "Euvolemic: free water (oral/D5W)" },
+            { label: "Hypervolemic: loop diuretics + free water" },
+            { label: "Diabetes insipidus: desmopressin (central); thiazides + low solute diet (nephrogenic)" }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 17 ----------------
+    {
+      label: "17. Hyperkalemia",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Serum K+ >5.0 mmol/L" },
+            { label: "Pseudohyperkalemia: hemolysis, thrombocytosis, leukocytosis, fist clenching" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Increased release from cells",
+              children: [
+                { label: "Tissue breakdown: rhabdomyolysis, tumor lysis, hemolysis, burns, trauma" },
+                { label: "Acidemia (↑H+ enters cells → K+ exits)" },
+                { label: "Hyperosmolality (hyperglycemia)" },
+                { label: "Insulin deficiency" },
+                { label: "β-blockers" },
+                { label: "Digitalis toxicity" },
+                { label: "Succinylcholine (in denervation, burns, neuromuscular disease)" }
+              ]
+            },
+            {
+              label: "Reduced excretion",
+              children: [
+                { label: "CKD (most common)" },
+                { label: "AKI" },
+                { label: "Hypoaldosteronism: primary (Addison's), secondary (hyporeninemic), pseudohypoaldosteronism" },
+                { label: "Drugs: ACEI/ARB, K-sparing diuretics, NSAIDs, cyclosporine, tacrolimus, heparin, trimethoprim, pentamidine" },
+                { label: "Type 4 RTA" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            { label: "Muscle weakness, flaccid paralysis" },
+            { label: "Cardiac: peaked T waves, prolonged PR, widened QRS, sine wave, VF/asystole" },
+            { label: "Paresthesias" }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            { label: "ECG (essential)" },
+            { label: "Serum K+, creatinine, pH, glucose" },
+            { label: "Urine K+, osmolality, pH" },
+            { label: "Drug review" }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            {
+              label: "Emergency (ECG changes / K+ >6.5)",
+              children: [
+                { label: "IV Ca gluconate 10% 10 ml → membrane stabilization (cardiac)" },
+                { label: "IV insulin 10 units + 50 ml 50% dextrose → shift K+ into cells" },
+                { label: "Nebulized salbutamol 10-20 mg → shift K+ into cells" },
+                { label: "NaHCO3 (if acidemia) → shift K+ into cells" }
+              ]
+            },
+            {
+              label: "Potassium removal",
+              children: [
+                { label: "Loop diuretics (if urine output)" },
+                { label: "Cation exchange resins (sodium polystyrene sulfonate, patiromer, SZC)" },
+                { label: "Dialysis (definitive; if severe, refractory, or renal failure)" }
+              ]
+            },
+            {
+              label: "General measures",
+              children: [
+                { label: "Stop K+-retaining drugs" },
+                { label: "Low K+ diet" },
+                { label: "Treat underlying cause" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 18 ----------------
+    {
+      label: "18. Hypokalemia",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Serum K+ <3.5 mmol/L" },
+            { label: "Pseudohypokalemia: leukocytosis (cells consume K+ in vitro)" }
+          ]
+        },
+        {
+          label: "Causes",
+          children: [
+            {
+              label: "Reduced intake",
+              children: [
+                { label: "Starvation, anorexia" }
+              ]
+            },
+            {
+              label: "Increased cellular uptake",
+              children: [
+                { label: "Alkalemia" },
+                { label: "Insulin" },
+                { label: "β-agonists" },
+                { label: "Barium poisoning" },
+                { label: "Familial hypokalemic periodic paralysis" }
+              ]
+            },
+            {
+              label: "Increased losses (most common)",
+              children: [
+                {
+                  label: "Renal losses",
+                  children: [
+                    { label: "Diuretics: thiazides, loops (most common cause)" },
+                    { label: "Mineralocorticoid excess: primary / secondary hyperaldosteronism, Cushing's, exogenous steroids, licorice" },
+                    { label: "Renal tubular acidosis: type 1 (distal), type 2 (proximal)" },
+                    { label: "Magnesium deficiency (impairs K+ conservation)" },
+                    { label: "Osmotic diuresis: hyperglycemia, mannitol" },
+                    { label: "Penicillin (high dose, carbenicillin)" },
+                    { label: "Bartter's, Gitelman's, Liddle's syndromes" }
+                  ]
+                },
+                {
+                  label: "Extra-renal losses",
+                  children: [
+                    { label: "GI: vomiting, diarrhea, laxative abuse, villous adenoma" },
+                    { label: "Sweating (prolonged, hot climate)" },
+                    { label: "Dialysis (especially PD)" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Clinical features",
+          children: [
+            { label: "Muscle weakness, fatigue, cramps, paralysis (ascending)" },
+            { label: "Ileus, constipation" },
+            { label: "Polyuria (nephrogenic DI), polydipsia" },
+            { label: "Cardiac: flattened T, ST depression, U waves, arrhythmias (esp. with digitalis)" },
+            { label: "Rhabdomyolysis (severe <2.5)" }
+          ]
+        },
+        {
+          label: "Investigations",
+          children: [
+            { label: "ECG" },
+            { label: "Serum K+, Mg2+, creatinine, pH" },
+            { label: "Urine K+ (spot or 24h): <20 → extra-renal; >20 → renal" },
+            { label: "Acid-base status" },
+            { label: "Drug review" }
+          ]
+        },
+        {
+          label: "Treatment",
+          children: [
+            { label: "Treat underlying cause" },
+            { label: "Stop offending drugs" },
+            { label: "Mg2+ repletion (essential; hypokalemia refractory if Mg2+ low)" },
+            {
+              label: "Potassium replacement",
+              children: [
+                { label: "Oral KCl (preferred): 20-40 mmol per dose, max 100 mmol/day" },
+                { label: "IV KCl: max 10 mmol/h (peripheral), 20-40 mmol/h (central, cardiac monitoring)" },
+                { label: "K-sparing diuretics (spironolactone, amiloride, triamterene)" },
+                { label: "KCl in IV fluids: max 40 mmol/L" }
+              ]
+            },
+            { label: "Monitor ECG & serum K+ frequently" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ============================================================
+// Folder 05 — Structural & Vascular Renal Diseases
+// Separate cards per common title
+// ============================================================
+const folderStructural = {
+  label: "05 · Structural & Vascular Renal Diseases",
+  children: [
+    // ---------------- Topic 8 ----------------
+    {
+      label: "8. Cystic Kidney Diseases",
+      children: [
+        {
+          label: "Simple (solitary) renal cysts",
+          children: [
+            {
+              label: "Incidence",
+              children: [
+                { label: "Increases with age; ~30% >50 years, ~50% >70 years" },
+                { label: "Usually solitary, unilateral, cortical" },
+                { label: "Multiple cysts → consider PCKD or acquired cystic disease" }
+              ]
+            },
+            {
+              label: "Presentations",
+              children: [
+                { label: "Asymptomatic (most)" },
+                { label: "Flank pain (large cyst or hemorrhage)" },
+                { label: "Hematuria (cyst hemorrhage or infection)" },
+                { label: "Incidental on imaging" }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                { label: "US: well-defined anechoic lesion, thin wall, posterior acoustic enhancement" },
+                { label: "CT: water density (0-20 HU), no enhancement" },
+                { label: "Bosniak classification for complex cysts" }
+              ]
+            },
+            {
+              label: "Differential diagnosis",
+              children: [
+                { label: "PCKD (multiple bilateral cysts + family history)" },
+                { label: "Acquired cystic kidney disease (CKD/dialysis, multiple small cysts)" },
+                { label: "Renal cystic neoplasm (Bosniak III/IV)" },
+                { label: "Multicystic dysplastic kidney (pediatric, non-functional)" }
+              ]
+            },
+            {
+              label: "Treatment",
+              children: [
+                { label: "Asymptomatic: no treatment, periodic US" },
+                { label: "Symptomatic: percutaneous aspiration + sclerotherapy (ethanol)" },
+                { label: "Infected: antibiotics + drainage" },
+                { label: "Suspected neoplasm (Bosniak III/IV): partial or radical nephrectomy" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Autosomal Dominant PCKD (ADPKD)",
+          children: [
+            {
+              label: "Incidence & genetics",
+              children: [
+                { label: "Incidence: 1:400-1:1000 live births" },
+                { label: "PKD1 (chr 16, 85%): severe, earlier ESRD (~55 yrs)" },
+                { label: "PKD2 (chr 4, 15%): milder, later ESRD (~75 yrs)" },
+                { label: "Autosomal dominant, high penetrance, variable expressivity" }
+              ]
+            },
+            {
+              label: "Clinical features",
+              children: [
+                { label: "Flank/abdominal pain (cyst enlargement, hemorrhage, infection, stones)" },
+                { label: "Hematuria (cyst rupture into collecting system)" },
+                { label: "Hypertension (early, ~60-70%; renin-angiotensin activation by cyst compression)" },
+                { label: "UTI (cyst infection, pyelonephritis)" },
+                { label: "Renal stones (uric acid, calcium oxalate)" },
+                { label: "Progressive renal enlargement → ESRD (median ~55 years PKD1)" },
+                { label: "Extrarenal manifestations: hepatic cysts, intracranial aneurysms (berry), mitral valve prolapse, colonic diverticula, inguinal hernia" }
+              ]
+            },
+            {
+              label: "Associated abnormalities",
+              children: [
+                { label: "Hepatic cysts (most common extrarenal, increase with age)" },
+                { label: "Intracranial berry aneurysms (~10-15%; screen if family history)" },
+                { label: "Mitral valve prolapse (~25%)" },
+                { label: "Colonic diverticula" },
+                { label: "Inguinal hernia" }
+              ]
+            },
+            {
+              label: "Complications",
+              children: [
+                { label: "Cyst hemorrhage, infection, rupture" },
+                { label: "Renal cell carcinoma (slightly ↑ risk)" },
+                { label: "Subarachnoid hemorrhage (aneurysm rupture)" }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                {
+                  label: "Ultrasound criteria (Ravine / Pei)",
+                  children: [
+                    { label: "<30 yrs: ≥2 cysts (unilateral or bilateral)" },
+                    { label: "30-59 yrs: ≥2 cysts in each kidney" },
+                    { label: "≥60 yrs: ≥4 cysts in each kidney" }
+                  ]
+                },
+                { label: "Genetic testing (PKD1/PKD2) for atypical or prenatal" }
+              ]
+            },
+            {
+              label: "Treatment",
+              children: [
+                { label: "BP control: ACEI/ARB first-line (target <130/80; <125/75 if proteinuria)" },
+                { label: "Tolvaptan (V2 antagonist): slows cyst growth & eGFR decline in rapidly progressing adults" },
+                { label: "Pain: analgesia, cyst aspiration/sclerotherapy, laparoscopic deroofing" },
+                { label: "Hematuria: bed rest, hydration, avoid anticoagulants" },
+                { label: "Cyst infection: lipophilic antibiotics (fluoroquinolones, TMP-SMX) penetrate cysts" },
+                { label: "Stones: hydration, citrate, allopurinol (if uric acid)" },
+                { label: "Intracranial aneurysms: screen high-risk; treat if >7mm or symptomatic" },
+                { label: "RRT: dialysis & transplantation (excellent outcomes, no recurrence)" }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Autosomal Recessive PCKD (ARPKD)",
+          children: [
+            {
+              label: "Incidence & genetics",
+              children: [
+                { label: "Incidence: 1:20,000 live births" },
+                { label: "PKHD1 (chr 6): fibrocystin / polyductin" },
+                { label: "Autosomal recessive" }
+              ]
+            },
+            {
+              label: "Clinical features",
+              children: [
+                { label: "Neonatal: enlarged echogenic kidneys, oligohydramnios → pulmonary hypoplasia (Potter sequence)" },
+                { label: "Infantile/childhood: hypertension, CKD, portal hypertension (congenital hepatic fibrosis)" },
+                { label: "Hepatic: congenital hepatic fibrosis → portal hypertension, esophageal varices, hypersplenism" },
+                { label: "Renal: progressive CKD → ESRD in childhood/adolescence" }
+              ]
+            },
+            {
+              label: "Diagnosis",
+              children: [
+                { label: "US: bilaterally enlarged echogenic kidneys with loss of corticomedullary differentiation; microcysts (1-3mm) radially arranged" },
+                { label: "Liver US: hepatomegaly, increased echogenicity, portal hypertension signs" },
+                { label: "Genetic testing (PKHD1)" }
+              ]
+            },
+            {
+              label: "Treatment",
+              children: [
+                { label: "Supportive: BP control, nutritional support, growth hormone" },
+                { label: "Portal hypertension: β-blockers, endoscopic variceal ligation, shunt/transplant" },
+                { label: "RRT: dialysis & combined liver-kidney transplant for hepatic + renal failure" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    // ---------------- Topic 13 ----------------
+    {
+      label: "13. Hypertensive Nephrosclerosis",
+      children: [
+        {
+          label: "Definition",
+          children: [
+            { label: "Chronic renal damage from long-standing essential hypertension" },
+            { label: "Arteriolosclerosis (hyaline in benign; hyperplastic in malignant) → ischemic nephron loss → fibrosis" }
+          ]
+        },
+        {
+          label: "Risk factors",
+          children: [
+            { label: "Long-standing, poorly controlled hypertension" },
+            { label: "African ancestry" },
+            { label: "Age >50 years" },
+            { label: "Smoking, dyslipidemia, diabetes" },
+            { label: "Family history of hypertension/ESRD" }
+          ]
+        },
+        {
+          label: "Diagnosis",
+          children: [
+            { label: "Clinical: long-standing HTN + slowly progressive CKD + benign urinary sediment (no hematuria/casts)" },
+            { label: "US: small, symmetrically shrunken kidneys; thinned cortex" },
+            { label: "Exclusion: no primary glomerular disease (biopsy if uncertain)" }
+          ]
+        },
+        {
+          label: "Management",
+          children: [
+            {
+              label: "BP goal & salt restriction",
+              children: [
+                { label: "Target <130/80 (no proteinuria); <125/75 (with proteinuria)" },
+                { label: "Salt <2 g/day" }
+              ]
+            },
+            {
+              label: "Diuretics",
+              children: [
+                { label: "Thiazide (early CKD, eGFR >30)" },
+                { label: "Loop diuretic (eGFR <30 or volume overload)" }
+              ]
+            },
+            {
+              label: "Antihypertensive drugs",
+              children: [
+                { label: "ACEI/ARB: reno-protective, reduce intraglomerular pressure (cautious if bilateral RAS)" },
+                { label: "CCB: non-dihydropyridine (verapamil, diltiazem) have additional reno-protective effect" },
+                { label: "β-blockers" },
+                { label: "Alpha-blockers, central agents as add-on" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ================================================================
+// Rendering engine — adapted from notebook-lm-mindmap template
+// Changes vs original: top tabs = folders (no "All" merge tab),
+// label wrap limits raised so no content is truncated.
+// ================================================================
+
+(() => {
+  'use strict';
+
+  // ==== Folders (tabs) =====
+  const FOLDERS = [
+    folderGlomerular,
+    folderAKI,
+    folderCKD,
+    folderElectrolytes,
+    folderStructural
+  ];
+
+  function countNodes(n) {
+    let c = 1;
+    if (n.children) for (const ch of n.children) c += countNodes(ch);
+    return c;
+  }
+
+  // ==== DOM refs ====
+  const svg = document.getElementById('mindmap-svg');
+  const connectionsLayer = document.getElementById('connections-layer');
+  const nodesLayer = document.getElementById('nodes-layer');
+  const container = document.getElementById('svg-container');
+  const topbar = document.getElementById('topbar');
+
+  // ==== State ====
+  const state = {
+    expanded: new Set(),
+    nodeMap: {},
+    focusedNodeId: null,
+    folderIdx: 0,
+  };
+
+  let nodeCounter = 0;
+  const X_GAP = 90;
+  const Y_GAP = 14;
+  let needsViewFit = true;
+
+  // ================================================================
+  //  TREE BUILDING — called once per folder switch
+  // ================================================================
+
+  function buildTree() {
+    state.nodeMap = {};
+    nodeCounter = 0;
+
+    function cloneAndId(node, parentId) {
+      const n = { label: node.label };
+      n.id = 'n' + (nodeCounter++);
+      if (node.children) n.children = node.children.map(c => cloneAndId(c, n.id));
+      n.parentId = parentId || null;
+      state.nodeMap[n.id] = n;
+      return n;
+    }
+
+    const root = cloneAndId(FOLDERS[state.folderIdx], null);
+    state.expanded.add(root.id);
+    return root;
+  }
+
+  // ================================================================
+  //  COLOR ASSIGNMENT
+  // ================================================================
+
+  function assignColors(node, depth, branchIdx) {
+    const colors = ['color-0','color-1','color-2','color-3','color-4','color-5','color-6','color-7'];
+    if (depth === 0) node._colorClass = 'is-root';
+    else if (depth === 1) node._colorClass = colors[branchIdx % colors.length];
+    else node._colorClass = colors[branchIdx % colors.length];
+    if (node.children) node.children.forEach((c, i) => assignColors(c, depth + 1, depth === 0 ? i : branchIdx));
+  }
+
+  // ================================================================
+  //  TEXT MEASUREMENT — raised limits so full labels are never cut
+  // ================================================================
+
+  function measureText(text, fontSize) {
+    const c = document.createElement('canvas');
+    const ctx = c.getContext('2d');
+    ctx.font = fontSize + 'px Arial, Helvetica, sans-serif';
+    return ctx.measureText(text || '').width;
+  }
+
+  function wrapText(text, maxWidth, fontSize) {
+    if (!text) return [{ text: '', width: 0 }];
+    const words = text.split(/\s+/);
+    const lines = [];
+    let cur = '', curW = 0;
+    for (const w of words) {
+      const ww = measureText(w + ' ', fontSize);
+      if (curW + ww > maxWidth && cur) {
+        lines.push({ text: cur.trim(), width: curW });
+        cur = w + ' '; curW = ww;
+      } else { cur += w + ' '; curW += ww; }
+    }
+    if (cur.trim()) lines.push({ text: cur.trim(), width: curW });
+    return lines.slice(0, 14);
+  }
+
+  function computeDims(label, fontSize, isRoot) {
+    const maxChars = isRoot ? 40 : 64;
+    const cw = fontSize * 0.58;
+    const maxTW = maxChars * cw;
+    const lines = wrapText(label, maxTW, fontSize);
+    const lh = fontSize * 1.35;
+    const tw = Math.max(...lines.map(l => l.width));
+    const th = lines.length * lh;
+    const px = isRoot ? 24 : 16;
+    const py = isRoot ? 14 : 10;
+    return {
+      width: Math.max(isRoot ? 100 : 56, tw + px * 2),
+      height: Math.max(isRoot ? 40 : 30, th + py * 2),
+      lines, lineHeight: lh,
+    };
+  }
+
+  // ================================================================
+  //  LAYOUT — sequential top-to-bottom, uses state.expanded
+  // ================================================================
+
+  function layout(node, depth, startX, startY) {
+    const isRoot = depth === 0;
+    const fs = isRoot ? 15 : 12.5;
+    const dims = computeDims(node.label, fs, isRoot);
+    node.isRoot = isRoot;
+    node._dims = dims;
+    node._x = startX;
+    node._y = startY;
+    node._w = dims.width;
+    node._h = dims.height;
+
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return;
+
+    const childX = startX + dims.width + X_GAP;
+    let curY = startY;
+    for (const child of node.children) {
+      layout(child, depth + 1, childX, curY);
+      curY += subtreeHeight(child) + Y_GAP;
+    }
+  }
+
+  function subtreeHeight(node) {
+    if (!node._h) return 0;
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return node._h;
+    let total = 0;
+    for (const c of node.children) total += subtreeHeight(c);
+    return Math.max(node._h, total + (node.children.length - 1) * Y_GAP);
+  }
+
+  function computeBounds(root) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    function walk(n) {
+      if (n._x === undefined) return;
+      const pad = 50;
+      minX = Math.min(minX, n._x - pad);
+      minY = Math.min(minY, n._y - pad);
+      maxX = Math.max(maxX, n._x + n._w + pad);
+      maxY = Math.max(maxY, n._y + n._h + pad);
+      if (n.children && state.expanded.has(n.id)) n.children.forEach(walk);
+    }
+    walk(root);
+    if (minX === Infinity) return { minX: -200, minY: -200, maxX: 200, maxY: 200 };
+    return { minX, minY, maxX, maxY };
+  }
+
+  // ================================================================
+  //  RENDER
+  // ================================================================
+
+  function render() {
+    const root = state.currentRoot;
+    if (!root) return;
+
+    connectionsLayer.innerHTML = '';
+    nodesLayer.innerHTML = '';
+
+    layout(root, 0, 30, 30);
+
+    if (needsViewFit) {
+      needsViewFit = false;
+      const b = computeBounds(root);
+      const pad = 60;
+      const vw = (b.maxX - b.minX) + pad * 2;
+      const vh = (b.maxY - b.minY) + pad * 2;
+      const vcx = (b.minX + b.maxX) / 2;
+      const vcy = (b.minY + b.maxY) / 2;
+      svg.setAttribute('viewBox', `${vcx - vw / 2} ${vcy - vh / 2} ${vw} ${vh}`);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    }
+
+    function renderNode(node) {
+      if (node._x === undefined) return;
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.classList.add('node-group', node._colorClass || 'color-0');
+      if (node.isRoot) g.classList.add('is-root');
+      if (node.id === state.focusedNodeId) g.classList.add('focused');
+      g.setAttribute('role', 'treeitem');
+      const hasCh = !!(node.children && node.children.length > 0);
+      const isExp = state.expanded.has(node.id);
+      g.setAttribute('aria-expanded', hasCh ? (isExp ? 'true' : 'false') : 'undefined');
+      g.setAttribute('aria-label', node.label + (hasCh ? (isExp ? ' — expanded' : ' — collapsed, ' + node.children.length + ' items') : ''));
+      g.setAttribute('tabindex', '0');
+      g.dataset.nodeId = node.id;
+
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', 0); rect.setAttribute('y', 0);
+      rect.setAttribute('width', node._w); rect.setAttribute('height', node._h);
+      rect.setAttribute('rx', '8'); rect.setAttribute('ry', '8');
+      rect.classList.add('node-bg');
+      rect.setAttribute('filter', node.isRoot ? 'url(#root-shadow)' : 'url(#node-shadow)');
+      g.appendChild(rect);
+
+      const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      txt.classList.add('node-text');
+      txt.setAttribute('font-size', node.isRoot ? 15 : 12.5);
+      const d = node._dims;
+      const th = d.lines.length * d.lineHeight;
+      const sy = (node._h - th) / 2 + d.lineHeight / 2;
+      d.lines.forEach((line, i) => {
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+        t.setAttribute('x', node._w / 2);
+        t.setAttribute('y', sy + i * d.lineHeight);
+        t.setAttribute('class', 'label');
+        t.textContent = line.text;
+        txt.appendChild(t);
+      });
+      g.appendChild(txt);
+
+      if (hasCh) {
+        const cx = node._w + 10, cy = node._h / 2;
+        const circ = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circ.setAttribute('cx', cx); circ.setAttribute('cy', cy);
+        circ.setAttribute('r', '8');
+        circ.classList.add('toggle-circle');
+        g.appendChild(circ);
+        const ic = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        ic.setAttribute('x', cx); ic.setAttribute('y', cy);
+        ic.setAttribute('text-anchor', 'middle');
+        ic.setAttribute('font-size', '11'); ic.setAttribute('font-weight', '700');
+        ic.setAttribute('fill', '#ffffff'); ic.setAttribute('dominant-baseline', 'central');
+        ic.textContent = isExp ? '−' : '+';
+        ic.classList.add('toggle-text');
+        g.appendChild(ic);
+      }
+
+      g.setAttribute('transform', `translate(${node._x}, ${node._y})`);
+
+      if (node.parentId && state.nodeMap[node.parentId]) {
+        const p = state.nodeMap[node.parentId];
+        if (p._x !== undefined) {
+          const sx = p._x + p._w, sy2 = p._y + p._h / 2;
+          const ex = node._x, ey = node._y + node._h / 2;
+          const cp = sx + (ex - sx) * 0.5;
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', `M${sx},${sy2} C${cp},${sy2} ${cp},${ey} ${ex},${ey}`);
+          path.classList.add('connector');
+          if (node.id === state.focusedNodeId || p.id === state.focusedNodeId) path.classList.add('focused');
+          connectionsLayer.appendChild(path);
+        }
+      }
+
+      nodesLayer.appendChild(g);
+
+      if (hasCh && isExp) node.children.forEach(renderNode);
+    }
+
+    renderNode(root);
+  }
+
+  // ================================================================
+  //  FOLDER SWITCHING
+  // ================================================================
+
+  function switchFolder(idx) {
+    state.folderIdx = idx;
+    state.expanded.clear();
+    state.focusedNodeId = null;
+    state.currentRoot = buildTree();
+    assignColors(state.currentRoot, 0, 0);
+    needsViewFit = true;
+    document.getElementById('fit-branch-btn').disabled = true;
+    // reset expand-all button (pure action, no toggle state)
+    const eab = document.getElementById('expand-all-btn');
+    eab.innerHTML = '<span>▸</span> Expand all';
+    renderTopbar();
+    render();
+  }
+
+  function renderTopbar() {
+    topbar.innerHTML = '';
+    FOLDERS.forEach((f, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'tab-btn' + (i === state.folderIdx ? ' active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === state.folderIdx ? 'true' : 'false');
+      btn.dataset.topic = i;
+      btn.innerHTML = `${f.label} <span class="count">(${countNodes(f)})</span>`;
+      btn.addEventListener('click', () => switchFolder(i));
+      topbar.appendChild(btn);
+    });
+  }
+
+  // ================================================================
+  //  TOGGLE / FOCUS / ZOOM
+  // ================================================================
+
+  function toggleNode(nodeId) {
+    const node = state.nodeMap[nodeId];
+    if (!node || !node.children || node.children.length === 0) return;
+
+    if (state.expanded.has(nodeId)) {
+      state.expanded.delete(nodeId);
+      function closeDesc(n) {
+        if (n.children) n.children.forEach(c => { state.expanded.delete(c.id); closeDesc(c); });
+      }
+      closeDesc(node);
+    } else {
+      state.expanded.add(nodeId);
+    }
+    render();
+  }
+
+  function focusNode(nodeId) {
+    const node = state.nodeMap[nodeId];
+    if (!node) return;
+    let cur = node;
+    while (cur.parentId) {
+      state.expanded.add(cur.parentId);
+      cur = state.nodeMap[cur.parentId];
+    }
+    if (node.children && node.children.length > 0) state.expanded.add(node.id);
+
+    state.focusedNodeId = nodeId;
+    render();
+
+    zoomToNode(node);
+    document.getElementById('fit-branch-btn').disabled = false;
+  }
+
+  function zoomToNode(node) {
+    if (!node._x) return;
+    const pad = 80;
+    const startX = node.parentId ? state.nodeMap[node.parentId]._x - 40 : state.currentRoot._x - 40;
+    const endX = branchRightmost(node);
+    const w = endX - startX + pad * 2;
+    const cy = node._y + node._h / 2;
+    const h = Math.max(w * 0.7, node._h * 6);
+    animateViewBox({ x: startX - pad, y: cy - h / 2, w, h });
+  }
+
+  function branchRightmost(node) {
+    if (!node.children || node.children.length === 0 || !state.expanded.has(node.id)) return node._x + node._w;
+    let max = node._x + node._w;
+    for (const c of node.children) max = Math.max(max, branchRightmost(c));
+    return max;
+  }
+
+  function animateViewBox(target) {
+    const cur = svg.getAttribute('viewBox').split(' ').map(Number);
+    const [cx, cy, cw, ch] = cur;
+    const [tx, ty, tw, th] = [target.x, target.y, target.w, target.h];
+    const dur = 200;
+    const t0 = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = 1 - (1 - p) * (1 - p) * (1 - p);
+      svg.setAttribute('viewBox',
+        `${cx + (tx - cx) * e} ${cy + (ty - cy) * e} ${cw + (tw - cw) * e} ${ch + (th - ch) * e}`);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function expandAll() {
+    function ex(n) { if (n.children) { state.expanded.add(n.id); n.children.forEach(ex); } }
+    ex(state.currentRoot);
+    state.focusedNodeId = null;
+    document.getElementById('fit-branch-btn').disabled = true;
+    render();
+  }
+
+  function collapseAll() {
+    function col(n) {
+      if (n.children) {
+        if (n.id !== state.currentRoot.id) state.expanded.delete(n.id);
+        n.children.forEach(col);
+      }
+    }
+    col(state.currentRoot);
+    state.focusedNodeId = null;
+    document.getElementById('fit-branch-btn').disabled = true;
+    render();
+    resetView();
+  }
+
+  function resetView() {
+    const b = computeBounds(state.currentRoot);
+    const pad = 60;
+    const vw = (b.maxX - b.minX) + pad * 2;
+    const vh = (b.maxY - b.minY) + pad * 2;
+    const vcx = (b.minX + b.maxX) / 2;
+    const vcy = (b.minY + b.maxY) / 2;
+    animateViewBox({ x: vcx - vw / 2, y: vcy - vh / 2, w: vw, h: vh });
+  }
+
+  // ================================================================
+  //  EVENTS
+  // ================================================================
+
+  function setupEvents() {
+
+    nodesLayer.addEventListener('click', (e) => {
+      const g = e.target.closest('.node-group');
+      if (!g) return;
+      const id = g.dataset.nodeId;
+
+      if (e.target.closest('.toggle-circle') || e.target.closest('.toggle-text')) {
+        toggleNode(id);
+        return;
+      }
+
+      if (id !== state.focusedNodeId) {
+        focusNode(id);
+      } else {
+        state.focusedNodeId = null;
+        document.getElementById('fit-branch-btn').disabled = true;
+        resetView();
+      }
+    });
+
+    nodesLayer.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const g = e.target.closest('.node-group');
+        if (g) focusNode(g.dataset.nodeId);
+      }
+    });
+
+    document.getElementById('zoom-in').addEventListener('click', () => zoomViewBox(0.75));
+    document.getElementById('zoom-out').addEventListener('click', () => zoomViewBox(1.33));
+    document.getElementById('zoom-reset').addEventListener('click', resetView);
+
+    function zoomViewBox(factor) {
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      const [vx, vy, vw, vh] = vb;
+      const nw = vw * factor, nh = vh * factor;
+      svg.setAttribute('viewBox', `${vx + (vw - nw) / 2} ${vy + (vh - nh) / 2} ${nw} ${nh}`);
+    }
+
+    const eab = document.getElementById('expand-all-btn');
+    eab.addEventListener('click', () => {
+      expandAll();
+    });
+
+    document.getElementById('collapse-all-btn').addEventListener('click', collapseAll);
+
+    document.getElementById('fit-branch-btn').addEventListener('click', () => {
+      if (state.focusedNodeId) zoomToNode(state.nodeMap[state.focusedNodeId]);
+    });
+
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      const [vx, vy, vw, vh] = vb;
+
+      if (e.shiftKey) {
+        const panX = e.deltaY * vw / container.clientWidth * 0.5;
+        svg.setAttribute('viewBox', `${vx + panX} ${vy} ${vw} ${vh}`);
+      } else {
+        const rect = container.getBoundingClientRect();
+        const relX = (e.clientX - rect.left) / container.clientWidth;
+        const relY = (e.clientY - rect.top) / container.clientHeight;
+        const factor = e.deltaY > 0 ? 1.12 : 0.89;
+        const nw = vw * factor, nh = vh * factor;
+        const nx = vx + relX * (vw - nw);
+        const ny = vy + relY * (vh - nh);
+        svg.setAttribute('viewBox', `${nx} ${ny} ${nw} ${nh}`);
+      }
+    }, { passive: false });
+
+    let drag = false, dsx, dsy, dvb;
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.toolbar') || e.target.closest('.topbar') || e.target.closest('.node-group')) return;
+      drag = true;
+      dsx = e.clientX; dsy = e.clientY;
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      dvb = { x: vb[0], y: vb[1], w: vb[2], h: vb[3] };
+      container.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!drag) return;
+      const dx = e.clientX - dsx, dy = e.clientY - dsy;
+      const sx = dvb.w / container.clientWidth, sy = dvb.h / container.clientHeight;
+      svg.setAttribute('viewBox', `${dvb.x - dx * sx} ${dvb.y - dy * sy} ${dvb.w} ${dvb.h}`);
+    });
+    window.addEventListener('mouseup', () => { if (drag) { drag = false; container.style.cursor = 'grab'; } });
+
+    let tsx, tsy, tvb;
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1 && !e.target.closest('.toolbar') && !e.target.closest('.topbar')) {
+        tsx = e.touches[0].clientX; tsy = e.touches[0].clientY;
+        const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+        tvb = { x: vb[0], y: vb[1], w: vb[2], h: vb[3] };
+      }
+    }, { passive: true });
+    container.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && tvb) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - tsx, dy = e.touches[0].clientY - tsy;
+        const sx = tvb.w / container.clientWidth, sy = tvb.h / container.clientHeight;
+        svg.setAttribute('viewBox', `${tvb.x - dx * sx} ${tvb.y - dy * sy} ${tvb.w} ${tvb.h}`);
+      }
+    }, { passive: false });
+    container.addEventListener('touchend', () => { tvb = null; }, { passive: true });
+  }
+
+  // ================================================================
+  //  INIT
+  // ================================================================
+
+  renderTopbar();
+  state.currentRoot = buildTree();
+  assignColors(state.currentRoot, 0, 0);
+  needsViewFit = true;
+  render();
+  setupEvents();
+})();
+
+</script>
+</body>
+</html>
