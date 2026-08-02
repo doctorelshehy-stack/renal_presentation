@@ -6,7 +6,7 @@ window.__MANIFEST__ = {
     {
       "type": "heading",
       "title": "Internal Medicine Nephrology",
-      "icon": "🫀",
+      "icon": "🩺",
       "description": "Glomerular diseases, AKI, CKD, electrolytes & vascular renal diseases"
     },
     {
@@ -149,7 +149,7 @@ window.__MANIFEST__ = {
       "id": "internal_medicine_05_Structural_and_Vascular_Renal_Diseases",
       "title": "05 — Structural & Vascular Renal Diseases",
       "description": "Cystic kidney diseases and hypertensive nephrosclerosis",
-      "icon": "🏗️",
+      "icon": "🫀",
       "folder": "internal_medicine_topics/05_Structural_and_Vascular_Renal_Diseases",
       "mindmapPath": "internal_medicine_topics/Nephrology_MindMaps.html",
       "slidesPath": "internal_medicine_topics/05_Structural_and_Vascular_Renal_Diseases/slides",
@@ -459,7 +459,7 @@ window.__MANIFEST__ = {
       "id": "urology_03_Functional_and_Andrology",
       "title": "03 — Functional & Andrology",
       "description": "Voiding dysfunction, male infertility, and sexual dysfunction",
-      "icon": "👨‍⚕️",
+      "icon": "⚙️",
       "folder": "urology_topics/03_Functional_and_Andrology",
       "mindmapPath": "urology_topics/Urology_Mind_Maps.html",
       "slidesPath": "urology_topics/03_Functional_and_Andrology/slides",

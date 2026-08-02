@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stones &amp; Infections of the Urinary Tract — Flashcards</title>
+<style>
+:root {
+  --accent: #4F7A3A; --dark: #2A4220; --mid: #3A5C2C; --bg: #E9F0E4; --card: #F5FAF2; --warn: #8A5A1C; --badge: #CDE0C0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Urology · NEPHRO-UROLOGY STUDY</div>
+      <h1>Stones &amp; Infections of the Urinary Tract</h1>
+    </div>
+    <div class="meta"><span id="counts">21 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">21</b></span>
+  <span>Source-faithful flashcards · Urology · Stones &amp; Infections of the Urinary Tract</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Give the incidence and classification of urinary stones.", "a": "Affect <b>10–20%</b> of the population; males 1–2× more; <b>3rd most common urinary tract disease</b>; recurrence 50–60% within 10 years. By composition: <b>calcium 70–80%</b>, infected (struvite) 10–20%, uric acid 5–10%, cystine 1–2%, miscellaneous &lt;5%. By X-ray: radiopaque vs radiolucent (uric acid).", "cat": "Stones"}, {"q": "Describe the three levels of saturation and the theories of stone formation.", "a": "<b>Undersaturated:</b> stones dissolve; no aggregation. <b>Saturated (metastable):</b> nucleation/growth possible but inhibitors can prevent it. <b>Supersaturated:</b> inhibitors ineffective, nucleation occurs. Theories: nucleation (homogeneous or heterogeneous/epitaxy), matrix initiation (urine proteins as framework), absence of inhibitors (↓mucoprotein).", "cat": "Stones"}, {"q": "List the causes of calcium, uric acid and cystine stones.", "a": "<b>Calcium stones:</b> hypercalcemia (hyperparathyroidism, vitamin D excess, bone mets), <b>hypercalciuria (most common cause)</b>, hyperoxaluria, hypocitraturia, hyperuricosuria. <b>Uric acid stones:</b> hyperuricemia (gout, neoplastic disease). <b>Cystine stones:</b> autosomal recessive defect of dibasic amino acid (cysteine, lysine, arginine) reabsorption in renal tubules.", "cat": "Stones"}, {"q": "What are the four major complications of urinary stones?", "a": "1. <b>Obstruction</b> (back-pressure → hydronephrosis → nephropathy), 2. <b>Infection</b> (stone + infection = <b>pyonephrosis — emergency</b>), 3. <b>Deterioration of renal function</b>, 4. <b>Chronic irritation</b> → metaplasia/malignant transformation.", "cat": "Stones"}, {"q": "Describe the pain distribution of ureteric stones.", "a": "<b>Upper third:</b> flank pain with referred pain to the <b>testicle</b>. <b>Lower third:</b> flank pain, lower-quadrant pain, radiating to the <b>scrotum or vulva</b>.", "cat": "Stones"}, {"q": "What does a plain KUB show and what is the differential of a radio-opaque shadow?", "a": "Diagnoses radio-opaque and soft-tissue shadows. DDx: urinary stones, gall bladder stones, phleboliths, appendicolith, GIT foreign bodies, nephrocalcinosis, calcified renal cyst/tumor, calcified mesenteric nodes, chip fracture of transverse process/rib.", "cat": "Stones"}, {"q": "What are the indications and contraindications of ESWL?", "a": "Principle: acoustic shock waves focused on the stone (X-ray/US) fragment it into particles. Indication: stones <b>≤2 cm</b>. Contraindications: urological (associated pathology needing intervention, acute UTI, distal obstruction, larger stones, renal insufficiency, single renal unit unless stented) and non-urological (pregnancy, bleeding disorders…).", "cat": "Stones"}, {"q": "What are the indications for PCNL?", "a": "Stones <b>&gt;2 cm</b>; staghorn stones; ESWL failure; associated pathology manipulable percutaneously (e.g., PUJO). Procedure: puncture calyx → guide wire → dilate tract (Amplatz sheath) → nephroscope → stone extraction or lithotripsy → nephrostomy 1–2 days.", "cat": "Stones"}, {"q": "How are ureteric stones managed by site?", "a": "<b>Upper third:</b> 1) ESWL, 2) ureteroscopy + laser, 3) open surgery. <b>Middle third:</b> 1) ureteroscopy + laser, 2) ESWL, 3) open. <b>Lower third:</b> 1) ureteroscopy, 2) ESWL, 3) open.", "cat": "Stones"}, {"q": "When is open surgery (cystolithotomy) indicated for bladder stones?", "a": "Large stones not manipulable endoscopically; multiple or very hard stones; diverticular stones; pediatric bladder calculi (without laser); associated pathology needing open surgery. Otherwise: endoscopic litholapaxy or lithotripsy.", "cat": "Stones"}, {"q": "What is the metabolic work-up and prevention of stone recurrence?", "a": "Serum Ca/P (exclude hyperparathyroidism), uric acid (gout); 24-h urine calcium (300 mg), uric acid (800 mg), oxalate (40 mg), citrate (300–900 mg) for a 60-kg adult. General: high fluid intake, restrict dietary salt/protein, avoid obesity. Calcium oxalate: low-oxalate diet, HCTZ 50 mg bid, citrates 5 g bid. Uric acid: avoid purines, keep urine alkaline (NaHCO₃), rule out myeloproliferative disease.", "cat": "Stones"}, {"q": "What is significant bacteriuria and the gold standard of UTI diagnosis?", "a": "Gold standard: <b>detection of the pathogen (midstream urine culture) in the presence of clinical symptoms</b>. Thresholds: uncomplicated cystitis ≥10³ cfu/mL; pyelonephritis ≥10⁴ cfu/mL; classic significant bacteriuria ≥10⁵ cfu/mL (also in pyelonephritis of pregnancy, Kass); complicated UTI (men) ≥10⁴; any count on suprapubic puncture.", "cat": "UTI"}, {"q": "What is the pathogenesis of UTI and catheter-related risk?", "a": "<b>E. coli causes 85% of ambulatory and 50% of nosocomial UTIs</b>; then Proteus, Klebsiella, Enterococcus. Route: <b>retrograde ascent from fecal flora</b> via urethra to bladder/kidney. Single catheter insertion → UTI in 1–2%; indwelling catheters with open drainage → bacteriuria in nearly 100% within 3–4 days. Hematogenous spread only for a few microbes (S. aureus, Candida).", "cat": "UTI"}, {"q": "Define uncomplicated vs complicated UTI.", "a": "<b>Uncomplicated:</b> acute cystitis/pyelonephritis in otherwise healthy individuals (E. coli 70–95%, S. saprophyticus 5–10%). <b>Complicated:</b> structural/functional abnormalities, indwelling catheters/stents, obstructive uropathy, renal insufficiency, transplant, diabetes, immunodeficiency, VUR, urinary diversions (ileal loop).", "cat": "UTI"}, {"q": "How is acute uncomplicated cystitis treated?", "a": "<b>Cotrimoxazole 160/800 mg bid × 3 days</b> (classic first-line) or trimethoprim 200 mg × 5 days; alternative ciprofloxacin 250 mg bid when resistance/intolerance. Diagnosis: ≥10³ cfu/mL; culture if suspected pyelonephritis or symptoms don't resolve/recur within 2–4 weeks.", "cat": "UTI"}, {"q": "How is acute uncomplicated pyelonephritis treated?", "a": "Diagnosis ≥10⁴ cfu/mL; US to exclude obstruction/stones; CT or DMSA if persistent. Mild: <b>oral fluoroquinolone × 7 days</b>. Severe: admission, <b>parenteral fluoroquinolone or 3rd-generation cephalosporin</b>, then oral continuation 1–2 weeks.", "cat": "UTI"}, {"q": "How are UTIs managed in pregnancy?", "a": "Asymptomatic bacteriuria in 4–7% of pregnant women; <b>20–40% progress to pyelonephritis</b> — treat asymptomatic bacteriuria. Prophylaxis: low-dose cephalexin (125–250 mg) or nitrofurantoin (50 mg) nightly. Acute pyelonephritis: 2nd/3rd-gen cephalosporins or aminoglycoside. <b>Quinolones, tetracyclines and TMP are contraindicated in the 1st trimester.</b>", "cat": "UTI"}, {"q": "What are the three groups of recurrent UTI?", "a": "<b>1. Unresolved infection</b> — subtherapeutic antibiotic, non-compliance, malabsorption, resistant pathogens. <b>2. Bacterial persistence</b> — a nidus in the urinary tract (may need surgical correction). <b>3. Reinfection</b> — new infection from periurethral/perineal/rectal flora. In post-menopausal women: <b>intravaginal oestriol</b> significantly reduces recurrence.", "cat": "UTI"}, {"q": "Describe urosepsis and its treatment.", "a": "SIRS (fever/hypothermia, leucocytosis/leucopenia, tachycardia, tachypnoea) is the first event → sepsis/septic shock → multi-organ failure. Prognosis better than sepsis from other sites but mortality up to <b>20–40%</b>. Treatment: resuscitation + source control (relieve obstruction, drainage) + antibiotics.", "cat": "UTI"}, {"q": "How are gonorrhoea and chlamydial urethritis treated?", "a": "<b>Gonorrhoea:</b> ceftriaxone 125 mg IM single dose (or cefixime 400 mg, ciprofloxacin 500 mg, ofloxacin 400 mg, levofloxacin 250 mg orally). <b>Chlamydia:</b> azithromycin 1 g single dose or doxycycline 100 mg bid × 7 days. <b>Always dual therapy for both</b> — co-infection is common.", "cat": "UTI"}, {"q": "Give the NIDDK/NIH classification of prostatitis and treatment.", "a": "<b>I:</b> acute bacterial prostatitis (admission + parenteral antibiotics, then oral 2–4 weeks). <b>II:</b> chronic bacterial prostatitis. <b>III:</b> chronic abacterial prostatitis/CPPS (A: inflammatory — white cells; B: non-inflammatory). <b>IV:</b> asymptomatic inflammatory prostatitis. Chronic: <b>ciprofloxacin/levofloxacin 4–6 weeks</b> (best pharmacokinetics).", "cat": "UTI"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

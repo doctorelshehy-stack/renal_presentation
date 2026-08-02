@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acute Kidney Injury &amp; AKI in Special Situations — Flashcards</title>
+<style>
+:root {
+  --accent: #B0722F; --dark: #4A2F16; --mid: #7A5233; --bg: #F2E4CE; --card: #FBF3E4; --warn: #A86E1C; --badge: #E8C98A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Internal Medicine · NEPHRO-UROLOGY STUDY</div>
+      <h1>Acute Kidney Injury &amp; AKI in Special Situations</h1>
+    </div>
+    <div class="meta"><span id="counts">27 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">27</b></span>
+  <span>Source-faithful flashcards · Internal Medicine · Acute Kidney Injury &amp; AKI in Special Situations</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Define AKI.", "a": "An <b>abrupt (within 48 hours)</b> and <b>sustained decrease in kidney function</b>, with a rise in serum creatinine, fall in urine output, or both — a term covering the whole spectrum from mild transient creatinine rise to overt renal failure needing RRT.", "cat": "Definition"}, {"q": "Summarize the RIFLE / AKIN staging of AKI.", "a": "<ul><li><b>Risk/1:</b> Cr ×1.5–2 or ↑≥0.3; UOP &lt;0.5 ml/kg/h ×6 h</li><li><b>Injury/2:</b> Cr ×2; UOP &lt;0.5 ml/kg/h ×12 h</li><li><b>Failure/3:</b> Cr ×3 or ≥4.0 (+0.5 rise); UOP &lt;0.3 ml/kg/h ×24 h or anuria 12 h</li><li><b>Loss:</b> persistent loss &gt;4 weeks</li><li><b>ESRD:</b> permanent loss &gt;3 months</li></ul>", "cat": "Staging"}, {"q": "List the 4 categories of pre-renal AKI with examples.", "a": "<ul><li><b>↓ effective ECF volume:</b> hemorrhage, vomiting, diarrhea, burns, diuretics; redistribution (liver failure, NS, pancreatitis)</li><li><b>↓ cardiac output:</b> cardiogenic shock, MI, arrhythmias, CHF, tamponade</li><li><b>Peripheral vasodilation:</b> sepsis, hypotension, anaphylaxis</li><li><b>Renal vasoconstriction:</b> PG inhibition (NSAIDs), adrenergics, hepato-renal syndrome, hypercalcemia</li><li><b>Efferent vasodilation:</b> ACEIs/ARBs → ↓ intraglomerular pressure</li></ul>", "cat": "Causes"}, {"q": "List the intrinsic (intra-renal) causes of AKI.", "a": "<ul><li><b>ATN:</b> hemodynamic (sepsis, surgery), toxic (aminoglycosides, contrast, heavy metals), intratubular deposits (urate, myeloma, oxalate, sulfadiazine), pigments (myoglobin, hemoglobin)</li><li><b>Acute GN</b> (e.g., RPGN)</li><li><b>Acute interstitial nephritis</b> (drug/infection)</li><li><b>Renal vascular occlusion:</b> arterial/venous thrombosis, vasculitis, cortical necrosis</li></ul>", "cat": "Causes"}, {"q": "List post-renal (obstructive) causes of AKI.", "a": "Congenital anomalies (ureterocele, PUV, neurogenic bladder); acquired uropathies (BPH, ureterolithiasis, papillary necrosis, ureteral ligation); malignancy (prostate, bladder, cervix, colon); gynecologic (prolapse, endometriosis); drugs (sulfonamides); infections (schistosomiasis, TB); catheter occlusion.", "cat": "Causes"}, {"q": "Define oliguria in AKI and why is it important?", "a": "Oliguria = &lt;300 ml/day (&lt;5 ml/kg/day or 0.5 ml/kg/h). <b>Oliguria alone is the best predictor of AKI</b> — but ≥50% of AKI cases are non-oliguric, so normal urine output does not exclude AKI.", "cat": "Clinical"}, {"q": "List causes of anuric AKI.", "a": "<ul><li><b>Complete urinary tract obstruction — ~90% of cases</b></li><li>Renal artery/vein thrombosis</li><li>Cortical necrosis (sepsis, obstetric accidents, DIC)</li><li>Renal vasculitis &amp; RPGN</li><li>AKI complicating sepsis, heat stroke, rhabdomyolysis</li></ul>", "cat": "Clinical"}, {"q": "What do muddy brown casts, RBC casts, WBC casts, and urine eosinophils suggest in AKI?", "a": "<b>Muddy brown casts</b> (+ tubular cell casts, oxalate crystals) → ATN. <b>Dysmorphic RBCs / RBC casts</b> → GN. <b>WBC casts / WBCs + eosinophils</b> → pyelonephritis or acute interstitial nephritis (AIN).", "cat": "Investigations"}, {"q": "Reddish-brown (cola) urine with a positive dipstick for blood but NO red cells on microscopy — what is it?", "a": "Suggests <b>myoglobin (rhabdomyolysis) or hemoglobin (hemolysis)</b> — pigment nephropathy.", "cat": "Investigations"}, {"q": "Write the FENa formula and its interpretation.", "a": "FENa = (UNa/PNa) ÷ (UCr/PCr) × 100. <b>&lt;1% → pre-renal AKI; &gt;1% → ATN.</b> Exceptions (ATN with FENa &gt;1% but paradoxically low): radio-contrast, severe burns, acute GN, rhabdomyolysis. Only valid in oliguric AKI — not in diuretic use, GN, cirrhosis, or non-oliguric states.", "cat": "Investigations"}, {"q": "When is FEurea used and how is it interpreted?", "a": "Used in patients <b>receiving diuretics</b> (urea transport is not affected by diuretics). <b>&lt;35% → pre-renal</b>.", "cat": "Investigations"}, {"q": "What does the BUN/creatinine ratio indicate in AKI?", "a": "<b>≥20:1 → pre-renal AKI.</b> &lt;20:1 → intrinsic or post-renal AKI.", "cat": "Investigations"}, {"q": "Match biomarkers to causes: ↑uric acid, ↑LDH, schistocytes, rouleaux, myoglobin.", "a": "<ul><li>↑Uric acid → <b>tumor lysis syndrome</b></li><li>↑LDH → <b>renal infarction</b></li><li>Schistocytes → <b>HUS/TTP</b></li><li>Rouleaux → <b>multiple myeloma</b></li><li>Myoglobin/free Hb → pigment nephropathy</li></ul>", "cat": "Investigations"}, {"q": "What are the bladder-pressure thresholds relevant to AKI?", "a": "<b>&lt;10 mmHg</b> = normal; <b>&gt;10 mmHg</b> = abnormal; <b>15–25 mmHg</b> = risk of abdominal compartment syndrome and AKI.", "cat": "Investigations"}, {"q": "When is renal biopsy indicated in AKI?", "a": "When the cause of <b>intrinsic</b> renal AKI is <b>unclear</b> after excluding pre- and post-renal causes — it distinguishes ATN from AIN, GN, and vascular causes.", "cat": "Investigations"}, {"q": "What are the principles of AKI treatment?", "a": "No definitive therapy exists — <b>supportive care is the mainstay</b>: (A) recognize &amp; manage etiology and risk factors (DM, CKD, HTN, cardiac/liver dysfunction); (B) monitor creatinine &amp; urine output for staging; (C) manage comorbidities — tight glucose control, hyperkalemia, avoid nephrotoxins, maintain renal perfusion (volume, inotropes); (D) RRT for uremia, refractory hyperkalemia/acidosis/hypervolemia; many start dialysis empirically at BUN &gt;100 mg/dl.", "cat": "Treatment"}, {"q": "Define contrast-induced nephropathy (CIN) and list risk factors.", "a": "Rise of serum creatinine <b>≥0.5 mg/dl or ≥25% above baseline within 48 h</b> after contrast. Patient factors: <b>pre-existing CKD (most potent; ~60% of cases)</b>, DM, CHF, hypotension, volume depletion, old age. Contrast factors: large volume, <b>high-osmolar</b> contrast.", "cat": "CIN"}, {"q": "Describe the pathogenesis of CIN.", "a": "1. <b>Renal ischemia</b> — vasoconstrictive compounds (endothelin, adenosine) + ↑ tubular oxygen utilization. 2. <b>Hyperosmolarity</b> — ↑ intratubular pressure ↓ GFR, ↑ tubular apoptosis. 3. <b>Oxygen free radicals</b> → oxidative injury. 4. <b>Direct cellular toxicity</b>.", "cat": "CIN"}, {"q": "What is the creatinine course in CIN?", "a": "Rises 24–48 h after exposure, <b>peaks in 3–5 days</b>, returns to baseline in <b>7–10 days</b>. Severe cases peak at 5–10 days with oliguria and possible dialysis.", "cat": "CIN"}, {"q": "How is CIN prevented?", "a": "Use <b>low-osmolar, non-iodinated</b> contrast; minimize volume (5 ml/kg, max 300 ml, ÷ serum creatinine); space out administrations; avoid nephrotoxins; <b>adequate hydration</b> before/during/after; N-acetylcysteine is of unclear benefit. No specific therapy once CIN occurs.", "cat": "CIN"}, {"q": "Define tumor lysis syndrome (TLS) and who is at risk?", "a": "Acute critical illness from massive sudden tumor-cell death after chemotherapy — <b>hyperuricemia, hyperphosphatemia, hyperkalemia, hypocalcemia (secondary to hyperphosphatemia), AKI</b>. At risk: rapidly growing cancers (especially <b>Burkitt's lymphoma</b>), ↑LDH, volume depletion, acidic urine, CKD.", "cat": "TLS"}, {"q": "How is TLS prevented before chemotherapy?", "a": "Identify at-risk patients; correct fluids/electrolytes; maintain hydration &amp; urine output; <b>alkalinize urine to pH &gt;7.0</b>; oral phosphate-binding antacids; <b>allopurinol 300 mg/m² 1–2 days before</b> chemotherapy. (Urine alkalinization + allopurinol = cornerstones.)", "cat": "TLS"}, {"q": "How is established AKI in TLS treated?", "a": "Allopurinol 600 mg/day; IV isotonic NaHCO₃ 200–300 ml/h (expand volume + alkalinize); <b>hemodialysis is life-saving</b> — lowers uric acid, phosphorus, potassium; corrects volume overload &amp; uremia. Stop alkalinization once uric acid normal (avoid Ca₃(PO₄)₂ precipitation); treat symptomatic hypocalcemia only after correcting hyperphosphatemia.", "cat": "TLS"}, {"q": "Define rhabdomyolysis and list its main causes.", "a": "Injury/metabolic defect of skeletal muscle → cell-membrane lysis with leakage of myoglobin, enzymes, phosphorus, potassium. Causes: direct trauma (crush, electric shock, burns); excessive exercise/seizures; hereditary myopathies (McArdle's); acquired metabolic (hyperthyroidism, hypokalemia, DKA, alcoholism); hypoxia/ischemia (CO poisoning, compartment syndrome); drugs (statins, cocaine); infections (Coxsackie, HIV, Legionella); toxins (snake venom, Haff disease); malignant hyperthermia, NMS.", "cat": "Rhabdo"}, {"q": "Explain the mechanism of AKI in severe rhabdomyolysis.", "a": "<b>1. Renal ischemia</b> — myoglobin is a potent renal vasoconstrictor. <b>2. Tubular obstruction/injury</b> — filtered myoglobin enters PCT cells where iron compounds are toxic; unabsorbed pigment reaches the distal nephron and with <b>Tamm-Horsfall protein in acidic urine</b> forms a gel that obstructs urine flow.", "cat": "Rhabdo"}, {"q": "How is rhabdomyolysis diagnosed?", "a": "Clinical: muscle pain, tenderness, weakness (severe: crush injury + AKI). Lab: serum <b>CK &gt;500 IU/L</b> raises suspicion; the <b>CK-MM isoform is the most sensitive test</b> to confirm.", "cat": "Rhabdo"}, {"q": "How is rhabdomyolysis treated?", "a": "ICU care for severe cases; <b>aggressive/urgent volume replacement</b> (avoid overload); <b>urine alkalinization</b> with bicarbonate to prevent cast obstruction; watch respiratory failure (diaphragmatic weakness); monitor hyperkalemia (ECG + K); dialysis for severe AKI.", "cat": "Rhabdo"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

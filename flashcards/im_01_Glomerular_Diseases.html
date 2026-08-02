@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glomerular Diseases — Flashcards</title>
+<style>
+:root {
+  --accent: #B0722F; --dark: #4A2F16; --mid: #7A5233; --bg: #F2E4CE; --card: #FBF3E4; --warn: #A86E1C; --badge: #E8C98A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Internal Medicine · NEPHRO-UROLOGY STUDY</div>
+      <h1>Glomerular Diseases</h1>
+    </div>
+    <div class="meta"><span id="counts">51 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">51</b></span>
+  <span>Source-faithful flashcards · Internal Medicine · Glomerular Diseases</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Define a glomerulopathy (glomerular disease).", "a": "A group of glomerular disorders characterized by: <b>Clinically</b> — one or more of 5 cardinal features; <b>Pathologically</b> — involvement of <b>both kidneys symmetrically</b>; <b>Etiologically</b> — unknown (primary/idiopathic) or secondary to various causes.", "cat": "Principles"}, {"q": "What are the five cardinal clinical features of glomerular disease?", "a": "<ul><li>1. <b>Proteinuria</b></li><li>2. <b>Hematuria</b></li><li>3. <b>Oliguria</b></li><li>4. <b>Hypertension</b></li><li>5. <b>Edema</b></li></ul>", "cat": "Principles"}, {"q": "How is glomerulonephritis classified etiologically?", "a": "<ul><li><b>Primary GN</b> — unknown cause (idiopathic)</li><li><b>Secondary GN</b> — secondary to: infections, multisystem diseases, malignancy/paraproteinemias, drugs &amp; toxins, metabolic causes (DM, gout), heredofamilial diseases, and others (sarcoidosis, pre-eclampsia, serum sickness…)</li></ul>", "cat": "Principles"}, {"q": "Give examples of infective causes of secondary GN (bacterial, viral, parasitic).", "a": "<ul><li><b>Bacterial:</b> streptococcal (β-hemolytic types 1, 4, 12, 49 → PSGN); non-streptococcal: staphylococci, gonococci, salmonella, meningococcal, secondary syphilis, leprosy</li><li><b>Viral:</b> HBV, HCV, HIV, EBV, mumps, measles, Coxsackie, varicella</li><li><b>Parasitic:</b> malaria, schistosomiasis, filariasis, toxoplasmosis</li></ul>", "cat": "Principles"}, {"q": "Which drugs &amp; toxins can cause secondary GN?", "a": "Penicillin, heavy metals (mercury, gold), heroin, captopril, antivenom/antitoxins, and contrast media.", "cat": "Principles"}, {"q": "List the heredofamilial causes of glomerular disease.", "a": "Thin basement membrane disease, Alport's syndrome, Fabry's disease, Nail-Patella syndrome, and sickle cell disease.", "cat": "Principles"}, {"q": "What is the value of light microscopy (LM), electron microscopy (EM) and immunofluorescence (IF) on renal biopsy?", "a": "<ul><li><b>LM:</b> the histopathological type + severity/degree of disease</li><li><b>EM:</b> site of immune deposition — subendothelial, subepithelial, mesangial</li><li><b>IF:</b> type of immune deposition (e.g., IgA, C3, C4)</li></ul>", "cat": "Principles"}, {"q": "What IF patterns are seen in immune-complex GN vs anti-GBM disease?", "a": "<b>Immune-complex GN:</b> diffuse <span class='hl'>granular</span> deposits. <b>Anti-GBM antibody disease:</b> smooth <span class='hl'>linear</span> deposits.", "cat": "Principles"}, {"q": "Describe the pathology of Minimal Change Disease (MCD).", "a": "<b>LM:</b> normal or mild mesangial cell increase. <b>EM:</b> fusion of foot processes of podocytes. <b>IF:</b> no deposits.", "cat": "Principles"}, {"q": "What does light microscopy show in Membranous GN (MGN)?", "a": "Diffuse thickening of the glomerular basement membrane (GBM).", "cat": "Principles"}, {"q": "Distinguish FSGS from FSGN.", "a": "<b>FSGS</b> (Focal Segmental Glomerulosclerosis) = <b>sclerosis/scarring</b> of some segments in some glomeruli. <b>FSGN</b> (Focal Segmental GN) = <b>cellular proliferation</b> of some segments in some glomeruli.", "cat": "Principles"}, {"q": "Name the 5 major clinical syndromes of glomerulopathy and one pathology/course highlight for each.", "a": "<ul><li><b>Acute GN (nephritic):</b> abrupt onset, hematuria/proteinuria/oliguria/edema/HTN; pathology DPGN; usually spontaneous resolution</li><li><b>Nephrotic syndrome:</b> proteinuria ≥3+, albumin &lt;2.5, hyperlipidemia, edema; variable lesions &amp; course</li><li><b>Chronic GN:</b> insidious, progressive decline in GFR → ESRD (common pathway)</li><li><b>RPGN:</b> rapid GFR decline, crescents — <b>renal emergency</b></li><li><b>Asymptomatic proteinuria ± hematuria:</b> accidentally discovered, relatively benign (FSGN)</li></ul>", "cat": "Principles"}, {"q": "Which urine findings strongly suggest glomerular origin of hematuria?", "a": "<b>Dysmorphic red cells</b> (phase-contrast microscopy) strongly suggest GN, and <b>red cell casts</b> are <span class='hl'>diagnostic of acute GN</span>.", "cat": "Principles"}, {"q": "Give the specific investigation for: DM, recent streptococcal infection, SLE, Goodpasture disease, IgA nephropathy, low complement states.", "a": "<ul><li>DM → blood glucose</li><li>Streptococcal → ASOT + throat/skin swab</li><li>SLE → ANA &amp; anti-dsDNA</li><li>Goodpasture → anti-GBM antibody</li><li>IgA nephropathy (Berger) → serum IgA</li></ul>", "cat": "Principles"}, {"q": "List the conditions with decreased serum complement (C3).", "a": "<ul><li><b>Post-infection:</b> acute PSGN (transient, ~8 weeks), infective endocarditis, shunt nephropathy</li><li><b>SLE</b></li><li><b>Cryoglobulinemia</b></li><li><b>Serum sickness</b></li></ul>", "cat": "Principles"}, {"q": "Why do ACEIs/ARBs reduce proteinuria?", "a": "They block the vasoconstrictor effect of angiotensin II on the <b>efferent arteriole</b> → efferent vasodilation → ↓ intraglomerular pressure → ↓ GFR → ↓ filtered protein → <b>↓ proteinuria</b>. Note: use small doses in normotensive patients; use cautiously in renal failure &amp; hyperkalemia.", "cat": "Principles"}, {"q": "What are the BP targets in renal disease according to proteinuria?", "a": "<ul><li>Proteinuria <b>&gt;1 gm/day</b> → target BP <b>&lt;125/75</b> (mean &lt;92)</li><li>Proteinuria <b>&lt;1 gm/day</b> → target BP <b>&lt;130/80</b> (mean &lt;98)</li></ul>First-line renoprotection: ACEIs/ARBs (also CCBs).", "cat": "Principles"}, {"q": "When is prophylactic anticoagulation used in nephrotic syndrome?", "a": "In nephrotic patients at high risk of thromboembolism: <b>albumin &lt;2.5 → risk of venous thrombosis → anticoagulants</b>; risk of arterial thrombosis → <b>aspirin</b>.", "cat": "Principles"}, {"q": "What is the natural course of PSGN, IgA nephropathy/FSGS, MGN, and anti-GBM/ANCA crescentic GN?", "a": "<ul><li><b>PSGN:</b> tends to resolve completely; little risk of ESRD</li><li><b>IgA nephropathy &amp; FSGS:</b> indolent but persistent → renal failure</li><li><b>MGN:</b> unpredictable — may remit, persist/relapse, or progress over years</li><li><b>Anti-GBM &amp; ANCA crescentic GN:</b> rapid progression to ESRD <b>unless treated</b></li></ul>", "cat": "Principles"}, {"q": "Define acute GN (nephritic syndrome) — list its 5 features.", "a": "Acute onset of: <ul><li>1. <b>Hematuria</b> (macroscopic or microscopic)</li><li>2. <b>Proteinuria</b> &lt;3.5 gm/day/1.73 m² (non-nephrotic)</li><li>3. <b>Hypertension</b></li><li>4. <b>Edema</b></li><li>5. <b>Oliguria</b> &lt;300 ml/day in severe cases</li></ul>", "cat": "Acute GN"}, {"q": "Nephritic vs nephrotic: which is dominated by hematuria and which by proteinuria?", "a": "<b>Nephritic syndrome (acute GN):</b> dominated by <b>hematuria</b> with non-nephrotic proteinuria (&lt;3.5 gm/day). <b>Nephrotic syndrome:</b> dominated by <b>heavy proteinuria ≥3.5 gm/day</b>.", "cat": "Acute GN"}, {"q": "Why does urine appear red vs smoky in acute GN?", "a": "<b>Red urine</b> → in alkaline urine. <b>Smoky/reddish-brown urine</b> → in acidic urine: denaturation of hemoglobin forms <b>acid haematine</b> and methemoglobin gives the smoky color.", "cat": "Acute GN"}, {"q": "What are dysmorphic red cells and how are they best seen?", "a": "Small, distorted RBCs with low hemoglobin content due to mechanical injury while passing through damaged glomerular capillary walls — best seen by <b>phase contrast microscopy</b>.", "cat": "Acute GN"}, {"q": "Why does edema develop early around the eyelids in acute GN?", "a": "Eyelids are an area of <b>low tissue pressure</b>. Edema results from salt &amp; water retention (↑ distal Na⁺ reabsorption + ↓ GFR → ↓ salt delivery to tubules).", "cat": "Acute GN"}, {"q": "Why is hypertension in acute GN called volume-dependent?", "a": "It is due to <b>salt &amp; water retention</b> (volume expansion), not a primary vasoconstrictor mechanism.", "cat": "Acute GN"}, {"q": "List the indications for renal biopsy in acute GN.", "a": "<ul><li>A. Unusual clinical features</li><li>B. Uncertain diagnosis</li><li>C. <b>Rapid deterioration of renal function → crescentic GN</b></li></ul>", "cat": "Acute GN"}, {"q": "How is hypertensive encephalopathy in acute GN managed?", "a": "Maintain airway; control BP with a parenteral agent (e.g., <b>hydralazine 5–20 mg infusion</b>); control fits with IV diazepam (10 mg).", "cat": "Acute GN"}, {"q": "Define nephrotic syndrome (4 criteria).", "a": "<ul><li>1. <b>Heavy proteinuria ≥3.5 gm/day/1.73 m²</b> (or UP/UCr ratio &gt;3.5 in adults)</li><li>2. <b>Hypoalbuminemia ≤2.5 gm/dl</b></li><li>3. <b>Edema</b></li><li>4. <b>Hyperlipidemia</b> (hypercholesterolemia)</li></ul>", "cat": "Nephrotic"}, {"q": "Blood pressure in nephrotic syndrome: MCD vs MCGN.", "a": "In <b>MCD</b> blood pressure is <span class='hl'>always normal</span>; in <b>MCGN</b> hypertension is <span class='hl'>always present</span>.", "cat": "Nephrotic"}, {"q": "What lab findings characterize nephrotic syndrome?", "a": "<ul><li>24-h protein &gt;3.5 gm/day; albumin ≤2.5 gm/dl</li><li>Electrophoresis: ↓ albumin, ↑ alpha-2 &amp; beta globulins, ↑ fibrinogen</li><li>↑ cholesterol &amp; LDL; ↑ triglycerides in ~50%; normal/↓ HDL</li><li><b>Hypocalcemia</b> — urinary loss of cholecalciferol-binding protein</li><li>RFT usually normal (impaired in severe hypovolemia, MGN, MCGN)</li></ul>", "cat": "Nephrotic"}, {"q": "What is selective vs unselective proteinuria?", "a": "Ratio of clearance of a large protein (e.g., IgG) to a small protein (albumin/transferrin): <b>Low ratio → selective</b> (MCD, DM, renal amyloidosis); <b>High ratio → unselective</b> (e.g., crescentic GN). Tested in children.", "cat": "Nephrotic"}, {"q": "When is renal biopsy NOT indicated in nephrotic syndrome?", "a": "<ul><li>Young children with selective proteinuria, normotensive, benign urinary sediment → likely MCD</li><li>Long-standing DM (&gt;10 y type 1, &gt;5 y type 2) with retinopathy/neuropathy</li><li>Patients on penicillamine-type drug therapy</li></ul>", "cat": "Nephrotic"}, {"q": "How do you manage thrombotic complications in nephrotic syndrome?", "a": "Long-term oral anticoagulant (warfarin). NB: <b>heparin is ineffective</b> because antithrombin III is lost in urine. Prophylactic anticoagulation is used in NS due to membranous GN (thromboembolism is common).", "cat": "Nephrotic"}, {"q": "Differentiate Goodpasture disease from Goodpasture syndrome.", "a": "<b>Goodpasture disease:</b> kidney-limited — anti-GBM GN with circulating anti-GBM antibodies. <b>Goodpasture syndrome:</b> systemic — triad of anti-GBM GN + circulating antibodies + <b>pulmonary hemorrhage</b>.", "cat": "Anti-GBM"}, {"q": "List the differential diagnosis of pulmonary-renal syndromes (hemoptysis + renal disease).", "a": "1. Goodpasture syndrome, 2. Henoch-Schönlein purpura, 3. SLE, 4. Microscopic polyangiitis, 5. Cryoglobulinemia, 6. Advanced uremia with pulmonary edema/coagulopathy, 7. TTP, 8. Pulmonary embolism with RV thrombosis.", "cat": "Anti-GBM"}, {"q": "Describe the treatment protocol of anti-GBM disease.", "a": "<b>3 days pulse methylprednisolone</b> (7–15 mg/kg/day, max 1 g/day) → <b>2 weeks daily plasmapheresis</b> (40–50 ml/kg plasma with albumin replacement, until antibody disappears) → <b>6 months oral corticosteroids</b> (1 mg/kg/day → 20 mg/day by 6 wk) + <b>3 months cyclophosphamide</b>.", "cat": "Anti-GBM"}, {"q": "When should plasmapheresis NOT be given in anti-GBM disease?", "a": "In patients with <b>anuria and/or crescents &gt;85%</b> of glomeruli — <b>unless there is pulmonary hemorrhage</b>. Albumin is the recommended replacement fluid (fewer complications).", "cat": "Anti-GBM"}, {"q": "Which organism causes post-streptococcal GN and what are the latent periods?", "a": "Group A <b>β-hemolytic streptococci</b>, nephritogenic strains <b>1, 4, 12, 49</b> (type 49 most commonly isolated). Latent period: <b>1–2 weeks</b> after throat infection; <b>~4 weeks</b> after skin infection.", "cat": "PSGN"}, {"q": "What % of infected individuals develop GN, and what is the presentation spectrum?", "a": "~<b>10%</b> develop GN; infection may be mild/unnoticed, and there is <b>no relationship between severity of infection and risk of GN</b>. Presentations: acute GN (children), insidious/subacute in adults; nephrotic syndrome &lt;20%; RPGN in ~5%; asymptomatic (found on routine urine).", "cat": "PSGN"}, {"q": "What is the biopsy triad of PSGN?", "a": "<b>EM:</b> subepithelial electron-dense deposits (<span class='hl'>humps</span>) + <b>IF:</b> granular deposits of <b>C3 &amp; IgG</b> + <b>serum:</b> transient low C3 recovering within <b>8 weeks</b>.", "cat": "PSGN"}, {"q": "What is the role of penicillin in PSGN — for patients and close contacts?", "a": "Patients: penicillin reduces antigen load and spread to contacts but does NOT reliably abort/ameliorate the course. Close contacts: short-term prophylaxis (<b>phenoxy penicillin 500 mg/day</b>) for high-risk individuals in closed communities. No benefit of long-term penicillin after GN develops; defer tonsillectomy until convalescence.", "cat": "PSGN"}, {"q": "Give the prevalence and hallmark renal histology of lupus nephritis.", "a": "Kidney is the <b>most common organ involved</b> in SLE; ~<b>50%</b> of lupus patients have LN at diagnosis. Pathology: <b>hematoxylin bodies</b> (pathognomonic, ~2%), <b>wire-loop deposits</b> (subendothelial, best on trichrome/silver), <b>hyaline thrombi</b> (intraluminal deposits). Tubulo-interstitial disease in ~50%.", "cat": "Lupus"}, {"q": "Summarize the ISN/RPS classes of lupus nephritis.", "a": "<ul><li><b>I:</b> Minimal mesangial (normal LM, mesangial deposits on IF/EM)</li><li><b>II:</b> Mesangial proliferative</li><li><b>III:</b> Focal proliferative — <b>&lt;50%</b> glomeruli</li><li><b>IV:</b> Diffuse proliferative — <b>&gt;50%</b> glomeruli</li><li><b>V:</b> Membranous</li><li><b>VI:</b> Advanced — global sclerosis of <b>≥90%</b> glomeruli</li></ul>", "cat": "Lupus"}, {"q": "What does the renal biopsy add in lupus nephritis?", "a": "Determines the pathological class; excludes other lesions (hypersensitivity interstitial nephritis, pure antiphospholipid syndrome); and gives the <b>activity index (0–24)</b> and <b>chronicity index (0–12)</b> that guide therapy and prognosis.", "cat": "Lupus"}, {"q": "Outline management and prognosis of lupus nephritis.", "a": "Management: <b>hydroxychloroquine for all</b> (unless contraindicated); BP target <b>≤120/80</b>; ACEIs/ARBs + protein restriction; statins; avoid nephrotoxic drugs (NSAIDs) &amp; pregnancy in active LN; corticosteroids + immunosuppression (cyclophosphamide, MMF, azathioprine, cyclosporine) in <b>induction → maintenance</b> phases. Prognosis: classes <b>I, II, V good</b>; <b>III, IV poor</b> (→ESRD, especially IV); VI → dialysis/transplant.", "cat": "Lupus"}, {"q": "List the renal complications of diabetes mellitus.", "a": "1. <b>Diabetic nephropathy (diabetic glomerulosclerosis)</b>, 2. Papillary necrosis, 3. UTI (asymptomatic bacteriuria, pyelonephritis, perinephric abscess), 4. Ischemic nephropathy (renal artery atherosclerosis), 5. Hydronephrosis (atonic bladder), 6. AKI (contrast nephropathy, obstruction from papillary necrosis).", "cat": "Diabetic"}, {"q": "Describe the 5 stages of diabetic nephropathy.", "a": "<ul><li><b>I — Hyperfiltration:</b> GFR ↑20–40%, kidney hypertrophy</li><li><b>II — Silent:</b> normal GFR, normal albumin (&lt;30 mg/day)</li><li><b>III — Incipient:</b> GFR starts declining; <b>microalbuminuria 30–300 mg/day</b> (5–10 y after onset)</li><li><b>IV — Overt:</b> proteinuria &gt;0.5 gm/day, ↓GFR, HTN</li><li><b>V — ESRD:</b> needs RRT; other diabetic complications present</li></ul>", "cat": "Diabetic"}, {"q": "What are the 3 major renal lesions of diabetic nephropathy?", "a": "<ul><li><b>Glomerulosclerosis</b> — diffuse (common, non-specific) and/or <b>nodular</b> (less common but <span class='hl'>pathognomonic</span>)</li><li>Chronic tubulo-interstitial nephritis</li><li>Vasculitic lesions — arteriolosclerosis of <b>afferent AND efferent</b> arterioles (pathognomonic for DM)</li></ul>", "cat": "Diabetic"}, {"q": "List risk factors for progression of diabetic nephropathy.", "a": "Proteinuria, hypertension, hyperglycemia, <b>smoking</b>, high-protein diet, and genetic factors.", "cat": "Diabetic"}, {"q": "When is renal biopsy needed to diagnose DN as the cause of CKD?", "a": "When: DM duration &lt;10 y without retinopathy/neuropathy; suspicion of alternative diagnosis (sudden NS early in DM, active urinary sediment with renal insufficiency), or when criteria of typical DN are absent.", "cat": "Diabetic"}, {"q": "What are the BP goals and drug choices in diabetic nephropathy?", "a": "Goals: <b>&lt;130/80</b> without proteinuria; <b>&lt;125/75</b> with proteinuria. Drugs: ACEI/ARBs first-line, + diuretics, non-dihydropyridine CCBs (verapamil, diltiazem), β-blockers, alpha-blockers (prazosin). <b>Reduce insulin dose</b> in DN (kidney clears insulin → prolonged half-life → hypoglycemia risk).", "cat": "Diabetic"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

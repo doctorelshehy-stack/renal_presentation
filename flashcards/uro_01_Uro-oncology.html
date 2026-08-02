@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uro-Oncology — Flashcards</title>
+<style>
+:root {
+  --accent: #4F7A3A; --dark: #2A4220; --mid: #3A5C2C; --bg: #E9F0E4; --card: #F5FAF2; --warn: #8A5A1C; --badge: #CDE0C0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Urology · NEPHRO-UROLOGY STUDY</div>
+      <h1>Uro-Oncology</h1>
+    </div>
+    <div class="meta"><span id="counts">21 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">21</b></span>
+  <span>Source-faithful flashcards · Urology · Uro-Oncology</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "What are the 3 well-established risk factors for prostate cancer?", "a": "<ul><li><b>Increasing age</b> — single most important demographic factor</li><li><b>Ethnic origin</b> — e.g., Japanese men have a low incidence</li><li><b>Heredity</b> — 1 first-line relative doubles risk; 2+ relatives → 5–11-fold increase</li></ul>PCa is the most common solid neoplasm in Europe and 2nd most common cause of cancer death in men.", "cat": "Prostate"}, {"q": "What are the PSA and its derivatives in prostate cancer?", "a": "PSA is a glycoprotein (serine protease) produced by benign and malignant prostate tissue; normal ≤2.5–4 ng/mL by age. Derivatives: <b>free/total PSA ratio</b>; <b>PSA density</b> (PSA ÷ prostate volume; &gt;0.15 = high risk); PSA velocity.", "cat": "Prostate"}, {"q": "How is prostate cancer diagnosed and staged?", "a": "Diagnosis: symptoms/signs (DRE — induration), PSA, <b>TRUS-guided biopsy</b> confirms histology, diagnostic TURP. Local staging (T): <b>MR imaging</b> + DCE-MRI in equivocal cases. Metastasis staging: <b>bone scan</b> for skeletal mets; PET/CT or whole-body MRI in equivocal cases; PLND for nodal spread.", "cat": "Prostate"}, {"q": "Explain the Gleason score.", "a": "Grading of adenocarcinoma of the prostate (which is &gt;95% of prostate cancers) by low-power glandular architecture: patterns 1–5 (1 = well-formed closely packed glands → 5 = no glandular differentiation, sheets). <b>Score = sum of the two most common patterns; ranges 2–10</b> (2 least aggressive, 10 most aggressive).", "cat": "Prostate"}, {"q": "Describe the androgen axis and the two routes of androgen deprivation.", "a": "Hypothalamus → LHRH → pituitary LH/FSH → Leydig cells → testosterone → <b>5-α-reductase converts T to DHT (≈10× more powerful)</b>. Depriving prostate cells of androgen → apoptosis. <b>Routes:</b> (1) suppress testicular androgen secretion — surgical (bilateral orchiectomy) or medical castration (LHRH agonists/antagonists); (2) inhibit action of circulating androgens — <b>anti-androgens</b> (compete with T/DHT at receptor). Complete androgen blockade = castration + anti-androgen.", "cat": "Prostate"}, {"q": "Summarize treatment of prostate cancer by stage (T1/T2).", "a": "<b>T1:</b> watchful waiting / active surveillance (standard for Gleason ≤6, ~10-year life expectancy), radical prostatectomy, or radiotherapy; hormonal therapy not an option. <b>T2:</b> <b>radical prostatectomy</b> (standard for 10-year survival), radiotherapy, brachytherapy (low-risk, small prostate); hormonal therapy only for palliation; combination for high-risk.", "cat": "Prostate"}, {"q": "List the inducing agents (carcinogens) of bladder cancer.", "a": "Viruses; chemical carcinogens — <b>aniline dyes</b>; cigarette smoking (nitrosamines, 2-naphthylamine, 4-aminobiphenyl); coffee; analgesics (phenacetin); artificial sweeteners; bacterial/parasitic/fungal infections; bladder calculi; genotoxic chemotherapeutic agents. Bladder cancer is &gt;2.5× more common in men; 4th most common cancer in men.", "cat": "Bladder"}, {"q": "What is the geographic variation of squamous cell carcinoma of the bladder?", "a": "SCC: 1% of bladder cancers in England, 3–7% in the USA, <b>40–75% in Egypt</b> — ~80% of Egyptian SCCs associated with chronic <b>Schistosoma haematobium</b> infection. Patients are 10–20 years younger than TCC patients; bilharzial cancers are exophytic/nodular, well-differentiated, with relatively low metastasis.", "cat": "Bladder"}, {"q": "Describe the patterns of spread of bladder cancer.", "a": "<b>Direct extension:</b> en bloc (~60%), tentacle-like (~25%), lateral spread under normal mucosa (~10%). <b>Implantation</b> in wounds/denuded urothelium. <b>Lymphatic</b> (pelvic nodes): obturator 74%, external iliac 65%, paravesical 16%, presacral ~25%. <b>Vascular:</b> liver, lung, bone.", "cat": "Bladder"}, {"q": "What is the most common presentation of bladder cancer?", "a": "<b>Painless hematuria — ~85%</b>. Second: bladder irritability — frequency, urgency, dysuria (usually with diffuse CIS or invasive cancer). Advanced: flank pain (ureteral obstruction), lower limb edema, pelvic mass, weight loss.", "cat": "Bladder"}, {"q": "Give the TNM staging of bladder cancer (T).", "a": "<ul><li><b>Ta:</b> papillary, epithelium-confined</li><li><b>Tis:</b> flat carcinoma in situ</li><li><b>T1:</b> lamina propria invasion</li><li><b>T2a/b:</b> muscle-invasive (superficial/deep)</li><li><b>T3a/b:</b> perivesical fat (micro/macroscopic)</li><li><b>T4a:</b> pelvic viscera (prostate, rectum, uterus, vagina)</li><li><b>T4b:</b> pelvic sidewall/abdominal wall</li></ul>N1 ≤2 cm single node; N2 2–5 cm; N3 &gt;5 cm.", "cat": "Bladder"}, {"q": "How is non-muscle-invasive bladder cancer (NMIBC) treated?", "a": "<b>TURBT</b> (resect whole lesion + sample underlying muscle); <b>intravesical therapy</b> — chemotherapy (mitomycin C) or <b>BCG</b> — reduces recurrence; photodynamic diagnosis with photosensitizers (hexa-aminolaevulinic acid) enhances tumor visibility; <b>radical cystectomy</b> for high-grade NMIBC failing TURBT + intravesical therapy.", "cat": "Bladder"}, {"q": "What are the risk factors for upper urinary tract urothelial tumors?", "a": "Male gender and increasing age; <b>smoking — the most important risk factor (2–3×)</b> (chemical carcinogens: aniline, benzidine, aromatic amines, azo dyes); cyclophosphamide; heavy caffeine; chronic inflammation/infection; occupational exposure. TCC frequency: bladder &gt; renal pelvis &gt; ureter (125 : 2.5 : 1).", "cat": "Upper tract"}, {"q": "What is the gold-standard treatment of upper tract urothelial tumors?", "a": "<b>Radical nephroureterectomy + bladder cuff excision</b> — remove kidney + entire ureter including orifice (multifocality + high ipsilateral recurrence after partial resection). Endoscopic resection/fulguration for: solitary kidney, bilateral disease, renal dysfunction, intercurrent illness, selected small low-grade lesions.", "cat": "Upper tract"}, {"q": "List the benign renal tumors and the Bosniak classification.", "a": "Commonest benign: renal cysts, <b>oncocytoma</b>, <b>angiomyolipoma</b>, renal adenomas. <b>Bosniak I:</b> thin wall, water density, no septa/calcification/enhancement. II: thin septa and/or fine calcification. (III/IV: more complex — suspicious/malignant.)", "cat": "Renal"}, {"q": "Give the overview and risk factors of renal cell carcinoma.", "a": "RCC = <b>85% of primary malignant renal tumors</b>; 5th–6th decade; M:F 3:2; grossly common in the upper pole; microscopic: clear cell, papillary, chromophobe, collecting duct. Risk factors: smoking, obesity, genetic (chromosomes 3 &amp; 7), <b>Von-Hippel-Lindau disease</b>, tuberous sclerosis, cystic disease on dialysis.", "cat": "Renal"}, {"q": "Summarize the 2017 TNM staging of RCC.", "a": "<b>T1:</b> ≤7 cm, limited to kidney. <b>T2:</b> &gt;7 cm (≤10), limited to kidney. <b>T3:</b> into major veins or perinephric tissues, within Gerota fascia — T3a: renal vein/segmental branches, pelvicalyceal system, perirenal/sinus fat; T3b: IVC below diaphragm; T3c: IVC above diaphragm or caval wall invasion. <b>T4:</b> beyond Gerota fascia (incl. ipsilateral adrenal).", "cat": "Renal"}, {"q": "What is the clinical picture and treatment of RCC?", "a": "Classic triad: gross hematuria, loin pain, palpable mass (rare today — most are incidental). Also metastasis, secondary varicocele, paraneoplastic (Stauffer syndrome, anemia, erythrocytosis, amyloidosis, hypercalcemia). Treatment: localized → <b>radical nephrectomy</b>; metastatic → radiotherapy, chemotherapy, immunotherapy, hormonal therapy, surgery.", "cat": "Renal"}, {"q": "Give the key facts of testicular tumors (epidemiology, aetiology, presentation).", "a": "Most common GU malignancy in males <b>15–35 years</b>; cure rate ~90%; more common on the right; more common in Caucasians. Aetiology: <b>cryptorchidism — commonest risk factor</b> (orchiopexy does not prevent cancer), orchitis/trauma, HIV, family history, CIS, atrophy. Presentation: painless scrotal lump; acute pain in 10% (hemorrhage); gynecomastia in 5% (functional metastasis).", "cat": "Testis"}, {"q": "Classify germ cell tumors of the testis.", "a": "<b>Seminoma (40%):</b> 70% confined to testis; radio- and chemo-sensitive; classic (80%), spermatocytic (best prognosis, &gt;50 y), anaplastic (worse). <b>Non-seminomatous (main 4):</b> yolk sac (most common in infancy; <b>AFP ↑ in 90%</b>), embryonal carcinoma (smallest, highly malignant), teratoma (bone/cartilage/intestinal tissue), <b>choriocarcinoma (worst prognosis; HCG ↑ in all)</b>. Non-germ cell: Sertoli/Leydig cell tumors.", "cat": "Testis"}, {"q": "How are testicular tumors diagnosed and treated?", "a": "Diagnosis: scrotal duplex US, CT chest/abdomen/pelvis, PET. Treatment: <b>ipsilateral radical orchiectomy first</b> (also diagnostic), then radiotherapy, chemotherapy, retroperitoneal lymph node dissection as staged. pT1: limited to testis/epididymis, no vascular invasion; pT2: with vascular invasion or tunica vaginalis involvement.", "cat": "Testis"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

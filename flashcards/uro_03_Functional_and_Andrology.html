@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functional Urology &amp; Andrology — Flashcards</title>
+<style>
+:root {
+  --accent: #4F7A3A; --dark: #2A4220; --mid: #3A5C2C; --bg: #E9F0E4; --card: #F5FAF2; --warn: #8A5A1C; --badge: #CDE0C0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Urology · NEPHRO-UROLOGY STUDY</div>
+      <h1>Functional Urology &amp; Andrology</h1>
+    </div>
+    <div class="meta"><span id="counts">24 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">24</b></span>
+  <span>Source-faithful flashcards · Urology · Functional Urology &amp; Andrology</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Define the types of urinary incontinence.", "a": "<ul><li><b>Stress:</b> involuntary loss on exertion, sneezing, coughing</li><li><b>Urge:</b> loss preceded by urgency (involuntary detrusor contraction)</li><li><b>Mixed:</b> stress + urge</li><li><b>Overflow:</b> leakage with urinary retention/bladder over-distension</li><li><b>Continuous:</b> urinary fistulas, ectopic ureter</li><li><b>Nocturnal enuresis:</b> loss during sleep</li><li><b>Pharmacologic:</b> diuretics, anticholinergics, TCA (imipramine), alpha-blockers (doxazosin, tamsulosin)</li><li><b>Transient (reversible):</b> delirium, psychological, excessive urine output, stool impaction</li></ul>", "cat": "Incontinence"}, {"q": "What are the consequences and consequences of stress incontinence risk factors?", "a": "Consequences: UTI, depression/poor self-esteem, restricted activity, falls and fractures, negative effect on sexual activity/relationships. Stress incontinence risk factors: obesity, pregnancy, vaginal delivery/obstructed labor, menopause, chronic cough/constipation, smoking, prior pelvic surgery.", "cat": "Incontinence"}, {"q": "How is urinary incontinence evaluated?", "a": "History; physical exam (vaginal: look for prolapse/rectocele/enterocele, pelvic floor strength; bladder full and empty); labs (urinalysis); US with <b>post-void residual</b>; lateral cystogram (vesicourethral junction opposite lower third of pubic bone, moves 0.5–1.5 cm with straining); <b>micturition diary</b>; dye tests (methylene blue in bladder + vaginal tampon for vesicovaginal fistula; phenazopyridine to confirm leakage is urine); urodynamics (filling pressure, sensation, involuntary contractions, capacity, compliance); cystourethroscopy.", "cat": "Incontinence"}, {"q": "Outline the treatment ladder for urinary incontinence.", "a": "Lifestyle/behavioural modification (↓ caffeine/alcohol, weight loss, programmed voiding, bladder retraining) → <b>pelvic floor muscle training (first-line for stress/mixed)</b> → oral agents (α-adrenergic agonists, imipramine, anticholinergics, estrogen, SNRIs) → pessaries/vaginal inserts → urethral bulking agents → surgery: <b>midurethral sling</b>, colposuspension (Burch), artificial urinary sphincter, urine diversion.", "cat": "Incontinence"}, {"q": "Describe the anatomy of the prostate and where BPH arises.", "a": "~70% glandular / 30% fibromuscular; normal weight 18 g; 3×4×2 cm; traversed by prostatic urethra. McNeal zones: peripheral (~70% of glandular part), central (~25%), <b>transition zone + periurethral glands — where BPH arises</b>.", "cat": "BPH"}, {"q": "Give the epidemiology and heredity of BPH.", "a": "Most common benign tumor in men. Pathological incidence ~30% above 40 y; clinical ~40% above 50 y, increasing 10% per decade. Heredity: autosomal dominant in ~50% of men having prostatectomy for BPH before 60 y (only ~9% after 60 y). Obesity ↑ risk; exercise ↓ risk.", "cat": "BPH"}, {"q": "Describe the pathophysiology cascade of BPH.", "a": "1. Prostate obstruction (lateral/median/three lobes/small fibrous type) → 2. Urethral obstruction (compression + elongation of prostatic urethra) → 3. Bladder changes (compensatory detrusor hypertrophy → decompensation: atrophy, saccules, diverticula) → 4. Upper tract dilatation (ureter &amp; kidney) — the endpoint of chronic obstruction.", "cat": "BPH"}, {"q": "What are the obstructive and irritative symptoms of BPH?", "a": "<b>Obstructive:</b> hesitancy, weak stream, forked/intermittent stream, post-micturition dribbling. <b>Irritative:</b> urgency, frequency (nocturia first), precipitancy, urge incontinence. <b>AUA score:</b> 0–7 mild, 8–19 moderate, 20–35 severe (7 questions: frequency, urgency, nocturia, weak stream, intermittent micturition, straining, incomplete emptying).", "cat": "BPH"}, {"q": "List the complications of BPH.", "a": "STASIS → INFECTION → STONE FORMATION → HEMATURIA → ACUTE RETENTION → CHRONIC RETENTION → CHRONIC RETENTION WITH OVERFLOW → RENAL FAILURE. (Stasis begets infection and stones; retention follows; renal failure is the ultimate threat.)", "cat": "BPH"}, {"q": "Summarize medical therapy of BPH.", "a": "<b>Alpha-adrenergic blockers</b> (alfuzosin, doxazosin; α-1 selective: tamsulosin, silodosin) — relax bladder neck/prostate muscle, work quickly, best for small prostates. <b>5-α-reductase inhibitors</b> (finasteride, dutasteride) — block T→DHT, shrink prostate ~25%, take 3–6 months. PDE5 inhibitors also used. Watchful waiting: avoid cold, excess fluids, sexual excitement, and certain drugs (diuretics, antispasmodics, α-stimulants).", "cat": "BPH"}, {"q": "What is the surgical therapy of BPH?", "a": "<b>TURP — gold standard</b> (unipolar or bipolar); TUIP for small fibrous glands; transurethral laser prostatectomy (vaporization/enucleation); microwave hyperthermia; TUNA; HIFU; intraurethral stents; balloon dilation; <b>open prostatectomy</b> (transvesical/retropubic) for large glands.", "cat": "BPH"}, {"q": "Define male infertility and give its epidemiology.", "a": "Inability to conceive after <b>1 year of unprotected intercourse</b>. 15% of couples are infertile after one year: 40% male factor, 40% female factor, 20% both. Testis function: endocrine (testosterone — 2% free, 98% bound to SHBG) and exocrine (sperm). Axis: GnRH → FSH (spermatogenesis) + LH (testosterone).", "cat": "Infertility"}, {"q": "Classify the causes of male infertility.", "a": "<b>Pre-testicular (hormonal):</b> Kallmann syndrome, isolated LH/FSH deficiency, pituitary insufficiency, hyperprolactinemia, exogenous hormones. <b>Testicular:</b> Klinefelter, Noonan, myotonic dystrophy, vanishing testis, Sertoli-cell-only, Y-microdeletion, gonadotoxins, systemic disease, cryptorchidism, varicocele, orchitis/torsion, idiopathic. <b>Post-testicular:</b> obstruction (congenital absent vas, vasectomy, epididymal obstruction, infection), sperm-motility disorders (immotile cilia), disorders of coitus (impotence, hypospadias).", "cat": "Infertility"}, {"q": "Give the WHO (5th ed) semen analysis reference values.", "a": "Semen volume ≥<b>1.5 mL</b>; total sperm number ≥<b>39×10⁶</b>/ejaculate; concentration ≥<b>15×10⁶/mL</b>; total motility ≥<b>40%</b>; progressive motility ≥<b>32%</b>; vitality ≥<b>58%</b>; normal morphology ≥<b>4%</b>. Collection after 48–72 h abstinence; seminal fructose reflects seminal vesicles.", "cat": "Infertility"}, {"q": "What are the surgical treatments for male infertility?", "a": "Varicocelectomy; vasovasostomy/epididymovasostomy (obstruction); TURED (ejaculatory duct obstruction); electroejaculation (spinal cord injury); sperm aspiration (vas/epididymis/testis) for ART; orchidopexy at 12–18 months; remove a gangrenous testis after torsion (sympathetic orchidopathia — immunologic damage to the contralateral testis).", "cat": "Infertility"}, {"q": "Define erectile dysfunction and list its risk factors.", "a": "Persistent inability to attain and maintain an erection sufficient for satisfactory sexual performance. Prevalence 10–20% of adult males; ↑ with age (1–10% &lt;40 y; 50–100% at 70–90 y). Risk factors: age, DM, cardiovascular disease, hypertension, smoking, overweight. <b>ED predicts future cardiovascular events.</b>", "cat": "ED"}, {"q": "Classify the etiology of ED.", "a": "<b>Psychogenic:</b> life stressors, performance anxiety. <b>Vasculogenic:</b> atherosclerosis, HTN, diabetes, pelvic radiotherapy. <b>Neurogenic:</b> diabetes, stroke, spinal trauma, pelvic/urethral surgery. <b>Hormonal:</b> hypogonadism, panhypopituitarism. <b>Drug-induced:</b> thiazides, β-blockers, antidepressants, antiandrogens, recreational drugs. <b>Anatomical:</b> Peyronie's disease, penile fracture.", "cat": "ED"}, {"q": "How is ED diagnosed?", "a": "History (IIEF questionnaire, onset, comorbidities); labs — fasting glucose, lipid profile, <b>morning total testosterone</b> (if low → free testosterone, LH, prolactin); focused exam (genital, prostate, signs of hypogonadism, CVS/neuro); advanced workup (intracavernosal injection test, duplex US, nocturnal penile tumescence) if needed.", "cat": "ED"}, {"q": "Outline ED management.", "a": "Treat curable causes (hypogonadism, psychogenic); lifestyle modification. <b>First-line: PDE5 inhibitors</b> (sildenafil, tadalafil, avanafil, vardenafil) — inhibit cGMP breakdown → vasodilation of cavernosal tissue; side effects headache/flushing/nasal congestion; <b>contraindicated with organic nitrates (severe hypotension)</b>. Second-line: topical/intracavernosal <b>alprostadil</b> (effective in 70%; priapism 1%), vacuum erection devices. Definitive: <b>penile prosthesis</b>.", "cat": "ED"}, {"q": "Define premature ejaculation (ISSM 2014) and classify it.", "a": "1. Ejaculation always/nearly always before or within <b>~1 minute</b> of vaginal penetration (lifelong) or a clinically significant reduction to ~3 minutes or less (acquired); 2. inability to delay ejaculation; 3. negative personal consequences (distress, avoidance). Prevalence 5–30%. <b>Lifelong</b> (from first encounter) vs <b>acquired</b> (after prior normal function — examine for urethritis/prostatitis, hyperthyroidism).", "cat": "PE"}, {"q": "List the causes of urethritis (gonococcal vs non-gonococcal).", "a": "<b>Gonococcal:</b> Neisseria gonorrhoeae (5–20%). <b>Non-gonococcal:</b> Chlamydia trachomatis (15–40%), Mycoplasma genitalium (15–25%), Trichomonas vaginalis, Ureaplasma urealyticum, HSV, adenovirus. N. gonorrhoeae: gram-negative intracellular diplococcus; incubation 3–14 days; males — purulent discharge/dysuria; females — often asymptomatic → PID/tubal scarring.", "cat": "Urethritis"}, {"q": "What are the causes of genital ulcers?", "a": "Herpes simplex virus, syphilis (Treponema pallidum), chancroid (Haemophilus ducreyi), donovanosis. <b>HSV:</b> painful papules → vesicles → ulcers; diagnosis by PCR/culture from ulcer base; treatment acyclovir 400 mg tid × 7–10 days (or valacyclovir, famciclovir). <b>Chancroid:</b> painful ulcers + lymphadenitis → bubo; treat azithromycin 1 g single dose or ceftriaxone 250 mg IM.", "cat": "STDs"}, {"q": "Describe the four stages of syphilis and its diagnosis.", "a": "Primary: painless single indurated chancre + regional lymphadenopathy (incubation 10–90 days). Secondary: bacteremia 3–5 months later (rash). Latent: seroreactivity without clinical disease. Tertiary (~35% of late latent): neurosyphilis, cardiovascular syphilis, gummatous syphilis. Diagnosis: <b>non-treponemal (VDRL, RPR — screening)</b> + <b>treponemal (FTA-ABS, TP-PA — confirm)</b>. Treatment: <b>IV penicillin G for all stages</b>.", "cat": "STDs"}, {"q": "Summarize HPV and HIV key facts.", "a": "<b>HPV:</b> dsDNA virus; <b>types 6 &amp; 11 — non-oncogenic, ~90% of anogenital warts</b>; types 16 &amp; 18 — cervical/other anogenital cancers. <b>HIV:</b> retrovirus infecting T cells; spread via blood, semen, vaginal fluid, breast milk; progressive loss of CD4 T-lymphocytes; diagnosis by ELISA + Western blot confirmation; stages — acute (2–4 weeks, flu-like, tests often negative) → clinical latency → AIDS.", "cat": "STDs"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

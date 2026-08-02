@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrolytes &amp; Acid-Base Disturbances — Flashcards</title>
+<style>
+:root {
+  --accent: #B0722F; --dark: #4A2F16; --mid: #7A5233; --bg: #F2E4CE; --card: #FBF3E4; --warn: #A86E1C; --badge: #E8C98A;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Internal Medicine · NEPHRO-UROLOGY STUDY</div>
+      <h1>Electrolytes &amp; Acid-Base Disturbances</h1>
+    </div>
+    <div class="meta"><span id="counts">29 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">29</b></span>
+  <span>Source-faithful flashcards · Internal Medicine · Electrolytes &amp; Acid-Base Disturbances</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Give the primary event and direction of change in the 4 acid-base disturbances.", "a": "<ul><li><b>Metabolic acidosis:</b> primary ↓HCO₃⁻ → pH↓, compensatory CO₂↓ (hyperventilation)</li><li><b>Metabolic alkalosis:</b> primary ↑HCO₃⁻ → pH↑, CO₂↑</li><li><b>Respiratory acidosis:</b> primary CO₂ retention → pH↓, kidneys retain HCO₃⁻ (HCO₃↑)</li><li><b>Respiratory alkalosis:</b> primary CO₂ loss → pH↑, kidneys excrete HCO₃⁻ (HCO₃↓)</li></ul>", "cat": "Acid-Base"}, {"q": "Write the anion gap formula and what it represents.", "a": "AG = Na⁺ − (HCO₃⁻ + Cl⁻). Plasma is electro-neutral; unmeasured anions (sulfate, phosphate, organic anions) slightly exceed unmeasured cations — that difference is the anion gap. ↑AG occurs with ↓ unmeasured cations (e.g., hypokalemia) or ↑ unmeasured anions (e.g., hyperphosphatemia).", "cat": "Acid-Base"}, {"q": "List causes of high-anion-gap metabolic acidosis.", "a": "Ketoacidosis; renal failure (uremia); lactic acidosis; massive rhabdomyolysis; exogenous toxins (salicylate, methanol, ethylene glycol, metformin). Mnemonic <b>K.U.S.M.A.U.L.</b> — Ketoacidosis, Uremia, Salicylates, Methanol, Alcohol, Uric acid (rhabdomyolysis), Lactic acidosis.", "cat": "Acid-Base"}, {"q": "List causes of normal-anion-gap (hyperchloremic) metabolic acidosis.", "a": "GI loss of HCO₃⁻ (diarrhea, enteric fistula); renal HCO₃⁻ loss (<b>proximal type II RTA</b>); failure of H⁺ secretion (<b>distal type I RTA</b>); acid infusion (ammonium chloride, hyperalimentation).", "cat": "Acid-Base"}, {"q": "What is the hallmark respiratory sign of metabolic acidosis?", "a": "<b>Kussmaul respiration</b> — rapid, deep sighing breathing as the body blows off CO₂ to compensate.", "cat": "Acid-Base"}, {"q": "When is alkali therapy indicated in metabolic acidosis and what is the deficit formula?", "a": "To raise pH above <b>7.20</b> when HCO₃⁻ low + PCO₂ near the compensation limit (~15 mmHg), or when well-compensated acidosis threatens respiratory failure. IV NaHCO₃ deficit = (Desired HCO₃⁻ − Measured HCO₃⁻) × 0.5 × body weight (kg). Oral HCO₃⁻ for chronic acidosis (e.g., RTA).", "cat": "Acid-Base"}, {"q": "How is metabolic alkalosis classified (first step)?", "a": "By <b>urine chloride</b>: <b>Chloride-responsive</b> (&lt;20 mEq/L), <b>Chloride-resistant</b> (&gt;20 mEq/L), and other causes (alkali loading).", "cat": "Acid-Base"}, {"q": "List causes of chloride-responsive metabolic alkalosis.", "a": "Loss of gastric secretions (vomiting, NG suction); loss of colonic secretions (chloridorrhea, villous adenoma); volume depletion; thiazide/loop diuretics (after discontinuation); cystic fibrosis.", "cat": "Acid-Base"}, {"q": "List causes of chloride-resistant metabolic alkalosis — with and without hypertension.", "a": "<b>With hypertension:</b> hyperaldosteronism (Conn, GRA), Cushing syndrome, exogenous steroids, Liddle syndrome, renovascular hypertension. <b>Without hypertension:</b> Bartter syndrome, Gitelman syndrome, severe K⁺ depletion, current thiazide/loop diuretic use, hypomagnesemia.", "cat": "Acid-Base"}, {"q": "What signs point to hypocalcemia in metabolic alkalosis?", "a": "Tetany, <b>Chvostek sign, Trousseau sign</b>, perioral tingling, muscle cramps, carpopedal spasms (decreased ionized calcium).", "cat": "Acid-Base"}, {"q": "How is chloride-responsive metabolic alkalosis treated?", "a": "Volume-depleted: <b>isotonic 0.9% NaCl</b> + potassium chloride. Volume-overloaded (edematous): potassium chloride ± carbonic anhydrase inhibitors or K⁺-sparing diuretics. Chloride-resistant: treat the specific cause (hyperaldosteronism, stop diuretics, replace Mg²⁺/K⁺).", "cat": "Acid-Base"}, {"q": "Define hyponatremia and pseudohyponatremia.", "a": "Hyponatremia: serum Na <b>&lt;135 mmol/L</b>. Most common form is <b>dilutional</b> (water retention). <b>Pseudohyponatremia:</b> spuriously low measured Na with normal true plasma Na — when serum lipids/proteins are markedly elevated; plasma osmolality stays normal (vs low in true hypotonic hyponatremia).", "cat": "Hyponatremia"}, {"q": "What are the pathological effects and neurological manifestations of hyponatremia?", "a": "Water shifts ECF → ICF → <b>cell swelling → brain edema</b>. Manifestations: altered personality, lethargy, confusion → stupor, neuromuscular hyperexcitability, hyperreflexia, <b>seizures, coma, death</b>. Severity correlates with severity and <b>rate of development</b>.", "cat": "Hyponatremia"}, {"q": "Classify hyponatremia by osmolality and volume status.", "a": "By osmolality: <b>Hypertonic &amp; isotonic = pseudohyponatremia</b>; <b>hypotonic = true hyponatremia</b>, then subclassified by volume: <b>hypervolemic</b> (HF, cirrhosis, nephrotic, CKD), <b>euvolemic</b> (SIADH — prototype, primary polydipsia, hypothyroidism, thiazides), <b>hypovolemic</b> (extra-renal loss — vomiting/diarrhea; renal loss — diuretics, adrenal insufficiency, salt-losing nephritis, recovery phase of AKI).", "cat": "Hyponatremia"}, {"q": "What is the risk of over-rapid correction of chronic hyponatremia?", "a": "<b>Osmotic demyelination syndrome (central pontine myelinolysis)</b> — correct slowly in chronic cases. Fluid of choice by volume status: isotonic 0.9% NaCl (hypo/euvolemic), hypertonic 3% NaCl + loop diuretics (hyper/euvolemic); vasopressin antagonists (conivaptan, tolvaptan) for SIADH.", "cat": "Hyponatremia"}, {"q": "Define hypernatremia and explain why it almost always means water deficit.", "a": "Serum Na <b>&gt;145 mmol/L</b>. Sodium is an osmotically effective ECF solute, so hypernatremia always reflects <b>hypertonicity</b> from a water deficit (TBW deficit &gt; Na deficit). Normally ADH and thirst defend against it — it occurs when these defenses fail.", "cat": "Hypernatremia"}, {"q": "What are the pathological effects of hypernatremia on the brain?", "a": "Water shifts ICF → ECF → <b>cell shrinkage</b> → neurological sequelae and <b>intracerebral hemorrhage</b> (punctate or major vessel disruption).", "cat": "Hypernatremia"}, {"q": "Classify hypernatremia by volume status with examples.", "a": "<ul><li><b>Hypervolemic:</b> excessive sodium administration (hypertonic 3% saline, NaHCO₃)</li><li><b>Euvolemic:</b> pure water loss — renal (diabetes insipidus, low urine osmolality) vs extra-renal (rhabdomyolysis, high urine osmolality)</li><li><b>Hypovolemic:</b> hypotonic fluid loss — renal Na loss (diuretics, polyuric ATN) vs extra-renal (GIT/respiratory/skin)</li></ul>", "cat": "Hypernatremia"}, {"q": "How is hypernatremia treated?", "a": "First resuscitation of volume with <b>isotonic 0.9% NaCl</b>; then gradual maintenance correction: TBW deficit = 0.6 × premorbid weight × (1 − 140/Na) + daily requirements, using oral water, IV 5% glucose or 0.45% NaCl. <b>Correct gradually — 0.5–1 mmol/L/hour — to avoid brain edema</b>.", "cat": "Hypernatremia"}, {"q": "Define hyperkalemia and list causes of increased K⁺ release from cells.", "a": "Serum K <b>&gt;5.5 mmol/L</b>. Increased release: <b>pseudo-hyperkalemia</b> (in-vitro hemolysis, polycythemia/leukocytosis), metabolic acidosis, insulin deficiency/hyperglycemia/hyperosmolality, increased catabolism (trauma, tumor lysis), β-blockade, exercise, digitalis overdose.", "cat": "Hyperkalemia"}, {"q": "List causes of reduced urinary K⁺ excretion.", "a": "Renal failure; hypoaldosteronism (primary/secondary); volume depletion; <b>type IV RTA</b>; drugs impairing aldosterone secretion (<b>ACEIs, ARBs, NSAIDs, cyclosporin</b>); drugs causing aldosterone resistance (<b>spironolactone, trimethoprim, heparin</b>).", "cat": "Hyperkalemia"}, {"q": "What are the manifestations of hyperkalemia and the membrane mechanism?", "a": "High extracellular K⁺ <b>depolarizes the resting membrane potential</b> → nerve/muscle/cardiac cells become <b>less excitable</b> → muscle weakness/paralysis, paresthesias, impaired cardiac conduction, irregular pulse, cardiac standstill.", "cat": "Hyperkalemia"}, {"q": "Describe the stepwise treatment of hyperkalemia.", "a": "Urgent if weakness/paralysis, ECG changes, arrhythmia, or K ≥7. <ul><li><b>1. Stabilize membrane:</b> IV calcium gluconate (10 ml over 10 min)</li><li><b>2. Shift K⁺ into cells:</b> β₂-agonists (salbutamol inhaled; avoid in IHD), insulin + dextrose, NaHCO₃ (rapid, brief)</li><li><b>3. Remove K⁺:</b> loop diuretics, K⁺ exchange resins (sodium polystyrene sulfonate — intestinal necrosis risk), <b>hemodialysis</b> (refractory/emergency, K &gt;7 or ECG changes)</li><li><b>4. Monitor:</b> continuous ECG + serial K at 1–2 h</li></ul>", "cat": "Hyperkalemia"}, {"q": "Give the ECG sequence of hyperkalemia.", "a": "Early: <b>tall peaked T waves</b> → intermediate: <b>PR prolongation, ST depression, loss of P waves</b> → late/severe: <b>widened QRS, VT, cardiac standstill</b> (sine wave). ECG changes = emergency trigger — treat immediately.", "cat": "Hyperkalemia"}, {"q": "Define hypokalemia and list its causes.", "a": "Serum K <b>&lt;3.5 mmol/L</b>. Causes: spurious (sample left at room temp, leukocytosis, recent insulin); ↓ intake; shift into cells (alkalosis, insulin, β-agonists, stress); <b>renal loss</b> (diuretics → RAAS activation, hyperaldosteronism/steroids, proximal RTA, hypomagnesemia, polyuria); extra-renal loss (vomiting/gastric aspiration → alkalosis + volume depletion → aldosterone).", "cat": "Hypokalemia"}, {"q": "Compare Bartter and Gitelman syndromes.", "a": "<b>Bartter:</b> impaired Na-Cl reabsorption in the <b>loop of Henle</b> — findings mimic a loop diuretic, <b>increased urinary calcium</b>, diagnosed in childhood, may have growth/mental retardation. <b>Gitelman:</b> defect in the <b>distal Na-Cl transporter</b> — findings mimic a thiazide diuretic.", "cat": "Hypokalemia"}, {"q": "What causes hypokalemic periodic paralysis?", "a": "A defect in a <b>voltage-gated calcium channel</b>; triggered by strenuous exercise followed by rest, high-carbohydrate or high-sodium meals, and sudden temperature changes.", "cat": "Hypokalemia"}, {"q": "Describe the ECG of hypokalemia.", "a": "<b>ST-segment and T-wave depression with prominent U waves</b>.", "cat": "Hypokalemia"}, {"q": "How is hypokalemia treated?", "a": "Treat the cause. IV KCl when serum K <b>&lt;2.5 mmol/L</b>; max rate <b>&lt;20 mmol/hour</b>. Oral K preferred otherwise. <b>Check serum Mg</b> — potassium cannot be restored if magnesium is low. ECG monitoring required.", "cat": "Hypokalemia"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

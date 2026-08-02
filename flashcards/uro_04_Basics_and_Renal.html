@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basics of Urology &amp; Renal Medicine — Flashcards</title>
+<style>
+:root {
+  --accent: #4F7A3A; --dark: #2A4220; --mid: #3A5C2C; --bg: #E9F0E4; --card: #F5FAF2; --warn: #8A5A1C; --badge: #CDE0C0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Urology · NEPHRO-UROLOGY STUDY</div>
+      <h1>Basics of Urology &amp; Renal Medicine</h1>
+    </div>
+    <div class="meta"><span id="counts">34 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">34</b></span>
+  <span>Source-faithful flashcards · Urology · Basics of Urology &amp; Renal Medicine</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Describe the embryology of the kidney (three stages).", "a": "<b>Pronephros</b> — rudimentary, non-functional (nephrotomes). <b>Mesonephros</b> — functional intermediate kidney (mesonephric tubules + Wolffian duct). <b>Metanephros</b> — the definitive kidney: <b>ureteric bud</b> (from mesonephric duct) + <b>metanephrogenic blastema</b>. Ureteric bud → collecting system (calyces, pelvis, ureter); blastema → nephrons. Cloaca receives allantois, hindgut, mesonephric ducts.", "cat": "Anatomy"}, {"q": "Give the position, size and internal structure of the kidney.", "a": "Obliquely along psoas; right kidney lower than left (liver); ~150 g, 12×6×3 cm; T12–L3, hilum at L1; ~1 million nephrons. Internal: outer cortex, inner medulla with medullary pyramids → each opens into a minor calyx → 3 major calyces → renal pelvis → ureter.", "cat": "Anatomy"}, {"q": "What is the order of structures at the renal hilum (anterior to posterior)?", "a": "<b>Renal vein (anterior) → renal artery → renal pelvis (posterior)</b>. Gerota's (renal) fascia encloses the kidney with its fibrous and fatty capsules; medially the left and right fascia blend anterior to the aorta and IVC.", "cat": "Anatomy"}, {"q": "What are the relations, blood supply and lymphatics of the kidneys?", "a": "Arterial: renal arteries from aorta at L1/L2; enter hilum as 5 segments (apical, upper, middle, lower — anterior; posterior) that <b>do not communicate</b>. Venous: renal veins unite into 5 vessels; left renal vein crosses anterior to aorta (receives left adrenal + gonadal veins). Posterior relations: diaphragm, pleura, lower ribs, psoas, quadratus lumborum, transversus abdominis. Anterior: right — suprarenal, liver, 2nd part duodenum, right colic flexure; left — suprarenal, stomach, spleen, pancreas, left colic flexure, jejunum.", "cat": "Anatomy"}, {"q": "Describe the ureter course and its key relations.", "a": "Continues from the renal pelvis at L1; ~25 cm long; crosses the pelvic brim at the SIJ anterior to the external iliac artery; runs anterior to internal iliac; in females the uterine artery crosses the juxtavesical ureter; in males the vas deferens crosses anterior to it. Landmarks: UPJ and UVJ (the UVJ's oblique intramural course = anti-reflux mechanism).", "cat": "Anatomy"}, {"q": "Describe the bladder structure, trigone and innervation.", "a": "Hollow muscular reservoir, capacity 400–500 mL; layers: mucosa (urothelium), submucosa, muscle (detrusor — inner longitudinal, middle circular, outer deep longitudinal), perivesical fat, peritoneum. <b>Oblique intramural ureter = anti-reflux mechanism</b>. Innervation: pelvic nerves (sensation + parasympathetic contraction), pudendal (voluntary external sphincter), sympathetic (storage). Arteries: superior/middle/inferior vesical from internal iliac.", "cat": "Anatomy"}, {"q": "Describe the anatomy of the prostate and scrotum/spermatic cord.", "a": "Prostate: ~20 g, below the bladder; contains the posterior urethra (~2.5 cm); ejaculatory ducts open at the verumontanum; Lowsley 5 lobes vs McNeal zones (peripheral, central, transition). Spermatic cord contents: ductus deferens (45 cm), testicular artery, pampiniform plexus, nerves, lymphatics; coverings from the layers of the abdominal wall through which the testis descended (processus vaginalis). <b>Left spermatic vein → left renal vein (basis of left varicocele and renal tumor association)</b>; testicular lymphatics → lumbar nodes (testicular cancer metastasizes retroperitoneally, not inguinally).", "cat": "Anatomy"}, {"q": "Describe renal agenesis — bilateral and unilateral.", "a": "<b>Bilateral:</b> complete absence of kidneys and ureters — peculiar face, pulmonary abnormalities, single umbilical artery; failure of ureteric bud or blastema; <b>incompatible with life</b>. <b>Unilateral:</b> more common; compatible with life if the solitary kidney is intact. IVU DDx: ectopic kidney, non-visualized/obstructed kidney, renal failure (no contrast excretion), prior nephrectomy.", "cat": "Anomalies"}, {"q": "Compare adult (AD) and infantile (AR) polycystic kidney disease.", "a": "<b>Adult (ADPKD):</b> autosomal dominant, more common; identified 30–50 y; renal mass, flank pain, hematuria, UTIs, late renal insufficiency. <b>Infantile (ARPKD):</b> autosomal recessive, rare; small cysts = generalized dilatation of collecting tubules; 4 types (perinatal, neonatal, infantile, juvenile); the earlier the age, the worse the prognosis; bilateral, pulmonary hypoplasia, oliguria, hypertension; often death at birth.", "cat": "Anomalies"}, {"q": "Differentiate renal ectopia from ptosis; what is the commonest fusion anomaly?", "a": "<b>Ectopia:</b> kidney never reaches the renal fossa (pelvic, iliac, abdominal, thoracic, crossed) — pelvis anterior, ureter short. <b>Ptosis:</b> normally positioned kidney that descends with posture — pelvis remains anterior. <b>Horseshoe kidney</b> — the commonest fusion anomaly — is often complicated by UPJ obstruction and stone disease.", "cat": "Anomalies"}, {"q": "List ureteral anomalies and their features.", "a": "<b>Ureteral duplication:</b> complete (two pelves, two ureters, two orifices) or incomplete ('Y' junction); ectopic ureter may open into vagina/urethra in females. <b>Ureterocele:</b> cystic ballooning of the distal ureter — 'cobra head' on pyelography. <b>UPJO:</b> stenosis, aberrant vessels, aganglionic segments — <b>commonest congenital cause of hydronephrosis in children</b>. <b>Retrocaval ureter:</b> ureter behind the IVC.", "cat": "Anomalies"}, {"q": "Describe bladder exstrophy, posterior urethral valve and hypospadias.", "a": "<b>Bladder exstrophy:</b> complete — wide separation of pelvic bones, epispadias, rudimentary penis/scrotum (cleft clitoris in girls); incomplete — defects only in abdominal/bladder wall. <b>PUV:</b> exaggerated folds of posterior urethra → bilateral hydronephrosis + retention; diagnosed by VCUG (MCU); most common cause of bladder outlet obstruction in boys. <b>Hypospadias:</b> abnormal ventral meatus + chordee; <b>never circumcise</b> — the prepuce is used for repair; surgery at 6–18 months.", "cat": "Anomalies"}, {"q": "What are dystopic vs ectopic testis and the treatment of cryptorchidism?", "a": "<b>Dystopic:</b> stopped along the normal path of descent (e.g., inguinal canal). <b>Ectopic:</b> outside the normal path — femoral, perineal, penile, <b>superficial inguinal pouch (most common)</b>. Risks of undescended testis: malignant change, infertility, torsion, trauma. Treatment: hormonal (hCG) and/or surgery <b>before the age of one year</b>.", "cat": "Anomalies"}, {"q": "What does the microscopic urine examination tell us?", "a": "RBC casts → glomerulonephritis; WBC casts → infection/pyelonephritis; cellular casts → ATN; protein casts → interstitial nephritis; <b>bacteria ≥5/hpf = ≥10⁵ cfu/mL (significant bacteriuria)</b>; crystals (oxalate, uric acid, struvite, cystine); parasites (bilharziasis, trichomonas).", "cat": "Investigations"}, {"q": "What is creatinine clearance and its normal values?", "a": "eGFR = Ucr × V / Pcr (urine creatinine × urine volume ÷ plasma creatinine). Normal GFR <b>90–120 mL/min</b>; serum creatinine adult 0.4–1.4 mg/dL, children 0.2–0.7 mg/dL. A rise in creatinine indicates damage to a significant number of nephrons.", "cat": "Investigations"}, {"q": "Summarize PSA — nature, values, factors and derivatives.", "a": "34-kD glycoprotein produced by prostatic epithelial cells; liquefies ejaculate; in blood 75% bound / 25% free; blood level normal &lt;4 ng/mL (age-specific). Increases with: prostatitis, prostate cancer, enlarged prostate, catheterization/instrumentation, biopsy. Derivatives: free/total ratio, <b>PSA velocity &gt;0.75 ng/mL/yr</b>, PSA density (cutoff ≥0.15 ng/mL/gram), age-specific PSA. Uses: screening + follow-up after treatment.", "cat": "Investigations"}, {"q": "What are the phases and uses of IVU?", "a": "Uses: obstruction (UPJO, strictures), hematuria, recurrent UTIs, stone disease, fistulas. Phases: plain film (KUB/scout) → nephrogram → urogram (supine after 5–10 min) → prone film → full-bladder film. Use has diminished with cross-sectional imaging (CT/MRI).", "cat": "Investigations"}, {"q": "What does the VCUG demonstrate?", "a": "Bladder capacity (contracted bladder); shape (diverticulum, neurogenic 'Christmas tree' bladder); filling defects (tumors, ureteroceles); emptying; <b>posterior urethral valve (ballooning/keyhole sign)</b>; <b>vesicoureteric reflux</b>. Ascending urethrogram: retrograde contrast for urethral strictures/injuries.", "cat": "Investigations"}, {"q": "Give the AKI diagnostic criteria and KDIGO stages.", "a": "Diagnosis: ↑ creatinine ≥0.3–0.5 mg/dL within 48 h; ↑ ≥1.5× baseline within 7 days; urine output ≤0.5 mL/kg/h for 6 h; GFR ↓25%. <b>KDIGO:</b> I — Cr ↑≥0.3 mg/dL or UOP &lt;0.5 mL/kg/h ×6 h; II — Cr 2–2.9× baseline or UOP &lt;0.5 ×12 h; III — Cr ≥3× or ≥4 mg/dL, UOP &lt;0.3 ×24 h/anuria 12 h, <b>or initiation of RRT</b>. Staging by the worst criterion.", "cat": "AKI"}, {"q": "Give the aetiology percentages of AKI.", "a": "<b>Pre-renal 55%</b> (hypovolemia, ↓cardiac output, drugs affecting autoregulation — NSAIDs, ACE-I/ARBs, cyclosporin). <b>Intrinsic 40%</b> (glomerular, tubular/interstitial — ischemia/sepsis/nephrotoxins, vascular — vasculitis/TTP-HUS/malignant HTN). <b>Post-renal 5%</b> (obstruction — the most surgically remediable). Risk factors: age &gt;75, pre-existing CKD/cardiac/hepatic disease, DM, nephrotoxins.", "cat": "AKI"}, {"q": "What is pre-renal azotemia and its hallmark?", "a": "Transient renal hypoperfusion → ↓GFR with urinary sodium retention; <b>hallmark = reversibility</b> with treatment of the cause (no structural damage); 'gold standard' = response to fluid repletion with return of renal function within 24–72 h. Sustained pre-renal azotemia → ATN.", "cat": "AKI"}, {"q": "What are the causes and prevention of ATN?", "a": "Causes: renal hypoperfusion/ischemia (most common) and nephrotoxins — aminoglycosides (10–30% risk), amphotericin B, cisplatin, cyclosporin, temsirolimus. Prevention: single daily-dose aminoglycosides, monitor levels, avoid prolonged therapy. AGN = RBC casts; AIN = WBC casts + eosinophiluria (Hansel stain); ATN = muddy brown casts.", "cat": "AKI"}, {"q": "When should you refer AKI to a nephrologist within 24 hours?", "a": "1. Suspected specialist diagnosis (vasculitis, GN, tubulointerstitial nephritis, myeloma); 2. AKI with no clear cause; 3. inadequate response to treatment/complications; 4. AKI stage 3; 5. renal transplant patient; 6. CKD stage 4 or 5. Urologists exclude/relieve obstruction — the only truly reversible cause.", "cat": "AKI"}, {"q": "What are the indications for immediate dialysis in AKI?", "a": "Refractory hyperkalemia (&gt;7 mmol/L or ECG changes); severe metabolic acidosis (pH &lt;7.15); refractory pulmonary edema; pericarditis; symptomatic uremia (especially encephalopathy); BUN &gt;150 mg/dL (or rapidly rising); certain intoxications/dialyzable toxins.", "cat": "AKI"}, {"q": "How is calcular anuria managed, and how do you distinguish AKI from CKD?", "a": "Calcular anuria: CT (non-contrast, gold standard for renal colic) → <b>bypass obstruction with JJ stent or nephrostomy</b> → definitive stone management when stable. AKI vs CKD: history of elevated creatinine (old records), <b>small shrunken kidneys</b>, normocytic normochromic anemia, renal osteodystrophy, and secondary hyperparathyroidism favor CKD.", "cat": "AKI"}, {"q": "Define CKD, GFR and the Cockcroft-Gault formula.", "a": "Kidney damage or GFR &lt;60 ml/min/1.73 m² persisting ≥3 months. Glomeruli filter ~180 L/day (~125 mL/min); normal GFR ≈120 ml/min/1.73 m²; declines ~1 ml/min/year after the third decade. <b>Cockcroft-Gault:</b> GFR = (140 − age) × weight(kg) / (72 × serum creatinine); ×0.85 for females.", "cat": "CKD"}, {"q": "Give the etiologies of ESRD and the KDIGO GFR categories.", "a": "Etiologies: DM 38%, hypertension 25%, glomerulonephritis 14%, cystic kidney disease 5%, urologic 2%, unknown/other 15%. KDIGO: <b>G1 ≥90; G2 60–89; G3a 45–59; G3b 30–44; G4 15–29; G5 &lt;15 (kidney failure/ESRD)</b>.", "cat": "CKD"}, {"q": "What are the management steps to slow CKD progression?", "a": "1. Treat underlying cause; 2. manage acute deterioration (reversible: decreased perfusion, nephrotoxins, obstruction); 3. <b>slow progression</b> — strict BP control, reduce proteinuria, tight glycemic control, dietary protein restriction 0.6–0.8 g/kg/day; 4. treat metabolic/systemic complications; 5. prepare for RRT.", "cat": "CKD"}, {"q": "What are the BP targets (NICE 2014) and drugs of choice for proteinuria?", "a": "Targets: CKD alone &lt;140/90; <b>CKD + diabetes &lt;130/80; CKD + proteinuria &lt;130/80</b> (with ACR ≥30 mg/mmol). Drugs of choice: <b>ACE inhibitors and ARBs first-line for proteinuria; never combine ACE + ARB</b>; second-line non-dihydropyridine CCBs (diltiazem, verapamil); salt restriction.", "cat": "CKD"}, {"q": "How is anemia in CKD treated?", "a": "Causes: relative EPO deficiency, ↓RBC survival, bleeding/iron deficiency, SHPT (marrow fibrosis), inflammation, hemoglobinopathies, vitamin deficiencies. Treatment: <b>maintain Hb 10.5–12 g/dL</b> with iron ± erythropoiesis-stimulating agents (rHuEPO, darbepoetin), after excluding other causes.", "cat": "CKD"}, {"q": "What are the indications for native nephrectomy before transplantation?", "a": "Symptomatic renal stones not cleared by minimally invasive therapy; high-grade solid renal tumors (± acquired cystic disease); symptomatic/infected polycystic kidneys or those with solid tumors; persistent anti-GBM antibodies; significant proteinuria uncontrolled medically; recurrent pyelonephritis; grade 4–5 VUR with UTIs. Ideally ≥6 weeks before transplant.", "cat": "Transplant"}, {"q": "Describe the transplant surgical procedure and function outcomes.", "a": "Wet ischemia time ≤30 min; kidney placed extraperitoneally in the lower quadrant; renal artery → internal/external iliac artery; vein → iliac vein; ureter → bladder. Living donor: immediate function; delayed graft function ~30% of cadaveric (prolonged cold ischemia) — dialysis until graft works. Graft survival: living 95%/76% (1/5 y); cadaveric 89%/61%. Patient survival: living 98%/91%; cadaveric 95%/81%.", "cat": "Transplant"}, {"q": "List the surgical complications of renal transplantation.", "a": "1. <b>Acute vascular occlusion</b> (0.5–8%, first week; renal vein thrombosis — graft tenderness, dark hematuria, ↓urine; Doppler US/isotope scan; surgery). 2. <b>Peritransplant hematoma</b>. 3. <b>Lymphocoele</b> (5–15%, first 3 months; percutaneous drainage). 4. <b>Obstructive uropathy</b> (3–6%; extrinsic compression/technical; US hydronephrosis; surgical). 5. <b>Renal artery stenosis</b> (late; uncontrolled HTN, graft dysfunction; US/MRA). 6. Urine leak at ureterovesical anastomosis.", "cat": "Transplant"}, {"q": "What is the immunosuppressive regimen and how is rejection treated?", "a": "Lifelong 'triple' therapy: <b>calcineurin inhibitor (cyclosporine/tacrolimus) + antiproliferative (mycophenolate mofetil/azathioprine) + corticosteroids</b>; sirolimus in standard protocols. Acute rejection: IV corticosteroids (methylprednisolone 250–1000 mg/day ×3 days). Fever in the 1st month is usually post-op infection (pneumonia, wound, line sepsis, catheter UTI); macrolides require ↓ cyclosporine/tacrolimus/sirolimus doses.", "cat": "Transplant"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>

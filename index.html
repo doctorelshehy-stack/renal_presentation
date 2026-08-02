@@ -1,25 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renal Medicine — Presentation Library</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* Inline critical: prevent FOUC */
-    html, body { margin: 0; padding: 0; background: #f8f9fc; }
-    [data-theme="dark"] html, [data-theme="dark"] body { background: #0d1117; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renal Medicine — Slides & Flashcards</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Times New Roman', Georgia, serif;
+  background: #F5EFE4;
+  color: #2E2318;
+  padding: 28px;
+  min-height: 100vh;
+}
+.hero {
+  background: linear-gradient(135deg,#2E2318,#6B4A28 60%,#B0722F);
+  color: #FBF3E4;
+  border-radius: 16px;
+  padding: 30px 34px;
+  margin-bottom: 26px;
+}
+.hero h1 { font-size: 30px; letter-spacing: 1px; }
+.hero p { margin-top: 8px; font-size: 15px; opacity: .92; max-width: 900px; line-height: 1.5; }
+.hero .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.hero .stat {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.25);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13.5px;
+}
+section { margin-bottom: 26px; }
+.chead {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 12px; flex-wrap: wrap;
+}
+.cbadge {
+  color: #fff; padding: 5px 16px; border-radius: 20px;
+  font-size: 15px; font-weight: 700; letter-spacing: 1px;
+}
+.cdesc { font-size: 14px; color: #5A4A33; }
+.decklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.deck {
+  display: flex; flex-direction: column;
+  background: #fff;
+  border: 1px solid #E0D2B8;
+  border-left: 5px solid var(--ac);
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: #2E2318;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+  position: relative;
+  min-height: 140px;
+}
+.deck:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.16);
+  border-color: var(--ac);
+}
+.deck[data-c="im"] { border-left-color: #B0722F; }
+/* Stretched cover link - whole card is clickable without nesting anchors */
+.deck > .cover-link {
+  position: absolute; inset: 0; z-index: 1;
+  border-radius: inherit;
+}
+.deck .action-btn { position: relative; z-index: 2; }
+.deck-head > div { flex: 1; min-width: 0; }
+
+.deck[data-c="ped"] { border-left-color: #2E7D8C; }
+.deck[data-c="uro"] { border-left-color: #4F7A3A; }
+
+.deck-main {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.deck-head {
+  display: flex; align-items: center; gap: 14px;
+}
+.dicon {
+  font-size: 28px;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: #F5EFE4;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.05);
+}
+.dnum {
+  font-size: 20px; font-weight: 700; line-height: 1;
+  color: var(--ac); min-width: 36px;
+  margin-top: 4px;
+}
+.deck[data-c="im"] .dnum { color: #B0722F; }
+.deck[data-c="ped"] .dnum { color: #2E7D8C; }
+.deck[data-c="uro"] .dnum { color: #4F7A3A; }
+.dtitle { font-size: 17px; font-weight: 700; flex: 1; line-height: 1.35; margin-top: 2px; }
+
+.deck-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+  padding-top: 14px; border-top: 1px solid #F0E4D0;
+}
+.dcount {
+  font-size: 13px; color: #7A6A50; font-weight: 600;
+  background: #F5EFE4; padding: 5px 12px; border-radius: 20px;
+  white-space: nowrap;
+}
+
+.deck-actions {
+  display: flex; gap: 8px;
+}
+.action-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  font-size: 13px; font-weight: 600; font-family: inherit;
+  background: #F5EFE4;
+  border: 1.5px solid #E0D2B8;
+  border-radius: 10px;
+  color: #5A4A33;
+  text-decoration: none;
+  transition: all .18s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.action-btn:hover {
+  background: #fff;
+  border-color: var(--ac);
+  color: var(--ac);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,.1);
+}
+.deck[data-c="im"] .action-btn:hover { border-color: #B0722F; color: #B0722F; }
+.deck[data-c="ped"] .action-btn:hover { border-color: #2E7D8C; color: #2E7D8C; }
+.deck[data-c="uro"] .action-btn:hover { border-color: #4F7A3A; color: #4F7A3A; }
+.action-btn .icon { font-size: 15px; line-height: 1; }
+.action-btn .label { display: none; }
+
+/* Show labels on wider screens */
+@media (min-width: 480px) {
+  .action-btn .label { display: inline; }
+}
+
+/* Card click hint */
+.deck::after {
+  content: "Click card to open slides →";
+  position: absolute;
+  bottom: 14px; right: 18px;
+  font-size: 11px; font-style: italic;
+  color: #A89878;
+  opacity: 0;
+  transition: opacity .2s;
+  pointer-events: none;
+}
+.deck:hover::after { opacity: 1; }
+
+footer { margin-top: 26px; font-size: 12.5px; color: #8A7A60; text-align: center; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  body { padding: 16px; }
+  .hero { padding: 24px; }
+  .hero h1 { font-size: 24px; }
+  .decklist { grid-template-columns: 1fr; }
+  .action-btn { padding: 8px 10px; }
+  .action-btn .label { display: none; }
+  .deck::after { display: none; }
+}
+</style>
 </head>
 <body>
-  <noscript>
-    <div style="text-align:center;padding:80px 20px;font-family:sans-serif">
-      <h2>JavaScript Required</h2>
-      <p>Please enable JavaScript to use the Presentation Library.</p>
-    </div>
-  </noscript>
+<div class="hero">
+  <h1>Renal Medicine — Slides & Flashcards</h1>
+  <p>Complete slide library (Internal Medicine, Pediatric Nephrology, Urology) with linked flashcard decks. Click a topic card to open slides, or use the buttons for mind maps and flashcards.</p>
+  <div class="stats">
+    <div class="stat">🗂 <b>19</b> topics</div>
+    <div class="stat">📊 <b>607</b> slides</div>
+    <div class="stat">🃏 <b>19</b> flashcard decks</div>
+    <div class="stat">🧠 <b>3</b> mind maps</div>
+  </div>
+</div>
 
-  <script src="js/manifest-data.js"></script>
-  <script src="js/app.js"></script>
+<section>
+  <div class="chead">
+    <span class="cbadge" style="background:#B0722F">Internal Medicine · Nephrology</span>
+    <span class="cdesc">5 topics · <b>217</b> slides · <b>5</b> flashcard decks</span>
+  </div>
+  <div class="decklist">
+    <div class="deck" style="--ac:#B0722F" data-c="im">
+      <a class="cover-link" href="viewer.html?topic=internal_medicine_01_Glomerular_Diseases" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🔬</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">01</span>
+            <div class="dtitle">Glomerular Diseases</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">49 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="internal_medicine_topics/Nephrology_MindMaps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/im_01_Glomerular_Diseases.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#B0722F" data-c="im">
+      <a class="cover-link" href="viewer.html?topic=internal_medicine_02_Acute_Kidney_Injury" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🚨</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">02</span>
+            <div class="dtitle">Acute Kidney Injury & Special Situations</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">44 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="internal_medicine_topics/Nephrology_MindMaps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/im_02_Acute_Kidney_Injury.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#B0722F" data-c="im">
+      <a class="cover-link" href="viewer.html?topic=internal_medicine_03_Chronic_Kidney_Disease_and_RRT" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🩸</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">03</span>
+            <div class="dtitle">Chronic Kidney Disease & RRT</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">48 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="internal_medicine_topics/Nephrology_MindMaps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/im_03_Chronic_Kidney_Disease_and_RRT.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#B0722F" data-c="im">
+      <a class="cover-link" href="viewer.html?topic=internal_medicine_04_Electrolytes_and_Acid_Base" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">⚖️</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">04</span>
+            <div class="dtitle">Electrolytes & Acid-Base</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">44 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="internal_medicine_topics/Nephrology_MindMaps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/im_04_Electrolytes_and_Acid_Base.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#B0722F" data-c="im">
+      <a class="cover-link" href="viewer.html?topic=internal_medicine_05_Structural_and_Vascular_Renal_Diseases" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🫀</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">05</span>
+            <div class="dtitle">Structural & Vascular Renal Diseases</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">32 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="internal_medicine_topics/Nephrology_MindMaps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/im_05_Structural_and_Vascular_Renal_Diseases.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="chead">
+    <span class="cbadge" style="background:#2E7D8C">Pediatric Nephrology</span>
+    <span class="cdesc">9 topics · <b>165</b> slides · <b>9</b> flashcard decks</span>
+  </div>
+  <div class="decklist">
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_01_Anatomy_Physiology_Kidney" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🫘</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">01</span>
+            <div class="dtitle">Anatomy & Physiology of Kidney</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">12 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_01_Anatomy_Physiology_Kidney.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_02_Change_in_Urine_Colour" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🌈</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">02</span>
+            <div class="dtitle">Change in Urine Colour</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">10 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_02_Change_in_Urine_Colour.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_03_Hematuria" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🩸</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">03</span>
+            <div class="dtitle">Hematuria</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">16 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_03_Hematuria.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_04_Acute_Post_Streptococcal_GN" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🦠</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">04</span>
+            <div class="dtitle">Acute Post-Streptococcal GN</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">22 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_04_Acute_Post_Streptococcal_GN.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_05_Proteinuria" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🧪</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">05</span>
+            <div class="dtitle">Proteinuria</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">11 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_05_Proteinuria.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_06_Nephrotic_Syndrome" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">💧</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">06</span>
+            <div class="dtitle">Nephrotic Syndrome</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">34 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_06_Nephrotic_Syndrome.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_07_Acute_Kidney_Injury" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🚨</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">07</span>
+            <div class="dtitle">Acute Kidney Injury (Pediatric)</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">20 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_07_Acute_Kidney_Injury.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_08_Chronic_Kidney_Disease" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">📉</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">08</span>
+            <div class="dtitle">Chronic Kidney Disease (Pediatric)</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">22 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_08_Chronic_Kidney_Disease.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#2E7D8C" data-c="ped">
+      <a class="cover-link" href="viewer.html?topic=pediatric_09_Urinary_Tract_Infections" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🦠</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">09</span>
+            <div class="dtitle">Urinary Tract Infections (Pediatric)</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">18 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="pediatric_topics/pediatric_nephrology_mindmap.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/ped_09_Urinary_Tract_Infections.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="chead">
+    <span class="cbadge" style="background:#4F7A3A">Urology</span>
+    <span class="cdesc">5 topics · <b>225</b> slides · <b>5</b> flashcard decks</span>
+  </div>
+  <div class="decklist">
+    <div class="deck" style="--ac:#4F7A3A" data-c="uro">
+      <a class="cover-link" href="viewer.html?topic=urology_01_Uro_oncology" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🎯</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">01</span>
+            <div class="dtitle">Uro-Oncology</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">37 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="urology_topics/Urology_Mind_Maps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/uro_01_Uro-oncology.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#4F7A3A" data-c="uro">
+      <a class="cover-link" href="viewer.html?topic=urology_02_Stones_and_Infections" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">💎</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">02</span>
+            <div class="dtitle">Stones & Infections</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">34 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="urology_topics/Urology_Mind_Maps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/uro_02_Stones_and_Infections.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#4F7A3A" data-c="uro">
+      <a class="cover-link" href="viewer.html?topic=urology_03_Functional_and_Andrology" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">⚙️</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">03</span>
+            <div class="dtitle">Functional & Andrology</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">52 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="urology_topics/Urology_Mind_Maps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/uro_03_Functional_and_Andrology.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#4F7A3A" data-c="uro">
+      <a class="cover-link" href="viewer.html?topic=urology_04_Basics_and_Renal" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">📚</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">04</span>
+            <div class="dtitle">Basics & Renal</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">69 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="urology_topics/Urology_Mind_Maps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/uro_04_Basics_and_Renal.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="deck" style="--ac:#4F7A3A" data-c="uro">
+      <a class="cover-link" href="viewer.html?topic=urology_05_Urological_Trauma" aria-label="Open slides"></a>
+      <div class="deck-main">
+        <div class="deck-head">
+          <span class="dicon">🩹</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+<span class="dnum">05</span>
+            <div class="dtitle">Urological Trauma</div>
+          </div>
+        </div>
+        <div class="deck-meta">
+          <span class="dcount">33 slides</span>
+          <div class="deck-actions">
+            <a class="action-btn" href="urology_topics/Urology_Mind_Maps.html" target="_blank" title="Mind Map"><span class="icon">🧠</span><span class="label">Mind Map</span></a>
+            <a class="action-btn" href="flashcards/uro_05_Urological_Trauma.html" title="Flashcards"><span class="icon">🃏</span><span class="label">Flashcards</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Click a topic card to open slides. Buttons: 🧠 Mind Map (new tab) · 🃏 Flashcard Deck · All files work offline.
+</footer>
 </body>
 </html>

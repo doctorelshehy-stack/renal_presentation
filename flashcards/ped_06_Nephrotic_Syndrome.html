@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nephrotic Syndrome — Flashcards</title>
+<style>
+:root {
+  --accent: #2E7D8C; --dark: #14404A; --mid: #1F5F6E; --bg: #E4F0F2; --card: #F4FAFB; --warn: #B0542E; --badge: #BFDCE3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Times New Roman', Georgia, serif; background: var(--bg); color: var(--dark);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+header {
+  background: linear-gradient(135deg, var(--dark), var(--mid) 60%, var(--accent));
+  color: #fff; padding: 14px 24px 12px; flex-shrink: 0;
+}
+header .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+header h1 { font-size: 21px; letter-spacing: 1px; }
+header .course { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; }
+header .meta { font-size: 13px; opacity: .9; }
+.toolbar {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 24px; background: var(--card); border-bottom: 2px solid var(--accent); flex-shrink: 0;
+}
+.toolbar button, .chips button {
+  font-family: inherit; font-size: 13.5px; cursor: pointer; border-radius: 20px; padding: 5px 14px;
+  border: 1.5px solid var(--mid); background: #fff; color: var(--dark); transition: all .15s;
+}
+.toolbar button:hover, .chips button:hover { background: var(--badge); }
+.toolbar button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips button.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+.progress-wrap { height: 6px; background: #ddd; }
+#progressbar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--warn)); transition: width .25s; }
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 22px; }
+#cardwrap { perspective: 1400px; width: min(760px, 92vw); height: min(430px, 60vh); cursor: pointer; }
+#card { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .5s; }
+#card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 16px; padding: 26px 34px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  border: 1px solid var(--mid);
+}
+.front { background: var(--card); display: flex; flex-direction: column; }
+.back { background: #fff; transform: rotateY(180deg); }
+.face .badge-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
+.face .cat {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--accent);
+  background: var(--badge); padding: 3px 10px; border-radius: 12px;
+}
+.face .n { font-size: 12px; color: var(--warn); font-weight: 700; }
+.front .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--warn); font-weight: 700; margin-bottom: 6px; }
+.front .qtext { font-size: clamp(17px, 2.4vw, 24px); line-height: 1.45; font-weight: 700; }
+.back .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+.back .atext { font-size: clamp(14px, 1.9vw, 18.5px); line-height: 1.5; color: #222; }
+.back .atext ul { margin: 8px 0 8px 22px; }
+.back .atext li { margin: 4px 0; }
+.back .atext b { color: var(--dark); }
+.back .atext .hl { background: var(--badge); padding: 0 4px; border-radius: 4px; font-weight: 700; color: var(--dark); }
+.hint { margin-top: auto; padding-top: 14px; font-size: 12px; color: #888; text-align: center; }
+footer { flex-shrink: 0; padding: 10px 24px; font-size: 12.5px; color: var(--mid); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; background: var(--card); border-top: 1px solid #ddd; }
+footer b { color: var(--dark); }
+.kbd { border: 1px solid #bbb; border-radius: 4px; padding: 0 5px; background: #fff; font-family: monospace; font-size: 11px; }
+@media (max-width: 640px) {
+  header h1 { font-size: 16px; } .face { padding: 18px 20px; } .front .qtext { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div>
+      <div class="course">Pediatrics · NEPHRO-UROLOGY STUDY</div>
+      <h1>Nephrotic Syndrome</h1>
+    </div>
+    <div class="meta"><span id="counts">16 cards</span> · <span id="catcount"></span></div>
+  </div>
+</header>
+<div class="toolbar">
+  <button id="btnPrev" title="Previous (←)">← Prev</button>
+  <button id="btnFlip" title="Flip (Space)">Flip Card</button>
+  <button id="btnNext" title="Next (→)">Next →</button>
+  <button id="btnShuffle" title="Shuffle deck">Shuffle</button>
+  <button id="btnRestart" title="Back to start">Restart</button>
+  <span style="flex:1"></span>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="progress-wrap"><div id="progressbar"></div></div>
+<main>
+  <div id="cardwrap" title="Click to flip">
+    <div id="card">
+      <div class="face front">
+        <div class="badge-row"><span class="cat" id="fcat"></span><span class="n" id="fn"></span></div>
+        <div class="label">Question</div>
+        <div class="qtext" id="fq"></div>
+        <div class="hint">Click card or press Space to flip · ← → to navigate</div>
+      </div>
+      <div class="face back">
+        <div class="badge-row"><span class="cat" id="bcat"></span><span class="n" id="bn"></span></div>
+        <div class="label">Answer</div>
+        <div class="atext" id="ba"></div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <span><b id="cur">1</b> / <b id="tot">16</b></span>
+  <span>Source-faithful flashcards · Pediatrics · Nephrotic Syndrome</span>
+  <span>Keys: <span class="kbd">←</span> <span class="kbd">→</span> prev/next · <span class="kbd">Space</span> flip · <span class="kbd">S</span> shuffle</span>
+</footer>
+<script>
+const CARDS = [{"q": "Define nephrotic syndrome (the tetrad) and its epidemiology.", "a": "Tetrad: 1. <b>Heavy proteinuria</b> (&gt;3.5 g/24 h adults; <b>&gt;40 mg/m²/hr children</b>), 2. <b>Hypoalbuminemia &lt;2.5 g/dL</b>, 3. Generalized edema, 4. Hyperlipidemia (cholesterol &gt;250 mg/dL). Pediatrics: <b>15× more common than in adults</b>; incidence 2–3/100,000 children/year; mostly steroid-sensitive MCD.", "cat": "Definition"}, {"q": "Classify the etiology of nephrotic syndrome.", "a": "<b>Idiopathic (~90%)</b> — three histological types: <b>Minimal Change Disease, Diffuse Mesangial Proliferation, FSGS</b> (may be separate diseases or a spectrum). <b>Secondary:</b> SLE, HSP. <b>Congenital:</b> see early-onset NS (1st year).", "cat": "Etiology"}, {"q": "Explain the pathogenesis of the nephrotic tetrad.", "a": "<b>Proteinuria:</b> ↑ GBM permeability (size/charge defect); selective (albumin, transferrin, IgG) vs non-selective. <b>Hypoproteinemia</b> (mainly hypoalbuminemia). <b>Edema:</b> ↓ plasma oncotic pressure → fluid to interstitial tissue (lax, gravity-dependent). <b>Hyperlipidemia:</b> liver ↑ synthesis of lipoproteins (not lost in urine) + ↓ lipoprotein lipase → ↓ lipid catabolism.", "cat": "Pathogenesis"}, {"q": "How is edema amplified in NS (aldosterone/ADH)?", "a": "↓ intravascular volume → ↓ renal blood flow → <b>JGA → ↑ aldosterone → Na⁺ &amp; water retention</b> → more edema; also ↓ intravascular volume → <b>↑ ADH → water retention</b>.", "cat": "Pathogenesis"}, {"q": "Describe the pathology of minimal change disease (MCNS).", "a": "<b>85% of cases.</b> LM: normal or minimal mesangial increase. IF: typically negative. <b>EM: effacement of epithelial cell foot processes.</b> &gt;95% respond to corticosteroids.", "cat": "Pathology"}, {"q": "What is the clinical picture of childhood NS?", "a": "M:F = <b>2:1</b>; peak age <b>2–6 years</b>; often after minor infections/insect bites. Mild edema around <b>eyes and lower extremities</b> → generalized with ascites, pleural effusions, genital edema. Anorexia, irritability, abdominal pain, diarrhea. <b>Hypertension and gross hematuria are uncommon.</b>", "cat": "Clinical"}, {"q": "What are the diagnostic criteria of NS on urine and blood?", "a": "Urine: yellowish <b>frothy</b>, high specific gravity, protein 3+/4+ (&gt;40 mg/m²/hr; Upr/UCr &gt;2.0); microscopic hematuria in ~20%; waxy (lipoid) &amp; hyaline casts. Blood: albumin &lt;2.5 g/dL, total protein &lt;4.5 g/dL, ↑ cholesterol/triglycerides, <b>C3/C4 normal</b>, creatinine usually normal.", "cat": "Diagnosis"}, {"q": "When is renal biopsy indicated in pediatric NS?", "a": "<b>Before treatment:</b> hematuria, hypertension, renal insufficiency, hypocomplementemia, age &lt;1 y or &gt;10 y, low C3. <b>After treatment:</b> frequent relapsers, steroid-resistant. Biopsy is NOT required for diagnosis in most children.", "cat": "Diagnosis"}, {"q": "Outline supportive treatment of NS.", "a": "Monitor (24-h protein, daily weight, infection signs, BP, urine output); low-sodium diet (normalize in remission); fluid restriction if hyponatremia/progressive weight loss; hospitalize severe symptomatic edema (large effusions, anasarca, genital edema); <b>judicious diuretics</b> (risk of thromboembolism/hypovolemia); salt-free albumin IV 25% (0.5 g/kg/12 h) + furosemide 1–2 mg/kg for anasarca with respiratory difficulty; albumin alone for hypovolemic shock.", "cat": "Treatment"}, {"q": "Describe steroid therapy for the first episode of NS.", "a": "<b>Prednisone 60 mg/m²/day (max 60 mg/day)</b> in 2–3 divided doses for at least 4 weeks → then <b>40 mg/m² every other day</b> as a single morning dose, tapered over 2–3 months. Response = urine trace/negative for protein for 3 consecutive days (80–90% respond).", "cat": "Treatment"}, {"q": "Define the response categories in NS.", "a": "<b>No relapse:</b> remission without relapse. <b>Steroid-dependent:</b> relapse on alternate-day therapy or within 14 days of stopping. <b>Frequent relapsers:</b> ≥4 relapses in 12 months. <b>Steroid-resistant:</b> failure to respond within 4–6 weeks → diagnostic renal biopsy.", "cat": "Treatment"}, {"q": "How is relapse treated, and what are the alternative agents?", "a": "Daily divided-dose prednisone until remission, then alternate-day taper over 1–2 months. Alternatives (steroid-dependent/frequent relapsers/resistant or severe steroid toxicity): <b>cyclophosphamide, methylprednisolone, cyclosporine</b>, ACE inhibitors/ARBs as adjuvant to reduce proteinuria; low-dose aspirin (↓ thrombosis); levamisole (consolidates remission); pneumococcal &amp; H. influenza vaccines.", "cat": "Treatment"}, {"q": "Why is infection the major complication of NS, and what is the pattern?", "a": "Urinary losses of immunoglobulins &amp; properdin B; defective cell-mediated immunity; immunosuppressives; malnutrition; edema fluid as culture medium; abnormal leukocyte function; splenic hypoperfusion. <b>Spontaneous bacterial peritonitis is the most frequent type</b> (S. pneumoniae most common; E. coli also); sepsis, pneumonia, cellulitis, UTI.", "cat": "Complications"}, {"q": "What is the risk and prevention of thromboembolism in pediatric NS?", "a": "Incidence <b>2–5%</b> (lower than adults): renal vein thrombosis, pulmonary embolus, sagittal sinus thrombosis, catheter thromboses. Mechanisms: ↑ prothrombotic factors (fibrinogen, thrombocytosis, hemoconcentration) and ↓ fibrinolytic factors (urinary loss of antithrombin III, proteins C &amp; S) + hyperlipidemia. <b>Prophylactic anticoagulation NOT recommended</b> unless previous thromboembolic event; avoid aggressive diuresis; limit indwelling catheters.", "cat": "Complications"}, {"q": "What should you tell the family about steroid-responsive NS?", "a": "Relapses generally <b>decrease with age</b>; the child will <b>not develop chronic renal failure</b>; the disease is generally not hereditary; fertility is preserved (without prolonged cyclophosphamide); when in remission the child is normal with unrestricted diet/activity.", "cat": "Prognosis"}, {"q": "List the causes of early-onset NS in the first year of life.", "a": "<b>1. Congenital NS — Finnish type:</b> AR, defect in <b>nephrin</b> in the GBM; presents in first 3 months; large edematous placenta at birth; poor prognosis → CRF; treat with albumin, ACE inhibitors, NSAIDs, nephrectomy + transplantation. 2. Congenital infections (TORCH). 3. Denys-Drash syndrome (Wilms tumor + GU anomalies + NS). 4–5. Drug-induced / idiopathic.", "cat": "Early-onset"}];
+let order = CARDS.map((_, i) => i);
+let pos = 0, filter = 'all';
+
+const cats = [...new Set(CARDS.map(c => c.cat))];
+const chipsEl = document.getElementById('chips');
+function visibleOrder() { return order.filter(i => filter==='all' || CARDS[i].cat===filter); }
+function renderChips() {
+  chipsEl.innerHTML = '';
+  const mk = (label, f) => {
+    const b = document.createElement('button');
+    b.textContent = label;
+    b.className = filter===f ? 'active' : '';
+    b.onclick = () => { filter=f; pos=0; renderChips(); render(); };
+    chipsEl.appendChild(b);
+  };
+  mk('All (' + visibleOrder().length + ')', 'all');
+  cats.forEach(c => mk(c + ' (' + CARDS.filter(x => x.cat===c).length + ')', c));
+}
+function card() {
+  const vis = visibleOrder();
+  if (!vis.length) return null;
+  return CARDS[vis[pos % vis.length]];
+}
+function render() {
+  const vis = visibleOrder();
+  document.getElementById('tot').textContent = vis.length;
+  const c = card();
+  if (!c) {
+    document.getElementById('cur').textContent = 0;
+    document.getElementById('fq').textContent = 'No cards in this category';
+    document.getElementById('ba').innerHTML = 'Choose another category.';
+    document.getElementById('fcat').textContent = '';
+    document.getElementById('fn').textContent = '';
+    document.getElementById('progressbar').style.width = '0%';
+    return;
+  }
+  document.getElementById('cur').textContent = (pos % vis.length) + 1;
+  document.getElementById('fcat').textContent = c.cat;
+  document.getElementById('bcat').textContent = c.cat;
+  document.getElementById('fn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('bn').textContent = 'Card ' + (pos % vis.length + 1);
+  document.getElementById('fq').textContent = c.q;
+  document.getElementById('ba').innerHTML = c.a;
+  document.getElementById('progressbar').style.width = ((pos % vis.length + 1) / vis.length * 100) + '%';
+  document.getElementById('catcount').textContent = filter==='all' ? 'all categories' : 'category: ' + filter;
+  flip = false;
+  document.getElementById('card').classList.remove('flipped');
+}
+function flipCard() {
+  flip = !flip;
+  document.getElementById('card').classList.toggle('flipped', flip);
+}
+function next() { const n = visibleOrder().length; if (n) { pos++; render(); } }
+function prev() { const n = visibleOrder().length; if (n) { pos = (pos + n - 1) % n; render(); } }
+function shuffle() {
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  pos = 0; render(); renderChips();
+}
+document.getElementById('btnNext').onclick = next;
+document.getElementById('btnPrev').onclick = prev;
+document.getElementById('btnFlip').onclick = flipCard;
+document.getElementById('btnShuffle').onclick = shuffle;
+document.getElementById('btnRestart').onclick = () => { order = CARDS.map((_, i) => i); pos = 0; render(); renderChips(); };
+document.getElementById('cardwrap').onclick = flipCard;
+document.addEventListener('keydown', e => {
+  if (['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+  else if (e.key === 's' || e.key === 'S') shuffle();
+});
+renderChips();
+render();
+</script>
+</body>
+</html>
